@@ -87,13 +87,9 @@ namespace Ares.UI
             { if (Terminal.OwnsCamera) Terminal.Close(); else if (overlay == null) Settings(); else if (campaign.Phase == Phase.Plan || campaign.Phase == Phase.Tasks) CloseOverlay(); }
             if (title || campaign == null) return;
             stationOffer = stations.Resolve(campaign, explorer.PlayerPosition);
-            campaign.Tick(Time.deltaTime, BlocksWorld);
-            if (!BlocksWorld || Terminal.Focused)
-            {
-                // Inside the live terminal, generation/oxygen continue while the campaign clock remains paused.
-                if (Terminal.Focused && campaign.Phase == Phase.Tasks) campaign.Solar.Tick(Time.deltaTime);
-                campaign.TickOxygen(Time.deltaTime);
-            }
+            campaign.Tick(Time.deltaTime, BlocksWorld, paused);
+            if (campaign.Phase == Phase.Summary && dirty)
+            { dirty = false; attempt = null; taskView = null; ShowSummary(); return; }
             Solar.Tick(Time.deltaTime);
             GreenhouseCare.Tick(Time.deltaTime);
             Observatory.Tick();
@@ -115,6 +111,7 @@ namespace Ares.UI
             if (campaign != null) campaign.Changed -= Changed;
             campaign = new Campaign(definition.campaign, definition.rules, explorer.solarSettings, explorer.oxygenSettings); campaign.Changed += Changed;
             Solar.Bind(campaign.Solar);
+            Apod.BeginMission();
             Terminal.Bind(campaign);
             title = false; BuildHud(); ShowReport();
         }
@@ -163,6 +160,7 @@ namespace Ares.UI
         }
         void Settings()
         {
+            paused = true;
             var view = Dialog(locale.T("settings.title"));
             Toggle(view, "settings.reducedMotion", explorer.reducedMotion, value => { explorer.reducedMotion = value; PlayerPrefs.SetInt("ARES.ReducedMotion", value ? 1 : 0); });
             Toggle(view, "settings.invertCamera", explorer.invertCamera, value => { explorer.invertCamera = value; PlayerPrefs.SetInt("ARES.InvertCamera", value ? 1 : 0); });
@@ -174,7 +172,7 @@ namespace Ares.UI
         void ShowReport()
         { if (attempt != null) return; CampaignScreens.Report(Dialog(), campaign, locale, () => { campaign.CloseReport(); CloseOverlay(); }); }
         void ShowEnergy()
-        { if (attempt != null || (campaign.Phase != Phase.Plan && campaign.Phase != Phase.Tasks)) return; EnergyView.Build(StationPanel(), campaign, definition.rules, locale, CloseOverlay); }
+        { if (attempt == null && Terminal.Near) Terminal.TryInteract(); }
         VisualElement StationPanel()
         {
             Terminal.Reset();
@@ -213,7 +211,7 @@ namespace Ares.UI
             { if (campaign.FinishTask(id, attempt.Solved, attempt.Seconds, attempt.Mistakes)) { attempt = null; CloseOverlay(); } }, CloseOverlay, explorer.reducedMotion);
         }
         internal void BuildComputerEnergy(VisualElement parent, Action close)
-        { EnergyView.Build(parent, campaign, definition.rules, locale, close); }
+        { if (Terminal.Focused && Terminal.Near) EnergyView.Build(parent, campaign, definition.rules, locale, close); }
         internal void SealFromComputer() { ShowSeal(); }
         public void ShowObservatory()
         {
@@ -235,7 +233,11 @@ namespace Ares.UI
             Button(view, locale.T("settings.close"), CloseOverlay, "ghost");
         }
         void ShowSummary()
-        { CampaignScreens.Summary(Dialog(), campaign, locale, () => { campaign.NextSol(); if (campaign.Phase == Phase.Report) { BuildHud(); ShowReport(); } else ShowEnd(); }); }
+        {
+            var view = Dialog();
+            if (campaign.EndedByClock) Text(view, "Os 10 minutos terminaram! As tarefas concluídas ficaram registradas. Vamos ver como a base passou o dia.", "heading");
+            CampaignScreens.Summary(view, campaign, locale, () => { campaign.NextSol(); if (campaign.Phase == Phase.Report) { BuildHud(); ShowReport(); } else ShowEnd(); });
+        }
         void ShowEnd()
         {
             var view = Dialog(locale.T(campaign.Phase == Phase.Victory ? "cert.title" : "gameover." + campaign.FailureCause + ".title"));

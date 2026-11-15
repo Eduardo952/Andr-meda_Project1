@@ -10,7 +10,7 @@ namespace Ares.UI
 {
     internal sealed class MissionHud
     {
-        readonly Label clock, alarm, next, stars, returnControl;
+        readonly Label alarm, next, stars, returnControl;
         readonly Label[] taskLabels;
         readonly Foldout checklist;
         readonly ProgressBar taskProgress;
@@ -37,7 +37,7 @@ namespace Ares.UI
             greenhouseCare=explorer.GetComponent<GreenhouseCare>();greenhouseHud=new GreenhouseCareHud(root,greenhouseCare);
             var top = Box(root, "hud"); var bars = Box(top, "panel row");
             integrity = Bar(bars,l.T("hud.integrity"),"integrity"); oxygen = Bar(bars,l.T("hud.oxygen"),"oxygen"); dose = Bar(bars,l.T("hud.dose"),"dose"); this.energy = Bar(bars,l.T("hud.energy"),"energy");
-            var clockBox=Box(top,"panel hud-clock"); clock = Text(clockBox, "", "heading"); next=Text(clockBox,"","small");
+            var clockBox=Box(top,"panel hud-clock"); next=Text(clockBox,"","small");
             stars=Text(root,"","panel hud-stars");
             var list = Box(root, "task-list panel");
             checklist = new Foldout { value = true }; list.Add(checklist);
@@ -80,8 +80,6 @@ namespace Ares.UI
             next.text=target==null?"":l.T("hud.next","room",l.T("rooms."+target));
             int total=c.BonusStars; for(int s=0;s<=c.SolIndex;s++) foreach(var task in definition.campaign.sols[s].tasks) total+=c.Stars(s,task.id);
             stars.text="★ "+total;
-            float seconds = c.SolFraction * 88775.244f;
-            clock.text = l.T("hud.sol", "n", c.Current.sol, "total", 5) + "  " + Mathf.FloorToInt(seconds / 3600).ToString("00") + ":" + Mathf.FloorToInt(seconds % 3600 / 60).ToString("00");
             int completed=0;
             for(int i=0;i<taskLabels.Length;i++)
             {
@@ -90,10 +88,12 @@ namespace Ares.UI
                 taskLabels[i].EnableInClassList("success",done);
             }
             checklist.text=l.T("tasks.title","n",c.Current.sol)+"  "+completed+"/"+taskLabels.Length;
+            returnControl.text = "Tudo pronto! Explore a base até o fim do dia.";
             taskProgress.value=completed; returnControl.style.display=completed==taskLabels.Length?DisplayStyle.Flex:DisplayStyle.None;
             use.text = offer.CanUse ? l.T("hud.use") + " [E] · " + l.T("rooms." + offer.Room.id)
                 : l.T(offer.Action == StationAction.NeedsPlan ? "station.needsPlan" : offer.Action == StationAction.Completed ? "station.completed" : "station.approach");
             if (solar.CanPickUp) use.text = l.T("solar.pickup");
+            if (offer.Action == StationAction.FindComputer) use.text = "Vá ao computador para gerenciar a energia";
             if (solar.CanReturn) use.text = l.T("solar.return");
             if(greenhouseCare.InteractionPrompt!=null)use.text=greenhouseCare.InteractionPrompt;
             if(observatory.CanUse)use.text="[E] Olhar pelo telescópio";

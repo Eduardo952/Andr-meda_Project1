@@ -21,7 +21,7 @@ namespace Ares.Editor
         static ReferenceExplorer explorer;
         static GameFrontend frontend;
         static int stage,frame;
-        static float elapsed,fieldOfView;
+        static float elapsed,fieldOfView,pausedAt;
         static double started;
         static Vector3 player, cameraPosition;
         static Quaternion cameraRotation;
@@ -40,6 +40,10 @@ namespace Ares.Editor
             {
                 string token=File.GetLastWriteTimeUtc(Request).Ticks.ToString();
                 if(SessionState.GetString(Pending+".refresh","")!=token){SessionState.SetString(Pending+".refresh",token);AssetDatabase.Refresh();return;}
+                if(File.ReadAllText(Request).Trim()=="oxygen-ui")
+                {File.Delete(Request);OxygenPresentationChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="wind-preview")
+                {File.Delete(Request);MartianWindPreview.Begin();return;}
                 File.Delete(Request);Directory.CreateDirectory("Logs");File.WriteAllText("Logs/ares-computer.txt","RUNNING");
                 stage=0;frame=-1;elapsed=0;started=EditorApplication.timeSinceStartup;SessionState.SetBool(Pending,true);
                 background=Application.runInBackground;Application.runInBackground=true;EditorApplication.isPaused=false;EditorApplication.EnterPlaymode();return;
@@ -55,6 +59,13 @@ namespace Ares.Editor
                     if(frontend==null||explorer?.Rover==null)return;
                     DomainChecks();keyboard=InputSystem.AddDevice<Keyboard>("ARES computer check");
                     frontend.StartMission();frontend.Campaign.CloseReport();Call("CloseOverlay");
+                    frontend.Apod.BeginMission(10);string firstDate=frontend.Apod.Collection.entries[0].date;
+                    var dates=new System.Collections.Generic.HashSet<string>();
+                    for(int i=0;i<5;i++){var entry=frontend.Apod.Collection.entries[i];Require(dates.Add(entry.date)&&frontend.Apod.Image(i)!=null&&!string.IsNullOrWhiteSpace(entry.credit),"Shuffled photo lost identity, credit or local image");}
+                    frontend.Apod.BeginMission(20);bool newOrder=frontend.Apod.Collection.entries[0].date!=firstDate;
+                    if(!newOrder){frontend.Apod.BeginMission(30);newOrder=frontend.Apod.Collection.entries[0].date!=firstDate;}
+                    Require(newOrder&&frontend.Apod.RequestCount==0,"Mission shuffle/reset did not vary photos locally");
+                    frontend.Campaign.SetAllocation(new Ares.Data.Allocation {shield=30,life=40,greenhouse=30});frontend.Campaign.StartSol();
                     explorer.reducedMotion=false;
                     SetPlayer(explorer.computerSettings.standPoint);explorer.RecenterCamera();elapsed=0;
                 }
@@ -100,12 +111,33 @@ namespace Ares.Editor
                     float consumption=system.Consumption;Press(root,"oxygen-laboratory");Require(system.Consumption<consumption,"Laboratory control did not save oxygen");
                     Press(root,"oxygen-mode-2");Require(system.Mode==OxygenMode.Boost,"Boost control failed");
                     Press(root,"computer-energy");Require(root.Query<SliderInt>().ToList().Count==3,"Energy planning lost from computer");
-                    ScreenCapture.CaptureScreenshot("Logs/ares-computer-energy.png");Next();
+                    Next();
                 }
-                else if(stage==5&&elapsed>.3f)
+                else if(stage==5&&elapsed>.6f)
+                {
+                    Require(root.Q("computer-track").worldBound.x-root.Q("computer-viewport").worldBound.x < -100,"Energy page did not slide left");
+                    ScreenCapture.CaptureScreenshot("Logs/ares-computer-energy.png");
+                    stage=21;elapsed=0;
+                }
+                else if(stage==21&&elapsed>.25f)
                 {
                     Press(root,"computer-oxygen");Require(!frontend.Campaign.OxygenSystem.LaboratoryEnabled,"Tab change reset oxygen settings");
-                    keys=new KeyboardState(Key.Escape);Next();
+                    stage=22;elapsed=0;
+                }
+                else if(stage==22&&elapsed>.6f)
+                {
+                    Require(Mathf.Abs(root.Q("computer-track").worldBound.x-root.Q("computer-viewport").worldBound.x)<1,"Oxygen page did not slide back");
+                    root.Q<Foldout>("oxygen-science").value=true;stage=23;elapsed=0;
+                }
+                else if(stage==23&&elapsed>.25f)
+                {
+                    root.Q<Foldout>("oxygen-science").GetFirstAncestorOfType<ScrollView>().scrollOffset=new Vector2(0,10000);
+                    stage=24;elapsed=0;
+                }
+                else if(stage==24&&elapsed>.3f)
+                {
+                    ScreenCapture.CaptureScreenshot("Logs/ares-computer-science.png");
+                    keys=new KeyboardState(Key.Escape);stage=6;elapsed=0;
                 }
                 else if(stage==6&&elapsed>1.9f)
                 {
@@ -132,32 +164,21 @@ namespace Ares.Editor
                 else if(stage==11&&elapsed>.2f)
                 {
                     Require(!terminal.Near&&!terminal.PromptVisible&&!terminal.TryInteract(),"Remote console access or prompt");
+                    Call("ShowEnergy");Call("UseStation");Require(!frontend.BlocksWorld&&root.Query<SliderInt>().ToList().Count==0,"Energy opened away from physical computer");
+                    Call("Settings");pausedAt=frontend.Campaign.SolElapsedSeconds;Next();
+                }
+                else if(stage==12&&elapsed>.4f)
+                {
+                    Require(Mathf.Abs(frontend.Campaign.SolElapsedSeconds-pausedAt)<.001f,"Settings failed to pause the actual day clock");Call("CloseOverlay");
                     frontend.StartMission();Require(frontend.Campaign.OxygenSystem.TotalConsumed==0,"New mission reused oxygen telemetry");
-                    Finish("PASS: finite/nonnegative resource accounting, capacity overflow, depletion, partial/no power, modes, laboratory savings, 30/120 Hz consistency; actual E near spawn computer; cartoon prompt; camera approach/return/FOV, input ownership, Escape during approach, reduced motion; live oxygen/power use; real mode/lab buttons; energy planning tab; distance gating; mission reset. Captures: prompt, transition, oxygen, energy.");
+                    Finish("PASS: 600-second day, pause/terminal/task clock, unfinished task close; NASA metabolic loads, electrolysis/water, separate CO2, energy limits and mass balance at 30/120 Hz; randomized discovery deck; actual E near computer, oxygen controls, animated energy/oxygen arrows, remote energy blocked, camera return/reduced motion; mission reset. Captures: prompt, transition, oxygen, energy.");
                     EditorApplication.ExitPlaymode();return;
                 }
                 InputSystem.QueueStateEvent(keyboard,keys);
             }
             catch(Exception error){Finish("FAIL stage "+stage+": "+error);EditorApplication.ExitPlaymode();}
         }
-        static void DomainChecks()
-        {
-            var settings=new OxygenSettings();var p=new OxygenPlant(settings,50);p.Tick(30,2.4f);
-            Near(p.ReserveLitres,501,"Balanced reserve");Near(p.TotalConsumed,8,"Consumption");Near(p.TotalProduced,9,"Production");
-            p.SetMode(OxygenMode.Economy);p.Tick(30,1.2f);Near(p.ReserveLitres,499,"Economy draws reserve");
-            p.SetLaboratory(false);Near(p.Consumption,6.9f,"Lab demand");Require(!p.SetMode((OxygenMode)99),"Invalid mode");
-            var full=new OxygenPlant(settings,100);full.Tick(30,2.4f);Near(full.TotalVented,1,"Overflow");Near(full.ReserveLitres,1000,"Capacity");
-            var empty=new OxygenPlant(settings,0);empty.Tick(30,0);Near(empty.ReserveLitres,0,"Underflow");Near(empty.TotalUnserved,8,"Unserved demand");
-            var partial=new OxygenPlant(settings,50);partial.Tick(30,1.2f);Near(partial.TotalProduced,4.5f,"Partial power");
-            float reserve=partial.ReserveLitres;partial.Tick(float.NaN,1);partial.Tick(-1,1);partial.Tick(1,-1);Near(partial.ReserveLitres,reserve,"Invalid time/energy");
-            foreach(int fps in new[]{30,120})
-            {
-                var run=new OxygenPlant(settings,50);for(int i=0;i<fps*30;i++)run.Tick(1f/fps,2.4f/30/fps);
-                Require(Mathf.Abs(run.ReserveLitres-501)<.05f,"Frame-rate accounting");
-                Require(Mathf.Abs(500+run.TotalProduced-run.TotalConsumed-run.TotalVented-run.ReserveLitres)<.05f,"Mass balance");
-            }
-            var battery=new SolarPlant(new SolarMaintenanceSettings {initialReserveKwh=1});Near(battery.DrawEnergy(2),1,"Battery delivery");Near(battery.ReserveKwh,0,"Battery underflow");
-        }
+        static void DomainChecks() => LifeSupportChecks.VerifyModel();
         static void SetPlayer(Vector3 p)
         {var player=(PlayerMotion)typeof(ReferenceExplorer).GetField("player",Private).GetValue(explorer);player.X=p.x;player.Z=-p.z;player.Speed=player.VelocityX=player.VelocityZ=0;}
         static void Call(string name) => typeof(GameFrontend).GetMethod(name,Private).Invoke(frontend,null);

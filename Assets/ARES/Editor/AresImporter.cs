@@ -29,6 +29,7 @@ namespace Ares.Editor
             definition.campaign = JsonUtility.FromJson<CampaignData>(File.ReadAllText(Root + "/Import/campaign.json"));
             definition.world = JsonUtility.FromJson<Ares.World.WorldConfiguration>(File.ReadAllText(Root + "/Import/balance.json"));
             definition.rules = JsonUtility.FromJson<CampaignRules>(File.ReadAllText(Root + "/Import/balance.json"));
+            definition.rules.realSecondsPerSol = Ares.Domain.MissionTime.RealSecondsPerSol;
             definition.portuguese = AssetDatabase.LoadAssetAtPath<TextAsset>(Root + "/Import/pt-BR.json"); definition.english = AssetDatabase.LoadAssetAtPath<TextAsset>(Root + "/Import/en.json"); EditorUtility.SetDirty(definition);
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var world = new GameObject("Base ARES — imported reference");

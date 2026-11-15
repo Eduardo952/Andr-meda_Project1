@@ -40,7 +40,7 @@ namespace Ares.UI
         {
             body.Clear(); footer.Clear();
             var content = Box(body, "observatory-content");
-            Text(content, "Uma nova descoberta a cada Sol. O que você consegue observar?", "heading");
+            Text(content, "Uma imagem sorteada a cada Sol, sem repetir. O que você consegue observar?", "heading");
             var days = Box(content, "row observatory-days");
             for (int i = 0; i < DiscoveryJournal.Days; i++)
             {

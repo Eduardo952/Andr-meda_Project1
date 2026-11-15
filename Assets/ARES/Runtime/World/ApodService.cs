@@ -18,13 +18,27 @@ namespace Ares.World
         public ObservatoryCollection Collection { get; private set; }
         public bool OfflineOnly { get; set; }
         public int RequestCount { get; private set; }
+        string collectionJson;
 
         void Awake()
         {
             var text = Resources.Load<TextAsset>("ARES/Observatory/collection");
-            Collection = JsonUtility.FromJson<ObservatoryCollection>(text.text.TrimStart('\uFEFF'));
+            collectionJson = text.text.TrimStart('\uFEFF');
+            Collection = JsonUtility.FromJson<ObservatoryCollection>(collectionJson);
             if (Collection.entries == null || Collection.entries.Length != 5)
                 throw new InvalidOperationException("The observatory requires five curated APOD entries.");
+        }
+
+        public void BeginMission(int? seed = null)
+        {
+            StopAllCoroutines();
+            for (int i = 0; i < downloaded.Length; i++)
+            { if (downloaded[i] != null) Destroy(downloaded[i]); downloaded[i] = null; attempted[i] = loading[i] = false; status[i] = null; records[i] = null; }
+            var source = JsonUtility.FromJson<ObservatoryCollection>(collectionJson);
+            var order = Ares.Domain.DiscoveryDeck.Shuffle(source.entries.Length, seed ?? Guid.NewGuid().GetHashCode());
+            Collection = JsonUtility.FromJson<ObservatoryCollection>(collectionJson);
+            for (int i = 0; i < order.Length; i++) Collection.entries[i] = source.entries[order[i]];
+            RequestCount = 0; Changed?.Invoke();
         }
 
         public Texture2D Image(int day) => downloaded[day] != null ? downloaded[day]

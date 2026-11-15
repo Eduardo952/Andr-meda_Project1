@@ -17,7 +17,6 @@ namespace Ares.World.Computer
         ComputerPrompt prompt;
         ComputerPanel foreground;
         Campaign campaign;
-        Action afterClose;
         float refresh;
         public ComputerCamera CameraRig { get; private set; }
         public bool OwnsCamera => CameraRig != null && CameraRig.Active;
@@ -43,14 +42,13 @@ namespace Ares.World.Computer
         {
             if(!Near || frontend.BlocksWorld || OwnsCamera || Camera.main==null)return false;
             CameraRig.Begin(Camera.main);
-            foreground=new ComputerPanel(root,campaign,()=>Focused,Close,frontend.BuildComputerEnergy,
-                ()=>{afterClose=frontend.SealFromComputer;Close();});
+            foreground=new ComputerPanel(root,campaign,()=>Focused,Close,frontend.BuildComputerEnergy,()=>explorer.reducedMotion);
             foreground.Root.style.opacity=0;return true;
         }
         public void Close() {CameraRig?.Close();}
         public void Reset()
         {
-            CameraRig?.Reset();foreground?.Root.RemoveFromHierarchy();foreground=null;afterClose=null;
+            CameraRig?.Reset();foreground?.Root.RemoveFromHierarchy();foreground=null;
             RestoreHud();
         }
         void RestoreHud() {if(root==null)return;foreach(var child in root.Children())child.style.opacity=1;}
@@ -68,7 +66,6 @@ namespace Ares.World.Computer
             else if(active)
             {
                 foreground?.Root.RemoveFromHierarchy();foreground=null;RestoreHud();
-                var next=afterClose;afterClose=null;next?.Invoke();
             }
             prompt?.Update(Camera.main,settings,Near&&!frontend.BlocksWorld,explorer.reducedMotion);
             refresh+=Time.unscaledDeltaTime;

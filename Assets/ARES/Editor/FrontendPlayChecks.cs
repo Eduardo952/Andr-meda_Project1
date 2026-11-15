@@ -44,14 +44,26 @@ namespace Ares.Editor
                     case 0: Require(ui.BlocksWorld,"Title does not block movement"); ScreenCapture.CaptureScreenshot("Logs/ares-title.png"); stage++; break;
                     case 1: Press(root, "Jogar", "Play"); Require(ui.Campaign.Phase==Phase.Report,"Play did not open report"); stage++; break;
                     case 2: ScreenCapture.CaptureScreenshot("Logs/ares-report.png"); stage=11; break;
-                    case 11: Press(root,"Planejar energia","Plan energy"); Require(ui.Campaign.Phase==Phase.Plan,"Report continue failed"); Call(ui,"ShowEnergy"); stage=3; break;
+                    case 11:
+                        Press(root,"Planejar energia","Plan energy"); Require(ui.Campaign.Phase==Phase.Plan,"Report continue failed");
+                        var explorer=ui.GetComponent<Ares.World.ReferenceExplorer>();
+                        var player=(Ares.World.PlayerMotion)typeof(Ares.World.ReferenceExplorer).GetField("player",Fields).GetValue(explorer);
+                        player.X=explorer.computerSettings.standPoint.x;player.Z=-explorer.computerSettings.standPoint.z;
+                        player.VelocityX=player.VelocityZ=player.Speed=0;stage=13;break;
+                    case 13: Call(ui,"ShowEnergy");stage=14;break;
+                    case 14:
+                        if(!ui.Terminal.Focused)break;
+                        var arrow=root.Q<Button>("computer-energy");Require(arrow!=null,"Computer energy arrow missing");
+                        using(var navigation=NavigationSubmitEvent.GetPooled()){navigation.target=arrow;arrow.SendEvent(navigation);}
+                        next=EditorApplication.timeSinceStartup+.6;stage=3;break;
                     case 3:
                         var sliders=root.Query<SliderInt>().ToList(); Require(sliders.Count==3,"Energy needs three levers");
                         sliders[0].value=ui.Campaign.Current.demand.shield; sliders[1].value=ui.Campaign.Current.demand.life;
                         sliders[2].value=ui.Campaign.EnergyPool-ui.Campaign.Allocation.Total;
                         Require(ui.Campaign.Allocation.Total==ui.Campaign.EnergyPool,"Energy allocation lost values");
                         ScreenCapture.CaptureScreenshot("Logs/ares-energy.png"); stage++; break;
-                    case 4: Press(root,"Iniciar Sol","Start Sol"); Require(ui.Campaign.Phase==Phase.Tasks,"Start Sol button failed"); task=0; stage++; break;
+                    case 4: Press(root,"Iniciar Sol","Start Sol"); Require(ui.Campaign.Phase==Phase.Tasks,"Start Sol button failed"); task=0;ui.Terminal.Close();stage=15;break;
+                    case 15: if(!ui.Terminal.OwnsCamera)stage=5;break;
                     case 5:
                         var assignment=ui.Campaign.Current.tasks[task]; Require(ui.Campaign.BeginTask(assignment.id,assignment.room),"Assigned task rejected"); Call(ui,"OpenTask",assignment.id);
                         stage++; break;

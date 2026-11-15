@@ -63,7 +63,7 @@ namespace Ares.Editor
             var campaign = new Campaign(definition.campaign,definition.rules);
             campaign.Tick(1000,false); Require(campaign.Solar.DirtyPanels==0, "Report must pause maintenance");
             campaign.CloseReport(); campaign.SetAllocation(new Ares.Data.Allocation {shield=campaign.EnergyPool}); campaign.StartSol();
-            campaign.Tick(1000,true); Require(campaign.Solar.DirtyPanels==0, "Overlay must pause maintenance");
+            campaign.Tick(1000,true,true); Require(campaign.Solar.DirtyPanels==0, "Explicit pause must pause maintenance");
             campaign.Tick(1000,false); Require(campaign.Solar.IsCritical, "Campaign must advance maintenance during gameplay");
         }
         static void Tick()

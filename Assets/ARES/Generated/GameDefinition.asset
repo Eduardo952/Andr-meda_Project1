@@ -484,7 +484,7 @@ MonoBehaviour:
     sliderStep: 5
     margin: 5
     campaignSols: 5
-    realSecondsPerSol: 480
+    realSecondsPerSol: 600
     startSolFraction: 0.3
     shelterSeconds: 60
     taskSeconds: 60

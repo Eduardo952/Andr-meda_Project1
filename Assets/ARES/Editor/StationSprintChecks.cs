@@ -171,7 +171,7 @@ namespace Ares.Editor
                     var room = definition.layout.rooms.First(r => r.id == task.room);
                     Require(interaction.Resolve(campaign, room.Center).Action == StationAction.NeedsPlan, "Unplanned task offered");
                 }
-                Require(interaction.Resolve(campaign, control.Center).Action == StationAction.PlanEnergy, "Control center cannot plan");
+                Require(interaction.Resolve(campaign, control.Center).Action == StationAction.FindComputer, "Control room must direct player to the physical computer");
                 campaign.SetAllocation(new Allocation { shield = campaign.EnergyPool }); campaign.StartSol();
                 Require(!interaction.Resolve(campaign, new Vector3(0, 0, 24)).CanUse, "Station offered from corridor");
                 foreach (var task in sol.tasks)
@@ -182,7 +182,7 @@ namespace Ares.Editor
                     Require(campaign.BeginTask(task.id, room.id) && GreenhouseCheckFixture.Complete(campaign, task.id), "Fixture task failed");
                     Require(interaction.Resolve(campaign, room.Center).Action == StationAction.Completed, "Completed task offered twice");
                 }
-                Require(interaction.Resolve(campaign, control.Center).Action == StationAction.SealSol, "Seal differs from use area");
+                Require(interaction.Resolve(campaign, control.Center).Action == StationAction.FindComputer, "Day completion must not expose remote energy management");
             }
         }
         static void MoveToStation()

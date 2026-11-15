@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ares.World
 {
-    public enum StationAction { None, PlanEnergy, OpenTask, SealSol, NeedsPlan, Completed }
+    public enum StationAction { None, PlanEnergy, OpenTask, SealSol, NeedsPlan, Completed, FindComputer }
 
     public readonly struct StationOffer
     {
@@ -35,10 +35,10 @@ namespace Ares.World
             if (room == null) room = navigation.Near(position, radius);
             if (room == null || room.id == "airlock" || campaign == null) return default;
             if (campaign.Phase == Phase.Plan)
-                return new StationOffer(room, room.id == "control" ? StationAction.PlanEnergy : StationAction.NeedsPlan);
+                return new StationOffer(room, room.id == "control" ? StationAction.FindComputer : StationAction.NeedsPlan);
             if (campaign.Phase != Phase.Tasks || campaign.OpenTask != null) return new StationOffer(room, StationAction.None);
             if (room.id == "control")
-                return new StationOffer(room, campaign.AllTasksDone ? StationAction.SealSol : StationAction.PlanEnergy);
+                return new StationOffer(room, StationAction.FindComputer);
             foreach (var task in campaign.Current.tasks)
                 if (task.room == room.id)
                     return new StationOffer(room, campaign.Completed(task.id) ? StationAction.Completed : StationAction.OpenTask, task.id);

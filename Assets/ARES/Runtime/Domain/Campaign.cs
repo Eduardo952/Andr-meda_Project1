@@ -25,6 +25,9 @@ namespace Ares.Domain
         public string Alarm { get; private set; }
         public float AlarmSeconds { get; private set; }
         public float SolFraction { get; private set; } = .3f;
+        public float SolElapsedSeconds { get; private set; }
+        public float SolRemainingSeconds => Math.Max(0, MissionTime.RealSecondsPerSol - SolElapsedSeconds);
+        public bool EndedByClock { get; private set; }
         public int Dose { get; private set; }
         public int BonusStars { get; private set; }
         public bool CleanedThisSol { get; private set; }
@@ -91,18 +94,24 @@ namespace Ares.Domain
             if (id == "CleanPanels") CleanedThisSol = true;
             Changed?.Invoke(); return true;
         }
-        public void Tick(float seconds, bool overlayOpen)
+        public void Tick(float seconds, bool overlayOpen, bool paused = false)
         {
-            if (Phase != Phase.Tasks || overlayOpen || OpenTask != null || float.IsNaN(seconds) || float.IsInfinity(seconds) || seconds < 0) return;
-            Solar.Tick(seconds);
-            SolFraction = Math.Min(.999f, SolFraction + seconds / rules.realSecondsPerSol);
+            if (Phase != Phase.Tasks || paused || float.IsNaN(seconds) || float.IsInfinity(seconds) || seconds <= 0) return;
+            seconds = Math.Min(seconds, SolRemainingSeconds);
+            // A task/computer is part of the day. Only explicit pause stops time and life support.
+            float remaining = seconds;
+            while (remaining > 0)
+            { float step = Math.Min(remaining, 1); remaining -= step; Solar.Tick(step); TickOxygen(step); }
+            SolElapsedSeconds = Math.Min(MissionTime.RealSecondsPerSol, SolElapsedSeconds + seconds);
+            SolFraction = (rules.startSolFraction + SolElapsedSeconds / MissionTime.RealSecondsPerSol) % 1;
             if (!string.IsNullOrEmpty(Alarm)) { AlarmSeconds = Math.Min(rules.shelterSeconds, AlarmSeconds + seconds); if (AlarmSeconds >= rules.shelterSeconds) { Alarm = null; ShelterMissed = true; Changed?.Invoke(); } }
+            if (SolRemainingSeconds <= 0) { EndedByClock = true; CompleteSol(); }
         }
         public void ReachShelter() { if (Phase == Phase.Tasks) { Alarm = null; Changed?.Invoke(); } }
-        /// <summary>Called once per live world/terminal frame by GameFrontend. Other overlays pause this subsystem.</summary>
+        /// <summary>Called by the campaign clock, including time spent in tasks and at the terminal.</summary>
         public void TickOxygen(float seconds)
         {
-            if ((Phase != Phase.Plan && Phase != Phase.Tasks) || OpenTask != null || float.IsNaN(seconds) || float.IsInfinity(seconds) || seconds <= 0) return;
+            if (Phase != Phase.Tasks || float.IsNaN(seconds) || float.IsInfinity(seconds) || seconds <= 0) return;
             // Bound the step for exact battery exhaustion and stable resource accounting.
             while (seconds > 0)
             {
@@ -118,6 +127,11 @@ namespace Ares.Domain
         public bool Seal(string nearbyRoom, Allocation confirmation)
         {
             if (Phase != Phase.Tasks || nearbyRoom != "control" || OpenTask != null || !AllTasksDone || Allocation.Total != EnergyPool || !confirmation.Equals(Allocation)) return false;
+            CompleteSol(); return true;
+        }
+        void CompleteSol()
+        {
+            OpenTask = null;
             Outcome = consequences.EvaluateSol(Allocation, Current.demand);
             var facts = Current.facts;
             var storm = consequences.StormForSol(SolIndex, facts.hasWindSpeed ? (float?)facts.windSpeed : null);
@@ -127,11 +141,12 @@ namespace Ares.Domain
             OxygenSystem.ApplyPercentDelta(Outcome.oxygenDelta + totals.oxygen); UpdateOxygenDisplay();
             Dose = Rules.ApplyDelta(Dose, totals.dose); BonusStars += totals.bonusStars;
             panelDust = consequences.PanelDustAfterCleaning(panelDust, storm, CleanedThisSol);
-            Phase = Phase.Summary; Alarm = null; Changed?.Invoke(); return true;
+            Phase = Phase.Summary; Alarm = null; Changed?.Invoke();
         }
         public void NextSol()
         {
             if (Phase != Phase.Summary) return;
+            SolElapsedSeconds = 0; EndedByClock = false;
             if (Dose >= 100 || Integrity <= 0 || Oxygen <= 0) { Phase = Phase.GameOver; FailureCause = Dose >= 100 ? "radiation" : Oxygen <= 0 ? "suffocation" : "powerCollapse"; }
             else if (SolIndex + 1 >= data.sols.Length) Phase = Phase.Victory;
             else { history[SolIndex] = new Dictionary<string, int>(results); SolIndex++; results.Clear(); Allocation = default; OpenTask = null; SolFraction = rules.startSolFraction; AlarmSeconds = 0; CleanedThisSol = false; ShelterMissed = false; Events = Array.Empty<ConsequenceEvent>(); Outcome = null; Greenhouse = new GreenhouseSimulation(); Watering = new GreenhouseWatering(Greenhouse); Phase = Phase.Report; }

@@ -8,56 +8,84 @@
 .computer-content { flex-grow: 1; }
 .computer-content > .unity-scroll-view__content-viewport { flex-grow: 1; }
 .computer-content .unity-scroll-view__content-container { align-items: center; }
-.oxygen-view { width: 100%; max-width: 1440px; padding: 14px 30px 10px; flex-shrink: 0; }
-.oxygen-view Label { white-space: normal; margin: 0; }
-.oxygen-intro { justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.oxygen-title-block { flex-grow: 1; }
-.oxygen-eyebrow { color: #60756c; font-size: 12px; -unity-font-style: bold; letter-spacing: 2px; }
-.oxygen-title { color: #304841; font-size: 38px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); margin-top: 2px; }
-.oxygen-subtitle { color: #74736e; font-size: 16px; margin-top: 3px; }
-.oxygen-live { background-color: #dfecd9; color: #4a7060; padding: 8px 14px; border-radius: 16px; font-size: 12px; -unity-font-style: bold; }
-.oxygen-columns { flex-direction: row; align-items: stretch; }
-.oxygen-storage { width: 290px; flex-shrink: 0; background-color: #edf2df; border-radius: 20px; padding: 18px; align-items: center; margin-right: 22px; border-width: 2px; border-color: #d0ddc7; }
-.oxygen-tank-art { width: 220px; height: 220px; flex-shrink: 0; }
-.oxygen-reserve-number { font-size: 51px; color: #355c50; -unity-font: resource("ARES/UI/Fonts/Fredoka"); }
-.oxygen-storage-caption { font-size: 14px; color: #61766b; }
-.oxygen-autonomy { font-size: 14px; background-color: #d9e6cb; border-radius: 12px; padding: 8px 12px; margin-top: 12px; -unity-text-align: middle-center; }
-.oxygen-details { flex-grow: 1; min-width: 0; }
-.oxygen-metrics { flex-direction: row; }
-.oxygen-metric { flex-grow: 1; flex-basis: 0; min-width: 0; border-radius: 18px; padding: 12px 22px; }
-.oxygen-production { background-color: #d2ede3; margin-right: 14px; }
-.oxygen-consumption { background-color: #f6dfca; }
-.oxygen-metric-value { font-size: 33px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #385e55; margin-top: 5px; }
-.oxygen-consumption .oxygen-metric-value { color: #965f45; }
-.oxygen-metric-caption { font-size: 13px; color: #6f766c; margin-top: 2px; }
-.oxygen-balance { background-color: #e3eddb; border-radius: 14px; padding: 12px 18px; margin-top: 12px; border-left-width: 5px; border-left-color: #72a980; }
-.oxygen-warning { background-color: #fae4cf; border-left-color: #d88f50; }
-.oxygen-balance-number { font-size: 18px; -unity-font-style: bold; color: #45634c; }
-.oxygen-balance-caption { font-size: 13px; color: #697166; margin-top: 3px; }
-.oxygen-sectors { padding: 15px 8px 3px; }
-.oxygen-section-title { font-size: 20px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #484b49; }
-.oxygen-sector { flex-direction: row; align-items: center; padding: 6px 0; border-bottom-width: 1px; border-bottom-color: #e4dfd1; }
-.oxygen-sector-name { width: 260px; flex-shrink: 1; }
-.oxygen-sector-title { font-size: 16px; -unity-font-style: bold; }
-.oxygen-sector-description { font-size: 12px; color: #7e7c74; margin-top: 2px; }
-.oxygen-sector-bar { height: 9px; flex-grow: 1; background-color: #e7e2d5; border-radius: 5px; margin: 0 20px; }
-.oxygen-sector-fill { height: 9px; background-color: #9abfaf; border-radius: 5px; }
-.oxygen-sector-value { width: 115px; -unity-text-align: middle-right; font-size: 15px; -unity-font-style: bold; }
-.oxygen-totals { flex-direction: row; margin-top: 12px; }
-.oxygen-total { flex-grow: 1; flex-basis: 0; font-size: 14px; color: #756c65; padding: 10px 14px; background-color: #f0eadc; border-radius: 12px; margin-right: 8px; }
-.oxygen-controls { margin-top: 12px; padding: 12px 20px 10px; border-radius: 18px; background-color: #efe8d9; }
-.oxygen-control-title { justify-content: space-between; margin-bottom: 8px; }
-.oxygen-modes { flex-direction: row; }
-Button.oxygen-mode { flex-grow: 1; flex-basis: 0; min-width: 0; padding: 10px 18px; margin: 4px; border-radius: 14px; background-color: #fffaf0; border-width: 2px; border-color: #d8cfbf; border-bottom-width: 5px; }
-Button.oxygen-mode.selected { background-color: #cde5cf; border-color: #7eaa8c; }
-Button.oxygen-mode:hover { background-color: #e0edd9; }
-.oxygen-mode-title { font-size: 20px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); }
-.oxygen-mode-hint { font-size: 12px; color: #697264; margin-top: 4px; }
-.oxygen-control-bottom { flex-direction: row; justify-content: space-between; align-items: center; margin-top: 8px; }
-.oxygen-mode-detail { font-size: 13px; color: #756f65; }
-Button.oxygen-laboratory { min-height: 36px; font-size: 14px; padding: 6px 15px; border-bottom-width: 3px; }
-.oxygen-note { flex-direction: row; justify-content: center; align-items: center; margin-top: 8px; }
-.oxygen-note .small { margin-left: 14px; font-size: 12px; }
 .computer-prompt { position: absolute; width: 190px; align-items: center; }
 .computer-key { width: 66px; height: 71px; background-color: #fff3cc; border-width: 3px; border-color: #574662; border-bottom-width: 8px; border-radius: 18px; align-items: center; justify-content: center; rotate: -5deg; }
 .computer-prompt-text { background-color: #fff7e6; border-width: 2px; border-color: #574662; border-radius: 13px; margin-top: 6px; padding: 5px 12px; font-size: 13px; -unity-font-style: bold; }
+.computer-page-title { font-size: 15px; color: #49695d; -unity-font-style: bold; }
+.computer-viewport { flex-grow: 1; overflow: hidden; position: relative; }
+.computer-track { width: 200%; height: 100%; flex-direction: row; flex-shrink: 0; transition-property: translate; transition-duration: 0.38s; transition-timing-function: ease-in-out; }
+.computer-reduced-motion .computer-track { transition-duration: 0s; }
+.computer-page { width: 50%; height: 100%; flex-shrink: 0; padding: 0 58px; }
+.computer-page .unity-scroll-view__content-container { align-items: center; }
+.computer-page:disabled { opacity: 1; }
+.computer-energy-body { width: 100%; max-width: 1440px; padding-top: 18px; }
+Button.computer-arrow { position: absolute; top: 42%; width: 48px; height: 74px; padding: 0; font-size: 49px; border-radius: 18px; border-width: 2px; border-bottom-width: 6px; background-color: #f5cc78; border-color: #956b42; color: #453e48; -unity-text-align: middle-center; }
+Button.computer-arrow:hover { background-color: #ffe4a1; }
+.computer-arrow-left { left: 7px; }
+.computer-arrow-right { right: 7px; }
+.computer-page .unity-scroller--vertical { width: 12px; }
+.computer-page .unity-scroller--vertical .unity-slider__dragger { background-color: #91afa2; border-radius: 6px; }
+
+/* Oxygen dashboard: overview -> choice -> optional learning. */
+.oxygen-view { width: 100%; max-width: 1200px; padding: 25px 28px 20px; flex-shrink: 0; }
+.oxygen-view Label { margin: 0; white-space: normal; }
+.ox-intro { margin-bottom: 22px; }
+.ox-title { font-size: 36px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #294d47; }
+.ox-subtitle { font-size: 18px; color: #6b766b; margin-top: 5px; }
+.ox-dashboard { flex-direction: row; align-items: stretch; }
+.ox-storage { width: 260px; flex-shrink: 0; align-items: center; justify-content: center; padding: 24px 16px; margin-right: 28px; border-radius: 25px; border-width: 2px; border-color: #c8dccc; background-color: #eaf0de; }
+.ox-eyebrow { font-size: 13px; -unity-font-style: bold; letter-spacing: 1px; color: #5c776b; }
+.oxygen-tank-art { width: 210px; height: 215px; flex-shrink: 0; margin-top: 12px; }
+.ox-percent { font-size: 57px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #355f50; }
+.ox-muted { font-size: 14px; color: #69746a; }
+.ox-trend { font-size: 17px; -unity-font-style: bold; color: #395e50; padding: 9px 13px; margin-top: 18px; background-color: #d8e7ca; border-radius: 13px; -unity-text-align: middle-center; }
+.ox-decisions { flex-grow: 1; min-width: 0; }
+.ox-status { padding: 17px 20px; border-radius: 18px; background-color: #e3eedc; border-left-width: 5px; border-left-color: #76a68c; }
+.ox-status-title { font-size: 24px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #31584a; }
+.ox-advice { font-size: 17px; color: #526657; margin-top: 7px; }
+.ox-warning { background-color: #f6e8cd; border-left-color: #d9a15d; }
+.ox-warning .ox-status-title { color: #78522e; }
+.ox-flow { padding: 17px 12px 14px; }
+.ox-flow-row { flex-direction: row; align-items: center; margin-bottom: 8px; }
+.ox-flow-label { width: 112px; font-size: 16px; color: #4d5f57; }
+.ox-flow-track { flex-grow: 1; height: 16px; background-color: #e7e4d7; border-radius: 8px; overflow: hidden; }
+.ox-flow-fill { height: 16px; border-radius: 8px; transition-property: width; transition-duration: 0.15s; }
+.ox-production { background-color: #65b6a5; }
+.ox-consumption { background-color: #deaa7d; }
+.ox-comparison { font-size: 14px; color: #70776b; margin-left: 112px; margin-top: 2px; }
+.ox-section { font-size: 21px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #3b5149; margin-bottom: 4px; }
+.ox-choices { flex-direction: row; margin: 4px -4px 8px; }
+Button.ox-mode { flex-grow: 1; flex-basis: 0; min-width: 0; height: 118px; margin: 0 3px; padding: 10px 14px 26px; background-color: transparent; border-width: 0; border-radius: 22px; -unity-background-scale-mode: stretch-to-fill; -unity-background-image-tint-color: #ffffff; justify-content: center; align-items: center; }
+Button.ox-mode:hover { background-color: transparent; -unity-background-image-tint-color: #e3f0d9; }
+Button.ox-mode.selected { background-color: transparent; -unity-background-image-tint-color: #b8e0ca; }
+Button.ox-mode:active { translate: 0 2px; }
+Button.ox-mode:focus { border-width: 2px; border-color: #2a7565; }
+.ox-mode-title { font-size: 20px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #274e47; -unity-text-align: middle-center; }
+.ox-mode-hint { font-size: 14px; color: #4d6155; margin-top: 3px; -unity-text-align: middle-center; }
+.ox-mode-state { font-size: 10px; min-height: 13px; margin-top: 4px; -unity-font-style: bold; letter-spacing: 1px; color: #245c4c; }
+.ox-experiments { flex-direction: row; align-items: center; padding: 14px 16px; background-color: #f0eadc; border-radius: 16px; }
+.ox-experiment-copy { flex-grow: 1; margin-right: 12px; }
+.ox-experiment-title { font-size: 16px; -unity-font-style: bold; color: #4a594f; margin-bottom: 3px; }
+Button.ox-experiment-button { min-width: 98px; min-height: 44px; border-radius: 14px; padding: 8px 18px; font-size: 16px; background-color: #fff9ea; color: #36584c; border-color: #c8c0ac; border-bottom-width: 4px; }
+.ox-support { flex-direction: row; justify-content: center; margin-top: 19px; flex-wrap: wrap; }
+.ox-chip { font-size: 14px; color: #4e6c5a; background-color: #e9eee0; padding: 7px 16px; margin: 3px 5px; border-radius: 15px; }
+.ox-chip-warning { color: #7b4c2a; background-color: #f8e4c7; }
+.ox-takeaway { font-size: 16px; color: #6b7367; -unity-text-align: middle-center; margin-top: 13px; margin-bottom: 13px; }
+.ox-more { padding: 12px 17px; background-color: #f1ebdd; border-radius: 16px; margin-top: 4px; }
+.ox-more > Toggle { min-height: 32px; font-size: 17px; }
+.ox-more Foldout { margin-top: 12px; }
+.ox-lesson { padding: 13px 0 3px; }
+.ox-body { font-size: 16px; color: #535d54; margin-top: 9px; margin-bottom: 7px; }
+.ox-more .ox-muted { margin-top: 8px; }
+Button.ox-source { min-height: 36px; font-size: 14px; padding: 5px 12px; align-self: flex-start; }
+.ox-compact { padding: 16px; }
+.ox-compact .ox-dashboard { flex-direction: column; }
+.ox-compact .ox-storage { width: auto; flex-direction: row; justify-content: space-around; margin-right: 0; margin-bottom: 15px; padding: 12px; flex-wrap: wrap; }
+.ox-compact .oxygen-tank-art { width: 90px; height: 95px; margin-top: 0; }
+.ox-compact .ox-percent { font-size: 42px; }
+.ox-compact .ox-trend { margin-top: 0; }
+.ox-compact .ox-eyebrow { display: none; }
+.ox-compact .ox-title { font-size: 29px; }
+.ox-compact .ox-mode-title { font-size: 18px; }
+
+.ox-choice-hint { font-size: 15px; color: #5f6e60; margin: 0 4px 12px; }

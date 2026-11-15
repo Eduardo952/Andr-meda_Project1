@@ -31,7 +31,7 @@ Por padrão usa-se a chave pública `DEMO_KEY`, sujeita às cotas da NASA. Para 
 
 ## Coleção educativa e tradução
 
-Os cinco Sols usam APOD de **13 a 17 de julho de 2022**, uma descoberta diferente por dia do jogo. Isso é uma seleção histórica explícita, não o APOD do dia civil atual. As páginas oficiais, as imagens originais e os créditos estão em `collection.json`. Os resumos e perguntas em português são adaptações educativas curtas, revisadas a partir dessas páginas; não são traduções automáticas da API. Não inventar uma explicação em português para uma imagem nova sem revisar sua fonte.
+Os cinco Sols sorteiam, sem repetição, os APOD de **13 a 17 de julho de 2022**. `DiscoveryDeck` usa Fisher-Yates; `ApodService.BeginMission` embaralha os registros completos e limpa downloads/tentativas da missão anterior. A foto de cada Sol permanece estável quando o diário é reaberto; uma nova missão faz outro sorteio. A semente opcional serve apenas para verificações reproduzíveis. Isso é uma seleção histórica explícita, não o APOD do dia civil atual. As páginas oficiais, imagens e créditos estão em `collection.json`. Datas, resumos, perguntas e licenças acompanham a imagem sorteada. Os textos em português são adaptações educativas revisadas das páginas oficiais; não são traduções automáticas da API.
 
 Para trocar a coleção, atualize juntos: data, título, resumo, pergunta, créditos, fonte, URL da imagem e recurso local. Mantenha cinco datas/imagens distintas e revise todos os resumos. Não altere somente a data deixando uma legenda antiga. A imagem usa `ScaleToFit`, sem recortar o conteúdo científico. Preserve `.meta` ao substituir assets.
 

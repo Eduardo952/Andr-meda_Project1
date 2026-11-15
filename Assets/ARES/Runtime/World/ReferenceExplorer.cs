@@ -12,6 +12,7 @@ namespace Ares.World
         public bool reducedMotion, invertCamera;
         [Range(.25f, 2)] public float cameraSensitivity = 1;
         public SprintSettings sprint = new SprintSettings();
+        public MartianWindSettings windSettings = new MartianWindSettings();
         public RoverSettings roverSettings = new RoverSettings();
         public Computer.ComputerSettings computerSettings = new Computer.ComputerSettings();
         public Ares.Domain.OxygenSettings oxygenSettings = new Ares.Domain.OxygenSettings();
@@ -72,6 +73,7 @@ namespace Ares.World
             }
             if (astronaut == null || bubble == null)
                 Debug.LogError("ARES character prefabs are missing. Regenerate the reference scene before testing animation.", this);
+            if (GetComponent<MartianWind>() == null) gameObject.AddComponent<MartianWind>();
         }
         void Update()
         {
