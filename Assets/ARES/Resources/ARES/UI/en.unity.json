@@ -1,0 +1,22 @@
+{
+  "entries": [
+    { "key": "solar.title", "value": "SOLAR PARK · 32 PANELS" },
+    { "key": "solar.reserve", "value": "Reserve: {{n}} kWh" },
+    { "key": "solar.generation", "value": "Generation: {{n}} kWh / {{seconds}} s · {{dirty}} dusty" },
+    { "key": "solar.critical", "value": "CRITICAL ENERGY FAILURE — reserve below {{threshold}} kWh. Clean panels to restore generation and recharge the reserve." },
+    { "key": "solar.pickup", "value": "[E] Pick up broom" },
+    { "key": "solar.return", "value": "[E] Return broom to rack" },
+    { "key": "solar.findBroom", "value": "A broom is available at the solar park entrance." },
+    { "key": "solar.enterZone", "value": "Broom equipped. Enter the outline of a dusty panel." },
+    { "key": "solar.clean", "value": "Panel {{n}} is clean. Look for panels slightly lightened by sand." },
+    { "key": "solar.hold", "value": "Panel {{n}}: hold the left mouse button for {{seconds}} s to clean." },
+    { "key": "solar.cleaning", "value": "Cleaning · {{n}}%" },
+    { "key": "howTo.solar", "value": "Dust builds up on the 32 panels over time. Pick up the broom with E at the park entrance, enter a panel outline and hold the left mouse button. The reserve supports the base for a while; below 100 kWh, an alert requests maintenance. Cleaning restores generation and the reserve recharges gradually." },
+    { "key": "title.exit", "value": "Exit" },
+    { "key": "howTo.sprint", "value": "Hold Shift while moving to run. Release Shift to walk again." },
+    { "key": "howTo.use", "value": "Enter a task area and press USE (E, Space or Enter). Plan energy in the Control Room before starting tasks." },
+    { "key": "station.needsPlan", "value": "Plan energy in the Control Room" },
+    { "key": "station.completed", "value": "This area's task is complete for this Sol" },
+    { "key": "station.approach", "value": "Approach a task area" }
+  ]
+}

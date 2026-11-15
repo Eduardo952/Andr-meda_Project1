@@ -17,6 +17,7 @@ namespace Ares.Data
     {
         public int sol; public string date, capturedAt, alarm, raw; public bool sample, thermalMissing;
         public Allocation demand; public Assignment[] tasks;
+        public ConsequenceFacts facts = new ConsequenceFacts();
     }
     [Serializable] public struct Allocation
     {

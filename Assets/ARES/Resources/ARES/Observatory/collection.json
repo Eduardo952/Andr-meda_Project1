@@ -1,0 +1,61 @@
+﻿{
+    "endpoint":  "https://api.nasa.gov/planetary/apod",
+    "entries":  [
+                    {
+                        "date":  "2022-07-13",
+                        "title":  "Um universo cheio de galáxias",
+                        "summary":  "O telescópio James Webb reuniu a luz de muitas galáxias distantes nesta imagem. Algumas aparecem como arcos: a gravidade de outras galáxias desvia e amplia sua luz.",
+                        "question":  "Você consegue encontrar uma galáxia em forma de arco?",
+                        "credit":  "NASA, ESA, CSA, STScI e NIRCam",
+                        "slug":  "webbs-first-deep-field",
+                        "sourceUrl":  "https://science.nasa.gov/image-article/apod-2022-july-13-webbs-first-deep-field/",
+                        "resource":  "ARES/Observatory/day1",
+                        "imageUrl":  "https://assets.science.nasa.gov/content/dam/science/cds/apod/apod/2022/july/STScI-SMACS0723_webb.png/jcr:content/renditions/cq5dam.web.1280.1280.png"
+                    },
+                    {
+                        "date":  "2022-07-14",
+                        "title":  "Os anéis de uma estrela",
+                        "summary":  "A Nebulosa do Anel Sul é formada por gás e poeira que uma estrela lançou ao espaço. O Webb revelou detalhes dessas camadas. A estrela mais brilhante perto do centro é sua companheira.",
+                        "question":  "Que formas você percebe nas camadas de gás?",
+                        "credit":  "NASA, ESA, CSA, STScI e NIRCam",
+                        "slug":  "webbs-southern-ring-nebula",
+                        "sourceUrl":  "https://science.nasa.gov/image-article/apod-2022-july-14-webbs-southern-ring-nebula/",
+                        "resource":  "ARES/Observatory/day2",
+                        "imageUrl":  "https://assets.science.nasa.gov/content/dam/science/cds/apod/apod/2022/july/STScI-WebbSouthernRing.png/jcr:content/renditions/cq5dam.web.1280.1280.png"
+                    },
+                    {
+                        "date":  "2022-07-15",
+                        "title":  "A Lua sobre um castelo",
+                        "summary":  "Esta Lua cheia foi fotografada sobre o castelo de Lubovna, na Eslováquia. Ela estava perto do ponto mais próximo da Terra em sua órbita. A atmosfera também muda a aparência da luz perto do horizonte.",
+                        "question":  "Como a borda de cima da Lua difere da borda de baixo?",
+                        "credit":  "© Petr Horálek / Institute of Physics in Opava",
+                        "slug":  "lubovna-full-moon",
+                        "sourceUrl":  "https://science.nasa.gov/image-article/apod-2022-july-15-lubovna-full-moon/",
+                        "resource":  "ARES/Observatory/day3",
+                        "imageUrl":  "https://assets.science.nasa.gov/content/dam/science/cds/apod/apod/2022/july/2022_07_13_Uplnek_Lubovna_1000mm_1500px.png/jcr:content/renditions/cq5dam.web.1280.1280.png"
+                    },
+                    {
+                        "date":  "2022-07-16",
+                        "title":  "Amanhecer nas crateras da Lua",
+                        "summary":  "A luz do Sol chega de lado às crateras Tycho e Clavius. Por isso, algumas bordas brilham enquanto seus fundos ficam na sombra. A luz e a sombra ajudam a perceber o relevo lunar.",
+                        "question":  "Onde você encontra uma borda iluminada ao lado de uma sombra?",
+                        "credit":  "© Eduardo Schaberger Poupeau",
+                        "slug":  "tycho-and-clavius-at-dawn",
+                        "sourceUrl":  "https://science.nasa.gov/image-article/apod-2022-july-16-tycho-and-clavius-at-dawn/",
+                        "resource":  "ARES/Observatory/day4",
+                        "imageUrl":  "https://assets.science.nasa.gov/content/dam/science/cds/apod/apod/2022/july/Dawn-in-Clavius-Tycho-07-07-22.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg"
+                    },
+                    {
+                        "date":  "2022-07-17",
+                        "title":  "Júpiter e sua lua Europa",
+                        "summary":  "A Voyager 1 registrou Júpiter e Europa. A Grande Mancha Vermelha é uma enorme tempestade. O ponto escuro no alto à direita é a sombra de outra lua, Io. A imagem reúne registros da passagem da sonda.",
+                        "question":  "Você consegue distinguir uma lua, uma sombra e uma tempestade?",
+                        "credit":  "NASA, Voyager 1, JPL, Caltech. Processamento: Alexis Tranchandon / Solaris (CC BY-NC-SA 2.0)",
+                        "slug":  "europa-and-jupiter-from-voyager-1",
+                        "sourceUrl":  "https://science.nasa.gov/image-article/apod-2022-july-17-europa-and-jupiter-from-voyager-1/",
+                        "resource":  "ARES/Observatory/day5",
+                        "imageUrl":  "https://assets.science.nasa.gov/content/dam/science/cds/apod/apod/2022/july/EuropaJupiter_Voyager_2792.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+                        "licenseUrl":  "https://creativecommons.org/licenses/by-nc-sa/2.0/"
+                    }
+                ]
+}

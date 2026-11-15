@@ -16,7 +16,7 @@ namespace Ares.Editor
         [Serializable] sealed class Pose { public string binding; public float[] position, rotation, scale; }
         [Serializable] sealed class AstronautFrame
         {
-            public bool reduced, observing;
+            public bool reduced, observing, observeArrived;
             public float elapsed, dt, phase, speed, x, z, heading, ambience, jump, observe;
             public Pose[] poses;
         }
@@ -67,9 +67,9 @@ namespace Ares.Editor
                 {
                     if (frame.reduced != previousReduced) observe = 0;
                     previousReduced = frame.reduced;
-                    observe = CharacterAnimation.Observe(observe, frame.observing, frame.dt);
+                    observe = CharacterAnimation.Observe(observe, frame.observing && frame.observeArrived, frame.dt);
                     Require(Mathf.Abs(observe - frame.observe) < .00001f, "Observation damping mismatch");
-                    float ob = frame.reduced ? (frame.observing ? 1 : 0) : observe;
+                    float ob = frame.reduced ? (frame.observing && frame.observeArrived ? 1 : 0) : observe;
                     astronaut.transform.position = ReferenceSpace.Position(frame.x, 0, frame.z);
                     astronaut.transform.rotation = ReferenceSpace.Euler(0, CharacterAnimation.Facing(frame.x, frame.z, frame.heading, ob, telescope.x, telescope.z), 0);
                     astronaut.Apply(CharacterAnimation.Astronaut(frame.speed, frame.phase, frame.elapsed, frame.ambience, frame.jump, ob, frame.reduced, config.ambience.jumpSeconds));

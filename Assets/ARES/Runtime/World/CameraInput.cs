@@ -13,9 +13,10 @@ namespace Ares.World
 
         public void Clear() { leftDrag = rightDrag = false; touchId = -1; pinchDistance = 0; }
 
-        public void Read(OrbitCamera rig, Camera camera, bool isometric, float sensitivity, bool invert, bool pointerBlocked)
+        public void Read(OrbitCamera rig, Camera camera, bool isometric, float sensitivity, bool invert, bool pointerBlocked, bool captureLeft = false)
         {
             var mouse = Mouse.current;
+            if (captureLeft) leftDrag = false;
             if (mouse != null)
             {
                 if (mouse.leftButton.wasPressedThisFrame)
@@ -24,7 +25,7 @@ namespace Ares.World
                     bool interactive = false;
                     foreach (var hit in Physics.RaycastAll(camera.ScreenPointToRay(mouse.position.ReadValue())))
                         if (hit.collider.GetComponentInParent<AstronautAnimator>() != null) { interactive = true; break; }
-                    leftDrag = !pointerBlocked && !interactive;
+                    leftDrag = !pointerBlocked && !interactive && !captureLeft;
                 }
                 if (mouse.rightButton.wasPressedThisFrame) rightDrag = !pointerBlocked;
                 if (!mouse.leftButton.isPressed) leftDrag = false;

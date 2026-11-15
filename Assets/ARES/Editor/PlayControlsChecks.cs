@@ -57,6 +57,7 @@ namespace Ares.Editor
                 if (keyboard == null)
                 {
                     explorer = UnityEngine.Object.FindAnyObjectByType<ReferenceExplorer>();
+                    explorer?.GetComponent<Ares.UI.GameFrontend>()?.SetInspectionTestMode();
                     astronaut = UnityEngine.Object.FindAnyObjectByType<AstronautAnimator>();
                     Require(explorer != null && astronaut != null, "Open the generated BaseARES scene before running this test.");
                     keyboard = InputSystem.AddDevice<Keyboard>("ARES test keyboard");

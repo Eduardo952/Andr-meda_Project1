@@ -1,0 +1,524 @@
+﻿{
+    "glyphs":  [
+                   {
+                       "y":  1027,
+                       "width":  181,
+                       "textureWidth":  1254,
+                       "height":  194,
+                       "x":  30,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "A"
+                   },
+                   {
+                       "y":  1028,
+                       "width":  165,
+                       "textureWidth":  1254,
+                       "height":  193,
+                       "x":  250,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "B"
+                   },
+                   {
+                       "y":  1027,
+                       "width":  165,
+                       "textureWidth":  1254,
+                       "height":  194,
+                       "x":  445,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "C"
+                   },
+                   {
+                       "y":  1028,
+                       "width":  171,
+                       "textureWidth":  1254,
+                       "height":  191,
+                       "x":  650,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "D"
+                   },
+                   {
+                       "y":  1029,
+                       "width":  154,
+                       "textureWidth":  1254,
+                       "height":  191,
+                       "x":  863,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "E"
+                   },
+                   {
+                       "y":  1027,
+                       "width":  149,
+                       "textureWidth":  1254,
+                       "height":  192,
+                       "x":  1068,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "F"
+                   },
+                   {
+                       "y":  800,
+                       "width":  182,
+                       "textureWidth":  1254,
+                       "height":  194,
+                       "x":  27,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "G"
+                   },
+                   {
+                       "y":  803,
+                       "width":  168,
+                       "textureWidth":  1254,
+                       "height":  185,
+                       "x":  242,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "H"
+                   },
+                   {
+                       "y":  805,
+                       "width":  149,
+                       "textureWidth":  1254,
+                       "height":  185,
+                       "x":  452,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "I"
+                   },
+                   {
+                       "y":  800,
+                       "width":  161,
+                       "textureWidth":  1254,
+                       "height":  189,
+                       "x":  647,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "J"
+                   },
+                   {
+                       "y":  802,
+                       "width":  167,
+                       "textureWidth":  1254,
+                       "height":  187,
+                       "x":  850,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "K"
+                   },
+                   {
+                       "y":  801,
+                       "width":  159,
+                       "textureWidth":  1254,
+                       "height":  187,
+                       "x":  1066,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "L"
+                   },
+                   {
+                       "y":  580,
+                       "width":  199,
+                       "textureWidth":  1254,
+                       "height":  182,
+                       "x":  19,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "M"
+                   },
+                   {
+                       "y":  577,
+                       "width":  178,
+                       "textureWidth":  1254,
+                       "height":  186,
+                       "x":  238,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "N"
+                   },
+                   {
+                       "y":  577,
+                       "width":  186,
+                       "textureWidth":  1254,
+                       "height":  187,
+                       "x":  435,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "O"
+                   },
+                   {
+                       "y":  577,
+                       "width":  164,
+                       "textureWidth":  1254,
+                       "height":  189,
+                       "x":  650,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "P"
+                   },
+                   {
+                       "y":  571,
+                       "width":  184,
+                       "textureWidth":  1254,
+                       "height":  196,
+                       "x":  841,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "Q"
+                   },
+                   {
+                       "y":  576,
+                       "width":  166,
+                       "textureWidth":  1254,
+                       "height":  190,
+                       "x":  1060,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "R"
+                   },
+                   {
+                       "y":  366,
+                       "width":  159,
+                       "textureWidth":  1254,
+                       "height":  181,
+                       "x":  35,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "S"
+                   },
+                   {
+                       "y":  369,
+                       "width":  165,
+                       "textureWidth":  1254,
+                       "height":  175,
+                       "x":  239,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "T"
+                   },
+                   {
+                       "y":  366,
+                       "width":  175,
+                       "textureWidth":  1254,
+                       "height":  176,
+                       "x":  438,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "U"
+                   },
+                   {
+                       "y":  368,
+                       "width":  179,
+                       "textureWidth":  1254,
+                       "height":  175,
+                       "x":  641,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "V"
+                   },
+                   {
+                       "y":  369,
+                       "width":  209,
+                       "textureWidth":  1254,
+                       "height":  173,
+                       "x":  833,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "W"
+                   },
+                   {
+                       "y":  367,
+                       "width":  171,
+                       "textureWidth":  1254,
+                       "height":  177,
+                       "x":  1058,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "X"
+                   },
+                   {
+                       "y":  175,
+                       "width":  170,
+                       "textureWidth":  1254,
+                       "height":  168,
+                       "x":  35,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "Y"
+                   },
+                   {
+                       "y":  176,
+                       "width":  156,
+                       "textureWidth":  1254,
+                       "height":  167,
+                       "x":  244,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "Z"
+                   },
+                   {
+                       "y":  173,
+                       "width":  160,
+                       "textureWidth":  1254,
+                       "height":  172,
+                       "x":  445,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "0"
+                   },
+                   {
+                       "y":  175,
+                       "width":  135,
+                       "textureWidth":  1254,
+                       "height":  170,
+                       "x":  664,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "1"
+                   },
+                   {
+                       "y":  176,
+                       "width":  153,
+                       "textureWidth":  1254,
+                       "height":  169,
+                       "x":  858,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "2"
+                   },
+                   {
+                       "y":  172,
+                       "width":  149,
+                       "textureWidth":  1254,
+                       "height":  173,
+                       "x":  1067,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "3"
+                   },
+                   {
+                       "y":  3,
+                       "width":  163,
+                       "textureWidth":  1254,
+                       "height":  158,
+                       "x":  33,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "4"
+                   },
+                   {
+                       "y":  1,
+                       "width":  147,
+                       "textureWidth":  1254,
+                       "height":  160,
+                       "x":  247,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "5"
+                   },
+                   {
+                       "y":  1,
+                       "width":  153,
+                       "textureWidth":  1254,
+                       "height":  162,
+                       "x":  450,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "6"
+                   },
+                   {
+                       "y":  1,
+                       "width":  149,
+                       "textureWidth":  1254,
+                       "height":  159,
+                       "x":  656,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "7"
+                   },
+                   {
+                       "y":  1,
+                       "width":  148,
+                       "textureWidth":  1254,
+                       "height":  161,
+                       "x":  859,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "8"
+                   },
+                   {
+                       "y":  1,
+                       "width":  146,
+                       "textureWidth":  1254,
+                       "height":  161,
+                       "x":  1071,
+                       "textureHeight":  1254,
+                       "atlas":  "letters-numbers",
+                       "character":  "9"
+                   },
+                   {
+                       "y":  942,
+                       "width":  226,
+                       "textureWidth":  1254,
+                       "height":  282,
+                       "x":  65,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "À"
+                   },
+                   {
+                       "y":  942,
+                       "width":  227,
+                       "textureWidth":  1254,
+                       "height":  282,
+                       "x":  364,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Á"
+                   },
+                   {
+                       "y":  942,
+                       "width":  227,
+                       "textureWidth":  1254,
+                       "height":  282,
+                       "x":  664,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Â"
+                   },
+                   {
+                       "y":  942,
+                       "width":  228,
+                       "textureWidth":  1254,
+                       "height":  280,
+                       "x":  963,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Ã"
+                   },
+                   {
+                       "y":  626,
+                       "width":  193,
+                       "textureWidth":  1254,
+                       "height":  293,
+                       "x":  79,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "É"
+                   },
+                   {
+                       "y":  625,
+                       "width":  198,
+                       "textureWidth":  1254,
+                       "height":  292,
+                       "x":  378,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Ê"
+                   },
+                   {
+                       "y":  626,
+                       "width":  128,
+                       "textureWidth":  1254,
+                       "height":  292,
+                       "x":  710,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Í"
+                   },
+                   {
+                       "y":  623,
+                       "width":  233,
+                       "textureWidth":  1254,
+                       "height":  296,
+                       "x":  957,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Ó"
+                   },
+                   {
+                       "y":  309,
+                       "width":  235,
+                       "textureWidth":  1254,
+                       "height":  291,
+                       "x":  54,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Ô"
+                   },
+                   {
+                       "y":  309,
+                       "width":  235,
+                       "textureWidth":  1254,
+                       "height":  291,
+                       "x":  354,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Õ"
+                   },
+                   {
+                       "y":  309,
+                       "width":  233,
+                       "textureWidth":  1254,
+                       "height":  293,
+                       "x":  656,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Ú"
+                   },
+                   {
+                       "y":  307,
+                       "width":  233,
+                       "textureWidth":  1254,
+                       "height":  290,
+                       "x":  956,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Ü"
+                   },
+                   {
+                       "y":  7,
+                       "width":  220,
+                       "textureWidth":  1254,
+                       "height":  276,
+                       "x":  58,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "Ç"
+                   },
+                   {
+                       "y":  15,
+                       "width":  125,
+                       "textureWidth":  1254,
+                       "height":  264,
+                       "x":  415,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "!"
+                   },
+                   {
+                       "y":  16,
+                       "width":  192,
+                       "textureWidth":  1254,
+                       "height":  267,
+                       "x":  675,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "?"
+                   },
+                   {
+                       "y":  25,
+                       "width":  262,
+                       "textureWidth":  1254,
+                       "height":  251,
+                       "x":  946,
+                       "textureHeight":  1254,
+                       "atlas":  "accents-symbols",
+                       "character":  "%"
+                   }
+               ]
+}

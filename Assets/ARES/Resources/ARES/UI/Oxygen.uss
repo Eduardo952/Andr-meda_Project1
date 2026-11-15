@@ -1,0 +1,63 @@
+.computer-session { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: #343344; padding: 16px; }
+.computer-shell { flex-grow: 1; background-color: #fbf7e9; border-radius: 24px; overflow: hidden; border-width: 3px; border-color: #e2c7a3; }
+.computer-header { flex-direction: row; align-items: center; justify-content: space-between; background-color: #ece5d4; padding: 8px 24px; border-bottom-width: 2px; border-bottom-color: #dcd2bf; }
+.computer-brand { font-size: 21px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); margin-bottom: 0; }
+.computer-navigation { flex-direction: row; align-items: center; }
+.computer-navigation Button { min-height: 38px; padding: 5px 20px; margin: 2px 5px; font-size: 16px; border-radius: 14px; border-bottom-width: 3px; }
+.computer-navigation Button.selected { background-color: #62cbb9; border-bottom-color: #3e877f; }
+.computer-content { flex-grow: 1; }
+.computer-content > .unity-scroll-view__content-viewport { flex-grow: 1; }
+.computer-content .unity-scroll-view__content-container { align-items: center; }
+.oxygen-view { width: 100%; max-width: 1440px; padding: 14px 30px 10px; flex-shrink: 0; }
+.oxygen-view Label { white-space: normal; margin: 0; }
+.oxygen-intro { justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.oxygen-title-block { flex-grow: 1; }
+.oxygen-eyebrow { color: #60756c; font-size: 12px; -unity-font-style: bold; letter-spacing: 2px; }
+.oxygen-title { color: #304841; font-size: 38px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); margin-top: 2px; }
+.oxygen-subtitle { color: #74736e; font-size: 16px; margin-top: 3px; }
+.oxygen-live { background-color: #dfecd9; color: #4a7060; padding: 8px 14px; border-radius: 16px; font-size: 12px; -unity-font-style: bold; }
+.oxygen-columns { flex-direction: row; align-items: stretch; }
+.oxygen-storage { width: 290px; flex-shrink: 0; background-color: #edf2df; border-radius: 20px; padding: 18px; align-items: center; margin-right: 22px; border-width: 2px; border-color: #d0ddc7; }
+.oxygen-tank-art { width: 220px; height: 220px; flex-shrink: 0; }
+.oxygen-reserve-number { font-size: 51px; color: #355c50; -unity-font: resource("ARES/UI/Fonts/Fredoka"); }
+.oxygen-storage-caption { font-size: 14px; color: #61766b; }
+.oxygen-autonomy { font-size: 14px; background-color: #d9e6cb; border-radius: 12px; padding: 8px 12px; margin-top: 12px; -unity-text-align: middle-center; }
+.oxygen-details { flex-grow: 1; min-width: 0; }
+.oxygen-metrics { flex-direction: row; }
+.oxygen-metric { flex-grow: 1; flex-basis: 0; min-width: 0; border-radius: 18px; padding: 12px 22px; }
+.oxygen-production { background-color: #d2ede3; margin-right: 14px; }
+.oxygen-consumption { background-color: #f6dfca; }
+.oxygen-metric-value { font-size: 33px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #385e55; margin-top: 5px; }
+.oxygen-consumption .oxygen-metric-value { color: #965f45; }
+.oxygen-metric-caption { font-size: 13px; color: #6f766c; margin-top: 2px; }
+.oxygen-balance { background-color: #e3eddb; border-radius: 14px; padding: 12px 18px; margin-top: 12px; border-left-width: 5px; border-left-color: #72a980; }
+.oxygen-warning { background-color: #fae4cf; border-left-color: #d88f50; }
+.oxygen-balance-number { font-size: 18px; -unity-font-style: bold; color: #45634c; }
+.oxygen-balance-caption { font-size: 13px; color: #697166; margin-top: 3px; }
+.oxygen-sectors { padding: 15px 8px 3px; }
+.oxygen-section-title { font-size: 20px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #484b49; }
+.oxygen-sector { flex-direction: row; align-items: center; padding: 6px 0; border-bottom-width: 1px; border-bottom-color: #e4dfd1; }
+.oxygen-sector-name { width: 260px; flex-shrink: 1; }
+.oxygen-sector-title { font-size: 16px; -unity-font-style: bold; }
+.oxygen-sector-description { font-size: 12px; color: #7e7c74; margin-top: 2px; }
+.oxygen-sector-bar { height: 9px; flex-grow: 1; background-color: #e7e2d5; border-radius: 5px; margin: 0 20px; }
+.oxygen-sector-fill { height: 9px; background-color: #9abfaf; border-radius: 5px; }
+.oxygen-sector-value { width: 115px; -unity-text-align: middle-right; font-size: 15px; -unity-font-style: bold; }
+.oxygen-totals { flex-direction: row; margin-top: 12px; }
+.oxygen-total { flex-grow: 1; flex-basis: 0; font-size: 14px; color: #756c65; padding: 10px 14px; background-color: #f0eadc; border-radius: 12px; margin-right: 8px; }
+.oxygen-controls { margin-top: 12px; padding: 12px 20px 10px; border-radius: 18px; background-color: #efe8d9; }
+.oxygen-control-title { justify-content: space-between; margin-bottom: 8px; }
+.oxygen-modes { flex-direction: row; }
+Button.oxygen-mode { flex-grow: 1; flex-basis: 0; min-width: 0; padding: 10px 18px; margin: 4px; border-radius: 14px; background-color: #fffaf0; border-width: 2px; border-color: #d8cfbf; border-bottom-width: 5px; }
+Button.oxygen-mode.selected { background-color: #cde5cf; border-color: #7eaa8c; }
+Button.oxygen-mode:hover { background-color: #e0edd9; }
+.oxygen-mode-title { font-size: 20px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); }
+.oxygen-mode-hint { font-size: 12px; color: #697264; margin-top: 4px; }
+.oxygen-control-bottom { flex-direction: row; justify-content: space-between; align-items: center; margin-top: 8px; }
+.oxygen-mode-detail { font-size: 13px; color: #756f65; }
+Button.oxygen-laboratory { min-height: 36px; font-size: 14px; padding: 6px 15px; border-bottom-width: 3px; }
+.oxygen-note { flex-direction: row; justify-content: center; align-items: center; margin-top: 8px; }
+.oxygen-note .small { margin-left: 14px; font-size: 12px; }
+.computer-prompt { position: absolute; width: 190px; align-items: center; }
+.computer-key { width: 66px; height: 71px; background-color: #fff3cc; border-width: 3px; border-color: #574662; border-bottom-width: 8px; border-radius: 18px; align-items: center; justify-content: center; rotate: -5deg; }
+.computer-prompt-text { background-color: #fff7e6; border-width: 2px; border-color: #574662; border-radius: 13px; margin-top: 6px; padding: 5px 12px; font-size: 13px; -unity-font-style: bold; }

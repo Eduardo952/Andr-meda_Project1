@@ -1,0 +1,6 @@
+.observatory-content { padding: 16px 24px; }
+.observatory-days { margin: 8px 0; justify-content: center; }
+.observatory-days Button { flex-grow: 1; }
+.observatory-photo { width: 100%; height: 350px; background-color: #19162b; border-radius: 16px; margin-bottom: 12px; }
+.observatory-summary { font-size: 19px; margin: 8px 0; white-space: normal; }
+.observatory-content .small { font-size: 13px; margin: 3px 0; white-space: normal; }

@@ -1,6 +1,49 @@
 # Base ARES — port nativo para Unity
 
-**Estado: migração em andamento. A cena atual é de inspeção, não o jogo completo.**
+**Estado: migração em andamento. Menu e campanha nativa integrados; fidelidade completa ainda pendente.**
+
+## Mestre da Estufa — 15/11/2026
+
+O **observatório APOD** também está integrado: telescópio clicável/E, cinco descobertas liberadas por Sol e diário no HUD. As imagens reais têm resumos em PT-BR, datas, fontes e créditos. `ApodService` valida a API e preserva cópias locais quando ela falha; `DiscoveryJournal` mantém o progresso. Leia [OBSERVATORY.md](Runtime/World/OBSERVATORY.md) para configuração, arquitetura, coleção histórica, proveniência e testes.
+
+**Atualização: a rega agora é manual no cenário.** Comece pelo [guia de manutenção na raiz](../../README.md) e por [MANUAL_WATERING.md](Runtime/World/MANUAL_WATERING.md). O painel prepara a dose; o jogador pega o regador com E, abastece e segura o clique em cada uma das quatro áreas. `Domain/GreenhouseWatering` conserva a água e só conclui o ciclo após as quatro entregas. O HUD mostra água, saúde, clima, solo, luz e progresso. Fechar o painel não reinicia o estado.
+
+`World/GreenhouseCare` adapta a entrada; `GreenhouseWorldView` posiciona a alça na mão e inclina o regador; `GreenhouseOcclusion` trata a visibilidade. A arte do regador é um sprite 2.5D, com [proveniência e prompts](Resources/ARES/UI/Greenhouse/WATERING_CAN_ART.md). O [alfabeto cartoon de 52 caracteres](Resources/ARES/UI/CartoonAlphabet/README.md) é reutilizável com `UI/CartoonText`; os corpos de texto continuam usando as fontes existentes. Reexecutar a interação com `Temp/ares-watering-check.request`; resultado em `Logs/ares-watering.txt`.
+
+`Domain/GreenhouseSimulation` substitui a atividade temporizada da estufa no fluxo do jogador por ciclos com 11 L, quatro prateleiras, irrigação e ajustes contextuais. `UI/GreenhouseNarrator` mantém textos educativos em PT-BR; `UI/GreenhouseView` usa controles nativos e arte gerada pela skill `imagegen`. Modelo, formato das mensagens, limites, resets por Sol e proveniência estão em [Runtime/Domain/GREENHOUSE.md](Runtime/Domain/GREENHOUSE.md).
+
+Passaram os testes em `Logs/ares-greenhouse.txt`: regras, água exata, clima, ajustes, risco, insuficiência, retomada, interface e conclusão sem recompensas duplicadas. Telas de início, clima e fim inspecionadas. Reexecutar com `Temp/ares-greenhouse-check.request`. Assets 3D originais permanecem; a nova ilustração de quatro prateleiras é um asset 2D da interface.
+
+## Manutenção solar — 15/11/2026
+
+`Campaign.Solar` mantém a reserva e a poeira dos 32 painéis ao longo da missão. `SolarCleaningSession` valida ferramenta e clique contínuo; `SolarMaintenance`, `SolarPanelView` e `SolarBroomView` cuidam do mundo; `SolarMaintenanceHud` apresenta geração, reserva, alerta e progresso. Balanceamento no Inspector de `ReferenceExplorer.solarSettings`. Regras, unidades, defaults e relação com o orçamento legado estão em [Runtime/World/SOLAR_MAINTENANCE.md](Runtime/World/SOLAR_MAINTENANCE.md).
+
+Testes de domínio e interação real por dispositivos virtuais passaram no editor (`Logs/ares-solar.txt`); capturas de antes/depois e limpeza foram inspecionadas. Reexecutar por `Temp/ares-solar-check.request`. A reserva começa em 160 kWh, alerta abaixo de 100 kWh, e cada painel limpo gera 0,4 kWh a cada 30 segundos de jogo ativo. Manutenção física não concede estrelas nem limpa automaticamente os painéis ao concluir o puzzle legado.
+
+## Interface e gerenciamento — continuação de 15/11/2026
+
+Menu, relatório, HUD, energia, 14 puzzles com tentativas próprias, selagem, resumo e final estão conectados a `Campaign`. A UI se instala automaticamente em Play na BaseARES. Traduções e fontes vêm da referência (4); não houve alteração na referência. Leia [Runtime/UI/README.md](Runtime/UI/README.md) para responsabilidades, comandos de teste e limites.
+
+Passaram no editor: suíte anterior de paridade e 70 combinações de puzzle/Sol. Passou em Play: fluxo de cinco Sols por eventos de botões/alavancas e soluções de teste dos 25 puzzles atribuídos. Passou também a regressão de movimento/câmera. Resultados em `Logs/ares-tasks.txt`, `Logs/ares-ui.txt` e `Logs/ares-play.txt`. A UI foi inspecionada em Play e em capturas, mas ainda não comparada lado a lado com a web. Permanecem diferenças de desenho, animação, áudio, gestos e serviços; não afirmar fidelidade total.
+
+As seções seguintes são o histórico anterior à integração da interface.
+
+## Continuação — 15/11/2026
+
+Referência exclusiva: `a896f420-3053-49eb-b6f2-a97f9b2dc6c8 (4)`. O exportador e a cena já foram atualizados; a pasta anterior não deve ser restaurada. Leia o estado atual no README da raiz antes do histórico abaixo.
+
+- 1.782 malhas de cenário e 36 dos personagens. Relevo/geologia do novo `Terrain.tsx`, UVs, cores por vértice, texturas originais do solo/painéis e propriedades físicas dos materiais são extraídos do código original.
+- `Shaders/ReferenceTerrain.shader`: iluminação URP do terreno com textura, cor de vértice e mapa de relevo. Iluminação/céu/toon/outlines globais ainda não equivalem ao original.
+- `Runtime/Data/CampaignRules.cs`: contratos do `balance.json` e presença explícita das leituras do Sol. `GameDefinition.rules` é atualizado pelo importador.
+- `Runtime/Domain/Consequences.cs`: avaliação pura de tempestades simuladas, poeira e limpeza, orçamento reduzido, déficits, dose, bônus e medalhas. `Campaign(data, rules)` aplica os efeitos na selagem, conserva estrelas históricas e registra o motivo de derrota.
+- `Tools/AresImport/consequence-fixtures.mjs`: executa os módulos TS reais e a campanha original com adaptadores locais, sem rede, servidor ou credenciais. Não é uma reimplementação JS das fórmulas C#.
+- `Editor/ConsequenceChecks.cs`: 640 casos, 9 limites de limpeza, 216 medalhas e 436 transições da campanha original passaram no editor.
+- `Editor/WorldImportChecks.cs`: 395.249 vértices de cenário, winding/UV/cores, 33 malhas texturizadas, configuração dos mapas e shader validados no editor.
+- `Editor/ReferenceProvenance.cs`: exige a referência (4) e compara os hashes do código e dos arquivos importados. Reexportar ao atualizar a referência. `ImportRequest` espera compilação/refresh e registra PASS/FAIL com horário em `Logs/ares-request-status.txt`.
+- Mantidos os checks de navegação, personagens e câmera manual. A fixture de observação agora exige `observeArrived`, como o original atualizado.
+- Play validado em 15/11: movimento de 5,13 m, braço 40,1°, corpo 0,178 m, arrasto -1,005 rad e recentralização com R. O teste removeu os dispositivos virtuais e saiu de Play. `Logs/ares-play.txt` registra PASS.
+
+A rotação importada contém 14 minijogos; os quatro novos são ResourcePriority, IrrigationPlan, PowerBalance e WindReading. Isso registra suas atribuições, **não implementa seus puzzles nem a interface**. O domínio da campanha continua separado da cena de inspeção. Próximo passo: apresentação/UI e integração jogável, sem conceder recompensa na UI. Nenhuma equivalência visual total foi declarada; o controle visual do editor expirou nesta etapa.
 
 ## Organização
 
@@ -26,7 +69,7 @@ O exportador executa somente módulos locais de geometria e regras. Não carrega
 
 As coordenadas Three.js são convertidas por `(x,y,z) -> (x,y,-z)`, com inversão única do winding dos triângulos. Normais são convertidas com a mesma reflexão. Os pisos, paredes, telhados e interiores permanecem em grupos separados. Os índices e posições das malhas são derivados diretamente dos geradores originais. Nos personagens, os pivôs e pais originais são preservados: quaternions recebem `(-x,-y,z,w)` e rotações Euler usam a ordem XYZ do Three, em vez da ordem padrão de `Quaternion.Euler`.
 
-## Validação desta etapa
+## Validação anterior — 14/11/2026
 
 `CharacterAnimationChecks` executa em cena de preview isolada, sem alterar a cena aberta. `Import/character-parity.json` contém dados calculados pelos callbacks originais de `Astronaut.tsx` e `Bubble.tsx`. Passaram no editor: 3.843 vértices em pose inicial, 200 quadros do astronauta e 128 do Bubble. Também passaram 120 quadros de câmera, 9.672 pontos de navegação, 384 casos de regras e os checks de campanha.
 
@@ -43,9 +86,9 @@ Novos minijogos devem ter modelos de estado e validação independentes de MonoB
 ## Ainda necessário para equivalência
 
 - Menu, HUD, textos localizados, configurações, acessibilidade, minimapa e interface de relatórios.
-- Dez minijogos táteis completos, apresentação das tarefas legadas e integração com a campanha.
+- 14 minijogos táteis completos, apresentação das tarefas legadas e integração com a campanha.
 - Completar integração da apresentação, roteiro de primeira caminhada, falas, poeira/áudio dos passos e eventos das animações já portadas; validar gestos touch.
-- Shader toon, outlines, textura procedural do terreno, céu, ciclo solar, transparência/cutaway e efeitos.
+- Shader toon, outlines, céu, ciclo solar, transparência/cutaway e efeitos. Terreno/texturas da versão (4) já importados.
 - Animação e colheita da estufa, observação do telescópio, telas NASA e áudio.
 - Proxies de dados/narrador, verificações de interface e comparação visual lado a lado.
 - Otimização de instâncias e agrupamento de materiais: atualmente as instâncias extraídas viram meshes individuais para inspeção.

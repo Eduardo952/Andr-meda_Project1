@@ -1,5 +1,7 @@
 using System.IO;
+using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace Ares.Editor
 {
@@ -13,16 +15,30 @@ namespace Ares.Editor
         static void Process()
         {
             if (EditorApplication.isCompiling || EditorApplication.isUpdating || EditorApplication.isPlayingOrWillChangePlaymode) return;
-            if (File.Exists(Request))
+            string request = File.Exists(Request) ? Request : File.Exists(ValidationRequest) ? ValidationRequest : null;
+            if (request == null) return;
+            string token = request + File.GetLastWriteTimeUtc(request).Ticks;
+            if (SessionState.GetString("ARES.RequestRefresh", "") != token)
             {
-                File.Delete(Request);
-                AresImporter.Import();
-                ParityChecks.Run();
+                SessionState.SetString("ARES.RequestRefresh", token);
+                AssetDatabase.Refresh();
+                return; // Let script compilation/reload finish before using the importer or checks.
             }
-            else if (File.Exists(ValidationRequest))
+            File.Delete(request);
+            Directory.CreateDirectory("Logs");
+            File.WriteAllText("Logs/ares-request-status.txt", DateTime.UtcNow.ToString("O") + " RUNNING " + request);
+            try
             {
-                File.Delete(ValidationRequest);
+                if (request == Request) AresImporter.Import();
                 ParityChecks.Run();
+                TaskInteractionChecks.Run();
+                File.WriteAllText("Logs/ares-request-status.txt", DateTime.UtcNow.ToString("O") + " PASS " + request);
+            }
+            catch (Exception error)
+            {
+                File.WriteAllText("Logs/ares-parity.txt", "FAIL: " + error);
+                File.WriteAllText("Logs/ares-request-status.txt", DateTime.UtcNow.ToString("O") + " FAIL " + error);
+                Debug.LogException(error);
             }
         }
     }

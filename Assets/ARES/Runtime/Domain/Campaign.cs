@@ -9,7 +9,11 @@ namespace Ares.Domain
     public sealed class Campaign
     {
         readonly CampaignData data;
+        readonly CampaignRules rules;
+        readonly Consequences consequences;
         readonly Dictionary<string, int> results = new Dictionary<string, int>();
+        readonly Dictionary<int, Dictionary<string, int>> history = new Dictionary<int, Dictionary<string, int>>();
+        float[] panelDust = new float[4];
         public event Action Changed;
         public Phase Phase { get; private set; } = Phase.Report;
         public int SolIndex { get; private set; }
@@ -21,19 +25,43 @@ namespace Ares.Domain
         public string Alarm { get; private set; }
         public float AlarmSeconds { get; private set; }
         public float SolFraction { get; private set; } = .3f;
+        public int Dose { get; private set; }
+        public int BonusStars { get; private set; }
+        public bool CleanedThisSol { get; private set; }
+        public bool ShelterMissed { get; private set; }
+        public string FailureCause { get; private set; }
+        public IReadOnlyList<float> PanelDust => Array.AsReadOnly(panelDust);
+        public IReadOnlyList<ConsequenceEvent> Events { get; private set; } = Array.Empty<ConsequenceEvent>();
+        public SolOutcome Outcome { get; private set; }
+        public int EnergyPool => consequences.EffectiveEnergyPool(panelDust);
+        public SolarPlant Solar { get; }
+        public OxygenPlant OxygenSystem { get; }
+        public DiscoveryJournal Discoveries { get; } = new DiscoveryJournal();
+        public GreenhouseSimulation Greenhouse { get; private set; } = new GreenhouseSimulation();
+        public GreenhouseWatering Watering { get; private set; }
+        public string SuccessTier => consequences.SuccessTier(Integrity, Oxygen, Dose);
+        public int Stars(int solIndex, string id) => solIndex == SolIndex ? (results.TryGetValue(id, out int stars) ? stars : 0) : history.TryGetValue(solIndex, out var previous) && previous.TryGetValue(id, out int saved) ? saved : 0;
         public bool AllTasksDone { get { foreach (var task in Current.tasks) if (!results.ContainsKey(task.id)) return false; return true; } }
-        public Campaign(CampaignData data) { if (data?.sols == null || data.sols.Length == 0) throw new ArgumentException("Campaign is empty"); this.data = data; }
+        public Campaign(CampaignData data, CampaignRules rules, SolarMaintenanceSettings solarSettings = null, OxygenSettings oxygenSettings = null)
+        {
+            if (data?.sols == null || data.sols.Length == 0) throw new ArgumentException("Campaign is empty");
+            this.data = data; this.rules = rules ?? throw new ArgumentNullException(nameof(rules)); consequences = new Consequences(rules);
+            Integrity = rules.initialIntegrity; Oxygen = rules.initialOxygen; SolFraction = rules.startSolFraction;
+            Solar = new SolarPlant(solarSettings ?? new SolarMaintenanceSettings());
+            OxygenSystem = new OxygenPlant(oxygenSettings ?? new OxygenSettings(), Oxygen);
+            Watering = new GreenhouseWatering(Greenhouse);
+        }
         public bool Completed(string id) => results.ContainsKey(id);
         public void CloseReport() { if (Phase != Phase.Report) return; Phase = Phase.Plan; Changed?.Invoke(); }
         public bool SetAllocation(Allocation value)
         {
             if (Phase != Phase.Plan && Phase != Phase.Tasks) return false;
-            if (value.shield < 0 || value.life < 0 || value.greenhouse < 0 || value.Total > 100 || value.shield % 5 != 0 || value.life % 5 != 0 || value.greenhouse % 5 != 0) return false;
+            if (value.shield < 0 || value.life < 0 || value.greenhouse < 0 || value.Total > EnergyPool || value.shield % rules.sliderStep != 0 || value.life % rules.sliderStep != 0 || value.greenhouse % rules.sliderStep != 0) return false;
             Allocation = value; Changed?.Invoke(); return true;
         }
         public bool StartSol()
         {
-            if (Phase != Phase.Plan || Allocation.Total != 100) return false;
+            if (Phase != Phase.Plan || Allocation.Total != EnergyPool) return false;
             Phase = Phase.Tasks; Alarm = Current.alarm; AlarmSeconds = 0; Changed?.Invoke(); return true;
         }
         public bool BeginTask(string id, string nearbyRoom)
@@ -45,33 +73,71 @@ namespace Ares.Domain
         public void CancelTask() { OpenTask = null; Changed?.Invoke(); }
         public bool FinishTask(string id, bool puzzleSolved, float seconds, int mistakes)
         {
-            int stars = Rules.Score(seconds, mistakes);
+            if (GreenhouseSimulation.IsTask(id)) return false;
+            int stars = Score(seconds, mistakes);
             if (Phase != Phase.Tasks || OpenTask != id || !puzzleSolved || stars == 0 || results.ContainsKey(id)) return false;
-            results.Add(id, stars); OpenTask = null; Integrity = Math.Min(100, Integrity + 2); Oxygen = Math.Min(100, Oxygen + 2); Changed?.Invoke(); return true;
+            return RecordTask(id, stars);
+        }
+        public bool FinishGreenhouseTask()
+        {
+            if (Phase != Phase.Tasks || !GreenhouseSimulation.IsTask(OpenTask) || !Greenhouse.Finished || Watering.CompletedManualCycles != Greenhouse.CompletedCycles || results.ContainsKey(OpenTask)) return false;
+            // This activity rewards completing the learning process, not speed or an answer revealed by the UI.
+            return RecordTask(OpenTask, 3);
+        }
+        bool RecordTask(string id, int stars)
+        {
+            results.Add(id, stars); OpenTask = null; Integrity = Rules.ApplyDelta(Integrity, rules.taskReward.integrity);
+            OxygenSystem.ApplyPercentDelta(rules.taskReward.oxygen); UpdateOxygenDisplay();
+            if (id == "CleanPanels") CleanedThisSol = true;
+            Changed?.Invoke(); return true;
         }
         public void Tick(float seconds, bool overlayOpen)
         {
             if (Phase != Phase.Tasks || overlayOpen || OpenTask != null || float.IsNaN(seconds) || float.IsInfinity(seconds) || seconds < 0) return;
-            SolFraction = Math.Min(.999f, SolFraction + seconds / 480f);
-            if (!string.IsNullOrEmpty(Alarm)) { AlarmSeconds = Math.Min(60, AlarmSeconds + seconds); if (AlarmSeconds >= 60) Alarm = null; }
+            Solar.Tick(seconds);
+            SolFraction = Math.Min(.999f, SolFraction + seconds / rules.realSecondsPerSol);
+            if (!string.IsNullOrEmpty(Alarm)) { AlarmSeconds = Math.Min(rules.shelterSeconds, AlarmSeconds + seconds); if (AlarmSeconds >= rules.shelterSeconds) { Alarm = null; ShelterMissed = true; Changed?.Invoke(); } }
         }
         public void ReachShelter() { if (Phase == Phase.Tasks) { Alarm = null; Changed?.Invoke(); } }
+        /// <summary>Called once per live world/terminal frame by GameFrontend. Other overlays pause this subsystem.</summary>
+        public void TickOxygen(float seconds)
+        {
+            if ((Phase != Phase.Plan && Phase != Phase.Tasks) || OpenTask != null || float.IsNaN(seconds) || float.IsInfinity(seconds) || seconds <= 0) return;
+            // Bound the step for exact battery exhaustion and stable resource accounting.
+            while (seconds > 0)
+            {
+                float step = Math.Min(seconds, 1); seconds -= step;
+                float energy = Solar.DrawEnergy(OxygenSystem.EnergyPerCycle * step / OxygenSystem.CycleSeconds);
+                OxygenSystem.Tick(step, energy);
+            }
+            int previous = Oxygen;
+            UpdateOxygenDisplay();
+            if (previous != Oxygen) Changed?.Invoke();
+        }
+        void UpdateOxygenDisplay() => Oxygen = Math.Max(0, Math.Min(100, (int)Math.Floor(OxygenSystem.Percent + .5f)));
         public bool Seal(string nearbyRoom, Allocation confirmation)
         {
-            if (Phase != Phase.Tasks || nearbyRoom != "control" || OpenTask != null || !AllTasksDone || Allocation.Total != 100 || !confirmation.Equals(Allocation)) return false;
-            var demand = Current.demand;
-            Integrity = Rules.ApplyDelta(Integrity, -Rules.Missing(Allocation.shield, demand.shield));
-            Oxygen = Rules.ApplyDelta(Oxygen, -Rules.Missing(Allocation.life, demand.life) - Rules.Missing(Allocation.greenhouse, demand.greenhouse) * .5f);
+            if (Phase != Phase.Tasks || nearbyRoom != "control" || OpenTask != null || !AllTasksDone || Allocation.Total != EnergyPool || !confirmation.Equals(Allocation)) return false;
+            Outcome = consequences.EvaluateSol(Allocation, Current.demand);
+            var facts = Current.facts;
+            var storm = consequences.StormForSol(SolIndex, facts.hasWindSpeed ? (float?)facts.windSpeed : null);
+            Events = Array.AsReadOnly(consequences.Evaluate(Outcome, facts, ShelterMissed, Dose, panelDust, storm, CleanedThisSol));
+            var totals = Consequences.Totals(Events);
+            Integrity = Rules.ApplyDelta(Integrity, Outcome.integrityDelta + totals.integrity);
+            OxygenSystem.ApplyPercentDelta(Outcome.oxygenDelta + totals.oxygen); UpdateOxygenDisplay();
+            Dose = Rules.ApplyDelta(Dose, totals.dose); BonusStars += totals.bonusStars;
+            panelDust = consequences.PanelDustAfterCleaning(panelDust, storm, CleanedThisSol);
             Phase = Phase.Summary; Alarm = null; Changed?.Invoke(); return true;
         }
         public void NextSol()
         {
             if (Phase != Phase.Summary) return;
-            if (Integrity <= 0 || Oxygen <= 0) Phase = Phase.GameOver;
+            if (Dose >= 100 || Integrity <= 0 || Oxygen <= 0) { Phase = Phase.GameOver; FailureCause = Dose >= 100 ? "radiation" : Oxygen <= 0 ? "suffocation" : "powerCollapse"; }
             else if (SolIndex + 1 >= data.sols.Length) Phase = Phase.Victory;
-            else { SolIndex++; results.Clear(); Allocation = default; OpenTask = null; SolFraction = .3f; Phase = Phase.Report; }
+            else { history[SolIndex] = new Dictionary<string, int>(results); SolIndex++; results.Clear(); Allocation = default; OpenTask = null; SolFraction = rules.startSolFraction; AlarmSeconds = 0; CleanedThisSol = false; ShelterMissed = false; Events = Array.Empty<ConsequenceEvent>(); Outcome = null; Greenhouse = new GreenhouseSimulation(); Watering = new GreenhouseWatering(Greenhouse); Phase = Phase.Report; }
             Changed?.Invoke();
         }
+        int Score(float seconds, int mistakes) => float.IsNaN(seconds) || float.IsInfinity(seconds) || seconds < 0 || seconds > rules.taskSeconds || mistakes < 0 ? 0 : seconds <= rules.miniGames.threeStarSeconds && mistakes == 0 ? 3 : seconds <= rules.miniGames.twoStarSeconds && mistakes <= rules.miniGames.twoStarMistakes ? 2 : 1;
     }
     public static class Rules
     {

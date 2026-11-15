@@ -1,0 +1,73 @@
+.ares-root { position: absolute; left: 0; top: 0; right: 0; bottom: 0; color: #30243e; font-size: 18px; -unity-font: resource("ARES/UI/Fonts/Nunito"); }
+Label { white-space: normal; margin-bottom: 8px; }
+Button { min-height: 48px; padding: 10px 22px; margin: 6px; background-color: #f4ca54; color: #30243e; border-width: 0; border-bottom-width: 5px; border-bottom-color: #b95c3a; border-radius: 28px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); font-size: 19px; }
+Button:hover { background-color: #ffdf7a; }
+Button:active { translate: 0 3px; }
+Button:disabled { opacity: .4; }
+Button:focus { border-top-width: 2px; border-top-color: #8462cc; }
+.alt { background-color: #63d3c4; border-bottom-color: #8462cc; }
+.ghost { background-color: #f8f3e5; border-bottom-color: #b5aebb; }
+.row { flex-direction: row; flex-wrap: wrap; align-items: center; }
+.center { align-items: center; justify-content: center; }
+.panel { background-color: rgba(248,243,229,.97); border-radius: 26px; border-width: 3px; border-color: #fff6e0; padding: 22px; }
+.title { font-size: 36px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); }
+.heading { font-size: 24px; -unity-font-style: bold; }
+.small { font-size: 14px; color: #6d6079; }
+.badge { background-color: #63d3c4; border-radius: 16px; padding: 8px 16px; }
+.warning { background-color: #ef9b54; border-radius: 14px; padding: 10px; }
+.overlay { position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(36,26,61,.65); align-items: center; justify-content: center; padding: 20px; }
+.dialog { width: 760px; max-width: 96%; max-height: 94%; }
+.hud { position: absolute; top: 12px; left: 12px; right: 12px; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.hud .panel { padding: 12px; }
+.task-list { position: absolute; left: 12px; top: 150px; width: 260px; padding: 14px; }
+.tools { position: absolute; left: 12px; right: 400px; bottom: 12px; }
+.use { position: absolute; right: 24px; bottom: 24px; }
+.alarm { position: absolute; top: 100px; left: 30%; right: 20px; }
+.title-screen { position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: #241a3d; align-items: center; padding-top: 108px; }
+.tagline { font-size: 18px; padding: 8px 20px; margin-bottom: 28px; }
+.title-screen .logo { font-size: 72px; color: #f4ca54; -unity-font: resource("ARES/UI/Fonts/Fredoka"); margin-bottom: 24px; text-shadow: 0 6px 0 #b95c3a; }
+.planet { position: absolute; width: 1200px; height: 1200px; top: 53%; left: 50%; margin-left: -600px; border-radius: 600px; background-color: #db805c; border-width: 24px; border-color: #b95c3a; }
+.card { background-color: #eee6d6; border-radius: 16px; padding: 14px; margin: 6px; flex-grow: 1; }
+.dial { width: 120px; height: 120px; margin: 8px; }
+SliderInt { min-height: 38px; margin: 8px 0 14px 0; }
+.unity-base-slider__tracker { height: 12px; background-color: #d5ccd9; border-radius: 6px; }
+.unity-base-slider__dragger { background-color: #8462cc; width: 26px; height: 26px; margin-top: -8px; border-radius: 13px; }
+.success { color: #3c8c57; }
+.minimap { position: absolute; right: 18px; top: 160px; width: 220px; height: 220px; background-color: rgba(248,243,229,.9); border-radius: 20px; }
+.resource { width: 112px; margin: 4px 8px; }
+.resource .unity-progress-bar__background { background-color: #d8d0d5; border-radius: 7px; }
+.resource .unity-progress-bar__progress { border-radius: 7px; }
+.resource .unity-progress-bar__title-container { display: none; }
+.integrity .unity-progress-bar__progress { background-color: #69ba71; }
+.oxygen .unity-progress-bar__progress { background-color: #72bcdf; }
+.dose .unity-progress-bar__progress { background-color: #db805c; }
+.energy .unity-progress-bar__progress { background-color: #f4ca54; }
+.walk-panel { position: absolute; bottom: 90px; left: 32%; right: 32%; flex-direction: row; align-items: center; }
+.walk-panel Label { flex-shrink: 1; }
+.speech-panel { position: absolute; right: 20px; bottom: 110px; width: 300px; }
+.direction { position: absolute; top: 110px; left: 35%; right: 35%; -unity-text-align: middle-center; }
+.report-grid > .card { width: 45%; flex-grow: 1; flex-shrink: 1; }
+.report .title { font-size: 30px; }
+.report .heading { font-size: 20px; }
+.report .card { padding: 10px; margin: 4px; }
+.report Label { margin-bottom: 4px; }
+.report .badge { margin-top: 8px; margin-bottom: 8px; }
+.hud-clock { align-items: center; }
+.hud-clock .heading { font-size: 20px; }
+.hud-tools { flex-wrap: nowrap; }
+Button.hud-tool { width: 56px; height: 56px; min-width: 56px; min-height: 56px; padding: 12px; align-items: center; justify-content: center; }
+.hud-stars { position: absolute; right: 18px; bottom: 100px; padding: 8px 16px; color: #b97e24; }
+.task-list { width: 225px; top: 110px; background-color: #f8f5ed; border-width: 1px; border-color: #dcd7cd; }
+.task-list .unity-foldout__text { font-size: 14px; -unity-font-style: bold; white-space: normal; flex-shrink: 1; }
+.task-list .unity-foldout__content { margin-left: 0; }
+.task-item { margin-top: 8px; font-size: 15px; }
+.task-list ProgressBar { height: 10px; margin-top: 8px; }
+.task-list .unity-progress-bar__title-container { display: none; }
+.task-list .unity-progress-bar__progress { background-color: #69ba71; }
+.solar-maintenance { position: absolute; left: 12px; bottom: 18px; width: 300px; padding: 14px; background-color: #f8f5ed; border-width: 1px; border-color: #dcd7cd; }
+.solar-maintenance Label { white-space: normal; }
+.solar-maintenance ProgressBar { height: 24px; margin-top: 6px; margin-bottom: 5px; }
+.solar-maintenance .unity-progress-bar__progress { background-color: #69ba71; }
+.solar-critical { color: #ae493b; -unity-font-style: bold; margin-top: 8px; margin-bottom: 8px; }
+.solar-danger { border-color: #cb6251; border-width: 2px; }
+.solar-danger .unity-progress-bar__progress { background-color: #cb6251; }

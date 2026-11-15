@@ -1,0 +1,44 @@
+# Base ARES
+- [x] Approve the five-region layout and implementation plan.
+- [x] Import inspected game source while retaining target framework versions.
+- [x] Measure baseline scene draw calls and triangles in Low/High.
+- [x] Replace extra rooms with the central hub, four region wings and Solar Park.
+- [x] Implement sealed walkable tunnels, interiors, doors, collisions and cutaway roofs.
+- [x] Relocate tasks, update minimap, region labels and guidance.
+- [x] Add Observatory APOD/Image Library display with server requests and snapshot fallback.
+- [x] Preserve narrator, energy rules, data layer, languages and camera controls.
+- [x] Verify gameplay, desktop/mobile rendering and before/after performance.
+- [ ] Verify live NASA/n8n services — blocked by sample campaign dates, absent authentic picture snapshots and missing NASA/n8n credentials.
+- [x] Approve the visual refinement plan with before/after comparisons and resolve open questions.
+- [x] Apply shared theme and redesign the command deck without changing gameplay formulas or data.
+- [x] Refine minimap, world labels, Observatory cards, and the single Bubble interface.
+- [x] Refine the astronaut and add optional first-walk guidance without changing collision or campaign rules.
+- [x] Verify desktop/mobile flows and record comparable Low/High draw calls and triangles before/after.
+- [x] Approve the greenhouse redesign plan.
+- [x] Build the larger vaulted greenhouse, animated growing systems and cosmetic apple harvesting without changing campaign rules.
+- [x] Verify greenhouse interactions, energy-driven visual states, cutaway roofs, phone layout and before/after rendering counts.
+- [x] Approve the per-sector tactile mini-game plan and provisional scoring rules.
+- [x] Implement deterministic Sol assignments, accessible lazy-loaded mini-games, checklist and report sealing.
+- [x] Extend narrator task facts, validation, localized learning lines and request samples.
+- [x] Test assignment, scoring, language-key parity, numeric provenance and a complete desktop Sol flow.
+- [x] Verify phone touch input and success overlay.
+- [ ] Complete every variant and a full Sol on a physical phone — device unavailable.
+- [x] Apply and verify uploaded telescope, Bubble dismissal and task-panel updates.
+- [x] Approve challenge coherence, dark consoles and telescope refinement plan.
+- [x] Refine sector variants, three-line briefings, explanatory feedback and existing reward display.
+- [x] Refine telescope model, walk-to-eyepiece, drift, zoom and observation question.
+- [x] Verify rules, origins, translations, full Sol progression and desktop/mobile controls.
+- [x] Refine Martian surface textures, terrain relief and reusable geological details.
+- [x] Refine existing dust, sunlight, material response and greenhouse foliage without changing simulation.
+- [x] Verify visual polish in Low/High and phone layouts, record metrics and implementation progress.
+- [x] Apply a reusable light Sol Report-style panel, data cards and Bubble hints to all station challenges without changing rules.
+- [x] Verify challenge controls, feedback, translations and desktop/phone layouts.
+- [x] Simplify the Sol 1 Observatory flare-ordering interaction and instructions.
+- [x] Simplify the Sol 1 Life Support pipe-rotation interaction and connection feedback.
+- [x] Verify both revised challenges with mouse, keyboard and phone-sized touch emulation.
+- [x] Add pure, tested Sol consequences and cumulative crew dose using confirmed report outcomes.
+- [x] Add deterministic simulated dust storms, panel dust persistence and next-Sol energy effects.
+- [x] Connect panel cleaning, inspection, verification and 3D cleaning feedback without duplicate rewards.
+- [x] Add prioritized accessible alerts, emergency scene feedback and synthesized audio.
+- [x] Add positive outcomes, cause-specific endings, bilingual copy and narrator facts.
+- [x] Add dev-only event forcing and verify the real Sol flow, tests, rendering and documentation.

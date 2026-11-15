@@ -349,6 +349,14 @@ MonoBehaviour:
         room: greenhouse
       - id: TiltSun
         room: solar
+      facts:
+        flareClass: C2.1
+        hasCmeSpeed: 0
+        hasAirTempMean: 1
+        hasWindSpeed: 1
+        cmeSpeed: 0
+        airTempMean: -61.2
+        windSpeed: 4.9
     - sol: 2
       date: SAMPLE-DATE-2
       capturedAt: 2026-11-14T00:00:00Z
@@ -367,10 +375,18 @@ MonoBehaviour:
         room: shield
       - id: ThermostatDial
         room: lifeSupport
-      - id: SmartFarmCare
+      - id: IrrigationPlan
         room: greenhouse
-      - id: CleanPanels
+      - id: PowerBalance
         room: solar
+      facts:
+        flareClass: M5.4
+        hasCmeSpeed: 1
+        hasAirTempMean: 1
+        hasWindSpeed: 1
+        cmeSpeed: 900
+        airTempMean: -63.8
+        windSpeed: 6.1
     - sol: 3
       date: SAMPLE-DATE-3
       capturedAt: 2026-11-14T00:00:00Z
@@ -387,12 +403,20 @@ MonoBehaviour:
         room: observatory
       - id: AlignCoils
         room: shield
-      - id: PipeFlow
+      - id: ResourcePriority
         room: lifeSupport
       - id: SmartFarmCare
         room: greenhouse
-      - id: TiltSun
+      - id: WindReading
         room: solar
+      facts:
+        flareClass: C8.0
+        hasCmeSpeed: 0
+        hasAirTempMean: 0
+        hasWindSpeed: 0
+        cmeSpeed: 0
+        airTempMean: 0
+        windSpeed: 0
     - sol: 4
       date: SAMPLE-DATE-4
       capturedAt: 2026-11-14T00:00:00Z
@@ -409,12 +433,20 @@ MonoBehaviour:
         room: observatory
       - id: WireShield
         room: shield
-      - id: ThermostatDial
+      - id: PipeFlow
         room: lifeSupport
-      - id: SmartFarmCare
+      - id: IrrigationPlan
         room: greenhouse
       - id: CleanPanels
         room: solar
+      facts:
+        flareClass: X2.3
+        hasCmeSpeed: 1
+        hasAirTempMean: 1
+        hasWindSpeed: 1
+        cmeSpeed: 1600
+        airTempMean: -66.5
+        windSpeed: 7.4
     - sol: 5
       date: SAMPLE-DATE-5
       capturedAt: 2026-11-14T00:00:00Z
@@ -431,12 +463,87 @@ MonoBehaviour:
         room: observatory
       - id: CmeCountdown
         room: shield
-      - id: PipeFlow
+      - id: ThermostatDial
         room: lifeSupport
       - id: SmartFarmCare
         room: greenhouse
       - id: TiltSun
         room: solar
+      facts:
+        flareClass: B7.5
+        hasCmeSpeed: 1
+        hasAirTempMean: 1
+        hasWindSpeed: 1
+        cmeSpeed: 450
+        airTempMean: -58.9
+        windSpeed: 3.8
+  rules:
+    initialIntegrity: 100
+    initialOxygen: 100
+    energyPool: 100
+    sliderStep: 5
+    margin: 5
+    campaignSols: 5
+    realSecondsPerSol: 480
+    startSolFraction: 0.3
+    shelterSeconds: 60
+    taskSeconds: 60
+    marsWeatherModifier: 1
+    weather:
+      windStormThreshold: 12
+      scriptedStormSols: 0200000004000000i
+      dustGain:
+      - 55
+      - 45
+      - 35
+      - 25
+    consequences:
+      minorMissingRatio: 0.25
+      moderateMissingRatio: 0.6
+      dosePerShieldKwh: 0.8
+      shelterMissedDose: 35
+      severeDose: 75
+      perfectBonusStars: 3
+      goldResourceMin: 80
+      silverResourceMin: 50
+      goldDoseMax: 25
+      silverDoseMax: 60
+    cleaning:
+      lightMax: 35
+      heavyMax: 70
+      animationSeconds: 6
+      lightPasses: 1
+      heavyPasses: 2
+      buriedPasses: 3
+    damage:
+      integrityPerShieldKwh: 1
+      oxygenPerLifeKwh: 1
+      oxygenPerGreenhouseKwh: 0.5
+    taskReward:
+      integrity: 2
+      oxygen: 2
+    miniGames:
+      threeStarSeconds: 30
+      twoStarSeconds: 45
+      weatherDustCap: 20
+      twoStarMistakes: 2
+      dialCount: 3
+      dialSteps: 12
+      wireCount: 4
+      pipeCount: 6
+      beds: 3
+      apples: 3
+      lightTarget: 3
+      dustPatches: 12
+      tiltStepDegrees: 5
+      speedStep: 10
+      speedTolerance: 50
+      dialTargets: 030000000600000009000000i
+      coilMarks: 04000000060000000c000000i
+      coilMotionSeconds:
+      - 8
+      - 6
+      - 4
   world:
     walkSpeed: 5.2
     walkAccel: 10

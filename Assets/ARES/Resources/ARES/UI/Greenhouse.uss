@@ -1,0 +1,32 @@
+.greenhouse-view { width: 1120px; }
+.greenhouse-view Label { white-space: normal; }
+.greenhouse-welcome { margin: 16px 24px 6px; font-size: 17px; }
+.greenhouse-columns { align-items: flex-start; flex-wrap: nowrap; padding: 16px 24px 20px; }
+.greenhouse-art { width: 270px; flex-shrink: 0; margin-right: 24px; background-color: #edf1df; border-radius: 20px; padding: 14px; }
+.greenhouse-rack { width: 100%; height: 300px; margin-bottom: 12px; }
+.greenhouse-shelf { flex-direction: row; justify-content: space-between; align-items: center; padding: 6px 10px; margin-top: 5px; border-radius: 10px; border-left-width: 4px; border-left-color: #70a56d; background-color: #faf9ed; }
+.greenhouse-shelf.shelf-problem { border-left-color: #d4a63f; background-color: #fff0c9; }
+.greenhouse-shelf.shelf-atrisk { border-left-color: #c9795c; background-color: #fae1d6; }
+.greenhouse-crop { font-size: 15px; -unity-font-style: bold; }
+.greenhouse-shelf .small { font-size: 13px; }
+.greenhouse-caption { font-size: 12px; margin-top: 12px; color: #66735e; }
+.greenhouse-decisions { flex-grow: 1; flex-shrink: 1; min-width: 0; }
+.greenhouse-cycle { padding: 16px 18px; border-radius: 16px; background-color: #f3f1e6; font-size: 17px; }
+.greenhouse-result { padding: 12px 16px; margin-bottom: 12px; background-color: #e1efe6; border-radius: 16px; font-size: 16px; }
+.greenhouse-levels { margin-top: 12px; flex-wrap: nowrap; }
+.greenhouse-view Button.greenhouse-level { flex-grow: 1; flex-basis: 0; min-width: 0; background-color: #e6edda; border-color: #b0c29b; }
+.greenhouse-view Button.selected { border-width: 3px; border-color: #3f7662; background-color: #c9e1c1; }
+.greenhouse-adjustments { margin-top: 8px; }
+.greenhouse-view .greenhouse-adjustments Button { min-height: 42px; font-size: 15px; padding: 7px 12px; }
+.greenhouse-preview { font-size: 14px; color: #44634b; margin: 10px 4px; }
+.greenhouse-error { padding: 12px; margin-top: 8px; border-radius: 12px; background-color: #fae1d6; font-size: 16px; }
+.greenhouse-reflection { margin-top: 18px; font-size: 16px; }
+.greenhouse-reflection .unity-text-field__input { min-height: 72px; white-space: normal; background-color: #fffdf5; border-radius: 12px; padding: 12px; }
+.greenhouse-view .mini-footer { align-items: center; }
+.greenhouse-view .mini-footer .small { max-width: 55%; }
+.greenhouse-care-hud { position: absolute; left: 12px; bottom: 18px; width: 340px; padding: 14px; background-color: #f8f5ed; border-width: 1px; border-color: #becfaf; }
+.greenhouse-care-hud Label { white-space: normal; }
+.greenhouse-care-hud ProgressBar { height: 22px; margin-top: 6px; margin-bottom: 8px; }
+.greenhouse-care-hud .unity-progress-bar__progress { background-color: #77bed2; }
+.greenhouse-care-shelf { font-size: 14px; margin-top: 5px; padding-left: 7px; border-left-width: 3px; border-left-color: #86ad76; }
+.greenhouse-care-instruction { font-size: 15px; -unity-font-style: bold; margin-top: 10px; }

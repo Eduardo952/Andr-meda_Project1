@@ -1,0 +1,105 @@
+/* Native counterpart of styles.css / light challenge roles. Scoped to avoid changing the world HUD. */
+.challenge-backdrop { background-color: rgba(248, 243, 229, .30); padding: 16px; }
+.mini-overlay { width: 860px; max-width: 100%; max-height: 100%; flex-shrink: 1; background-color: var(--challenge-surface); color: var(--challenge-text); border-width: 1px; border-color: var(--challenge-border); border-radius: 24px; overflow: hidden; font-size: 17px; }
+.mini-overlay Label { flex-shrink: 1; }
+.mini-header { padding: 20px 24px 16px; border-bottom-width: 1px; border-bottom-color: var(--challenge-border); align-items: flex-start; flex-wrap: nowrap; flex-shrink: 0; }
+.mini-header-title { flex-grow: 1; flex-shrink: 1; align-items: flex-start; }
+.mini-header .title { font-size: 30px; margin: 10px 0 12px; -unity-font-style: bold; }
+.mini-sector { font-size: 13px; -unity-font-style: bold; background-color: var(--region-solar-badge); border-radius: 20px; padding: 5px 12px; margin: 0; }
+.region-shield .mini-sector { background-color: var(--region-shield-badge); }
+.region-lifeSupport .mini-sector { background-color: var(--region-life-badge); }
+.region-greenhouse .mini-sector { background-color: var(--region-greenhouse-badge); }
+.region-observatory .mini-sector { background-color: var(--region-observatory-badge); }
+.mini-source { border-radius: 16px; padding: 4px 10px; margin: 0 6px 0 0; font-size: 12px; -unity-font-style: bold; }
+.mini-source.rule { background-color: var(--sun); }
+.mini-source.real { background-color: var(--turquoise); }
+.mini-source.sample { background-color: #f2c2ac; }
+.mini-overlay Button { min-height: 56px; min-width: 56px; border-radius: 16px; background-color: var(--sun); color: var(--challenge-text); border-width: 1px; border-color: var(--sun); padding: 10px 16px; margin: 4px; font-size: 17px; white-space: normal; -unity-font: resource("ARES/UI/Fonts/Nunito"); -unity-font-style: bold; }
+.mini-overlay Button:active { translate: 0 0; background-color: #efbc35; }
+.mini-overlay Button:focus { border-width: 3px; border-color: var(--challenge-info); }
+.mini-overlay Button:hover { background-color: #f5dc8e; }
+.mini-overlay Button.ghost { background-color: var(--challenge-card); border-color: var(--challenge-border); color: var(--challenge-info); }
+.mini-header-actions { flex-wrap: nowrap; }
+.mini-header-actions Button { padding: 8px; font-size: 24px; }
+.mini-scroll { flex-shrink: 1; min-height: 0; }
+.mini-scroll .unity-scroll-view__content-container { flex-shrink: 0; }
+.mini-context { margin: 20px 24px 16px; }
+.mini-context .small { margin-top: 6px; margin-bottom: 3px; font-size: 14px; -unity-font-style: bold; }
+.mini-instruction { -unity-font-style: bold; -unity-text-align: middle-center; }
+.mini-context .mini-instruction { -unity-text-align: upper-left; }
+.mini-data-grid { margin: 0 19px 11px; }
+.mini-data-card { width: 47%; flex-grow: 1; flex-shrink: 1; padding: 12px; margin: 5px; background-color: var(--challenge-card); border-width: 1px; border-color: var(--challenge-border); border-radius: 18px; flex-wrap: nowrap; }
+.mini-data-content { margin-left: 10px; flex-shrink: 1; }
+.mini-data-card .small { font-size: 12px; -unity-font-style: bold; margin-bottom: 3px; }
+.mini-data-card .heading { font-size: 24px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); margin: 0; }
+.mini-play { margin: 0 24px 20px; padding: 20px; background-color: var(--challenge-card); border-width: 1px; border-color: var(--challenge-border); border-radius: 20px; align-items: center; flex-shrink: 0; }
+.mini-play > Label { margin-top: 8px; margin-bottom: 8px; }
+.mini-play > Button { margin-top: 12px; }
+.mini-play Button { background-color: var(--region-solar-button); border-color: var(--region-solar-border); font-size: 18px; }
+.region-lifeSupport .mini-play Button { background-color: var(--region-life-button); border-color: var(--region-life-border); }
+.region-greenhouse .mini-play Button { background-color: var(--region-greenhouse-button); border-color: var(--region-greenhouse-border); }
+.region-shield .mini-play Button { background-color: var(--region-shield-button); border-color: var(--region-shield-border); }
+.mini-overlay .mini-play Button.mini-confirm, .mini-overlay .mini-play > Button { background-color: var(--sun); border-color: var(--sun); }
+.mini-play SliderInt { width: 100%; min-height: 56px; margin: 0; }
+.mini-play .unity-base-slider__tracker { height: 8px; background-color: var(--muted); }
+.mini-play .unity-base-slider__dragger { width: 24px; height: 24px; background-color: var(--challenge-info); }
+.mini-overlay ProgressBar { width: 100%; height: 12px; margin-bottom: 8px; }
+.mini-overlay .unity-progress-bar__title-container { display: none; }
+.mini-overlay .unity-progress-bar__background { background-color: var(--muted); border-radius: 6px; }
+.mini-overlay .unity-progress-bar__progress { background-color: var(--turquoise); border-radius: 6px; }
+.mini-footer { padding: 10px 20px; border-top-width: 1px; border-top-color: var(--challenge-border); flex-shrink: 0; justify-content: space-between; }
+.mini-status { background-color: var(--muted); font-size: 13px; border-radius: 18px; padding: 7px 10px; margin: 0; }
+.mini-footer-actions { margin-left: auto; }
+.mini-briefing { margin: 0 24px 20px; color: var(--challenge-muted); font-size: 16px; }
+.mini-hint, .mini-feedback, .mini-practice { margin: 12px 24px; padding: 14px; border-radius: 16px; }
+.mini-hint { background-color: #dff2ed; }
+.mini-feedback, .mini-practice { background-color: var(--challenge-error); }
+.mini-result { margin: 20px 24px; padding: 24px; align-items: center; border-radius: 20px; border-width: 1px; border-color: var(--challenge-border); }
+.result-success { background-color: var(--challenge-success); }
+.result-retry { background-color: var(--challenge-error); }
+.mini-result .stars { color: #d9a524; }
+.mini-consequence { width: 100%; align-items: stretch; }
+.mini-reward { flex-grow: 1; width: 45%; margin: 8px; }
+.mini-dials, .mini-pipe-row, .mini-beds, .mini-flare-order, .mini-flare-cards, .mini-caption-cards { width: 100%; justify-content: center; }
+.mini-dial { width: 31%; flex-grow: 1; flex-shrink: 1; align-items: center; margin: 4px; }
+.mini-dial .slider-value { font-size: 14px; }
+.mini-dial > .row { justify-content: center; }
+.mini-circuit { width: 100%; padding: 12px; margin-bottom: 14px; background-color: var(--challenge-surface); border-radius: 18px; border-width: 1px; border-color: var(--challenge-border); }
+.mini-pipe-row { flex-wrap: nowrap; }
+.mini-play Button.mini-pipe-piece { width: 30%; flex-grow: 1; flex-shrink: 1; min-height: 138px; padding: 8px; background-color: var(--challenge-card); align-items: center; justify-content: center; border-width: 2px; }
+.mini-pipe-piece .small { font-size: 15px; margin-bottom: 0; }
+.mini-overlay .mini-play Button.is-connected { background-color: var(--challenge-success); border-color: var(--region-greenhouse); opacity: 1; }
+.mini-wires { flex-wrap: nowrap; justify-content: center; align-items: flex-start; }
+.wire-column { width: 100px; }
+.mini-wires Button { height: 70px; margin: 4px 0; font-size: 26px; }
+.mini-overlay .mini-play Button.wire-tone-0 { background-color: var(--region-control-wire); }
+.mini-overlay .mini-play Button.wire-tone-1 { background-color: var(--region-shield-wire); }
+.mini-overlay .mini-play Button.wire-tone-2 { background-color: var(--region-greenhouse-wire); }
+.mini-overlay .mini-play Button.wire-tone-3 { background-color: var(--region-solar-wire); }
+.mini-play Button.selected, .mini-play .drop-hover { border-width: 3px; border-color: var(--challenge-info); }
+.mini-play .is-dragging { opacity: .65; }
+.mini-play Button.mini-bed { width: 150px; height: 150px; align-items: center; justify-content: center; }
+.mini-play Button.apple { background-color: var(--challenge-error); }
+.mini-flare-reading { width: 90%; padding: 14px; background-color: #e5edf4; border-radius: 18px; align-items: center; }
+.mini-flare-slot { width: 16%; height: 96px; margin: 5px; padding: 8px; align-items: center; background-color: var(--challenge-surface); border-width: 1px; border-color: var(--challenge-border); border-radius: 18px; }
+.mini-play Button.mini-flare-card { width: 16%; height: 88px; font-size: 36px; background-color: var(--challenge-card); border-width: 2px; }
+.mini-flare-card:disabled { opacity: 1; background-color: var(--challenge-success); }
+.mini-orbit { width: 100%; justify-content: space-between; }
+.orbit-path { height: 4px; flex-grow: 1; background-color: #a78bd7; margin: 0 20px; }
+.mini-caption-cards Button { width: 30%; flex-grow: 1; flex-shrink: 1; min-height: 90px; font-size: 16px; }
+.mini-play .mini-dropzone { background-color: var(--challenge-surface); border-color: var(--challenge-info); width: 100%; }
+.solar-array-list { width: 100%; align-items: stretch; }
+.solar-array-card { width: 46%; flex-grow: 1; flex-shrink: 1; padding: 12px; margin: 6px; border-width: 2px; border-color: var(--challenge-border); border-radius: 18px; background-color: var(--challenge-surface); opacity: .72; }
+.solar-array-card.active { border-color: var(--sun); opacity: 1; }
+.solar-array-card .heading { font-size: 18px; }
+.solar-array-card .small { font-size: 13px; }
+.solar-array-card Button { width: 100%; margin: 0; font-size: 15px; }
+.solar-array-card.active Button { background-color: var(--sun); }
+.mini-energy-row { width: 100%; padding: 12px; margin: 6px 0; border-radius: 16px; background-color: var(--challenge-surface); }
+.mini-scroll .unity-scroller--vertical { width: 10px; }
+.mini-scroll .unity-scroller--vertical .unity-scroller__low-button, .mini-scroll .unity-scroller--vertical .unity-scroller__high-button { display: none; }
+.mini-scroll .unity-scroller--vertical .unity-base-slider__dragger { width: 6px; min-height: 24px; margin: 0 2px; border-width: 0; border-radius: 3px; background-color: #c8c3b9; }
+.mini-scroll .unity-scroller--vertical .unity-base-slider__tracker { background-color: transparent; }
+
+.region-control .mini-sector { background-color: var(--region-control-badge); }
+.region-observatory .mini-play Button { background-color: var(--region-observatory-button); border-color: var(--region-observatory-border); }

@@ -1,0 +1,22 @@
+{
+  "entries": [
+    { "key": "solar.title", "value": "PARQUE SOLAR · 32 PAINÉIS" },
+    { "key": "solar.reserve", "value": "Reserva: {{n}} kWh" },
+    { "key": "solar.generation", "value": "Geração: {{n}} kWh / {{seconds}} s · {{dirty}} com poeira" },
+    { "key": "solar.critical", "value": "FALHA CRÍTICA DE ENERGIA — reserva abaixo de {{threshold}} kWh. Limpe os painéis para recuperar a geração e recarregar a reserva." },
+    { "key": "solar.pickup", "value": "[E] Pegar vassoura" },
+    { "key": "solar.return", "value": "[E] Devolver vassoura ao suporte" },
+    { "key": "solar.findBroom", "value": "Vassoura disponível na entrada do parque solar." },
+    { "key": "solar.enterZone", "value": "Vassoura equipada. Entre no contorno de um painel com poeira." },
+    { "key": "solar.clean", "value": "Painel {{n}} limpo. Procure os painéis levemente clareados pela areia." },
+    { "key": "solar.hold", "value": "Painel {{n}}: segure o clique esquerdo por {{seconds}} s para limpar." },
+    { "key": "solar.cleaning", "value": "Limpando · {{n}}%" },
+    { "key": "howTo.solar", "value": "A poeira se acumula nos 32 painéis com o tempo. Pegue a vassoura com E na entrada do parque, entre no contorno de um painel e segure o clique esquerdo para limpar. A reserva mantém a base por um tempo; abaixo de 100 kWh, o alerta pede manutenção. A limpeza recupera a geração e a reserva recarrega gradualmente." },
+    { "key": "title.exit", "value": "Sair" },
+    { "key": "howTo.sprint", "value": "Segure Shift enquanto anda para correr. Solte Shift para voltar a caminhar." },
+    { "key": "howTo.use", "value": "Entre na área de uma tarefa e aperte USAR (E, Espaço ou Enter). Planeje a energia na Sala de Controle antes de iniciar as tarefas." },
+    { "key": "station.needsPlan", "value": "Planeje a energia na Sala de Controle" },
+    { "key": "station.completed", "value": "Tarefa desta área concluída neste Sol" },
+    { "key": "station.approach", "value": "Aproxime-se de uma área de tarefa" }
+  ]
+}

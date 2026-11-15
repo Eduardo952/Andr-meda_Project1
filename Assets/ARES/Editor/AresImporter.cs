@@ -12,11 +12,12 @@ namespace Ares.Editor
     public static class AresImporter
     {
         [Serializable] sealed class WorldFile { public MeshData[] meshes; }
-        [Serializable] sealed class MeshData { public string name, room, layer, color, emissive; public float[] vertices, normals; public int[] indices; public float glow, opacity; public bool transparent; }
+        [Serializable] sealed class MeshData { public string name, room, layer, color, emissive, map, bumpMap; public float[] vertices, normals, uv, colors, repeat; public int[] indices; public float glow, opacity, metalness, roughness, bumpScale; public bool transparent, unlit, depthWrite; public int side; }
         const string Root = "Assets/ARES";
         [MenuItem("ARES/Import reference geometry and create scene")]
         public static void Import()
         {
+            ReferenceProvenance.Validate();
             for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++)
                 if (UnityEngine.SceneManagement.SceneManager.GetSceneAt(i).isDirty)
                     throw new InvalidOperationException("Save your scene changes before regenerating BaseARES. No scene was replaced.");
@@ -27,11 +28,18 @@ namespace Ares.Editor
             definition.layout = JsonUtility.FromJson<LayoutData>(File.ReadAllText(Root + "/Import/layout.json"));
             definition.campaign = JsonUtility.FromJson<CampaignData>(File.ReadAllText(Root + "/Import/campaign.json"));
             definition.world = JsonUtility.FromJson<Ares.World.WorldConfiguration>(File.ReadAllText(Root + "/Import/balance.json"));
+            definition.rules = JsonUtility.FromJson<CampaignRules>(File.ReadAllText(Root + "/Import/balance.json"));
             definition.portuguese = AssetDatabase.LoadAssetAtPath<TextAsset>(Root + "/Import/pt-BR.json"); definition.english = AssetDatabase.LoadAssetAtPath<TextAsset>(Root + "/Import/en.json"); EditorUtility.SetDirty(definition);
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var world = new GameObject("Base ARES — imported reference");
             var groups = new Dictionary<string, Transform>(); var materials = new Dictionary<string, Material>();
             var source = JsonUtility.FromJson<WorldFile>(File.ReadAllText(Root + "/Import/world.json"));
+            var configuredTextures = new HashSet<string>();
+            foreach (var data in source.meshes)
+            {
+                ConfigureTexture(data.map, true, configuredTextures);
+                ConfigureTexture(data.bumpMap, false, configuredTextures);
+            }
             AssetDatabase.StartAssetEditing();
             try
             {
@@ -43,6 +51,8 @@ namespace Ares.Editor
                 var vertices = new Vector3[data.vertices.Length / 3];
                 for (int i = 0; i < vertices.Length; i++) vertices[i] = new Vector3(data.vertices[i * 3], data.vertices[i * 3 + 1], -data.vertices[i * 3 + 2]);
                 mesh.vertices = vertices;
+                if (data.uv != null && data.uv.Length == vertices.Length * 2) { var uv = new Vector2[vertices.Length]; for (int i = 0; i < uv.Length; i++) uv[i] = new Vector2(data.uv[i * 2], data.uv[i * 2 + 1]); mesh.uv = uv; }
+                if (data.colors != null && data.colors.Length == data.vertices.Length) { var colors = new Color[vertices.Length]; for (int i = 0; i < colors.Length; i++) colors[i] = new Color(data.colors[i * 3], data.colors[i * 3 + 1], data.colors[i * 3 + 2], 1); mesh.colors = colors; }
                 // Three.js is right-handed. Mirror Z and reverse winding once.
                 for (int i = 0; i < data.indices.Length; i += 3) { int temp = data.indices[i]; data.indices[i] = data.indices[i + 2]; data.indices[i + 2] = temp; }
                 mesh.triangles = data.indices;
@@ -52,13 +62,19 @@ namespace Ares.Editor
                 var existing = AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
                 if (existing != null) { EditorUtility.CopySerialized(mesh, existing); UnityEngine.Object.DestroyImmediate(mesh); mesh = existing; } else AssetDatabase.CreateAsset(mesh, meshPath);
                 bool cutaway = data.layer == "walls" || data.layer == "roof";
-                string mk = data.color + "_" + data.emissive + "_" + data.glow + "_" + data.opacity + "_" + cutaway;
+                string mk = data.color + "_" + data.emissive + "_" + data.glow + "_" + data.opacity + "_" + cutaway + "_" + data.metalness + "_" + data.roughness + "_" + data.unlit + "_" + data.side + "_" + data.depthWrite + "_" + data.map + "_" + data.bumpMap;
                 if (!materials.TryGetValue(mk, out var material))
                 {
-                    material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
-                    ColorUtility.TryParseHtmlString(data.color, out var color); color.a = data.opacity; material.SetColor("_BaseColor", color); material.SetFloat("_Smoothness", .2f);
+                    string shaderName = data.colors?.Length > 0 ? "ARES/Reference Terrain" : data.unlit ? "Universal Render Pipeline/Unlit" : "Universal Render Pipeline/Lit";
+                    var shader = Shader.Find(shaderName);
+                    if (shader == null) throw new InvalidOperationException("Missing shader: " + shaderName);
+                    material = new Material(shader);
+                    ColorUtility.TryParseHtmlString(data.color, out var color); color.a = data.opacity; material.SetColor("_BaseColor", color); material.SetFloat("_Smoothness", 1 - data.roughness); material.SetFloat("_Metallic", data.metalness);
+                    material.SetFloat("_Cull", data.side == 2 ? 0 : data.side == 1 ? 1 : 2);
+                    if (!string.IsNullOrEmpty(data.map)) { material.SetTexture("_BaseMap", AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Import/" + data.map)); material.SetTextureScale("_BaseMap", new Vector2(data.repeat[0], data.repeat[1])); }
+                    if (!string.IsNullOrEmpty(data.bumpMap)) { material.SetTexture("_HeightMap", AssetDatabase.LoadAssetAtPath<Texture2D>(Root + "/Import/" + data.bumpMap)); material.SetFloat("_HeightScale", data.bumpScale); }
                     ColorUtility.TryParseHtmlString(data.emissive, out var emission); material.SetColor("_EmissionColor", emission * data.glow); if (data.glow > 0) material.EnableKeyword("_EMISSION");
-                    if (cutaway || data.transparent && data.opacity < 1) { material.SetFloat("_Surface", 1); material.SetFloat("_ZWrite", 0); material.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha); material.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha); material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT"); material.renderQueue = 3000; }
+                    if (cutaway || data.transparent) { material.SetFloat("_Surface", 1); material.SetFloat("_ZWrite", !cutaway && data.depthWrite ? 1 : 0); material.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha); material.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha); material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT"); material.renderQueue = 3000; }
                     string materialPath = Root + "/Generated/Materials/material_" + materials.Count + ".mat";
                     var prior = AssetDatabase.LoadAssetAtPath<Material>(materialPath); if (prior != null) { EditorUtility.CopySerialized(material, prior); UnityEngine.Object.DestroyImmediate(material); material = prior; } else AssetDatabase.CreateAsset(material, materialPath);
                     materials.Add(mk, material);
@@ -75,6 +91,15 @@ namespace Ares.Editor
             AssetDatabase.SaveAssets(); EditorSceneManager.SaveScene(scene, Root + "/Scenes/BaseARES.unity");
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(Root + "/Scenes/BaseARES.unity", true) };
             Debug.Log("ARES import complete: " + source.meshes.Length + " exact reference meshes.");
+        }
+        static void ConfigureTexture(string name, bool srgb, HashSet<string> configured)
+        {
+            if (string.IsNullOrEmpty(name) || !configured.Add(name)) return;
+            var importer = (TextureImporter)AssetImporter.GetAtPath(Root + "/Import/" + name);
+            importer.sRGBTexture = srgb; importer.wrapMode = TextureWrapMode.Repeat;
+            importer.anisoLevel = 4; importer.mipmapEnabled = true;
+            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            importer.SaveAndReimport();
         }
     }
 }

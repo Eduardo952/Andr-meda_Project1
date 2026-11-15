@@ -41,4 +41,5 @@ Desktop.ini
 # Migration tooling caches (source and lockfile remain versioned)
 **/node_modules/
 /Tools/AresImport/generated/
+/Tools/AresPreview/dist/
 **/.env
