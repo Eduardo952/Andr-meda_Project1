@@ -137,7 +137,7 @@ namespace Ares.Editor
                 {
                     Require(!explorer.IsDrivingRover && rover.Motion.Speed==0,"Y failed to park rover");
                     Require(explorer.PlayerPosition==astronaut,"Astronaut position changed during remote control");
-                    frontend.StartMission(); frontend.Campaign.CloseReport();
+                    frontend.StartMission(false); frontend.Campaign.CloseReport();
                     typeof(GameFrontend).GetMethod("CloseOverlay",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(frontend,null);
                     Next();
                 }

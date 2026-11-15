@@ -23,12 +23,20 @@ Shader "ARES/Martian Wind Dust"
                 output.distance = distance(world,GetCameraPositionWS());
                 return output;
             }
+            float Hash(float2 p) { return frac(sin(dot(p,float2(127.1,311.7)))*43758.5453); }
+            float Noise(float2 p)
+            {
+                float2 i=floor(p), f=frac(p); f=f*f*(3-2*f);
+                return lerp(lerp(Hash(i),Hash(i+float2(1,0)),f.x),lerp(Hash(i+float2(0,1)),Hash(i+1),f.x),f.y);
+            }
             half4 Frag(Varyings input) : SV_Target
             {
                 float2 p = input.uv*2-1;
                 float softness = pow(saturate(1-dot(p,p)),2);
+                float billow = Noise(input.uv*5 + float2(_Time.y*.18,0));
+                billow = lerp(billow,Noise(input.uv*11-float2(0,_Time.y*.12)),.3);
                 float nearFade = smoothstep(1.5,4,input.distance);
-                return half4(input.color.rgb,input.color.a*softness*nearFade);
+                return half4(input.color.rgb*lerp(.82,1.08,billow),input.color.a*softness*lerp(.4,1.5,billow)*nearFade);
             }
             ENDHLSL
         }

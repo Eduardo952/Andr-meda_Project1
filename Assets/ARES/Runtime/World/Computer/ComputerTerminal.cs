@@ -37,12 +37,13 @@ namespace Ares.World.Computer
             CameraRig=new ComputerCamera(settings);screen=new ComputerScreen(transform,settings);
         }
         public void Bind(Campaign campaign) { Reset();this.campaign=campaign;screen.Bind(campaign); }
-        public void AttachPrompt() {prompt=new ComputerPrompt(root);}
+        public void AttachPrompt(VisualElement parent = null) {prompt=new ComputerPrompt(parent ?? root);}
         public bool TryInteract()
         {
             if(!Near || frontend.BlocksWorld || OwnsCamera || Camera.main==null)return false;
+            if (frontend.TutorialActive && !frontend.Tutorial.AllowsComputer) return false;
             CameraRig.Begin(Camera.main);
-            foreground=new ComputerPanel(root,campaign,()=>Focused,Close,frontend.BuildComputerEnergy,()=>explorer.reducedMotion);
+            foreground=new ComputerPanel(root,campaign,()=>Focused && (!frontend.TutorialActive || frontend.Tutorial.AllowsEnergy),Close,frontend.BuildComputerEnergy,()=>explorer.reducedMotion,frontend.BuildComputerCommunications,frontend.TutorialActive);
             foreground.Root.style.opacity=0;return true;
         }
         public void Close() {CameraRig?.Close();}
@@ -60,8 +61,10 @@ namespace Ares.World.Computer
             if(OwnsCamera)
             {
                 float hud=1-Mathf.SmoothStep(0,1,Mathf.Clamp01(CameraRig.Progress*3));
-                foreach(var child in root.Children())if(child!=foreground.Root)child.style.opacity=hud;
+                foreach(var child in root.Children())
+                    if(child!=foreground.Root && child.name!="tutorial-layer" && child.name!="command-console" && child.name!="mission-event-banner")child.style.opacity=hud;
                 foreground.Root.style.opacity=CameraRig.InterfaceOpacity;
+                foreground.Root.style.display = frontend.TutorialActive && !frontend.Tutorial.AllowsEnergy ? DisplayStyle.None : DisplayStyle.Flex;
             }
             else if(active)
             {

@@ -764,5 +764,76 @@
         "error": "That direction does not match the recorded prevailing wind."
       }
     }
+  },
+  "trainer": {
+    "title": "Greenhouse Master",
+    "welcome": "Welcome, new greenhouse astronomer!",
+    "mission": "Your mission is to care for plants with limited water. Observe soil and light before deciding.",
+    "source": "Training inspired by VEG-04 averages: 34, 51 and 58 mL per container/day. The 1.36, 2.04 and 2.32 L levels are game adaptations, not official NASA levels. This activity does not change mission resources.",
+    "scoreboard": "Crop health",
+    "crops": {
+      "fruit": "Fruit",
+      "vegetable": "Vegetable",
+      "greens": "Leafy greens"
+    },
+    "health": {
+      "healthy": "Healthy",
+      "stressed": "Stressed",
+      "risk": "At risk"
+    },
+    "soilBands": {
+      "low": "Dry",
+      "medium": "Moderate",
+      "high": "Wet"
+    },
+    "lightBands": {
+      "low": "Low",
+      "medium": "Moderate",
+      "high": "Excessive"
+    },
+    "cycle": "Cycle {{n}}",
+    "reservoir": "Reservoir: {{water}} L",
+    "focus": "Crop in focus: {{crop}}",
+    "soil": "Soil: {{state}}",
+    "light": "Light: {{state}}",
+    "hint": "Hint: {{hint}}",
+    "question": "Which irrigation level do you choose: Low, Medium or High?",
+    "levels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "optional": "One optional adjustment",
+    "adjustments": {
+      "none": "No adjustment",
+      "moreWater": "Provide more water",
+      "lessWater": "Provide less water",
+      "moreLight": "Increase light temperature",
+      "lessLight": "Decrease light temperature"
+    },
+    "adjustmentRule": "In training, water adjustments redistribute the selected irrigation, without extra use or refills. Light temperature adjustments represent lighting correction, not a scientific measurement.",
+    "confirm": "Confirm decision",
+    "result": "Result: {{crop}} — {{health}}.",
+    "updatedWater": "Updated water: {{water}} L.",
+    "explainHealthy": "Soil and light are balanced! Roots receive water and leaves receive light to grow.",
+    "explainSoil": "The soil is out of balance. Roots need water, but too much can also cause problems. Let’s observe next cycle!",
+    "explainLight": "Light is out of balance. Leaves need light to grow, but too much can be harmful.",
+    "explainBoth": "Soil and light are out of balance. Caring for both helps plants grow. Every attempt teaches something!",
+    "dustEvent": "Simulated event: Martian dust reduced the light.",
+    "sunEvent": "Simulated event: strong sunlight increased the light.",
+    "calmEvent": "Simulated event: lighting returned to balance.",
+    "hintDry": "The soil looks dry… what might the roots be feeling?",
+    "hintWet": "The soil is very wet… can the roots breathe?",
+    "hintLight": "Observe the leaves. What changed in the lighting?",
+    "hintBalanced": "Everything looks balanced. How can we care for plants and save water?",
+    "lowWater": "Less than 4 L left! Water on Mars is limited. Think about saving it.",
+    "insufficient": "Not enough water for this level. Choose a lower level.",
+    "noLevel": "Water remains, but not enough for the lowest irrigation level. Let’s save it and reflect on what we learned.",
+    "finish": "Finish learning",
+    "finished": "What did we learn?",
+    "empty": "The reservoir is empty. Thank you for caring for the plants!",
+    "saved": "We saved the remaining water. Each decision taught us about resources.",
+    "reflection": "How did water and light affect your plants? What would you try differently? Saving water supports life on Mars.",
+    "restart": "Start again"
   }
 }

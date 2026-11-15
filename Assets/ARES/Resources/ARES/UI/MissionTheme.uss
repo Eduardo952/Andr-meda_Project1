@@ -1,0 +1,160 @@
+/* Mission Mars: rounded equipment, illustrated badges, tactile buttons, readable activity colors. */
+.energy-card-heading { flex-direction: row; align-items: center; }
+.energy-card-heading .mini-instruction { margin-left: 12px; }
+.ares-root .mini-energy-row { background-color: #f3e8cd; border-radius: 22px; border-width: 2px; border-color: #d4c4a1; padding: 14px; margin-bottom: 12px; }
+.mini-energy-row .mission-comparison-track { height: 9px; margin-top: 7px; margin-bottom: 6px; }
+.ares-root .energy-warning { color: #9f4c32; }
+.report .row > .card { border-radius: 24px; border-color: #a5b8c7; border-width: 2px; border-bottom-width: 7px; padding: 20px; background-color: #e4ece7; }
+.comms-report-card { border-radius: 24px; border-width: 2px; border-color: #a5b8c7; border-bottom-width: 6px; padding: 18px; }
+.ares-root { color: #26314d; --challenge-text: #26314d; --challenge-surface: #fff4db; --challenge-card: #f8e8c9; --challenge-border: #c5b894; --challenge-info: #176f78; --challenge-success: #d0f0cd; --challenge-error: #ffe0bd; --muted: #dedcc7; --sun: #ffcc54; --turquoise: #4fcfc1; }
+.ares-root Button { border-radius: 22px; border-width: 2px; border-color: #d8a444; border-bottom-width: 6px; border-bottom-color: #b36e46; transition-property: translate, scale, background-color, opacity; transition-duration: .14s; transition-timing-function: ease-out; }
+.ares-root Button:hover { translate: 0 -2px; background-color: #ffdf7c; }
+.ares-root Button:active { translate: 0 3px; scale: 0.98 0.98; }
+.ares-root Button:focus { border-width: 3px; border-color: #5966a6; border-bottom-width: 6px; }
+.ares-root Button:disabled { opacity: .44; translate: 0 0; scale: 1 1; }
+.ares-root Button.alt { background-color: #4fcfc1; border-color: #2b8e93; border-bottom-color: #326078; }
+.ares-root Button.ghost { background-color: #efe5cc; border-color: #d2c4a3; border-bottom-color: #a99d87; }
+.ares-root .overlay { background-color: rgba(30,36,64,.70); padding: 28px; }
+.ares-root .dialog { width: 90%; max-width: 1260px; background-color: #fff4db; border-width: 4px; border-color: #465678; border-bottom-width: 12px; border-radius: 36px; padding: 26px; }
+.ares-root .title { -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #26314d; font-size: 38px; }
+.ares-root .heading { -unity-font: resource("ARES/UI/Fonts/Fredoka"); }
+.mini-overlay, .dialog, .mission-menu-content, .tutorial-composition, .world-map { transition-property: opacity, scale, translate; transition-duration: .22s; transition-timing-function: ease-out; }
+.mission-opening { opacity: 0; scale: 0.94 0.94; translate: 0 16px; }
+.mission-closing { opacity: 0; scale: 0.97 0.97; translate: 0 12px; }
+.reduced-motion Button, .reduced-motion .mini-overlay, .reduced-motion .dialog, .reduced-motion .mission-menu-content, .reduced-motion .world-map { transition-duration: 0s; }
+.ares-root .challenge-backdrop { background-color: rgba(30,36,64,.64); padding: 24px; }
+.ares-root .mini-overlay { width: 92%; max-width: 1240px; height: 86%; border-width: 4px; border-color: #465678; border-bottom-width: 10px; border-radius: 36px; background-color: #fff4db; }
+.ares-root .mini-header { padding: 18px 22px; border-bottom-width: 4px; border-bottom-color: #465678; align-items: center; }
+.mini-activity-emblem { width: 94px; height: 94px; margin-right: 20px; border-radius: 32px; background-color: #fff4db; border-width: 3px; border-color: #fffaf0; border-bottom-width: 7px; border-bottom-color: #b8b59e; align-items: center; justify-content: center; flex-shrink: 0; rotate: -5deg; }
+.ares-root .mini-header .title { font-size: 35px; margin-top: 7px; margin-bottom: 8px; }
+.ares-root .mini-sector { font-size: 13px; letter-spacing: 1px; background-color: rgba(255,250,234,.72); padding: 5px 13px; }
+.ares-root .mini-source { font-size: 11px; opacity: .9; }
+.ares-root .mini-overlay Button { -unity-font: resource("ARES/UI/Fonts/Fredoka"); font-size: 19px; border-radius: 20px; border-width: 2px; border-bottom-width: 6px; border-bottom-color: #b28f53; min-height: 54px; }
+.ares-root .mini-overlay Button:active { translate: 0 3px; }
+.ares-root .mini-overlay Button:focus, .ares-root .mini-play Button.selected { border-color: #5866a8; border-width: 3px; border-bottom-width: 6px; }
+.ares-root .mini-play { margin: 6px 24px 22px; padding: 22px; background-color: #f3e5c4; border-width: 2px; border-color: #d2bf97; border-bottom-width: 5px; border-radius: 26px; }
+.ares-root .region-shield .mini-play { background-color: #dcebf2; border-color: #9cbcd1; }
+.ares-root .region-lifeSupport .mini-play { background-color: #d7eee1; border-color: #8fbcae; }
+.ares-root .region-greenhouse .mini-play { background-color: #e0edc8; border-color: #a5bf89; }
+.ares-root .region-observatory .mini-play { background-color: #e8dff5; border-color: #b8a5d5; }
+.ares-root .mini-data-card { background-color: #f4e6c9; border-width: 2px; border-radius: 20px; }
+.ares-root .mini-footer { background-color: #efdfbd; border-top-width: 2px; padding: 12px 20px; }
+.ares-root .mini-context { margin-top: 18px; }
+.ares-root .mini-result { border-width: 3px; border-radius: 28px; }
+.ares-root .result-success { background-color: #d2efc8; border-color: #71aa74; }
+.ares-root .result-retry { background-color: #ffe0bd; border-color: #d78b59; }
+.ares-root .mini-overlay .unity-base-slider__tracker { background-color: #b5c6b9; height: 10px; border-radius: 6px; }
+.ares-root .mini-overlay .unity-base-slider__dragger { background-color: #3aaea7; border-width: 3px; border-color: #25657a; border-radius: 16px; width: 28px; height: 28px; }
+.ares-root .computer-session { background-color: rgba(30,36,64,.62); padding: 36px; align-items: center; justify-content: center; }
+.ares-root .computer-shell { width: 94%; max-width: 1500px; height: 94%; flex-grow: 0; border-radius: 36px; border-width: 4px; border-color: #465678; border-bottom-width: 12px; background-color: #fff4db; }
+.ares-root .computer-header { background-color: #334765; border-bottom-color: #4fcfc1; border-bottom-width: 4px; padding: 12px 22px; }
+.ares-root .computer-brand, .ares-root .computer-page-title { color: #fff4db; }
+.ares-root .computer-page { padding-left: 38px; padding-right: 38px; }
+.ares-root .computer-energy-body.mini-overlay { width: 100%; height: auto; min-height: 0; max-height: none; border-width: 0; border-radius: 0; padding-top: 0; }
+.ares-root .energy-board { width: 100%; align-items: stretch; padding: 14px; }
+.energy-cards { width: 100%; flex-direction: row; flex-wrap: wrap; align-items: stretch; }
+.ares-root .energy-cards .mini-energy-row { width: 30%; min-width: 220px; flex-grow: 1; margin: 7px; padding: 12px; }
+.energy-cards .energy-card-heading { flex-direction: column; align-items: flex-start; }
+.energy-cards .mini-instruction { font-size: 20px; margin-left: 0; }
+.energy-board > .badge { align-self: center; margin: 6px; }
+.ares-root .computer-energy-body .mini-header { padding: 12px 18px; }
+.ares-root .computer-energy-body .mini-activity-emblem { width: 74px; height: 74px; }
+.ares-root .computer-energy-body .mini-header .title { font-size: 30px; margin: 4px 0; }
+.ares-root .computer-energy-body .mini-context { margin: 4px; padding: 8px; }
+.ares-root .mission-report-dialog { max-width: 1440px; padding: 20px; }
+.mission-report .title { font-size: 32px; }
+.mission-report-mentor { padding: 14px; margin-left: 16px; }
+.mission-report-mentor Image { height: 160px; }
+.mission-report-mentor Label { font-size: 18px; }
+.mission-report .mission-comparison { padding: 12px; margin-bottom: 9px; }
+.mission-report .mission-comparison .heading { font-size: 23px; }
+.mission-report .mission-comparison-caption { width: 40%; flex-shrink: 1; }
+.mission-report .mission-comparison-value { font-size: 23px; }
+.mission-report .mission-comparison .small { font-size: 13px; }
+.mission-report .mission-report-stats { margin-top: 5px; }
+.mission-report .mission-report-stat { padding: 8px 12px; }
+.mission-report .mission-report-stat .heading { font-size: 20px; }
+.mission-report .mission-report-footer { margin-top: 8px; }
+.ares-root .computer-energy-body .mini-header { border-width: 0; }
+.ares-root .oxygen-card, .ares-root .greenhouse-card, .ares-root .comms-report-card { background-color: #e7efd9; border-width: 2px; border-color: #a8beac; border-bottom-width: 5px; border-radius: 24px; }
+.ares-root .comms-connection { background-color: #d3eee0; border-width: 2px; border-color: #67a395; border-left-width: 8px; }
+.ares-root .comms-message.incoming { background-color: #d8e8f1; border-width: 2px; border-color: #9db8d1; }
+.ares-root .comms-message.outgoing { background-color: #dcebc9; border-width: 2px; border-color: #abc18d; }
+.ares-root .panel { background-color: rgba(255,244,219,.97); border-width: 3px; border-color: #465678; border-bottom-width: 6px; border-radius: 25px; }
+.ares-root .hud .panel { padding: 10px 12px; }
+.ares-root .task-list { border-top-color: #4fcfc1; border-top-width: 7px; }
+.ares-root .resource-content .small { color: #43506d; font-size: 13px; }
+.ares-root .map-header { background-color: #334765; padding: 18px 24px; border-radius: 24px; }
+.ares-root .map-title, .ares-root .map-eyebrow { color: #fff4db; }
+.ares-root .map-viewport { border-color: #334765; border-width: 4px; }
+.ares-root .map-controls { background-color: #ded8c1; border-bottom-width: 5px; border-bottom-color: #b7bba9; }
+.mission-menu { position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: #202e52; }
+.mission-menu-art, .mission-menu-shade { position: absolute; left: 0; top: 0; right: 0; bottom: 0; }
+.mission-menu-shade { background-color: rgba(19,26,53,.13); }
+.mission-menu-content { position: absolute; left: 6%; top: 10%; width: 39%; max-width: 650px; padding: 28px; border-radius: 36px; background-color: rgba(29,39,73,.86); border-width: 2px; border-color: rgba(155,185,226,.42); border-bottom-width: 8px; border-bottom-color: #172b48; }
+.mission-menu-kicker { color: #74e1cf; font-size: 15px; letter-spacing: 3px; margin-bottom: 18px; }
+.mission-menu-title { -unity-font: resource("ARES/UI/Fonts/Fredoka"); font-size: 92px; color: #fff4db; margin: 0; -unity-font-style: bold; }
+.mission-menu-title-accent { color: #ffcc54; font-size: 108px; margin-top: -20px; }
+.mission-menu-description { font-size: 24px; color: #d8e9ee; margin-top: 16px; margin-bottom: 22px; }
+.ares-root Button.mission-launch { min-height: 76px; font-size: 28px; margin-left: 0; margin-right: 0; background-color: #ffcc54; border-bottom-width: 8px; }
+.mission-menu-links { flex-direction: row; flex-wrap: wrap; }
+.mission-menu-links Button { flex-grow: 1; flex-basis: 30%; font-size: 17px; padding-left: 10px; padding-right: 10px; }
+.mission-menu-footer { position: absolute; left: 7%; bottom: 4%; color: #dbe9f3; font-size: 16px; }
+.mission-menu-version { position: absolute; right: 4%; bottom: 4%; color: #dbe9f3; font-size: 14px; }
+.mission-report-header { flex-direction: row; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom-width: 3px; border-bottom-color: #c2ad88; margin-bottom: 18px; }
+.mission-report-kicker { font-size: 14px; letter-spacing: 2px; color: #547387; }
+.mission-report-body { flex-direction: row; align-items: stretch; }
+.mission-report-resources { width: 64%; flex-grow: 1; }
+.mission-report-mentor { width: 32%; margin-left: 22px; padding: 20px; border-width: 3px; border-color: #88bdb9; border-bottom-width: 7px; border-radius: 28px; background-color: #dcefe3; }
+.mission-report-mentor Image { width: 100%; height: 190px; }
+.mission-report-mentor Label { font-size: 20px; }
+.mission-comparison { margin-bottom: 14px; border-width: 2px; border-color: #b5c5be; border-bottom-width: 5px; border-radius: 25px; padding: 18px; background-color: #e0eddf; }
+.mission-comparison.warning { background-color: #ffe3bc; border-color: #d5a06d; }
+.mission-comparison-head { flex-direction: row; align-items: center; margin-bottom: 8px; }
+.mission-comparison-caption { flex-grow: 1; margin-left: 14px; }
+.mission-comparison .heading { font-size: 25px; margin-bottom: 0; }
+.mission-comparison-value { font-size: 27px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); }
+.mission-comparison-track { height: 20px; border-radius: 10px; background-color: #bccfc4; overflow: hidden; margin-top: 7px; margin-bottom: 9px; }
+.mission-comparison-fill { height: 100%; border-radius: 10px; background-color: #49bda6; }
+.mission-comparison.warning .mission-comparison-fill { background-color: #f08c58; }
+.mission-report-stats { flex-direction: row; flex-wrap: wrap; margin-top: 14px; }
+.mission-report-stat { flex-grow: 1; padding: 10px 14px; margin: 4px; border-radius: 18px; background-color: #e7dcc0; }
+.mission-report-footer { margin-top: 18px; flex-direction: row; align-items: center; justify-content: space-between; }
+.mission-report-footer .small { max-width: 58%; }
+.ares-root .mission-next { min-height: 64px; font-size: 25px; background-color: #ffcc54; }
+.energy-card-emblem { width: 64px; height: 64px; margin-right: 14px; }
+.ares-root .mini-energy-row { background-color: #e1eee2; border-width: 2px; border-color: #a4c2b0; border-bottom-width: 5px; padding: 12px 18px; }
+.ares-root .mini-energy-row.energy-warning { background-color: #ffead0; border-color: #dab587; }
+.mission-report-popup { width: 94%; max-width: 1440px; height: 94%; padding: 20px; border-radius: 36px; background-color: #fff4db; border-width: 4px; border-bottom-width: 12px; border-color: #465678; }
+.mission-report-popup .mission-report-header { flex-shrink: 0; padding: 4px 0 8px; margin-bottom: 10px; }
+.mission-report-popup .mission-report-header Label { margin-bottom: 3px; }
+.mission-report-scroll { flex-grow: 1; flex-shrink: 1; min-height: 0; }
+.mission-report-popup .mission-report-footer { flex-shrink: 0; border-top-width: 2px; border-color: #d1c09a; padding-top: 10px; }
+.mission-report-popup .mission-report-mentor Image { height: 145px; }
+.mission-report-popup .mission-report-mentor Label { font-size: 18px; }
+.mission-report-popup .mission-comparison { padding: 10px 12px; }
+.mission-report-popup .mission-comparison-head { margin-bottom: 0; }
+.mission-report-popup .mission-comparison-track { height: 16px; margin-top: 4px; margin-bottom: 5px; }
+.mission-report-popup .mission-comparison .small { margin-bottom: 3px; }
+.ares-root .computer-session { background-color: rgba(30,36,64,.88); }
+.computer-physical-screen .computer-session { padding: 0; background-color: #26314d; }
+.computer-physical-screen .computer-shell { width: 100%; height: 100%; border-radius: 20px; }
+.mission-event-banner { left: 29%; right: 18px; top: 110px; padding: 12px 18px; border-radius: 18px; border-width: 2px; border-color: #d47939; background-color: #fff0c2; color: #402e36; white-space: normal; font-size: 18px; }
+.optional-shield { white-space: normal; font-size: 13px; margin-top: 12px; padding: 8px; }
+.shield-controls { flex-direction: row; margin-top: 8px; margin-bottom: 10px; }
+.shield-control { width: 32%; flex-grow: 1; flex-shrink: 1; min-width: 0; padding: 10px 12px; margin: 0 4px 9px 4px; border-radius: 18px; background-color: #e3e4f5; border-width: 2px; border-color: #adaed4; }
+.shield-control .heading { font-size: 20px; }
+.shield-control IntegerField { min-width: 44px; width: 52px; }
+.shield-control SliderInt { height: 32px; }
+.event-inline { white-space: normal; margin-top: 8px; margin-bottom: 12px; padding: 10px; border-radius: 12px; background-color: #ffdeaa; color: #402e36; }
+.storm-wind-card { position: absolute; right: 18px; top: 266px; width: 240px; padding: 12px 16px; border-radius: 22px; border-width: 2px; border-bottom-width: 6px; border-color: #d49b50; background-color: #fff0cd; }
+.storm-wind-title { font-size: 13px; letter-spacing: 2px; color: #745038; }
+.storm-wind-speed { font-size: 34px; -unity-font: resource("ARES/UI/Fonts/Fredoka"); color: #5c342d; margin-top: 2px; margin-bottom: 2px; }
+.storm-wind-caption { font-size: 14px; white-space: normal; color: #745038; }
+.command-console-shade { position: absolute; left: 0; right: 0; top: 0; bottom: 0; justify-content: flex-end; align-items: center; padding: 22px; background-color: rgba(25,28,47,0.4); }
+.command-console-panel { width: 96%; max-width: 1000px; padding: 18px 24px; border-radius: 24px; border-width: 3px; border-bottom-width: 8px; border-color: #51737c; background-color: #fff4db; }
+.command-console-header { align-items: center; justify-content: space-between; }
+.command-console-header .heading { flex-grow: 1; }
+.command-console-panel TextField { min-height: 46px; font-size: 21px; margin-top: 8px; margin-bottom: 12px; }
+.command-console-panel .unity-text-field__input { background-color: #26314d; color: #e3fff6; border-radius: 12px; padding: 10px 14px; }
+.command-feedback { margin-top: 10px; white-space: normal; font-size: 16px; }

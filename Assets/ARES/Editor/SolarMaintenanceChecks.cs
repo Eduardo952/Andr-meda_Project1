@@ -93,7 +93,7 @@ namespace Ares.Editor
                     solar=ui.Solar; Require(solar.BoundPanels==32,"Scene panel binding");
                     Require(!ShaderUtil.ShaderHasError(Resources.Load<Shader>("ARES/Effects/SolarDust")),"Solar shader errors");
                     keyboard=InputSystem.AddDevice<Keyboard>("ARES solar keyboard"); mouse=InputSystem.AddDevice<Mouse>("ARES solar mouse");
-                    ui.StartMission(); ui.Campaign.CloseReport(); Call("CloseOverlay");
+                    ui.StartMission(false); ui.Campaign.CloseReport(); Call("CloseOverlay");
                     ui.Campaign.SetAllocation(new Ares.Data.Allocation {shield=ui.Campaign.EnergyPool}); ui.Campaign.StartSol();
                     SetPlayer(solar.PanelCenter(0)+Vector3.forward*2.3f); explorer.RecenterCamera();
                     elapsed=0;
@@ -113,7 +113,7 @@ namespace Ares.Editor
                         Require(ui.GetComponent<UIDocument>().rootVisualElement.Q<Label>("solar-critical").resolvedStyle.display==DisplayStyle.Flex,"Critical alert not visible");
                         ScreenCapture.CaptureScreenshot("Logs/ares-solar-dirty.png"); stage=21; elapsed=0; }
                 }
-                else if(stage==21 && elapsed>.25f) { SetPlayer(SolarBroomView.PickupPosition+Vector3.back); stage=2; elapsed=0; }
+                else if(stage==21 && elapsed>.25f) { SetPlayer(ui.Solar.BroomPickupPosition+Vector3.back); stage=2; elapsed=0; }
                 else if(stage==2 && elapsed>.4f) { Require(solar.CanPickUp,"Pickup zone"); keys=new KeyboardState(Key.E); Next(); }
                 else if(stage==3 && elapsed>.2f)
                 {
@@ -134,7 +134,7 @@ namespace Ares.Editor
                 }
                 else if(stage==8 && elapsed>.15f)
                 {
-                    ui.StartMission(); Require(solar.Plant.CleanedPanels==0 && !solar.Cleaning.HasBroom && !solar.Plant.IsCritical,"Restart reset");
+                    ui.StartMission(false); Require(solar.Plant.CleanedPanels==0 && !solar.Cleaning.HasBroom && !solar.Plant.IsCritical,"Restart reset");
                     Finish("PASS: 32 cell bindings; 0.4 kWh each; gradual dust/neglect/critical reserve; recharge; hold cancellation and tool requirement; actual E pickup and mouse cleaning; camera capture; HUD alert; mission reset. Screenshots in Logs/ares-solar-*.png."); return;
                 }
                 InputSystem.QueueStateEvent(keyboard,keys); InputSystem.QueueStateEvent(mouse,pointer);

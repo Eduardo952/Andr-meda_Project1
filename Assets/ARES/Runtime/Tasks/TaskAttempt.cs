@@ -33,6 +33,8 @@ namespace Ares.Tasks
             IntegrityBefore = campaign.Integrity; OxygenBefore = campaign.Oxygen;
             Sample = campaign.Current.sample;
             Readings = new TaskReadings(definition, campaign.Current);
+            if (id == "SortFlares" && Readings.ArchivedFlare != null || id == "CmeCountdown" && Readings.ArchivedCme != null) Sample = false;
+            if (id == "PhotoDetective" && Readings.ArchivedPhoto != null) Sample = false;
             Priority = campaign.Oxygen < Rules.initialOxygen ? "air" : Demand.life >= Demand.greenhouse ? "heat" : "water";
             var consequences = new Consequences(Rules); var facts = campaign.Current.facts;
             Dust = consequences.PanelDustAfterStorm(campaign.PanelDust, consequences.StormForSol(campaign.SolIndex, facts.hasWindSpeed ? (float?)facts.windSpeed : null));

@@ -1,0 +1,9 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { BALANCE } from "@/config/balance";
+import { deriveSol } from "@/engine/normalize";
+import { SYSTEMS } from "@/engine/demand";
+import { useT } from "@/i18n";
+import { MiniFrame, NumberValue, type MiniProps, type PlayState } from "./MiniFrame";
+function Compare({props,state}:{props:MiniProps;state:PlayState}){const {t}=useT();const demand=deriveSol(props.sol).demand,total=SYSTEMS.reduce((v,k)=>v+demand[k],0);const [compared,setCompared]=useState(false);const [values,setValues]=useState([0,0,0]);return <><p>{t("challenge.available")} <NumberValue value={BALANCE.energyPool} origin="energy"/></p><progress value={BALANCE.energyPool} max={Math.max(total,BALANCE.energyPool)} aria-label={t("challenge.available")}/><p>{t("challenge.demand")} <NumberValue value={total} origin="energy"/></p><progress value={total} max={Math.max(total,BALANCE.energyPool)} aria-label={t("challenge.demand")}/>{!compared?<div className="mini-cards">{[true,false].map(covered=><Button key={String(covered)} onClick={()=>covered===(total<=BALANCE.energyPool)?setCompared(true):state.mistake()}>{t(covered?"challenge.matches":"challenge.shortfall")}</Button>)}</div>:<>{SYSTEMS.map((k,i)=><label className="mini-energy-row" key={k}>{t(`sys.${k}`)} <NumberValue value={demand[k]} origin="energy"/><input type="range" min={0} max={100} step={5} aria-label={t(`sys.${k}`)} value={values[i]} onChange={e=>setValues(v=>v.map((x,j)=>j===i?Number(e.target.value):x))}/><NumberValue value={values[i]??0} origin="input"/></label>)}<Button onClick={()=>SYSTEMS.every((k,i)=>values[i]===demand[k])?state.win():state.mistake()}>{t("tasks.check")}</Button></>}</>;}
+export default function PowerBalance(props:MiniProps){const {t}=useT();return <MiniFrame {...props} id="PowerBalance" learned={t("mini.PowerBalance.learned")}>{state=><Compare props={props} state={state}/>}</MiniFrame>;}

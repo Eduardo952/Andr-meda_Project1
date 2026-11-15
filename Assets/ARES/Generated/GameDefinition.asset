@@ -25,40 +25,42 @@ MonoBehaviour:
       stationX: 8
       stationZ: -8
       ports:
-      - x: 0
-        z: -14
       - x: 14
         z: 0
-      - x: 0
-        z: 14
-      - x: -14
-        z: 0
+      - x: 4.33
+        z: -13.31
+      - x: -11.33
+        z: -8.23
+      - x: -11.33
+        z: 8.23
+      - x: 4.33
+        z: 13.31
     - id: observatory
-      shape: barrel
+      shape: dome
       color: '#a287da'
-      x: 0
-      z: -42
-      width: 24
-      depth: 18
-      height: 6
-      stationX: 0
-      stationZ: -46
-      ports:
-      - x: 0
-        z: -33
-    - id: shield
-      shape: barrel
-      color: '#62a9e5'
-      x: -44
-      z: 0
+      x: 13.91
+      z: -42.8
       width: 26
-      depth: 18
+      depth: 26
       height: 6
-      stationX: -48
-      stationZ: 0
+      stationX: 15.14
+      stationZ: -46.6
       ports:
-      - x: -31
-        z: 0
+      - x: 9.89
+        z: -30.43
+    - id: shield
+      shape: dome
+      color: '#62a9e5'
+      x: -36.41
+      z: -26.45
+      width: 26
+      depth: 26
+      height: 6
+      stationX: -39.64
+      stationZ: -28.8
+      ports:
+      - x: -25.89
+        z: -18.81
     - id: greenhouse
       shape: glass
       color: '#83bf64'
@@ -73,61 +75,45 @@ MonoBehaviour:
       - x: 32
         z: 0
     - id: lifeSupport
-      shape: barrel
+      shape: dome
       color: '#3dbfb3'
-      x: 0
-      z: 42
+      x: 13.91
+      z: 42.8
       width: 26
-      depth: 18
+      depth: 26
       height: 6
-      stationX: 0
-      stationZ: 45
+      stationX: 15.14
+      stationZ: 46.6
       ports:
-      - x: 0
-        z: 33
-      - x: 0
-        z: 51
+      - x: 9.89
+        z: 30.43
     - id: airlock
-      shape: box
+      shape: dome
       color: '#ff9a3c'
-      x: 0
-      z: 57
-      width: 6
-      depth: 10
+      x: -29.12
+      z: 21.16
+      width: 8
+      depth: 8
       height: 4
-      stationX: 0
-      stationZ: 57
+      stationX: -29.12
+      stationZ: 21.16
       ports:
-      - x: 0
-        z: 52
-      - x: 0
-        z: 62
+      - x: -25.89
+        z: 18.81
+      - x: -32.36
+        z: 23.51
     - id: solar
       shape: park
       color: '#f4ca54'
-      x: 0
-      z: 82
-      width: 48
-      depth: 26
+      x: -48.54
+      z: 35.27
+      width: 44
+      depth: 44
       height: 0
-      stationX: 0
-      stationZ: 76
+      stationX: -43.69
+      stationZ: 31.74
       ports: []
     paths:
-    - a:
-        x: 0
-        z: -13
-      b:
-        x: 0
-        z: -34
-      width: 5
-    - a:
-        x: -13
-        z: 0
-      b:
-        x: -32
-        z: 0
-      width: 5
     - a:
         x: 13
         z: 0
@@ -136,40 +122,47 @@ MonoBehaviour:
         z: 0
       width: 5
     - a:
-        x: 0
-        z: 13
+        x: 4.02
+        z: -12.36
       b:
-        x: 0
-        z: 34
+        x: 10.2
+        z: -31.38
       width: 5
     - a:
-        x: 0
-        z: 50
+        x: -10.52
+        z: -7.64
       b:
-        x: 0
-        z: 53
+        x: -26.7
+        z: -19.4
       width: 5
     - a:
-        x: 0
-        z: 61
+        x: -10.52
+        z: 7.64
       b:
-        x: 0
-        z: 83
+        x: -26.7
+        z: 19.4
+      width: 5
+    - a:
+        x: 4.02
+        z: 12.36
+      b:
+        x: 10.2
+        z: 31.38
+      width: 5
+    - a:
+        x: -31.55
+        z: 22.92
+      b:
+        x: -49.35
+        z: 35.86
       width: 6
     - a:
-        x: -23
-        z: 82
+        x: -62.06
+        z: 16.66
       b:
-        x: 23
-        z: 82
+        x: -35.02
+        z: 53.88
       width: 25
-    - a:
-        x: 0
-        z: -14
-      b:
-        x: 0
-        z: 0
-      width: 5
     - a:
         x: 14
         z: 0
@@ -178,15 +171,29 @@ MonoBehaviour:
         z: 0
       width: 5
     - a:
-        x: 0
-        z: 14
+        x: 4.33
+        z: -13.31
       b:
         x: 0
         z: 0
       width: 5
     - a:
-        x: -14
+        x: -11.33
+        z: -8.23
+      b:
+        x: 0
         z: 0
+      width: 5
+    - a:
+        x: -11.33
+        z: 8.23
+      b:
+        x: 0
+        z: 0
+      width: 5
+    - a:
+        x: 4.33
+        z: 13.31
       b:
         x: 0
         z: 0
@@ -199,32 +206,32 @@ MonoBehaviour:
         z: -8
       width: 5
     - a:
-        x: 0
-        z: -33
+        x: 9.89
+        z: -30.43
       b:
-        x: 0
-        z: -42
+        x: 13.91
+        z: -42.8
       width: 5
     - a:
-        x: 0
-        z: -42
+        x: 13.91
+        z: -42.8
       b:
-        x: 0
-        z: -46
+        x: 15.14
+        z: -46.6
       width: 5
     - a:
-        x: -31
-        z: 0
+        x: -25.89
+        z: -18.81
       b:
-        x: -44
-        z: 0
+        x: -36.41
+        z: -26.45
       width: 5
     - a:
-        x: -44
-        z: 0
+        x: -36.41
+        z: -26.45
       b:
-        x: -48
-        z: 0
+        x: -39.64
+        z: -28.8
       width: 5
     - a:
         x: 32
@@ -241,69 +248,48 @@ MonoBehaviour:
         z: 0
       width: 5
     - a:
-        x: 0
-        z: 33
+        x: 9.89
+        z: 30.43
       b:
-        x: 0
-        z: 42
+        x: 13.91
+        z: 42.8
       width: 5
     - a:
-        x: 0
-        z: 51
+        x: 13.91
+        z: 42.8
       b:
-        x: 0
-        z: 42
+        x: 15.14
+        z: 46.6
       width: 5
     - a:
-        x: 0
-        z: 42
+        x: -25.89
+        z: 18.81
       b:
-        x: 0
-        z: 45
+        x: -29.12
+        z: 21.16
       width: 5
     - a:
-        x: 0
-        z: 52
+        x: -32.36
+        z: 23.51
       b:
-        x: 0
-        z: 57
+        x: -29.12
+        z: 21.16
       width: 5
     - a:
-        x: 0
-        z: 62
+        x: -29.12
+        z: 21.16
       b:
-        x: 0
-        z: 57
+        x: -29.12
+        z: 21.16
       width: 5
     - a:
-        x: 0
-        z: 57
+        x: -48.54
+        z: 35.27
       b:
-        x: 0
-        z: 57
-      width: 5
-    - a:
-        x: 0
-        z: 82
-      b:
-        x: 0
-        z: 76
+        x: -43.69
+        z: 31.74
       width: 5
     corridors:
-    - a:
-        x: 0
-        z: -13
-      b:
-        x: 0
-        z: -34
-      width: 5
-    - a:
-        x: -13
-        z: 0
-      b:
-        x: -32
-        z: 0
-      width: 5
     - a:
         x: 13
         z: 0
@@ -312,19 +298,81 @@ MonoBehaviour:
         z: 0
       width: 5
     - a:
-        x: 0
-        z: 13
+        x: 4.02
+        z: -12.36
       b:
-        x: 0
-        z: 34
+        x: 10.2
+        z: -31.38
       width: 5
     - a:
-        x: 0
-        z: 50
+        x: -10.52
+        z: -7.64
       b:
-        x: 0
-        z: 53
+        x: -26.7
+        z: -19.4
       width: 5
+    - a:
+        x: -10.52
+        z: 7.64
+      b:
+        x: -26.7
+        z: 19.4
+      width: 5
+    - a:
+        x: 4.02
+        z: 12.36
+      b:
+        x: 10.2
+        z: 31.38
+      width: 5
+    solarYaw: 5.3407073
+    landmarks:
+    - id: generator
+      x: -22.87
+      z: -70.38
+      radius: 3
+    - id: landingPad
+      x: 80.9
+      z: -58.78
+      radius: 11
+    - id: rover
+      x: -28.43
+      z: 87.5
+      radius: 5
+    - id: mast
+      x: -60
+      z: 0
+      radius: 2
+    garden:
+      pickup:
+        x: 35.35762
+        z: 2.8
+        height: 1.49
+      refill:
+        x: 69.2
+        z: 0
+        height: 3.12
+      rows:
+      - x: 52.4
+        z: -9.5
+        width: 31.2
+        depth: 1.1499996
+        containers: 10
+      - x: 52.4
+        z: -5
+        width: 31.2
+        depth: 1.1499996
+        containers: 10
+      - x: 52.4
+        z: 5
+        width: 31.2
+        depth: 1.1499996
+        containers: 10
+      - x: 52.4
+        z: 9.5
+        width: 31.2
+        depth: 1.1499996
+        containers: 10
   campaign:
     sols:
     - sol: 1

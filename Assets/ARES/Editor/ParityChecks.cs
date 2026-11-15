@@ -37,15 +37,16 @@ namespace Ares.Editor
             }
             var data = JsonUtility.FromJson<CampaignData>(File.ReadAllText("Assets/ARES/Import/campaign.json"));
             var campaignRules = JsonUtility.FromJson<CampaignRules>(File.ReadAllText("Assets/ARES/Import/balance.json"));
-            var campaign = new Campaign(data, campaignRules);
+            var campaign = new Campaign(data, campaignRules, eventSeed: 63);
             Require(!campaign.StartSol(), "Cannot skip report");
             for(int i=0;i<data.sols.Length;i++)
             {
-                campaign.CloseReport(); var allocation = new Allocation {shield=40,life=campaign.EnergyPool - 60,greenhouse=20};
+                campaign.CloseReport(); int shield = Math.Min(campaign.Current.demand.shield, campaign.EnergyPool - 40);
+                var allocation = new Allocation {shield=shield,life=20,greenhouse=campaign.EnergyPool - shield - 20};
                 Require(!campaign.SetAllocation(new Allocation {shield=101}), "Invalid budget accepted");
                 Require(campaign.SetAllocation(allocation) && campaign.StartSol(), "Cannot start Sol");
                 Require(!campaign.Seal("control",allocation), "Unfinished tasks allowed sealing");
-                float before=campaign.SolFraction; campaign.Tick(5,true); Require(before==campaign.SolFraction,"Clock did not pause");
+                float before=campaign.SolFraction; campaign.Tick(5,true,true); Require(before==campaign.SolFraction,"Explicit pause did not stop clock");
                 foreach(var task in campaign.Current.tasks)
                 {
                     Require(!campaign.BeginTask(task.id,"wrong-room"),"Remote task accepted");
@@ -55,8 +56,15 @@ namespace Ares.Editor
                     Require(!campaign.FinishTask(task.id,true,10,0),"Duplicate reward accepted");
                 }
                 Require(!campaign.Seal("solar",allocation),"Remote sealing accepted");
+                if (campaign.Demands.ShieldTaskAvailable)
+                {
+                    Require(campaign.BeginShieldRegulation("shield"), "Cannot open optional protection");
+                    for (int dial = 0; dial < 3; dial++) campaign.ShieldCalibration.Adjust(dial, campaign.ShieldCalibration.Target(dial));
+                    Require(campaign.FinishShieldRegulation(), "Cannot calibrate optional protection");
+                }
+                campaign.Tick(65, false);
                 Require(campaign.Seal("control",allocation),"Sealing failed");
-                Require(!campaign.Seal("control",allocation),"Double sealing accepted"); campaign.NextSol();
+                Require(!campaign.Seal("control",allocation),"Double sealing accepted"); CommunicationCheckFixture.SendRequiredReport(campaign); campaign.NextSol();
             }
             Require(campaign.Phase==Phase.Victory,"Campaign did not finish");
             Require(Rules.Score(float.NaN,0)==0 && Rules.Score(61,0)==0 && Rules.Score(30,0)==3 && Rules.Score(45,2)==2,"Score boundary mismatch");

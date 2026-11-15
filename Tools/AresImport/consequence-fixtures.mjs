@@ -31,8 +31,8 @@ export async function exportConsequenceFixtures({source,output,get,emit,BALANCE,
  const {scoreTask}=await get('tasks/score');
  code=ts.transpileModule(code,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;
  const create=()=>initializer=>{let state;const set=patch=>{state={...state,...patch};};const get=()=>state;state=initializer(set,get);return {getState:get};};
- const names=['create','BALANCE','DERIVED','SOLS','freeEnergy','applyDelta','evaluateSol','tasksForSol','runtime','useGame','isMiniTask','scoreTask',...Object.keys(c)];
- const values=[create,BALANCE,normalized.map(deriveSol),normalized,demand.freeEnergy,outcome.applyDelta,outcome.evaluateSol,s=>assignments.assignTasks(s.sol),{}, {getState:()=>({say(){},nearStation:'control'})},assignments.isMiniTask,scoreTask,...Object.values(c)];
+ const names=['create','BALANCE','DERIVED','SOLS','freeEnergy','applyDelta','evaluateSol','tasksForSol','runtime','useGame','isMiniTask','scoreTask','newMissionId',...Object.keys(c)];
+ const values=[create,BALANCE,normalized.map(deriveSol),normalized,demand.freeEnergy,outcome.applyDelta,outcome.evaluateSol,s=>assignments.assignTasks(s.sol),{}, {getState:()=>({say(){},nearStation:'control'})},assignments.isMiniTask,scoreTask,()=> 'offline-geometry-fixture',...Object.values(c)];
  const traces=[];
  for(const scenario of ['balanced','unprotected','no-oxygen','no-integrity']){
   const exports={};new Function('exports',...names,code)(exports,...values);

@@ -81,14 +81,14 @@ namespace Ares.Editor
                 {
                     ui=UnityEngine.Object.FindAnyObjectByType<GameFrontend>();explorer=UnityEngine.Object.FindAnyObjectByType<ReferenceExplorer>();
                     if(ui==null||explorer==null||typeof(ReferenceExplorer).GetField("player",Private).GetValue(explorer)==null)return;
-                    ui.Apod.OfflineOnly=true;ui.StartMission();ui.Campaign.CloseReport();Close();
+                    ui.Apod.OfflineOnly=true;ui.StartMission(false);ui.Campaign.CloseReport();Close();
                     ui.Campaign.SetAllocation(new Allocation{shield=ui.Campaign.EnergyPool});ui.Campaign.StartSol();
                     var p=(PlayerMotion)typeof(ReferenceExplorer).GetField("player",Private).GetValue(explorer);
-                    p.X=ObservatoryInteraction.StandPosition.x;p.Z=-ObservatoryInteraction.StandPosition.z;
+                    p.X=ui.Observatory.StandPosition.x;p.Z=-ui.Observatory.StandPosition.z;
                     keyboard=InputSystem.AddDevice<Keyboard>("ARES observatory keyboard");mouse=InputSystem.AddDevice<Mouse>("ARES observatory mouse");elapsed=0;
                 }
                 keyboard.MakeCurrent();mouse.MakeCurrent();
-                var keys=new KeyboardState();var point=Camera.main.WorldToScreenPoint(ObservatoryInteraction.TelescopePosition);
+                var keys=new KeyboardState();var point=Camera.main.WorldToScreenPoint(ui.Observatory.TelescopePosition);
                 var pointer=new MouseState{position=new Vector2(point.x,point.y)};
                 var root=ui.GetComponent<UIDocument>().rootVisualElement;
                 if(stage==0 && elapsed>1){Require(ui.Observatory.CanUse,"Telescope proximity");yaw=explorer.CameraTargetYaw;pointer=pointer.WithButton(MouseButton.Left);Next();}
@@ -132,7 +132,7 @@ namespace Ares.Editor
                 {
                     liveStatus=ui.Apod.Status(0);Require(ui.Apod.Image(0)!=null,"Network failure removed offline image");
                     int requests=ui.Apod.RequestCount;ui.Apod.Load(0);Require(ui.Apod.RequestCount==requests,"Reopening repeated request");
-                    Close();ui.StartMission();Require(!ui.Campaign.Discoveries.Observed(0),"New mission retained journal progress");
+                    Close();ui.StartMission(false);Require(!ui.Campaign.Discoveries.Observed(0),"New mission retained journal progress");
                     Finish("PASS: five unique real images; old/new API formats; video/logo/HTML/date rejection; offline photos; actual telescope click and E/Escape; camera capture; locked future days; all five diary pages; history; victory diary and return; mission reset; no duplicate requests. Live check: "+liveStatus);return;
                 }
                 InputSystem.QueueStateEvent(keyboard,keys);InputSystem.QueueStateEvent(mouse,pointer);

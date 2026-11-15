@@ -1,0 +1,1964 @@
+{
+  "entries": [
+    { "source": "CONSOLE DE COMANDOS", "translation": "COMMAND CONSOLE" },
+    { "source": "Fechar console", "translation": "Close console" },
+    { "source": "Executar comando", "translation": "Run command" },
+    { "source": "Digite /event (WindStorm) para iniciar uma tempestade de areia.", "translation": "Type /event (WindStorm) to start a sandstorm." },
+    { "source": "O jogo fica pausado enquanto você digita. Enter executa; Esc ou ' fecha.", "translation": "The game pauses while you type. Enter runs the command; Esc or ' closes the console." },
+    { "source": "Tempestade iniciada! Feche o console para continuar.", "translation": "Storm started! Close the console to continue." },
+    { "source": "Use este comando durante a exploração, após o tutorial e a divisão de energia.", "translation": "Use this command during exploration, after the tutorial and energy allocation." },
+    { "source": "Já existe um evento em andamento. Aguarde o fim da tempestade atual.", "translation": "An event is already in progress. Wait for the current storm to end." },
+    { "source": "Comando desconhecido. Use /help para ver os comandos.", "translation": "Unknown command. Use /help to see available commands." },
+    { "source": "Comandos: /event (WindStorm) ou /event WindStorm — iniciar tempestade de areia.", "translation": "Commands: /event (WindStorm) or /event WindStorm — start a sandstorm." },
+    { "source": "VENTO EXTERNO", "translation": "OUTDOOR WIND" },
+    { "source": "Tempestade de areia · rajadas", "translation": "Sandstorm · wind gusts" },
+    {
+      "source": "Prepare a casa para mais um dia em Marte.",
+      "translation": "Prepare your home for another day on Mars."
+    },
+    {
+      "source": "Cada equipamento precisa de uma parte da energia.",
+      "translation": "Every system needs a share of the energy."
+    },
+    {
+      "source": "Céu e clima · ver registros",
+      "translation": "Sky and weather · view records"
+    },
+    {
+      "source": "Valores de treino para esta história, não medições da NASA.",
+      "translation": "Practice values for this story, not NASA measurements."
+    },
+    {
+      "source": "A divisão de energia é uma regra do jogo. Os desafios solares usam outros registros reais, identificados na fonte.",
+      "translation": "Energy allocation is a game rule. The solar challenges use other real records, identified in their sources."
+    },
+    {
+      "source": "Antes de seguir, revise e envie o relatório da base para a Terra.",
+      "translation": "Before moving on, review and send the base report to Earth."
+    },
+    {
+      "source": "Revisar relatório na central",
+      "translation": "Review report at the terminal"
+    },
+    {
+      "source": "Explosões no Sol · NASA/DONKI",
+      "translation": "Solar flares · NASA/DONKI"
+    },
+    {
+      "source": "Nuvens solares · NASA/DONKI",
+      "translation": "Solar clouds · NASA/DONKI"
+    },
+    {
+      "source": "Temperatura de Marte · InSight",
+      "translation": "Mars temperature · InSight"
+    },
+    {
+      "source": "Vento em Marte · InSight",
+      "translation": "Mars wind · InSight"
+    },
+    {
+      "source": "Casa Marte ↔ Terra",
+      "translation": "Ares Base ↔ Earth"
+    },
+    {
+      "source": "Equipe da Terra · aventura educativa",
+      "translation": "Earth team · educational adventure"
+    },
+    {
+      "source": "Na realidade: cerca de 4–24 minutos para cada trecho. Aqui, cada trecho leva 12 segundos de jogo. Enviar não é receber uma resposta na hora.",
+      "translation": "In reality: about 4–24 minutes each way. Here, each leg takes 12 game seconds. Sending a message does not mean getting an instant reply."
+    },
+    {
+      "source": "Relatórios · 5 dias",
+      "translation": "Reports · 5 days"
+    },
+    {
+      "source": "Como a NASA se comunica?",
+      "translation": "How does NASA communicate?"
+    },
+    {
+      "source": "A Deep Space Network (DSN) é uma rede de grandes antenas na Terra. Ela ajuda a conversar com missões distantes. A luz e os sinais de rádio levam tempo para viajar.",
+      "translation": "The Deep Space Network (DSN) is a network of large antennas on Earth. It helps communicate with distant missions. Light and radio signals take time to travel."
+    },
+    {
+      "source": "Mensagens, falha de antena, bateria do rádio e custos de energia são regras educativas. Nenhuma mensagem é enviada à NASA. Dados do relatório vêm desta missão.",
+      "translation": "Messages, antenna faults, the radio battery and energy costs are educational game rules. No message is sent to NASA. Report data comes from this mission."
+    },
+    {
+      "source": "Fonte: NASA · comunicação espacial",
+      "translation": "Source: NASA · space communications"
+    },
+    {
+      "source": "ARES / COMPUTADOR CENTRAL",
+      "translation": "ARES / CENTRAL COMPUTER"
+    },
+    {
+      "source": "Voltar  [Esc]",
+      "translation": "Back  [Esc]"
+    },
+    {
+      "source": "Voltar ao oxigênio",
+      "translation": "Back to oxygen"
+    },
+    {
+      "source": "Ir para o gerenciamento de energia",
+      "translation": "Go to energy management"
+    },
+    {
+      "source": "Voltar à energia",
+      "translation": "Back to energy"
+    },
+    {
+      "source": "Ir para energia",
+      "translation": "Go to energy"
+    },
+    {
+      "source": "Ir para a central de comunicação",
+      "translation": "Go to communications"
+    },
+    {
+      "source": "TUTORIAL / DIVIDIR ENERGIA",
+      "translation": "TUTORIAL / ALLOCATE ENERGY"
+    },
+    {
+      "source": "Acessar computador",
+      "translation": "Use computer"
+    },
+    {
+      "source": "Água no reservatório: {0} L",
+      "translation": "Reservoir water: {0} L"
+    },
+    {
+      "source": "No regador: {0} mL · Usada hoje: {1} L",
+      "translation": "In watering can: {0} mL · Used today: {1} L"
+    },
+    {
+      "source": "Ver cada prateleira",
+      "translation": "View each shelf"
+    },
+    {
+      "source": "Painéis solares",
+      "translation": "Solar panels"
+    },
+    {
+      "source": "Energia na bateria: {0} kWh\n{1} de 32 painéis precisam de limpeza.",
+      "translation": "Battery energy: {0} kWh\n{1} of 32 panels need cleaning."
+    },
+    {
+      "source": "Escudo magnético",
+      "translation": "Magnetic shield"
+    },
+    {
+      "source": "Energia de proteção suficiente.",
+      "translation": "Enough energy for protection."
+    },
+    {
+      "source": "Proteção precisa de atenção: faltou energia.",
+      "translation": "Protection needs attention: not enough energy."
+    },
+    {
+      "source": "Energia: {0} / {1} kWh\nExposição acumulada: {2} (índice do jogo)",
+      "translation": "Energy: {0} / {1} kWh\nAccumulated exposure: {2} (game index)"
+    },
+    {
+      "source": "Ambiente para descansar: estável.",
+      "translation": "Resting environment: stable."
+    },
+    {
+      "source": "Ambiente para descansar: precisa de atenção.",
+      "translation": "Resting environment: needs attention."
+    },
+    {
+      "source": "Oxigênio: {0}% · Integridade da base: {1}%",
+      "translation": "Oxygen: {0}% · Base integrity: {1}%"
+    },
+    {
+      "source": "Avaliado pelo ar, energia e integridade. Horas de sono ainda não são medidas pelo jogo.",
+      "translation": "Based on air, energy and integrity. The game does not track sleep hours yet."
+    },
+    {
+      "source": "Faltam ",
+      "translation": "Missing "
+    },
+    {
+      "source": "Energia necessária reservada!",
+      "translation": "Required energy reserved!"
+    },
+    {
+      "source": "Voltar ao resumo",
+      "translation": "Back to summary"
+    },
+    {
+      "source": "Diário de descobertas",
+      "translation": "Discovery journal"
+    },
+    {
+      "source": "Histórico de comunicação",
+      "translation": "Communication history"
+    },
+    {
+      "source": "Reservatório: {0} / 11 L · Dia {1} de 5",
+      "translation": "Reservoir: {0} / 11 L · Day {1} of 5"
+    },
+    {
+      "source": "Regador: {0} / 510 mL",
+      "translation": "Watering can: {0} / 510 mL"
+    },
+    {
+      "source": "Luz: ",
+      "translation": "Light: "
+    },
+    {
+      "source": "Cuidados deste dia encerrados.",
+      "translation": "Care for this day has ended."
+    },
+    {
+      "source": "Cuidados de hoje prontos! [E] Abra o painel para registrar.",
+      "translation": "Today's care is complete! [E] Open the panel to record it."
+    },
+    {
+      "source": "Regando… fique perto até terminar.",
+      "translation": "Watering… stay nearby until finished."
+    },
+    {
+      "source": "Clique na prateleira para observar.",
+      "translation": "Click a shelf to observe it."
+    },
+    {
+      "source": "Pegue o regador na entrada.",
+      "translation": "Pick up the watering can at the entrance."
+    },
+    {
+      "source": "Reabasteça o regador no reservatório.",
+      "translation": "Refill the watering can at the reservoir."
+    },
+    {
+      "source": "Clique na prateleira para regar.",
+      "translation": "Click a shelf to water it."
+    },
+    {
+      "source": "Clique no regador, na entrada, para pegar.",
+      "translation": "Click the watering can at the entrance to pick it up."
+    },
+    {
+      "source": "Sem água para outra rega completa. Cuide também da luz.",
+      "translation": "Not enough water for another full dose. Check the light too."
+    },
+    {
+      "source": "Clique no reservatório para reabastecer.",
+      "translation": "Click the reservoir to refill."
+    },
+    {
+      "source": "Observe o solo de cada prateleira antes de regar.",
+      "translation": "Check the soil on each shelf before watering."
+    },
+    {
+      "source": "Uma rega: 510 mL",
+      "translation": "One dose: 510 mL"
+    },
+    {
+      "source": "Faça a água durar os 5 dias. Olhe o solo antes de regar.",
+      "translation": "Make the water last all 5 days. Check the soil before watering."
+    },
+    {
+      "source": "Cultivo inspirado no Veggie da NASA e nos experimentos VEG-04A e VEG-04B. Frutas, legumes e verduras fazem parte da nossa estufa educativa; o VEG-04 estudou a verdura mizuna.",
+      "translation": "Growing inspired by NASA's Veggie and the VEG-04A and VEG-04B experiments. Our educational greenhouse includes fruit and vegetables; VEG-04 studied mizuna greens."
+    },
+    {
+      "source": "No VEG-04A, um dos tratamentos usou em média 51 mL por recipiente por dia. Aqui, 10 × 51 = 510 mL por prateleira. O regador, os estados do solo, as doses e os 11 L são regras do jogo, não recomendações de irrigação da NASA.",
+      "translation": "In VEG-04A, one treatment used an average of 51 mL per container per day. Here, 10 × 51 = 510 mL per shelf. The can, soil conditions, doses and 11 L supply are game rules, not NASA irrigation recommendations."
+    },
+    {
+      "source": "A estufa é fechada e climatizada. Mudanças de solo e luz vêm de situações internas ou falhas nos equipamentos. O clima de Marte não muda diretamente essas condições.",
+      "translation": "The greenhouse is enclosed and climate-controlled. Soil and light changes come from internal conditions or equipment faults. The Martian weather does not change them directly."
+    },
+    {
+      "source": "Muito úmido",
+      "translation": "Very wet"
+    },
+    {
+      "source": "Não regue. As raízes precisam de ar!",
+      "translation": "Do not water. Roots need air!"
+    },
+    {
+      "source": "Rega de hoje concluída!",
+      "translation": "Today's watering is complete!"
+    },
+    {
+      "source": "Regue 2 vezes, reabastecendo entre elas.",
+      "translation": "Water twice, refilling between doses."
+    },
+    {
+      "source": "Falta 1 rega de 510 mL.",
+      "translation": "One 510 mL dose left."
+    },
+    {
+      "source": "Aumente a luz para ajudar as plantas a crescer.",
+      "translation": "Increase the light to help the plants grow."
+    },
+    {
+      "source": "Diminua a luz para evitar estresse nas plantas.",
+      "translation": "Reduce the light to avoid stressing the plants."
+    },
+    {
+      "source": "A luz está boa. Mantenha assim!",
+      "translation": "The light is good. Keep it this way!"
+    },
+    {
+      "source": "Dia {0}: {1}/4 prateleiras em boas condições. Água usada: {2} L.",
+      "translation": "Day {0}: {1}/4 shelves in good condition. Water used: {2} L."
+    },
+    {
+      "source": "Estufa · Casa Marte",
+      "translation": "Greenhouse · Ares Base"
+    },
+    {
+      "source": "Dia {0} de 5 · Reservatório: {1} L",
+      "translation": "Day {0} of 5 · Reservoir: {1} L"
+    },
+    {
+      "source": "Reserva para toda a missão",
+      "translation": "Supply for the whole mission"
+    },
+    {
+      "source": "No regador: {0} / 510 mL · Usados hoje: {1} L",
+      "translation": "In watering can: {0} / 510 mL · Used today: {1} L"
+    },
+    {
+      "source": "Não há água suficiente para outra rega de 510 mL. Você ainda pode observar as plantas e ajustar a luz.",
+      "translation": "Not enough water for another 510 mL dose. You can still observe the plants and adjust the light."
+    },
+    {
+      "source": "Solo: ",
+      "translation": "Soil: "
+    },
+    {
+      "source": "Regas: {0} / {1}",
+      "translation": "Doses: {0} / {1}"
+    },
+    {
+      "source": "Observar solo",
+      "translation": "Observe soil"
+    },
+    {
+      "source": "Nas 4 prateleiras: todas moderadas = 2,04 L/dia; todas secas = 4,08 L/dia; todas muito úmidas = 0 L/dia.",
+      "translation": "Across 4 shelves: all moderate = 2.04 L/day; all dry = 4.08 L/day; all very wet = 0 L/day."
+    },
+    {
+      "source": "Solo seco pode desidratar as plantas. Água demais pode prejudicar as raízes. Pouca luz prejudica o crescimento; luz demais pode causar estresse.",
+      "translation": "Dry soil can dehydrate plants. Too much water can harm roots. Too little light limits growth; too much can cause stress."
+    },
+    {
+      "source": "Pesquisa VEG-04 · NASA",
+      "translation": "VEG-04 research · NASA"
+    },
+    {
+      "source": "Tudo pronto! Explore a base até o fim do dia.",
+      "translation": "All done! Explore the base until the day ends."
+    },
+    {
+      "source": "Divida a energia no computador",
+      "translation": "Allocate energy at the computer"
+    },
+    {
+      "source": "Controle remoto ativo · [Y] Voltar ao astronauta",
+      "translation": "Remote control active · [Y] Return to astronaut"
+    },
+    {
+      "source": "Diminuir imagem",
+      "translation": "Zoom out"
+    },
+    {
+      "source": "Ampliar imagem de 1 a 3 vezes",
+      "translation": "Zoom from 1× to 3×"
+    },
+    {
+      "source": "Ampliar imagem",
+      "translation": "Zoom in"
+    },
+    {
+      "source": "Ampliação: ",
+      "translation": "Zoom: "
+    },
+    {
+      "source": "Voltar à missão (Esc)",
+      "translation": "Back to mission (Esc)"
+    },
+    {
+      "source": "Imagem real: APOD",
+      "translation": "Real image: APOD"
+    },
+    {
+      "source": "Biblioteca NASA",
+      "translation": "NASA library"
+    },
+    {
+      "source": "Escolha o ritmo",
+      "translation": "Choose a mode"
+    },
+    {
+      "source": "Gasta menos energia",
+      "translation": "Uses less energy"
+    },
+    {
+      "source": "Ritmo do dia a dia",
+      "translation": "Everyday mode"
+    },
+    {
+      "source": "Produz mais oxigênio",
+      "translation": "Makes more oxygen"
+    },
+    {
+      "source": "Produz menos oxigênio e pode usar a reserva.",
+      "translation": "Makes less oxygen and may use the reserve."
+    },
+    {
+      "source": "Equilibra produção e gasto de energia.",
+      "translation": "Balances production and energy use."
+    },
+    {
+      "source": "Produz mais, mas gasta mais água e energia.",
+      "translation": "Makes more, but uses more water and energy."
+    },
+    {
+      "source": "Pausar poupa um pouco de oxigênio.",
+      "translation": "Pausing saves a little oxygen."
+    },
+    {
+      "source": "EM USO",
+      "translation": "IN USE"
+    },
+    {
+      "source": "Experimentos ligados",
+      "translation": "Experiments running"
+    },
+    {
+      "source": "Experimentos pausados",
+      "translation": "Experiments paused"
+    },
+    {
+      "source": "Poupar gasta menos energia, mas pode baixar a reserva.",
+      "translation": "Economy uses less energy, but may lower the reserve."
+    },
+    {
+      "source": "Reforçar faz mais oxigênio e gasta mais água e energia.",
+      "translation": "Boost makes more oxygen and uses more water and energy."
+    },
+    {
+      "source": "Equilibrar busca repor o oxigênio que a equipe usa.",
+      "translation": "Balance aims to replace the oxygen the crew uses."
+    },
+    {
+      "source": "Saiba mais",
+      "translation": "Learn more"
+    },
+    {
+      "source": "De onde vem o oxigênio?",
+      "translation": "Where does the oxygen come from?"
+    },
+    {
+      "source": "O gerador usa água e energia para fazer oxigênio. A equipe respira esse oxigênio e solta CO₂. O filtro retira o CO₂ do ar.",
+      "translation": "The generator uses water and energy to make oxygen. The crew breathes that oxygen and releases CO₂. The filter removes CO₂ from the air."
+    },
+    {
+      "source": "Reforçar produz mais, mas gasta mais água e energia. Poupar gasta menos energia, mas pode baixar a reserva. Compare as barras e observe o tanque depois de escolher.",
+      "translation": "Boost makes more, but uses more water and energy. Economy uses less energy, but may lower the reserve. Compare the bars and watch the tank after choosing."
+    },
+    {
+      "source": "A porcentagem mostra quanto há no tanque. Ela não é a quantidade de oxigênio misturada no ar.",
+      "translation": "The percentage shows how much is in the tank. It is not the oxygen concentration in the air."
+    },
+    {
+      "source": "Ver os números da base",
+      "translation": "View base measurements"
+    },
+    {
+      "source": "A ciência por trás do jogo",
+      "translation": "The science behind the game"
+    },
+    {
+      "source": "Na estação espacial, eletricidade separa água em oxigênio e hidrogênio. Outro aparelho retira o CO₂. A água do gerador desta base é separada da água da estufa.",
+      "translation": "On the space station, electricity splits water into oxygen and hydrogen. Another device removes CO₂. This base's generator water is separate from the greenhouse water."
+    },
+    {
+      "source": "A referência da NASA usa cerca de 820 g de oxigênio por pessoa em um dia terrestre com exercícios. Um dia de Marte é um pouco mais longo. Aqui, o dia dura 10 minutos; os tamanhos e gastos dos aparelhos foram escolhidos para o jogo.",
+      "translation": "The NASA reference uses about 820 g of oxygen per person per Earth day with exercise. A Martian day is slightly longer. Here, a day lasts 10 minutes; equipment sizes and consumption were chosen for the game."
+    },
+    {
+      "source": "O MOXIE testou outra maneira: tirar oxigênio do ar de Marte. Ele não é o gerador de água desta base.",
+      "translation": "MOXIE tested another method: extracting oxygen from the Martian air. It is not this base's water-based generator."
+    },
+    {
+      "source": "NASA · Suporte à vida",
+      "translation": "NASA · Life support"
+    },
+    {
+      "source": "NASA · MOXIE em Marte",
+      "translation": "NASA · MOXIE on Mars"
+    },
+    {
+      "source": "A água do gerador acabou",
+      "translation": "The generator is out of water"
+    },
+    {
+      "source": "O gerador parou. Pause os experimentos para poupar o oxigênio guardado.",
+      "translation": "The generator stopped. Pause the experiments to save stored oxygen."
+    },
+    {
+      "source": "Os experimentos já estão pausados. Sem água, aumentar o ritmo não ajuda.",
+      "translation": "Experiments are already paused. Without water, increasing the mode will not help."
+    },
+    {
+      "source": "O gerador precisa de energia",
+      "translation": "The generator needs energy"
+    },
+    {
+      "source": "Limpe os painéis solares. Sem energia, o gerador e o filtro trabalham menos.",
+      "translation": "Clean the solar panels. Without energy, the generator and filter do less work."
+    },
+    {
+      "source": "A reserva está baixa",
+      "translation": "The reserve is low"
+    },
+    {
+      "source": "A reserva já está se recuperando. Acompanhe o tanque e evite gastos extras.",
+      "translation": "The reserve is already recovering. Watch the tank and avoid extra use."
+    },
+    {
+      "source": "Escolha Reforçar e pause os experimentos para ajudar a reserva.",
+      "translation": "Choose Boost and pause the experiments to help the reserve."
+    },
+    {
+      "source": "Tudo pronto para começar",
+      "translation": "Ready to begin"
+    },
+    {
+      "source": "Escolha o ritmo do gerador. Depois, use a seta para planejar a energia do dia.",
+      "translation": "Choose the generator mode. Then use the arrow to plan today's energy."
+    },
+    {
+      "source": "Estamos usando a reserva",
+      "translation": "We are using the reserve"
+    },
+    {
+      "source": "Pause os experimentos para reduzir o uso de oxigênio.",
+      "translation": "Pause the experiments to reduce oxygen use."
+    },
+    {
+      "source": "Escolha Equilibrar ou Reforçar para produzir mais oxigênio.",
+      "translation": "Choose Balance or Boost to produce more oxygen."
+    },
+    {
+      "source": "Temos uma boa reserva",
+      "translation": "We have a good reserve"
+    },
+    {
+      "source": "O tanque está cheio. Experimente Equilibrar para gastar menos água e energia.",
+      "translation": "The tank is full. Try Balance to use less water and energy."
+    },
+    {
+      "source": "O gerador acompanha o uso da equipe. Você pode manter este ritmo.",
+      "translation": "The generator is keeping up with the crew. You can keep this mode."
+    },
+    {
+      "source": "A reserva está aumentando",
+      "translation": "The reserve is growing"
+    },
+    {
+      "source": "Estamos produzindo mais do que usamos. O que sobra fica guardado.",
+      "translation": "We are producing more than we use. The extra is stored."
+    },
+    {
+      "source": "A reserva está estável",
+      "translation": "The reserve is stable"
+    },
+    {
+      "source": "Estamos produzindo tanto quanto usamos. Continue acompanhando o tanque.",
+      "translation": "We are producing as much as we use. Keep watching the tank."
+    },
+    {
+      "source": "Oxigênio da base",
+      "translation": "Base oxygen"
+    },
+    {
+      "source": "Cuide da reserva para a equipe respirar.",
+      "translation": "Care for the reserve so the crew can breathe."
+    },
+    {
+      "source": "NOSSA RESERVA",
+      "translation": "OUR RESERVE"
+    },
+    {
+      "source": "Uso da base",
+      "translation": "Base consumption"
+    },
+    {
+      "source": "Tanque vazio",
+      "translation": "Empty tank"
+    },
+    {
+      "source": "Pronto para o dia",
+      "translation": "Ready for the day"
+    },
+    {
+      "source": "Tanque cheio",
+      "translation": "Full tank"
+    },
+    {
+      "source": "Reserva estável",
+      "translation": "Stable reserve"
+    },
+    {
+      "source": "Usamos mais do que produzimos.",
+      "translation": "We use more than we produce."
+    },
+    {
+      "source": "Produzimos mais do que usamos.",
+      "translation": "We produce more than we use."
+    },
+    {
+      "source": "Produção e uso estão equilibrados.",
+      "translation": "Production and consumption are balanced."
+    },
+    {
+      "source": "Água disponível",
+      "translation": "Water available"
+    },
+    {
+      "source": "Energia suficiente",
+      "translation": "Enough energy"
+    },
+    {
+      "source": "Filtro limpando o ar",
+      "translation": "Filter cleaning the air"
+    },
+    {
+      "source": "Filtro ativo",
+      "translation": "Filter active"
+    },
+    {
+      "source": "Radiação recebida: quanto menos, melhor. É uma escala do jogo.",
+      "translation": "Radiation received: less is better. This is a game scale."
+    },
+    {
+      "source": "Ar guardado para a equipe respirar.",
+      "translation": "Air stored for the crew to breathe."
+    },
+    {
+      "source": "Quanto a bateria ainda tem de energia.",
+      "translation": "How much energy the battery still holds."
+    },
+    {
+      "source": "Estado da base: cuide dos equipamentos.",
+      "translation": "Base condition: look after the equipment."
+    },
+    {
+      "source": "Explorar ciência real",
+      "translation": "Explore real science"
+    },
+    {
+      "source": "O Sol",
+      "translation": "The Sun"
+    },
+    {
+      "source": "Os desafios de explosões e nuvens solares usam registros reais de 10 de maio de 2024. São exemplos do arquivo, não alertas de agora.",
+      "translation": "The solar flare and cloud challenges use real records from May 10, 2024. They are archive examples, not current alerts."
+    },
+    {
+      "source": "NASA · DONKI",
+      "translation": "NASA · DONKI"
+    },
+    {
+      "source": "Flores e fungos na estação espacial",
+      "translation": "Flowers and fungi on the space station"
+    },
+    {
+      "source": "Plantas expostas à radiação",
+      "translation": "Plants exposed to radiation"
+    },
+    {
+      "source": "Plantas sob pressão baixa",
+      "translation": "Plants under low pressure"
+    },
+    {
+      "source": "RadLab reúne medições de instrumentos no espaço. Uma medição na estação espacial não é a dose de um astronauta em Marte. Nossa barra usa uma escala de jogo.",
+      "translation": "RadLab brings together measurements from space instruments. A measurement on the space station is not an astronaut's dose on Mars. Our bar uses a game scale."
+    },
+    {
+      "source": "NASA · RadLab",
+      "translation": "NASA · RadLab"
+    },
+    {
+      "source": "Explorar Marte",
+      "translation": "Explore Mars"
+    },
+    {
+      "source": "Veja mapas reais de Marte. Nossa base foi desenhada para jogar: não é um lugar medido pelo Mars Trek.",
+      "translation": "Explore real maps of Mars. Our base was designed for the game: it is not a site measured by Mars Trek."
+    },
+    {
+      "source": "NASA · Mars Trek",
+      "translation": "NASA · Mars Trek"
+    },
+    {
+      "source": "Fontes oficiais verificadas. Projeto independente, sem endosso da NASA ou da Agência Espacial Canadense.",
+      "translation": "Verified official sources. Independent project, not endorsed by NASA or the Canadian Space Agency."
+    },
+    {
+      "source": "Foto real · NASA/APOD",
+      "translation": "Real photo · NASA/APOD"
+    },
+    {
+      "source": "Arquivo NASA/DONKI · ",
+      "translation": "NASA/DONKI archive · "
+    },
+    {
+      "source": "Não é um alerta de agora. Este registro sozinho não diz se uma tempestade chega a Marte.",
+      "translation": "This is not a current alert. This record alone does not tell us whether a storm reaches Mars."
+    },
+    {
+      "source": "Ver registro oficial",
+      "translation": "View official record"
+    },
+    {
+      "source": "Fonte da foto · NASA/APOD",
+      "translation": "Photo source · NASA/APOD"
+    },
+    {
+      "source": "O que mudou?",
+      "translation": "What changed?"
+    },
+    {
+      "source": "EXPLORAR  /  APRENDER  /  CUIDAR",
+      "translation": "EXPLORE  /  LEARN  /  CARE"
+    },
+    {
+      "source": "Um novo mundo.\nUma grande aventura com Ares.",
+      "translation": "A new world.\nA great adventure with Ares."
+    },
+    {
+      "source": "Iniciar missão  ›",
+      "translation": "Start mission  ›"
+    },
+    {
+      "source": "Construa descobertas. Cuide da sua equipe. Explore Marte.",
+      "translation": "Make discoveries. Care for your crew. Explore Mars."
+    },
+    {
+      "source": "DIÁRIO DE BORDO / TELEMETRIA DA BASE",
+      "translation": "MISSION LOG / BASE TELEMETRY"
+    },
+    {
+      "source": "Tempo de missão concluído · tarefas registradas",
+      "translation": "Mission time complete · tasks recorded"
+    },
+    {
+      "source": "O escudo precisava de {0} kWh, mas recebeu {1}. Faltaram {2} kWh para a proteção prevista. No próximo Sol, confira a necessidade antes de dividir a energia!",
+      "translation": "The shield needed {0} kWh but received {1}. It was {2} kWh short of the planned protection. Next Sol, check each system's needs before allocating energy!"
+    },
+    {
+      "source": "O sistema de ar precisava de mais energia. Vamos reservar o necessário para a equipe respirar bem no próximo Sol!",
+      "translation": "The air system needed more energy. Let's reserve enough for the crew to breathe comfortably next Sol!"
+    },
+    {
+      "source": "A estufa precisava de mais energia. As plantas também fazem parte da nossa equipe: vamos cuidar delas no próximo Sol!",
+      "translation": "The greenhouse needed more energy. The plants are part of our crew too: let's care for them next Sol!"
+    },
+    {
+      "source": "Os sistemas receberam a energia necessária! Confira os registros e conte à Terra como foi a nossa aventura de hoje.",
+      "translation": "The systems received the energy they needed! Check the records and tell Earth about today's adventure."
+    },
+    {
+      "source": "AR DA EQUIPE",
+      "translation": "CREW AIR"
+    },
+    {
+      "source": "Ver acontecimentos e registros deste Sol",
+      "translation": "View this Sol's events and records"
+    },
+    {
+      "source": "Antes da próxima aventura, revise e envie o relatório para a Terra.",
+      "translation": "Before the next adventure, review and send the report to Earth."
+    },
+    {
+      "source": "Próximo Sol  ›",
+      "translation": "Next Sol  ›"
+    },
+    {
+      "source": "ATENÇÃO · ENERGIA INSUFICIENTE",
+      "translation": "WARNING · NOT ENOUGH ENERGY"
+    },
+    {
+      "source": "PROTEGIDO · ENERGIA EXTRA",
+      "translation": "PROTECTED · EXTRA ENERGY"
+    },
+    {
+      "source": "ÓTIMO · NECESSIDADE ATENDIDA",
+      "translation": "OPTIMAL · NEEDS MET"
+    },
+    {
+      "source": "Faltaram {0} kWh para atender este sistema.",
+      "translation": "This system was {0} kWh short."
+    },
+    {
+      "source": "O sistema recebeu o necessário para este Sol.",
+      "translation": "The system received what it needed for this Sol."
+    },
+    {
+      "source": "Sair do tutorial",
+      "translation": "Exit tutorial"
+    },
+    {
+      "source": "SEU COMPANHEIRO DE MISSÃO",
+      "translation": "YOUR MISSION COMPANION"
+    },
+    {
+      "source": "Vamos lá!",
+      "translation": "Let's go!"
+    },
+    {
+      "source": "Oi! Eu sou o Ares. Quer aprender comigo? Primeiro vamos dividir a energia da nave no computador. Depois, vamos regar as plantas!",
+      "translation": "Hi! I'm Ares. Want to learn with me? First we'll divide the ship's energy at the computer. Then we'll water the plants!"
+    },
+    {
+      "source": "Fazer tutorial",
+      "translation": "Start tutorial"
+    },
+    {
+      "source": "Jogar sem tutorial",
+      "translation": "Play without tutorial"
+    },
+    {
+      "source": "Nossa primeira tarefa é dividir a energia da nave. Siga a trilha dourada até o computador. Use WASD ou as setas para andar e aperte E quando chegar.",
+      "translation": "Our first task is to divide the ship's energy. Follow the golden trail to the computer. Use WASD or the arrow keys to walk, and press E when you arrive."
+    },
+    {
+      "source": "Ir ao computador",
+      "translation": "Go to the computer"
+    },
+    {
+      "source": "Temos {0} kWh disponíveis. Arraste as três barras para dividir essa energia entre escudo, ar e calor, e estufa. Confira a necessidade de cada sistema e use toda a energia antes de confirmar.",
+      "translation": "We have {0} kWh available. Drag the three bars to share this energy between the shield, air and heat, and greenhouse. Check each system's needs and use all the energy before confirming."
+    },
+    {
+      "source": "Minha vez!",
+      "translation": "My turn!"
+    },
+    {
+      "source": "Energia dividida! Agora vem a tarefa: regar plantas. Siga a trilha até a estufa e pegue o regador no suporte. Vou mostrar uma coisa de cada vez.",
+      "translation": "Energy allocated! Now for the next task: watering plants. Follow the trail to the greenhouse and pick up the watering can from its stand. I'll show you one thing at a time."
+    },
+    {
+      "source": "Ir à estufa",
+      "translation": "Go to the greenhouse"
+    },
+    {
+      "source": "Regador na mão! Ele leva 510 mL por vez. Vá até o reservatório de água e aperte E para encher. Vamos cuidar das quatro fileiras, uma de cada vez.",
+      "translation": "Watering can ready! It holds 510 mL at a time. Go to the water reservoir and press E to refill. We'll care for all four rows, one at a time."
+    },
+    {
+      "source": "Encher o regador",
+      "translation": "Fill the watering can"
+    },
+    {
+      "source": "Tudo pronto! Aproxime-se da fileira destacada e clique nas plantas ou aperte E. Fique por perto até a rega terminar. Depois, volte ao reservatório para encher novamente.",
+      "translation": "All set! Approach the highlighted row and click the plants or press E. Stay nearby until watering finishes. Then return to the reservoir to refill."
+    },
+    {
+      "source": "Regar plantas",
+      "translation": "Water plants"
+    },
+    {
+      "source": "Você conseguiu! A energia está dividida e as quatro fileiras receberam água. O tutorial terminou. Vou continuar ao seu lado enquanto você explora e resolve as próximas tarefas!",
+      "translation": "You did it! The energy is allocated and all four rows have been watered. The tutorial is over. I'll stay by your side as you explore and complete the next tasks!"
+    },
+    {
+      "source": "Continuar a missão",
+      "translation": "Continue mission"
+    },
+    {
+      "source": "Você chegou! Use o computador para dividir a energia.",
+      "translation": "You made it! Use the computer to divide the energy."
+    },
+    {
+      "source": "Siga a trilha dourada até o computador.\nWASD / setas: andar · Arraste o cenário: girar a câmera",
+      "translation": "Follow the golden trail to the computer.\nWASD / arrows: walk · Drag the scene: rotate camera"
+    },
+    {
+      "source": "Usar computador [E]",
+      "translation": "Use computer [E]"
+    },
+    {
+      "source": "Siga a trilha até o regador no suporte da estufa.",
+      "translation": "Follow the trail to the watering can on the greenhouse stand."
+    },
+    {
+      "source": "Pegar regador [E]",
+      "translation": "Pick up watering can [E]"
+    },
+    {
+      "source": "Vá ao reservatório indicado e encha o regador.",
+      "translation": "Go to the marked reservoir and fill the watering can."
+    },
+    {
+      "source": "Encher regador [E]",
+      "translation": "Fill watering can [E]"
+    },
+    {
+      "source": "Regando… fique perto das plantas até terminar.",
+      "translation": "Watering… stay near the plants until finished."
+    },
+    {
+      "source": "Siga a trilha até a fileira {0}. Clique nas plantas ou aperte E para regar.",
+      "translation": "Follow the trail to row {0}. Click the plants or press E to water."
+    },
+    {
+      "source": "Regar fileira [E]",
+      "translation": "Water row [E]"
+    },
+    {
+      "source": "Regando as plantas",
+      "translation": "Watering the plants"
+    },
+    {
+      "source": "Imagem real do arquivo APOD · cópia local",
+      "translation": "Real APOD archive image · local copy"
+    },
+    {
+      "source": "Modo offline · imagem real do arquivo APOD",
+      "translation": "Offline mode · real APOD archive image"
+    },
+    {
+      "source": "Consultando a NASA… Você já pode explorar a cópia local.",
+      "translation": "Contacting NASA… You can explore the local copy now."
+    },
+    {
+      "source": "Conexão indisponível · imagem real do arquivo APOD",
+      "translation": "Connection unavailable · real APOD archive image"
+    },
+    {
+      "source": "A NASA não enviou uma foto válida. Mostrando o arquivo verificado.",
+      "translation": "NASA did not return a valid photo. Showing the verified archive."
+    },
+    {
+      "source": "Não foi possível baixar a foto. A cópia local continua disponível.",
+      "translation": "Could not download the photo. The local copy is still available."
+    },
+    {
+      "source": "Imagem inválida · mostrando o arquivo verificado.",
+      "translation": "Invalid image · showing the verified archive."
+    },
+    {
+      "source": "Foto do arquivo NASA recebida",
+      "translation": "NASA archive photo received"
+    },
+    {
+      "source": "Clique no suporte ou [E] para devolver",
+      "translation": "Click the stand or [E] to return"
+    },
+    {
+      "source": "Clique no regador ou [E] para pegar",
+      "translation": "Click the can or [E] to pick up"
+    },
+    {
+      "source": "Clique no reservatório ou [E] para encher",
+      "translation": "Click the reservoir or [E] to refill"
+    },
+    {
+      "source": "Reservatório vazio",
+      "translation": "Empty reservoir"
+    },
+    {
+      "source": "Regador cheio: 510 mL",
+      "translation": "Full watering can: 510 mL"
+    },
+    {
+      "source": "CLIQUE / E · DEVOLVER",
+      "translation": "CLICK / E · RETURN"
+    },
+    {
+      "source": "CLIQUE / E · PEGAR\n510 mL",
+      "translation": "CLICK / E · PICK UP\n510 mL"
+    },
+    {
+      "source": "CLIQUE / E · ÁGUA\n{0} / 11 L",
+      "translation": "CLICK / E · WATER\n{0} / 11 L"
+    },
+    {
+      "source": "Observe o solo antes de regar. Uma reserva de água bem cuidada ajuda nos próximos dias.",
+      "translation": "Check the soil before watering. A well-managed water reserve helps in the coming days."
+    },
+    {
+      "source": "Uma antena pode precisar de manutenção. Se o sinal cair, confira o cabo, alinhe a antena e teste a conexão.",
+      "translation": "An antenna may need maintenance. If the signal fails, check the cable, align the antenna and test the connection."
+    },
+    {
+      "source": "Energia é compartilhada: conversar com a Terra também usa a bateria que ajuda a manter o ar da base.",
+      "translation": "Energy is shared: talking to Earth also uses the battery that helps maintain the base's air."
+    },
+    {
+      "source": "Último dia! Confira as plantas, a energia e a proteção. Seu relatório conta como foi a missão.",
+      "translation": "Last day! Check the plants, energy and protection. Your report tells the story of the mission."
+    },
+    {
+      "source": "Olá, Casa Marte! Somos a equipe da Terra nesta aventura. Cuide do ar, da energia e das plantas. No fim do dia, envie seu relatório.",
+      "translation": "Hello, Ares Base! We're the Earth team for this adventure. Care for the air, energy and plants. At the end of the day, send your report."
+    },
+    {
+      "source": "Solo moderado: uma rega. Seco: duas. Muito úmido: nenhuma. Reabasteça o regador entre as doses.",
+      "translation": "Moderate soil: one dose. Dry: two. Very wet: none. Refill the can between doses."
+    },
+    {
+      "source": "Para recuperar o sinal, abra a manutenção da antena. Cada etapa precisa terminar antes da próxima.",
+      "translation": "To restore the signal, open antenna maintenance. Each step must finish before the next."
+    },
+    {
+      "source": "Observe primeiro. Limpe os painéis para recuperar geração de energia e evite gastar mais do que precisa. As reservas devem durar toda a missão.",
+      "translation": "Observe first. Clean the panels to recover energy generation and avoid using more than you need. The reserves must last the whole mission."
+    },
+    {
+      "source": "Preciso de uma orientação para cuidar da base.",
+      "translation": "I need some advice on caring for the base."
+    },
+    {
+      "source": "Recebido! Vou cuidar disso.",
+      "translation": "Received! I'll take care of it."
+    },
+    {
+      "source": "Ares Base ↔ Terra",
+      "translation": "Ares Base ↔ Earth"
+    },
+    {
+      "source": "Estufa · Ares Base",
+      "translation": "Greenhouse · Ares Base"
+    },
+    {
+      "source": "Conexão ativa",
+      "translation": "Connected"
+    },
+    {
+      "source": "Conexão interrompida · falha na antena",
+      "translation": "Connection interrupted · antenna fault"
+    },
+    {
+      "source": "1 · Verificar cabo",
+      "translation": "1 · Check cable"
+    },
+    {
+      "source": "2 · Alinhar antena",
+      "translation": "2 · Align antenna"
+    },
+    {
+      "source": "3 · Testar sinal",
+      "translation": "3 · Test signal"
+    },
+    {
+      "source": "Verificando… aguarde 2 segundos",
+      "translation": "Checking… wait 2 seconds"
+    },
+    {
+      "source": "Bateria da base: {0} kWh · Reserva só para relatórios: {1} kWh",
+      "translation": "Base battery: {0} kWh · Reports-only reserve: {1} kWh"
+    },
+    {
+      "source": "Histórico guardado nesta missão e em arquivo local. Comunicação simulada.",
+      "translation": "History saved for this mission and in a local file. Simulated communication."
+    },
+    {
+      "source": "Pedir uma dica gasta mais bateria. Ela também mantém nosso ar.",
+      "translation": "Asking for a hint uses more battery. That battery also maintains our air."
+    },
+    {
+      "source": "Mensagens",
+      "translation": "Messages"
+    },
+    {
+      "source": "Equipe da Terra",
+      "translation": "Earth team"
+    },
+    {
+      "source": "Você → Terra",
+      "translation": "You → Earth"
+    },
+    {
+      "source": "Sinal viajando…",
+      "translation": "Signal travelling…"
+    },
+    {
+      "source": "Recebida na Terra",
+      "translation": "Received on Earth"
+    },
+    {
+      "source": "Recebida em Marte",
+      "translation": "Received on Mars"
+    },
+    {
+      "source": "Recebido · 0,2 kWh",
+      "translation": "Received · 0.2 kWh"
+    },
+    {
+      "source": "Pedir dica · 0,5 kWh",
+      "translation": "Ask for a hint · 0.5 kWh"
+    },
+    {
+      "source": "Novas mensagens aparecem quando o sinal chega e a antena está conectada.",
+      "translation": "New messages appear when the signal arrives and the antenna is connected."
+    },
+    {
+      "source": "Seu relatório será preparado automaticamente no fim do dia. Cuide da base e volte para revisar.",
+      "translation": "Your report will be prepared automatically at the end of the day. Care for the base and return to review it."
+    },
+    {
+      "source": "Relatório do dia {0} · dados no fechamento do dia",
+      "translation": "Day {0} report · data at the end of the day"
+    },
+    {
+      "source": "Cenário educativo: clima espacial e ambiente de Marte usam dados de exemplo.",
+      "translation": "Educational scenario: space weather and the Martian environment use sample data."
+    },
+    {
+      "source": "Revise os dados acima. O envio usa 0,2 kWh da bateria reservada para relatórios.",
+      "translation": "Review the data above. Sending uses 0.2 kWh from the reports-only battery."
+    },
+    {
+      "source": "Enviar relatório",
+      "translation": "Send report"
+    },
+    {
+      "source": "Restabeleça a antena para enviar",
+      "translation": "Restore the antenna to send"
+    },
+    {
+      "source": "Relatório recebido na Terra.",
+      "translation": "Report received on Earth."
+    },
+    {
+      "source": "Relatório enviado. O sinal está viajando até a Terra.",
+      "translation": "Report sent. The signal is travelling to Earth."
+    },
+    {
+      "source": "Concluir missão",
+      "translation": "Complete mission"
+    },
+    {
+      "source": "Avançar para o próximo dia",
+      "translation": "Advance to the next day"
+    },
+    {
+      "source": "enviado",
+      "translation": "sent"
+    },
+    {
+      "source": "Dia {0}",
+      "translation": "Day {0}"
+    },
+    {
+      "source": "01 / 03   OXIGÊNIO",
+      "translation": "01 / 03   OXYGEN"
+    },
+    {
+      "source": "02 / 03   ENERGIA",
+      "translation": "02 / 03   ENERGY"
+    },
+    {
+      "source": "03 / 03   COMUNICAÇÃO",
+      "translation": "03 / 03   COMMUNICATIONS"
+    },
+    {
+      "source": "Créditos",
+      "translation": "Credits"
+    },
+    {
+      "source": "Voltar à lente",
+      "translation": "Back to lens"
+    },
+    {
+      "source": "Uma imagem sorteada a cada Sol, sem repetir. Reveja suas descobertas:",
+      "translation": "A different image is chosen each Sol, without repeats. Revisit your discoveries:"
+    },
+    {
+      "source": "Estas são fotos reais do arquivo APOD, não uma transmissão ao vivo de Marte. As cores podem mostrar luz que nossos olhos não enxergam.",
+      "translation": "These are real APOD archive photos, not a live broadcast from Mars. Colors may reveal light our eyes cannot see."
+    },
+    {
+      "source": "Licença da imagem",
+      "translation": "Image license"
+    },
+    {
+      "source": "Consultar NASA",
+      "translation": "Check NASA"
+    },
+    {
+      "source": "Descobertas",
+      "translation": "Discoveries"
+    },
+    {
+      "source": "01 / 02   DIVIDIR A ENERGIA",
+      "translation": "01 / 02   ALLOCATE ENERGY"
+    },
+    {
+      "source": "02 / 02   REGAR PLANTAS",
+      "translation": "02 / 02   WATER PLANTS"
+    },
+    {
+      "source": "{0} / 4 fileiras cuidadas   ·   Regador: {1} / 510 mL",
+      "translation": "{0} / 4 rows cared for   ·   Watering can: {1} / 510 mL"
+    },
+    {
+      "source": "SOL {0} · Missão do dia",
+      "translation": "SOL {0} · Today's mission"
+    },
+    {
+      "source": "{0}% de integridade",
+      "translation": "{0}% integrity"
+    },
+    {
+      "source": "{0}% de oxigênio",
+      "translation": "{0}% oxygen"
+    },
+    {
+      "source": "{0}/4 fileiras saudáveis",
+      "translation": "{0}/4 healthy rows"
+    },
+    {
+      "source": "Faltam {0} kWh para atender este sistema.",
+      "translation": "This system needs {0} more kWh."
+    },
+    {
+      "source": "Estufa",
+      "translation": "Greenhouse"
+    },
+    {
+      "source": "ESTUFA",
+      "translation": "GREENHOUSE"
+    },
+    {
+      "source": "Dormitório",
+      "translation": "Dormitory"
+    },
+    {
+      "source": "Reservatório",
+      "translation": "Reservoir"
+    },
+    {
+      "source": "Regador",
+      "translation": "Watering can"
+    },
+    {
+      "source": "Água",
+      "translation": "Water"
+    },
+    {
+      "source": "Solo",
+      "translation": "Soil"
+    },
+    {
+      "source": "Luz",
+      "translation": "Light"
+    },
+    {
+      "source": "Seco",
+      "translation": "Dry"
+    },
+    {
+      "source": "Muito úmido",
+      "translation": "Very wet"
+    },
+    {
+      "source": "Moderado",
+      "translation": "Moderate"
+    },
+    {
+      "source": "Moderada",
+      "translation": "Moderate"
+    },
+    {
+      "source": "Pouca",
+      "translation": "Low"
+    },
+    {
+      "source": "Excessiva",
+      "translation": "Excessive"
+    },
+    {
+      "source": "saudável",
+      "translation": "healthy"
+    },
+    {
+      "source": "precisa de cuidado",
+      "translation": "needs care"
+    },
+    {
+      "source": "em risco",
+      "translation": "at risk"
+    },
+    {
+      "source": "pronto",
+      "translation": "ready"
+    },
+    {
+      "source": "{0}/{1} regas",
+      "translation": "{0}/{1} doses"
+    },
+    {
+      "source": "{0} · {1} · 10 recipientes",
+      "translation": "{0} · {1} · 10 containers"
+    },
+    {
+      "source": "{0}/4 saudáveis · {1} precisam de cuidado · {2} em risco",
+      "translation": "{0}/4 healthy · {1} need care · {2} at risk"
+    },
+    {
+      "source": "Tomates",
+      "translation": "Tomatoes"
+    },
+    {
+      "source": "Morangos",
+      "translation": "Strawberries"
+    },
+    {
+      "source": "Alface",
+      "translation": "Lettuce"
+    },
+    {
+      "source": "Cenouras",
+      "translation": "Carrots"
+    },
+    {
+      "source": "Tomate",
+      "translation": "Tomato"
+    },
+    {
+      "source": "Morango",
+      "translation": "Strawberry"
+    },
+    {
+      "source": "Cenoura",
+      "translation": "Carrot"
+    },
+    {
+      "source": "Feijão",
+      "translation": "Beans"
+    },
+    {
+      "source": "Batata",
+      "translation": "Potato"
+    },
+    {
+      "source": "Mizuna",
+      "translation": "Mizuna"
+    },
+    {
+      "source": "do tanque",
+      "translation": "of tank capacity"
+    },
+    {
+      "source": "Produção",
+      "translation": "Production"
+    },
+    {
+      "source": "Consumo",
+      "translation": "Consumption"
+    },
+    {
+      "source": "Poupar",
+      "translation": "Economy"
+    },
+    {
+      "source": "Equilibrar",
+      "translation": "Balance"
+    },
+    {
+      "source": "Reforçar",
+      "translation": "Boost"
+    },
+    {
+      "source": "Laboratório",
+      "translation": "Laboratory"
+    },
+    {
+      "source": "Pausar",
+      "translation": "Pause"
+    },
+    {
+      "source": "Retomar",
+      "translation": "Resume"
+    },
+    {
+      "source": "Ligado",
+      "translation": "On"
+    },
+    {
+      "source": "Desligado",
+      "translation": "Off"
+    },
+    {
+      "source": "Produzindo",
+      "translation": "Producing"
+    },
+    {
+      "source": "Respiração",
+      "translation": "Breathing"
+    },
+    {
+      "source": "Reserva",
+      "translation": "Reserve"
+    },
+    {
+      "source": "Filtro",
+      "translation": "Filter"
+    },
+    {
+      "source": "Detalhes",
+      "translation": "Details"
+    },
+    {
+      "source": "RÉ",
+      "translation": "REVERSE"
+    },
+    {
+      "source": "FRENTE",
+      "translation": "FORWARD"
+    },
+    {
+      "source": "Não foi possível salvar o histórico no disco. Ele continua disponível nesta missão.",
+      "translation": "Could not save history to disk. It is still available during this mission."
+    },
+    {
+      "source": "Sem acesso ao disco. O histórico continua disponível nesta missão.",
+      "translation": "Disk access is unavailable. History is still available during this mission."
+    },
+    {
+      "source": "Um universo cheio de galáxias",
+      "translation": "A universe full of galaxies"
+    },
+    {
+      "source": "O telescópio James Webb reuniu a luz de muitas galáxias distantes nesta imagem. Algumas aparecem como arcos: a gravidade de outras galáxias desvia e amplia sua luz.",
+      "translation": "The James Webb telescope collected light from many distant galaxies in this image. Some appear as arcs: the gravity of other galaxies bends and magnifies their light."
+    },
+    {
+      "source": "Você consegue encontrar uma galáxia em forma de arco?",
+      "translation": "Can you find an arc-shaped galaxy?"
+    },
+    {
+      "source": "Os anéis de uma estrela",
+      "translation": "The rings of a star"
+    },
+    {
+      "source": "A Nebulosa do Anel Sul é formada por gás e poeira que uma estrela lançou ao espaço. O Webb revelou detalhes dessas camadas. A estrela mais brilhante perto do centro é sua companheira.",
+      "translation": "The Southern Ring Nebula is made of gas and dust released into space by a star. Webb revealed details of these layers. The brighter star near the center is its companion."
+    },
+    {
+      "source": "Que formas você percebe nas camadas de gás?",
+      "translation": "What shapes can you see in the layers of gas?"
+    },
+    {
+      "source": "A Lua sobre um castelo",
+      "translation": "The Moon over a castle"
+    },
+    {
+      "source": "Esta Lua cheia foi fotografada sobre o castelo de Lubovna, na Eslováquia. Ela estava perto do ponto mais próximo da Terra em sua órbita. A atmosfera também muda a aparência da luz perto do horizonte.",
+      "translation": "This full Moon was photographed above Lubovna Castle in Slovakia. It was near the closest point to Earth in its orbit. The atmosphere also changes the appearance of light near the horizon."
+    },
+    {
+      "source": "Como a borda de cima da Lua difere da borda de baixo?",
+      "translation": "How does the Moon's upper edge differ from its lower edge?"
+    },
+    {
+      "source": "Amanhecer nas crateras da Lua",
+      "translation": "Dawn over the Moon's craters"
+    },
+    {
+      "source": "A luz do Sol chega de lado às crateras Tycho e Clavius. Por isso, algumas bordas brilham enquanto seus fundos ficam na sombra. A luz e a sombra ajudam a perceber o relevo lunar.",
+      "translation": "Sunlight reaches the Tycho and Clavius craters from the side. Some rims shine while their floors remain in shadow. Light and shadow reveal the shape of the lunar surface."
+    },
+    {
+      "source": "Onde você encontra uma borda iluminada ao lado de uma sombra?",
+      "translation": "Where can you find a bright rim beside a shadow?"
+    },
+    {
+      "source": "Júpiter e sua lua Europa",
+      "translation": "Jupiter and its moon Europa"
+    },
+    {
+      "source": "A Voyager 1 registrou Júpiter e Europa. A Grande Mancha Vermelha é uma enorme tempestade. O ponto escuro no alto à direita é a sombra de outra lua, Io. A imagem reúne registros da passagem da sonda.",
+      "translation": "Voyager 1 photographed Jupiter and Europa. The Great Red Spot is an enormous storm. The dark spot at the upper right is the shadow of another moon, Io. The image combines observations from the spacecraft's flyby."
+    },
+    {
+      "source": "Você consegue distinguir uma lua, uma sombra e uma tempestade?",
+      "translation": "Can you distinguish a moon, a shadow and a storm?"
+    },
+    {
+      "source": "NASA, ESA, CSA, STScI e NIRCam",
+      "translation": "NASA, ESA, CSA, STScI and NIRCam"
+    },
+    {
+      "source": "AGORA",
+      "translation": "NOW"
+    },
+    {
+      "source": "DESDE O INÍCIO DA MISSÃO",
+      "translation": "SINCE THE MISSION BEGAN"
+    },
+    {
+      "source": "Guardado: {0} de {1} kg",
+      "translation": "Stored: {0} of {1} kg"
+    },
+    {
+      "source": "Produção: {0} g/min · uso: {1} g/min",
+      "translation": "Production: {0} g/min · consumption: {1} g/min"
+    },
+    {
+      "source": "Equipe ({0} pessoas): {1} g/min · pequenas perdas: {2} g/min · experimentos: {3} g/min",
+      "translation": "Crew ({0} people): {1} g/min · small losses: {2} g/min · experiments: {3} g/min"
+    },
+    {
+      "source": "Saldo: {0} g/min · água restante: {1} kg",
+      "translation": "Balance: {0} g/min · water remaining: {1} kg"
+    },
+    {
+      "source": "CO₂ aguardando o filtro: {0} g",
+      "translation": "CO₂ awaiting filtration: {0} g"
+    },
+    {
+      "source": "A reserva não está diminuindo.",
+      "translation": "The reserve is not decreasing."
+    },
+    {
+      "source": "Neste ritmo, a reserva dura cerca de {0} min de jogo.",
+      "translation": "At this rate, the reserve will last about {0} game minutes."
+    },
+    {
+      "source": "Energia pedida: {0} kWh/min · recebida: {1}%",
+      "translation": "Energy requested: {0} kWh/min · received: {1}%"
+    },
+    {
+      "source": "Bateria da base: {0} kWh",
+      "translation": "Base battery: {0} kWh"
+    },
+    {
+      "source": "Oxigênio produzido: {0} kg · usado: {1} kg",
+      "translation": "Oxygen produced: {0} kg · consumed: {1} kg"
+    },
+    {
+      "source": "Liberado com tanque cheio: {0} kg · necessidade não atendida: {1} kg",
+      "translation": "Vented with full tank: {0} kg · unmet demand: {1} kg"
+    },
+    {
+      "source": "Água usada: {0} kg · hidrogênio separado: {1} kg",
+      "translation": "Water used: {0} kg · hydrogen separated: {1} kg"
+    },
+    {
+      "source": "CO₂ produzido: {0} kg · retirado: {1} kg",
+      "translation": "CO₂ produced: {0} kg · removed: {1} kg"
+    },
+    {
+      "source": "Energia usada: {0} kWh",
+      "translation": "Energy used: {0} kWh"
+    },
+    {
+      "source": "g = gramas. 1.000 g = 1 kg. kWh mede energia. As taxas por minuto usam o tempo do jogo.",
+      "translation": "g = grams. 1,000 g = 1 kg. kWh measures energy. Per-minute rates use game time."
+    },
+    {
+      "source": "NASA · Respiração e CO₂",
+      "translation": "NASA · Breathing and CO₂"
+    },
+    {
+      "source": "↓ Diminuindo",
+      "translation": "↓ Decreasing"
+    },
+    {
+      "source": "↑ Aumentando",
+      "translation": "↑ Increasing"
+    },
+    {
+      "source": "! Água esgotada",
+      "translation": "! Out of water"
+    },
+    {
+      "source": "! Água acabando",
+      "translation": "! Water running low"
+    },
+    {
+      "source": "! Pouca energia",
+      "translation": "! Low energy"
+    },
+    {
+      "source": "! Filtro com pouca energia",
+      "translation": "! Filter has low energy"
+    },
+    {
+      "source": "{0} g por minuto de jogo",
+      "translation": "{0} g per game minute"
+    },
+    {
+      "source": "Ar e calor",
+      "translation": "Air and heat"
+    },
+    {
+      "source": "Pessoas",
+      "translation": "People"
+    },
+    {
+      "source": "Água usada",
+      "translation": "Water used"
+    },
+    {
+      "source": "Oxigênio",
+      "translation": "Oxygen"
+    },
+    {
+      "source": "Energia",
+      "translation": "Energy"
+    },
+    {
+      "source": "Aumentar",
+      "translation": "Increase"
+    },
+    {
+      "source": "Diminuir",
+      "translation": "Decrease"
+    },
+    {
+      "source": "Registrar cuidados",
+      "translation": "Record care"
+    },
+    {
+      "source": "Fechar",
+      "translation": "Close"
+    },
+    {
+      "source": "Ver detalhes",
+      "translation": "View details"
+    },
+    {
+      "source": "Luz baixa",
+      "translation": "Low light"
+    },
+    {
+      "source": "Luz moderada",
+      "translation": "Moderate light"
+    },
+    {
+      "source": "Luz excessiva",
+      "translation": "Excessive light"
+    },
+    {
+      "source": "Ajustar luz",
+      "translation": "Adjust light"
+    },
+    {
+      "source": "prateleiras",
+      "translation": "shelves"
+    },
+    {
+      "source": "recipientes",
+      "translation": "containers"
+    },
+    {
+      "source": "Regas",
+      "translation": "Doses"
+    },
+    {
+      "source": "Mizuna, alface e rúcula",
+      "translation": "Mizuna, lettuce and arugula"
+    },
+    {
+      "source": "Frutas",
+      "translation": "Fruit"
+    },
+    {
+      "source": "Legumes",
+      "translation": "Vegetables"
+    },
+    {
+      "source": "Verduras",
+      "translation": "Leafy greens"
+    },
+    {
+      "source": "Observar",
+      "translation": "Observe"
+    },
+    {
+      "source": "Diário",
+      "translation": "Journal"
+    },
+    {
+      "source": "no suporte",
+      "translation": "on the stand"
+    },
+    {
+      "source": "na mão",
+      "translation": "in hand"
+    },
+    {
+      "source": "10 recipientes",
+      "translation": "10 containers"
+    },
+    {
+      "source": "Registrar cuidados de hoje",
+      "translation": "Record today's care"
+    },
+    {
+      "source": "[Y] Pilotar rover  ·  NOMAD 06",
+      "translation": "[Y] Drive rover  ·  NOMAD 06"
+    },
+    {
+      "source": "[Y] Voltar ao astronauta",
+      "translation": "[Y] Return to astronaut"
+    },
+    {
+      "source": "Projeto educativo independente. A NASA não endossa este jogo.",
+      "translation": "Independent educational project. NASA does not endorse this game."
+    },
+    {
+      "source": "Plantas no espaço",
+      "translation": "Plants in space"
+    },
+    {
+      "source": "Cientistas estudam plantas para aprender a cultivar longe da Terra.",
+      "translation": "Scientists study plants to learn how to grow them far from Earth."
+    },
+    {
+      "source": "Nosso escudo é real?",
+      "translation": "Is our shield real?"
+    },
+    {
+      "source": "Escudos magnéticos para astronautas ainda estão em pesquisa. O escudo desta base é uma ideia de ficção científica para o jogo.",
+      "translation": "Magnetic shields for astronauts are still being researched. This base's shield is a science-fiction idea for the game."
+    },
+    {
+      "source": "NASA · pesquisa em proteção ↗",
+      "translation": "NASA · protection research ↗"
+    },
+    {
+      "source": "Comida longe de casa",
+      "translation": "Food far from home"
+    },
+    {
+      "source": "Cultivar comida exige cuidar da água, da luz e das plantas. Explore atividades com sua família ou escola.",
+      "translation": "Growing food means caring for water, light and plants. Explore activities with your family or school."
+    },
+    {
+      "source": "Agência Espacial Canadense ↗",
+      "translation": "Canadian Space Agency ↗"
+    },
+    {
+      "source": "NASA · Respiração e CO₂ ↗",
+      "translation": "NASA · Breathing and CO₂ ↗"
+    },
+    {
+      "source": "NASA · Suporte à vida ↗",
+      "translation": "NASA · Life support ↗"
+    },
+    {
+      "source": "NASA · MOXIE em Marte ↗",
+      "translation": "NASA · MOXIE on Mars ↗"
+    },
+    {
+      "source": "O que você descobriu?",
+      "translation": "What did you discover?"
+    },
+    {
+      "source": "Tudo pronto",
+      "translation": "All set"
+    },
+    {
+      "source": "Consultar novamente",
+      "translation": "Check again"
+    },
+    {
+      "source": "Arraste para explorar",
+      "translation": "Drag to explore"
+    },
+    {
+      "source": "− Diminuir",
+      "translation": "− Decrease"
+    },
+    {
+      "source": "+ Aumentar",
+      "translation": "+ Increase"
+    },
+    {
+      "source": "1 · Pegar regador",
+      "translation": "1 · Pick up watering can"
+    },
+    {
+      "source": "2 · Encher: 510 mL",
+      "translation": "2 · Fill: 510 mL"
+    },
+    {
+      "source": "3 · Clicar na prateleira",
+      "translation": "3 · Click a shelf"
+    },
+    {
+      "source": "Voltar à estufa",
+      "translation": "Back to greenhouse"
+    },
+    {
+      "source": "Observado",
+      "translation": "Observed"
+    },
+    {
+      "source": "Ventilação desigual e uma falha nas lâmpadas.",
+      "translation": "Uneven ventilation and a lighting fault."
+    },
+    {
+      "source": "O controlador deixou as lâmpadas fortes demais.",
+      "translation": "The controller made the lights too strong."
+    },
+    {
+      "source": "A circulação interna mudou a umidade das prateleiras.",
+      "translation": "Internal circulation changed the shelves' soil moisture."
+    },
+    {
+      "source": "Ambiente interno estável.",
+      "translation": "Stable indoor environment."
+    },
+    {
+      "source": "Regular Escudo Eletromagnético",
+      "translation": "Calibrate Electromagnetic Shield"
+    },
+    {
+      "source": "MISSÃO OPCIONAL · DIAS 2 E 5",
+      "translation": "OPTIONAL MISSION · DAYS 2 AND 5"
+    },
+    {
+      "source": "Alinhe os três controles com as marcas de referência. A regulagem protege somente o dia atual.",
+      "translation": "Align all three controls with their reference marks. Calibration protects you only for the current day."
+    },
+    {
+      "source": "Você pode encerrar o dia sem esta tarefa, mas uma erupção solar sem o escudo regulado causa morte por radiação.",
+      "translation": "You can end the day without this task, but a solar flare with an uncalibrated shield causes death from radiation."
+    },
+    {
+      "source": "Intensidade do campo",
+      "translation": "Field strength"
+    },
+    {
+      "source": "Fase das bobinas",
+      "translation": "Coil phase"
+    },
+    {
+      "source": "Frequência de proteção",
+      "translation": "Shield frequency"
+    },
+    {
+      "source": "Referência: {0}%",
+      "translation": "Reference: {0}%"
+    },
+    {
+      "source": "Ativar proteção do dia",
+      "translation": "Activate protection for today"
+    },
+    {
+      "source": "Voltar à base",
+      "translation": "Return to base"
+    },
+    {
+      "source": "Campo alinhado! Ative a proteção.",
+      "translation": "Field aligned! Activate protection."
+    },
+    {
+      "source": "Controles alinhados: {0}/3",
+      "translation": "Controls aligned: {0}/3"
+    },
+    {
+      "source": "Opcional: use no setor do escudo. Não conta para as missões obrigatórias.",
+      "translation": "Optional: use in the shield sector. Does not count toward mandatory missions."
+    },
+    {
+      "source": "✓ Escudo regulado para este dia",
+      "translation": "✓ Shield calibrated for today"
+    },
+    {
+      "source": "○ Regular Escudo Eletromagnético\nOPCIONAL",
+      "translation": "○ Calibrate Electromagnetic Shield\nOPTIONAL"
+    },
+    {
+      "source": "[E] Regular Escudo Eletromagnético",
+      "translation": "[E] Calibrate Electromagnetic Shield"
+    },
+    {
+      "source": "Tempestade de poeira em {0} s. Prepare a vassoura no parque solar!",
+      "translation": "Dust storm in {0} s. Get the broom ready at the solar array!"
+    },
+    {
+      "source": "Erupção solar em {0} s. Escudo regulado! A antena ainda poderá sofrer danos.",
+      "translation": "Solar flare in {0} s. Shield calibrated! The antenna may still be damaged."
+    },
+    {
+      "source": "Erupção solar em {0} s! Vá ao escudo e regule a proteção para sobreviver.",
+      "translation": "Solar flare in {0} s! Go to the shield and calibrate protection to survive."
+    },
+    {
+      "source": "Painéis soterrados: {0}/32. Limpe com a vassoura; a base está usando a bateria.",
+      "translation": "Buried panels: {0}/32. Clean them with the broom; the base is using battery power."
+    },
+    {
+      "source": "Sem energia! O oxigênio está diminuindo. Limpe os painéis: {0}/32 soterrados.",
+      "translation": "No power! Oxygen is dropping. Clean the panels: {0}/32 buried."
+    },
+    {
+      "source": "Antena danificada pela erupção solar. Faça as 3 etapas do reparo no computador.",
+      "translation": "Antenna damaged by the solar flare. Complete all 3 repair steps at the computer."
+    },
+    {
+      "source": "Escudo regulado: proteção ativa durante a erupção solar.",
+      "translation": "Shield calibrated: protection active during the solar flare."
+    },
+    {
+      "source": "Evento do dia: tempestade de poeira",
+      "translation": "Event today: dust storm"
+    },
+    {
+      "source": "Evento do dia: erupção solar · escudo regulado",
+      "translation": "Event today: solar flare · shield calibrated"
+    },
+    {
+      "source": "A erupção solar atingiu a base sem o escudo regulado. Nos dias 2 e 5, faça a regulagem antes do impacto.",
+      "translation": "The solar flare hit the base with an uncalibrated shield. On days 2 and 5, calibrate it before impact."
+    },
+    {
+      "source": "Os painéis ficaram soterrados. A bateria acabou, a produção de oxigênio parou e a reserva de ar chegou a zero. Limpe os painéis a tempo na próxima tentativa.",
+      "translation": "The panels remained buried. The battery ran out, oxygen production stopped and the air reserve reached zero. Clean the panels in time on your next attempt."
+    },
+    {
+      "source": "Demandas conflitantes",
+      "translation": "Conflicting demands"
+    },
+    {
+      "source": "Nenhum evento atingiu a base neste dia.",
+      "translation": "No event hit the base today."
+    },
+    {
+      "source": "Tempestade de poeira",
+      "translation": "Dust storm"
+    },
+    {
+      "source": "Erupção solar",
+      "translation": "Solar flare"
+    },
+    {
+      "source": "Escudo regulado: sim · proteção válida neste dia",
+      "translation": "Shield calibrated: yes · protection valid for this day"
+    },
+    {
+      "source": "Escudo regulado: não",
+      "translation": "Shield calibrated: no"
+    },
+    {
+      "source": "Painéis ainda soterrados: {0}/32",
+      "translation": "Panels still buried: {0}/32"
+    },
+    {
+      "source": "Antena conectada",
+      "translation": "Antenna connected"
+    },
+    {
+      "source": "Antena danificada · reparo necessário",
+      "translation": "Antenna damaged · repair needed"
+    }
+  ]
+}

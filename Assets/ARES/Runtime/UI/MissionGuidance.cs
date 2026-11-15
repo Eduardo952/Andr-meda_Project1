@@ -40,7 +40,7 @@ namespace Ares.UI
             speech.style.display=!blocked && remaining>0?DisplayStyle.Flex:DisplayStyle.None;
             string target=campaign.Phase==Phase.Plan?"control":null;
             if(campaign.Phase==Phase.Tasks) { target="control"; foreach(var task in campaign.Current.tasks) if(!campaign.Completed(task.id)) { target=task.room;break; } }
-            if(!string.IsNullOrEmpty(campaign.Alarm)) target="shield";
+            if(campaign.HazardTarget != null) target=campaign.HazardTarget;
             panel.style.display=!blocked && !progress.Dismissed && progress.Step<Tour.Length && string.IsNullOrEmpty(campaign.Alarm) && (target==null || target==Tour[progress.Step])?DisplayStyle.Flex:DisplayStyle.None;
             if(progress.Step<Tour.Length) tourText.text=locale.T("refine.walk."+Tour[progress.Step]);
             direction.style.display=!blocked && target!=null?DisplayStyle.Flex:DisplayStyle.None;

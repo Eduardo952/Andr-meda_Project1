@@ -1,37 +1,44 @@
-# Mestre da Estufa
+﻿# Estufa — Casa Marte
 
-The greenhouse station routes both `SmartFarmCare` and `IrrigationPlan` to the new child-paced Portuguese activity. The original reference sources, exported meshes and historical puzzle fixtures remain unchanged. This feature uses a generated four-shelf illustration and native UI Toolkit controls, not a newly generated 3D model.
+Estufa educativa para crianças de 7–14 anos: quatro prateleiras, dez recipientes em cada uma, uma reserva de 11.000 mL e cinco dias de missão. Esta implementação substitui os antigos níveis de 1,36/2,04/2,32 L e o reinício do reservatório a cada Sol.
 
-## Model
+## Responsabilidades
 
-**Manual watering integration:** the management panel prepares a locked plan in `GreenhouseWatering`; it does not call `Decide` directly. The player must pick up/fill the can and deliver water to all four marked cultivation groups. Only the last delivery commits the simulation decision. See [manual care architecture and water ledger](../World/MANUAL_WATERING.md). Reward validation also requires `CompletedManualCycles == CompletedCycles`.
+| Arquivo | Responsabilidade |
+| --- | --- |
+| `GreenhouseRules.cs` | Constantes de projeto e conversão solo → quantidade de doses |
+| `GreenhouseDayConditions` (no arquivo de regras) | Situações internas determinísticas por dia, sem ligação ao clima externo |
+| `GreenhouseSimulation.cs` | Quatro estados de solo, luz compartilhada, saúde, reservatório e resultados diários |
+| `GreenhouseWatering.cs` | Regador, retirada de água, ação de rega e conservação do saldo |
+| `Campaign.cs` | Avanço dos dias e registro da tarefa diária; preserva as mesmas instâncias durante toda a missão |
+| `../World/GreenhouseCare.cs` | Entrada por clique/E e proximidade |
+| `../World/GreenhouseCropRacks.cs` | Quatro prateleiras com dez recipientes visíveis, lâmpadas e reservatório |
+| `../World/GreenhouseWorldView.cs` | Regador, pose, gotas e indicadores no cenário |
+| `../UI/GreenhouseView.cs` | Observação do solo, ajuste da luz e registro dos cuidados |
+| `../UI/GreenhouseNarrator.cs` | Texto infantil e explicações científicas |
 
-`GreenhouseSimulation` owns all decisions and stores water as integer millilitres: initially 11000; Low 1360, Medium 2040, High 2320 per cycle for the entire greenhouse. The optional adjustment changes the final level before cost validation. No water, climate, history or cycle changes on rejected decisions. There is no preselected answer, timer, automatic irrigation, background AI service or refill on reopening.
+## Regras e ciclo de vida
 
-The four logical shelves are Fruta, Legume, Verdura, Verdura. They share the specified soil and lighting system, so they currently share health outcomes; no undocumented crop sensitivities are invented. Initial soil/light are Moderate. The full nine-case irrigation table is explicit. High irrigation on Dry deterministically yields Moderate, one of the two allowed outcomes. High on Wet also records worsening waterlogging.
+- Uma rega completa usa 510 mL. Solo moderado: uma; seco: duas; muito úmido: nenhuma.
+- Nas quatro prateleiras uniformes, os totais são 2.040, 4.080 e 0 mL, respectivamente.
+- `RequiredDoses` é fixado no início do dia. Após completar as doses, o solo aparece moderado, mas isso não cria outra necessidade de rega no mesmo dia.
+- Cada clique numa prateleira a observa e tenta iniciar uma dose. Uma prateleira muito úmida fica registrada como observada sem consumir água. Doses extras são bloqueadas.
+- A luz começa moderada. Os botões alteram uma faixa por vez, permitindo aprender com pouca luz ou luz excessiva. Ambos podem prejudicar a saúde.
+- `EndDay` aplica consequências de regas faltantes e iluminação inadequada uma única vez. Solo muito úmido sem água adicional drena ao longo do dia (simplificação educativa). Problemas em dois dias seguidos elevam o risco; condições adequadas restauram a saúde.
+- `BeginDay` só aceita o próximo dia após o encerramento do anterior. As situações internas fornecem os desafios do novo dia. Não existe reposição automática de água.
+- `CareReady` permite registrar a tarefa quando todas as prateleiras foram observadas/cuidas e a luz está adequada. Registrar não avança o relógio. O dia continua usando a duração global de 600 segundos.
+- A missão da estufa termina após o quinto dia. Água insuficiente bloqueia novas doses, mas não bloqueia observar ou ajustar luz.
 
-Two consecutive completed cycles with any nonideal factor count as repeated problems and produce `AtRisk`; both factors outside the ideal also produce `AtRisk`. Ideal conditions restore `Healthy`. Presenting a climate event does not itself count as another completed problem cycle.
+A sequência educativa inicial exige 2.040 mL/dia quando bem cuidada, incluindo dias com solos mistos; sobram 800 mL após cinco dias. Isso é balanceamento de jogo. O cenário inicial pode ser injetado no construtor para criar atividades alternativas; os próximos dias são definidos por `GreenhouseDayConditions.ForDay`.
 
-Weather is a deterministic teaching sequence, not live Martian measurements: stable, dust storm, strong sun, clear sky, stable, dust storm, clear sky, strong sun. Dust reduces light; strong sun increases light and dries soil by one step; clear sky returns external light to Moderate; stable leaves conditions unchanged. Weather is applied once before the new decision. The previous result is an immutable-to-consumers snapshot, so the narration does not mix consequences of the last decision with the next weather event.
+## Base científica e limites
 
-Only meaningful optional adjustments are offered: more water on dry soil unless already High; less water on Wet unless already Low; more/less light for Low/Excessive light. One adjustment can accompany a selected irrigation level. Selecting another level clears the prior adjustment. The UI shows final cost, never a predicted answer or an automatically selected solution.
+Fonte primária: [Pick-and-eat space crop production flight testing on the International Space Station — NASA NTRS](https://ntrs.nasa.gov/citations/20240000823), [artigo completo](https://ntrs.nasa.gov/api/citations/20240000823/downloads/2024%20Buncheck%20VEG-04.pdf).
 
-## Ending and campaign
+O VEG-04A estudou mizuna no Veggie e registrou média de 51 mL por recipiente/dia no tratamento com maior proporção de luz vermelha; o outro tratamento apresentou valor diferente. Portanto, 51 mL não é uma necessidade universal de qualquer planta. O VEG-04B também estudou cultivo e manejo da água.
 
-When remaining water is below 1360 ml, no legal full cycle is possible. End the activity and accurately display any residual water (never round it down to zero or deduct a partial cycle). This also handles a zero-water ending. The final reflection is optional and limited to 240 characters, held in local session memory.
+A multiplicação por dez recipientes fornece os 510 mL usados como referência didática. A NASA não definiu esse regador, a reserva de 11 litros, os três estados do solo, as doses por estado nem essa missão marciana de cinco dias. Frutas e legumes são parte da variedade visual do jogo, não uma descrição dos cultivos do VEG-04A/B.
 
-`Campaign.Greenhouse` survives closing/reopening the activity during the same Sol. Each new Sol starts a **new cultivation activity** with 11 L; starting a new mission also resets it. This is not an in-round refill. Each greenhouse assignment is complete only after the cultivation activity ends and the player records the learning. `FinishGreenhouseTask` validates that state and awards the ordinary mission reward once, with three participation stars independent of speed or making the optimal choices. The generic timed `FinishTask` cannot bypass the greenhouse rules. The final reflection is not graded.
+## Verificação focada
 
-## Presentation and sources
-
-`GreenhouseNarrator` owns curated PT-BR copy, cycle format, arithmetic and reflection prompts. `GreenhouseView` renders only; `Greenhouse.uss` extends the existing warm challenge style. The `imagegen` skill produced `Resources/ARES/UI/Greenhouse/veggie-rack.png`; its final prompt is recorded in `ART_DIRECTION.md`. Four shelves and alpha transparency were inspected. Illustration and controls remain separate so text stays readable and accessible.
-
-The inspiration is [NASA's Veggie cultivation system](https://www.nasa.gov/exploration-research-and-technology/growing-plants-in-space/), which uses plant pillows and LED lighting. The four-shelf setup, Mars weather sequence and irrigation levels are game rules. The user supplied the 34/51/58 ml experimental-average rationale for scaling to 1.36/2.04/2.32 L; it has not been independently established by the linked overview, so the UI makes no claim that those levels are official NASA recommendations. No NASA logo or official-hardware claim is used.
-
-## Tests
-
-Create `Temp/ares-greenhouse-check.request` with BaseARES open. `GreenhouseChecks` verifies all soil transitions, exact arithmetic, final-level adjustment consumption, valid contextual controls, climate, repeated-risk rules, rejected choices, residual-water termination, campaign reward guards, actual E/Escape/reopening, native button decisions, reflection and viewport bounds. Results: `Logs/ares-greenhouse.txt`; screenshots: `Logs/ares-greenhouse-{start,weather,end}.png`.
-
-`GreenhouseCheckFixture` adapts historical campaign trace fixtures to complete the new activity without bypassing its domain rules. Runtime code never uses that helper. `FrontendPlayChecks` now exercises the new greenhouse controls inside the existing five-Sol campaign regression. Historical pure `TaskAttempt` tests still validate the original imported puzzle models, which are no longer the greenhouse station's runtime UI.
-
-Verified 2026-11-15: greenhouse model and Play checks passed; initial/weather/end screenshots were visually inspected. Reference parity and historical puzzle checks passed. The updated native UI campaign regression also passed all 25 assigned activities through five Sols and Victory (`Logs/ares-ui.txt`), including the new greenhouse controls. No standalone build was produced.
+Menu `ARES > Checks > Casa Marte - water and daily care`. Verifica contabilidade, doses, interrupções, reservatório insuficiente, cinco dias, persistência real entre dias da campanha, interação por clique, 40 recipientes, luz e registro da tarefa. Abre somente vistas da estufa; não percorre outras tarefas nem testa o rover. Relatório: `Logs/ares-casa-marte.txt`; imagens: `Logs/ares-casa-marte-world.png` e `Logs/ares-casa-marte-ui.png`.

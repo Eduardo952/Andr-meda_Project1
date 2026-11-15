@@ -1,0 +1,32 @@
+{
+  "source": "casa-marte-missao-n8n",
+  "provenance": "Existing user project, original procedural geometry; no external models or generated bitmap assets",
+  "skills": [
+    "level-design",
+    "create-game-assets",
+    "game-ui-ux"
+  ],
+  "worldMeshes": 1657,
+  "geometry": {
+    "sourceVertices": 516517,
+    "vertices": 288526,
+    "sourceTriangles": 205761,
+    "triangles": 204788,
+    "degenerate": 865,
+    "duplicate": 108
+  },
+  "integrityManifest": "Assets/ARES/Import/manifest.json",
+  "floorEvidence": "Logs/ares-world-geometry.json",
+  "validation": {
+    "meshOptimizer": "Attribute-preserving cleanup executed during export; no silhouette decimation",
+    "floorCoverage": "75132 samples, 0 detected holes, 0 zero normals",
+    "initialSectorCaptures": "Logs/ares-scenery-*.png",
+    "latestSmallFunctions": "Not individually tested, at user request",
+    "campaignParity": "Known oxygen trace difference: expected 78, actual 79",
+    "sceneryChecks": "Logs/ares-scenery.txt",
+    "mapChecks": "PASS: fullscreen/compact captions, projection, zoom, pan, marker, modal lifecycle; Logs/ares-map.txt"
+  },
+  "build": "Builds/ReferenceScenery/ARES.exe",
+  "buildResult": { "status": "Succeeded", "errors": 0, "warnings": 2, "bytes": 136292981, "report": "Logs/ares-scenery-build.txt" },
+  "modules": "Assets/ARES/SCENERY.md"
+}

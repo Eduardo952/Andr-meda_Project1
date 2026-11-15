@@ -1,0 +1,14 @@
+{
+  "asset": "Assets/ARES/Resources/ARES/UI/Tutorial/ares-speech-v1.png",
+  "mode": "built-in image_gen",
+  "skill": "C:/Users/dudu-/.codex/skills/.system/imagegen/SKILL.md",
+  "prompt": "Use case: stylized-concept / production game UI asset. Create ONE finished empty cartoon comic speech balloon for a friendly floating fish mentor named Ares in a cozy low-poly Mars exploration game. Transparent background with real alpha. Wide landscape composition, approximately 3:2 canvas, bubble fills nearly the whole frame with 4 percent transparent outer margin. Main body: a large gently irregular rounded rectangle, warm ivory cream interior (#fff6df), bold smooth deep plum ink outline (#30243e), a thinner warm terracotta offset shadow and subtle teal accent edge (#62cfc1). One short curved triangular speech tail pointing LEFT near the lower-left third, since the fish will float to the LEFT of this balloon. The cream speech area must remain empty and uncluttered across its central 80 percent, flat solid color suitable for live readable text. Charming hand-inked comic contour, a tiny restrained teal sparkle near the upper-right outer border is acceptable. Match a playful pastel space habitat interface: cream panels, rounded cartoon typography added later, yellow-gold buttons, teal accents and plum outlines. No text, no letters, no name plate, no numbers, no characters, no fish, no planets, no interface mockup, no background, no checkerboard, no gradients or texture within the text area. This is a standalone reusable speech-balloon PNG asset, not a screenshot.",
+  "sourceDimensions": [
+    1536,
+    1024
+  ],
+  "transparentPixels": 304279,
+  "alphaPreserved": true,
+  "typography": "Existing Fredoka, Nunito and CartoonAlphabet; dialogue text is native UI Toolkit, never baked into the image",
+  "integration": "Assets/ARES/Runtime/UI/Tutorial/TutorialView.cs"
+}

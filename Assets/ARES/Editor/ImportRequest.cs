@@ -24,12 +24,19 @@ namespace Ares.Editor
                 AssetDatabase.Refresh();
                 return; // Let script compilation/reload finish before using the importer or checks.
             }
+            bool sceneryOnly=request==Request&&File.ReadAllText(request).Trim()=="scenery";
             File.Delete(request);
             Directory.CreateDirectory("Logs");
             File.WriteAllText("Logs/ares-request-status.txt", DateTime.UtcNow.ToString("O") + " RUNNING " + request);
             try
             {
                 if (request == Request) AresImporter.Import();
+                if(sceneryOnly)
+                {
+                    string result=WorldImportChecks.Run();
+                    File.WriteAllText("Logs/ares-request-status.txt",DateTime.UtcNow.ToString("O")+" PASS scenery: "+result);
+                    return;
+                }
                 ParityChecks.Run();
                 TaskInteractionChecks.Run();
                 File.WriteAllText("Logs/ares-request-status.txt", DateTime.UtcNow.ToString("O") + " PASS " + request);

@@ -1,6 +1,35 @@
-.observatory-content { padding: 16px 24px; }
-.observatory-days { margin: 8px 0; justify-content: center; }
-.observatory-days Button { flex-grow: 1; }
-.observatory-photo { width: 100%; height: 350px; background-color: #19162b; border-radius: 16px; margin-bottom: 12px; }
-.observatory-summary { font-size: 19px; margin: 8px 0; white-space: normal; }
-.observatory-content .small { font-size: 13px; margin: 3px 0; white-space: normal; }
+﻿/* Telescope eyepiece: Assets/References/WhatsApp Image 2026-11-15 at 08.27.14.jpeg. */
+.telescope-backdrop { padding: 0; background-color: #080610; }
+.telescope-view { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: #080610; color: #f4f1fb; align-items: center; justify-content: center; }
+.telescope-content { align-items: center; width: 100%; padding: 20px 16px 12px; }
+.telescope-view Label { margin: 0; padding: 0; }
+.telescope-glow { background-color: rgba(91,56,140,.08); border-radius: 2000px; padding: 10px; margin-bottom: 4px; }
+.telescope-lens { border-radius: 2000px; overflow: hidden; border-width: 2px; border-color: #30223f; background-color: #111321; flex-shrink: 0; }
+.telescope-photo { position: absolute; }
+.telescope-crosshair { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
+.telescope-crosshair-x { position: absolute; left: -35px; top: 0; width: 70px; height: 1px; background-color: rgba(220,210,241,.17); }
+.telescope-crosshair-y { position: absolute; left: 0; top: -35px; width: 1px; height: 70px; background-color: rgba(220,210,241,.17); }
+.telescope-view .telescope-title { font-size: 17px; -unity-font-style: bold; -unity-text-align: middle-center; margin-top: 4px; max-width: 94%; }
+.telescope-view .telescope-credit { color: #b8b4c2; font-size: 13px; -unity-text-align: middle-center; max-width: 94%; margin: 6px 0 2px; }
+.telescope-controls, .telescope-sources, .telescope-days { flex-direction: row; align-items: center; justify-content: center; }
+.telescope-view Button { background-color: #292f39; color: #f7f4fc; border-width: 1px; border-color: #a587cf; border-radius: 18px; margin: 4px; padding: 10px 16px; min-height: 52px; font-size: 16px; -unity-font: resource("ARES/UI/Fonts/Nunito"); }
+.telescope-view Button:hover { background-color: #404054; border-color: #cfb2f9; }
+.telescope-view Button:focus { border-width: 2px; border-color: #ddc8ff; }
+.telescope-view Button:active { background-color: #514266; translate: 0 1px; }
+.telescope-view .telescope-exit { position: absolute; right: 16px; top: 12px; width: 44px; height: 44px; min-height: 44px; border-width: 0; background-color: rgba(8,6,16,.7); font-size: 26px; padding: 0; }
+.telescope-view .telescope-zoom-button { width: 56px; height: 56px; font-size: 24px; padding: 0; }
+.telescope-zoom { width: 118px; height: 44px; margin: 0 6px; }
+.telescope-zoom .unity-base-slider__tracker { height: 6px; background-color: #575460; border-width: 1px; border-color: #94909e; }
+.telescope-zoom .unity-base-slider__dragger { width: 16px; height: 16px; margin-top: -5px; border-radius: 8px; background-color: #ae8bd9; }
+.telescope-view .telescope-sources Button { border-width: 0; font-size: 13px; }
+.telescope-details { position: absolute; width: 500px; max-width: 92%; max-height: 86%; padding: 18px; border-radius: 22px; background-color: #191522; border-width: 1px; border-color: #8a70ac; }
+.telescope-details ScrollView { flex-shrink: 1; }
+.telescope-view .telescope-details Label { white-space: normal; font-size: 17px; margin: 10px 6px; }
+.telescope-view .telescope-details-title { -unity-font-style: bold; font-size: 23px; }
+.telescope-view .telescope-question { color: #d4b8ff; }
+.telescope-view .telescope-detail-credit { color: #b8b4c2; font-size: 13px; }
+.telescope-days { flex-wrap: wrap; }
+.telescope-view .selected { background-color: #604778; }
+.telescope-compact .telescope-zoom { width: 70px; }
+.telescope-compact .telescope-zoom-button { width: 44px; height: 48px; min-height: 48px; }
+.telescope-compact .telescope-sources Button { font-size: 12px; padding: 8px; }

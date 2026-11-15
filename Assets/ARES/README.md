@@ -1,4 +1,26 @@
+> Cenário atual (15/11/2026): a referência ativa é **casa-marte-missao-n8n**, com base radial, árvore central, marcos externos e 40 recipientes na estufa. Consulte [SCENERY.md](SCENERY.md) para arquitetura, comandos de atualização e evidências. Referências à pasta `(4)` abaixo são histórico da migração anterior.
+
 # Base ARES — port nativo para Unity
+
+## Tutorial guiado pelo Ares
+
+Ao iniciar uma missão, o jogador nasce na base e escolhe **Fazer tutorial** ou **Jogar sem tutorial**. A primeira tarefa é dividir e confirmar toda a energia no computador. A segunda é **Regar plantas**: pegar o regador, encher no reservatório e cuidar das quatro fileiras, reabastecendo entre elas.
+
+Durante o tutorial, o HUD e os marcadores de outras tarefas ficam ocultos; a trilha acompanha somente o alvo atual. As explicações bloqueiam o controle, aproximam o pet original em um retrato 3D flutuante e mostram o balão gerado com ImageGen. O botão da fala devolve o controle. O relógio da missão permanece pausado durante todo o aprendizado. É possível sair durante as etapas de ação; a campanha continua com o progresso real já realizado.
+
+Os módulos ficam em `Runtime/Domain/TutorialFlow.cs` e `Runtime/UI/Tutorial/`:
+
+- `TutorialFlow`: transições de estados; observa ações reais, sem distribuir recursos ou concluir tarefas artificialmente.
+- `TutorialDirector`: integra computador, regador, proximidade, rota e registro da tarefa pelas regras existentes.
+- `TutorialView`: balão, falas, objetivo atual, botões e foco. Usa as fontes Fredoka/Nunito e o alfabeto cartoon existente.
+- `AresMentorPortrait`: aproximação, flutuação, câmera e textura próprias; restaura a visibilidade do pet e libera os recursos ao sair.
+- `Resources/ARES/UI/Tutorial.uss`: layout amplo/compacto. O asset está em `Resources/ARES/UI/Tutorial/ares-speech-v1.png`, com alpha preservado.
+
+O identificador de campanha `SmartFarmCare` permanece estável; a lista de tarefas apresenta **Regar plantas**. A conclusão exige as quatro fileiras realmente cuidadas e usa `Campaign.FinishGreenhouseTask`. O tutorial não altera doses, estoque ou regras do cultivo. Novas etapas devem entrar no fluxo e no diretor; não adicionar regras de campanha à interface ou ao retrato.
+
+Conferência focada: **ARES > Checks > Ares guided tutorial**, ou escrever `tutorial` em `Temp/ares-computer-check.request`. Relatório: `Logs/ares-tutorial.txt`; capturas: `Logs/ares-tutorial-*.png`. O editor usa o relógio controlado de rega após as interações reais, para que perder foco não interrompa a conferência. As verificações antigas usam `StartMission(false)` explicitamente; o botão Jogar continua oferecendo o tutorial.
+
+Proveniência e prompt completo da imagem: `Tools/ArtEvidence/tutorial-speech-manifest.json`, na raiz do repositório. As falas são texto nativo, fora da imagem, e podem ser editadas em `TutorialView`.
 
 **Estado: migração em andamento. Menu e campanha nativa integrados; fidelidade completa ainda pendente.**
 

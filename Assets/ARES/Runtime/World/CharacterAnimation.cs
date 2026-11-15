@@ -14,11 +14,11 @@ namespace Ares.World
             float jump, float observe, bool reducedMotion, float jumpSeconds)
         {
             float walk = Mathf.Min(1, speed / 4);
-            float swing = Mathf.Sin(phase) * .7f * walk;
+            float swing = Mathf.Sin(phase) * .58f * walk;
             float leap = reducedMotion ? 0 : Mathf.Sin(Mathf.PI * Mathf.Max(0, 1 - jump / jumpSeconds)) * (jump > 0 ? .9f : 0);
             return new AstronautPose
             {
-                bodyHeight = (reducedMotion ? .4f : 1) * Mathf.Abs(Mathf.Sin(phase)) * .18f * walk + Mathf.Sin(elapsed * 2) * .03f * (1 - walk) + leap,
+                bodyHeight = (reducedMotion ? .4f : 1) * (1-Mathf.Cos(phase*2)) * .042f * walk + (reducedMotion?0:Mathf.Sin(elapsed * 1.7f) * .018f * (1 - walk)) + leap,
                 bodyPitch = .28f * observe,
                 leftArm = swing,
                 rightArm = observe > .01f ? -1.3f * observe - swing * (1 - observe) : -swing,

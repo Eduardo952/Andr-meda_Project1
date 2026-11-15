@@ -43,7 +43,7 @@ namespace Ares.Editor
                 {
                     ui=UnityEngine.Object.FindAnyObjectByType<GameFrontend>();if(ui==null)return;
                     explorer=ui.GetComponent<ReferenceExplorer>();
-                    ui.StartMission();ui.Campaign.CloseReport();Call("CloseOverlay");
+                    ui.StartMission(false);ui.Campaign.CloseReport();Call("CloseOverlay");
                     ui.Campaign.SetAllocation(new Ares.Data.Allocation{shield=30,life=40,greenhouse=30});ui.Campaign.StartSol();
                     var player=(PlayerMotion)typeof(ReferenceExplorer).GetField("player",Private).GetValue(explorer);
                     player.X=explorer.computerSettings.standPoint.x;player.Z=-explorer.computerSettings.standPoint.z;

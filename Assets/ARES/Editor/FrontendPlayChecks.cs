@@ -75,14 +75,18 @@ namespace Ares.Editor
                         Require(attempt.Solved,"UI task state did not solve"); stage=10; break;
                     case 10: if(task==0) ScreenCapture.CaptureScreenshot("Logs/ares-task-result.png"); stage=7; break;
                     case 7:
-                        Press(root,"Continuar","Continue","Registrar aprendizado"); Require(ui.Campaign.Completed(ui.Campaign.Current.tasks[task].id),"Continue did not award result");
+                        Press(root,"Continuar","Continue","Registrar aprendizado","Registrar cuidados de hoje"); Require(ui.Campaign.Completed(ui.Campaign.Current.tasks[task].id),"Continue did not award result");
                         task++; stage=task<ui.Campaign.Current.tasks.Length?5:8; break;
                     case 8:
                         Require(ui.Campaign.Seal("control",ui.Campaign.Allocation),"Completed Sol rejected sealing"); stage++; break;
                     case 9:
                         ScreenCapture.CaptureScreenshot("Logs/ares-summary.png"); stage=12; break;
                     case 12:
-                        Press(root,"Continuar","Continue");
+                        Press(root,"Revisar relatório na central");
+                        CommunicationCheckFixture.SendRequiredReport(ui.Campaign);
+                        stage=20; break;
+                    case 20:
+                        Press(root,"Avançar para o próximo dia","Concluir missão");
                         if(ui.Campaign.Phase==Phase.Report) stage=2;
                         else { Require(ui.Campaign.Phase==Phase.Victory,"Five Sols did not end in victory"); Finish(null); } break;
                 }

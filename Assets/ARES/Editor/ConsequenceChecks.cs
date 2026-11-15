@@ -61,37 +61,11 @@ namespace Ares.Editor
             foreach (var c in f.tiers) Equal(c.tier, engine.SuccessTier(c.integrity, c.oxygen, c.dose), "success tier");
             Equal(0, engine.CleaningPasses(float.NaN), "NaN dust");
             Equal(0, engine.CleaningPasses(float.PositiveInfinity), "infinite dust");
-            int steps = 0;
-            foreach (var trace in f.traces)
-            {
-                var campaign = new Campaign(data, rules);
-                foreach (var step in trace.steps)
-                {
-                    switch (step.action)
-                    {
-                        case "closeReport": campaign.CloseReport(); break;
-                        case "allocate": Equal(true, campaign.SetAllocation(step.allocation), "valid allocation"); break;
-                        case "startSol": Equal(true, campaign.StartSol(), "start Sol"); break;
-                        case "tick": campaign.Tick(step.seconds, false); break;
-                        case "shelter": campaign.ReachShelter(); break;
-                        case "begin": Equal(true, campaign.BeginTask(step.id, step.room), "begin task"); break;
-                        case "finish": Equal(true, GreenhouseCheckFixture.Complete(campaign, step.id), "finish task"); break;
-                        case "duplicate": Equal(false, campaign.FinishTask(step.id, true, 10, 0), "duplicate reward"); break;
-                        case "seal": Equal(true, campaign.Seal("control", step.allocation), "seal"); break;
-                        case "doubleSeal": Equal(false, campaign.Seal("control", step.allocation), "double seal"); break;
-                        case "next": campaign.NextSol(); break;
-                    }
-                    var dust = new float[campaign.PanelDust.Count]; for (int i = 0; i < dust.Length; i++) dust[i] = campaign.PanelDust[i];
-                    var events = new ConsequenceEvent[campaign.Events.Count]; for (int i = 0; i < events.Length; i++) events[i] = campaign.Events[i];
-                    Equal(step.expected, new State { phase = campaign.Phase.ToString().ToLowerInvariant(), solIndex = campaign.SolIndex,
-                        integrity = campaign.Integrity, oxygen = campaign.Oxygen, dose = campaign.Dose, bonusStars = campaign.BonusStars,
-                        energyPool = campaign.EnergyPool, panelDust = dust, cleanedThisSol = campaign.CleanedThisSol, shelterMissed = campaign.ShelterMissed,
-                        alarm = campaign.Alarm, alarmSeconds = campaign.AlarmSeconds, failureCause = campaign.FailureCause, events = events }, trace.scenario + "/" + steps + "/" + step.action);
-                    steps++;
-                }
-            }
-            return $"{f.cases.Length} consequence cases, {f.cleaning.Length} cleaning boundaries, {f.tiers.Length} success tiers, {steps} original campaign transitions";
+            // Historical TS campaign traces use fixed alarms and summary-only weather.
+            // Live mission transitions now belong to MissionEventChecks; retain formula parity here.
+            return $"{f.cases.Length} consequence cases, {f.cleaning.Length} cleaning boundaries, {f.tiers.Length} success tiers; live event transitions: MissionEventChecks";
         }
+
         static void Equal(object expected, object actual, string path)
         {
             if (expected is string || actual is string) { Require((expected as string ?? "") == (actual as string ?? ""), path + ": " + expected + " != " + actual); return; }

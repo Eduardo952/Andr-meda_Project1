@@ -14,11 +14,15 @@ namespace Ares.World
         public SprintSettings sprint = new SprintSettings();
         public MartianWindSettings windSettings = new MartianWindSettings();
         public RoverSettings roverSettings = new RoverSettings();
+        public MapSettings mapSettings = new MapSettings();
         public Computer.ComputerSettings computerSettings = new Computer.ComputerSettings();
         public Ares.Domain.OxygenSettings oxygenSettings = new Ares.Domain.OxygenSettings();
         public RoverController Rover { get; private set; }
         public bool IsDrivingRover => Rover != null && Rover.IsDriving;
         public Vector3 ControlledPosition => IsDrivingRover ? Rover.transform.position : PlayerPosition;
+        // PlayerMotion uses reflected source Z. Do not use the model's visual forward or orbit yaw.
+        public Vector3 ControlledForward => IsDrivingRover ? Rover.transform.forward
+            : new Vector3(Mathf.Sin(player?.Heading ?? Mathf.PI), 0, -Mathf.Cos(player?.Heading ?? Mathf.PI));
         public Ares.Domain.SolarMaintenanceSettings solarSettings = new Ares.Domain.SolarMaintenanceSettings();
         SprintDust sprintDust;
         WorldNavigation navigation;
@@ -42,12 +46,21 @@ namespace Ares.World
         public void RecenterCamera() { overview = false; if (IsDrivingRover) Rover.CameraRig.Recenter(Rover.transform); else rig?.Recenter(isometric); }
         public void ToggleRover()
         {
-            if (Rover == null || (frontend != null && frontend.BlocksWorld)) return;
+            if (Rover == null || (frontend != null && (frontend.BlocksWorld || frontend.TutorialActive))) return;
             Rover.SetDriving(!Rover.IsDriving); cameraInput.Clear(); overview = false;
             player.VelocityX = player.VelocityZ = player.Speed = 0; IsRunning = false;
             cameraPosition = view.transform.position;
         }
         public void ToggleRoofs() { roofs = !roofs; }
+        public void ResetMissionSpawn()
+        {
+            if (navigation == null) return;
+            Rover?.SetDriving(false);
+            player = new PlayerMotion(navigation);
+            cameraInput.Clear(); overview = false; IsRunning = false;
+            rig.Recenter(isometric);
+            cameraPosition = rig.Position(player.X, player.Z, true);
+        }
         void Start() { Initialize(); }
         void Initialize()
         {

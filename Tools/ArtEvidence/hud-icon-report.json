@@ -1,0 +1,85 @@
+{
+  "ok": true,
+  "assets": [
+    {
+      "path": "Assets/ARES/Resources/ARES/UI/HudIcons/integrity-v1.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1168808,
+      "color_count": ">65535",
+      "has_alpha": true,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "transparent_pixels": 749826,
+      "content_bounds": [
+        51,
+        43,
+        1222,
+        1238
+      ],
+      "problems": []
+    },
+    {
+      "path": "Assets/ARES/Resources/ARES/UI/HudIcons/oxygen-v1.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1047973,
+      "color_count": ">65535",
+      "has_alpha": true,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "transparent_pixels": 796060,
+      "content_bounds": [
+        0,
+        37,
+        1218,
+        1254
+      ],
+      "problems": []
+    },
+    {
+      "path": "Assets/ARES/Resources/ARES/UI/HudIcons/dose-v1.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1188361,
+      "color_count": 56237,
+      "has_alpha": true,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "transparent_pixels": 644583,
+      "content_bounds": [
+        49,
+        32,
+        1186,
+        1242
+      ],
+      "problems": []
+    },
+    {
+      "path": "Assets/ARES/Resources/ARES/UI/HudIcons/energy-v1.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 833210,
+      "color_count": ">65535",
+      "has_alpha": true,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "transparent_pixels": 885741,
+      "content_bounds": [
+        71,
+        39,
+        1144,
+        1223
+      ],
+      "problems": []
+    }
+  ]
+}

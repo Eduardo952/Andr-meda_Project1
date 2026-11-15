@@ -1,5 +1,6 @@
 {
   "entries": [
+    { "key": "task.waterPlants", "value": "Regar plantas" },
     { "key": "solar.title", "value": "PARQUE SOLAR · 32 PAINÉIS" },
     { "key": "solar.reserve", "value": "Reserva: {{n}} kWh" },
     { "key": "solar.generation", "value": "Geração: {{n}} kWh / {{seconds}} s · {{dirty}} com poeira" },
@@ -17,6 +18,23 @@
     { "key": "howTo.use", "value": "Entre na área de uma tarefa e aperte USAR (E, Espaço ou Enter). Planeje a energia na Sala de Controle antes de iniciar as tarefas." },
     { "key": "station.needsPlan", "value": "Planeje a energia na Sala de Controle" },
     { "key": "station.completed", "value": "Tarefa desta área concluída neste Sol" },
-    { "key": "station.approach", "value": "Aproxime-se de uma área de tarefa" }
+    { "key": "station.approach", "value": "Aproxime-se de uma área de tarefa" },
+    {"key": "map.title", "value": "Mapa da base"},
+    {"key": "map.button", "value": "Mapa"},
+    {"key": "map.open", "value": "Abrir mapa [M]"},
+    {"key": "map.close", "value": "Voltar [Esc]"},
+    {"key": "map.player", "value": "Você está aqui · a ponta indica sua direção"},
+    {"key": "map.rover", "value": "Rover NOMAD 06 · a ponta indica sua direção"},
+    {"key": "map.hint", "value": "Roda: zoom · Arraste: explorar · Missão pausada"},
+    {"key": "map.zoomIn", "value": "Ampliar (+)"},
+    {"key": "map.zoomOut", "value": "Reduzir (−)"},
+    {"key": "map.locate", "value": "Localizar"},
+    {"key": "map.base", "value": "Ver base"},
+    {"key": "map.landmark.generator", "value": "Gerador magnético"},
+    {"key": "map.landmark.landingPad", "value": "Foguete / pouso"},
+    {"key": "map.landmark.rover", "value": "Rover"},
+    {"key": "map.landmark.mast", "value": "Comunicações"},
+    {"key": "map.reset", "value": "Visão geral"},
+    {"key": "map.offscreen", "value": "Fora da vista · use Localizar"}
   ]
 }

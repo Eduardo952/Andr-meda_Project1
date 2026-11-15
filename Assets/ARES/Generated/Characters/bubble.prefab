@@ -926,6 +926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7217575175800393430}
+  - component: {fileID: 577344607176127535}
   - component: {fileID: 7652595951670726500}
   m_Layer: 0
   m_Name: bubble
@@ -950,6 +951,19 @@ Transform:
   - {fileID: 1101214178241864919}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &577344607176127535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450491830188900618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9aeaa44b6ec14a4aae3d9c4de7e28f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Ares.Runtime::Ares.World.ReferenceRig
+  id: bubble
 --- !u!114 &7652595951670726500
 MonoBehaviour:
   m_ObjectHideFlags: 0

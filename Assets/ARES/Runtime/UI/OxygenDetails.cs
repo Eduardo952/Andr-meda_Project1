@@ -34,6 +34,7 @@ namespace Ares.UI
             Source(science, "NASA · Respiração e CO₂", "https://www.nasa.gov/ochmo-tb-004-carbon-dioxide-2/", canInteract);
             Source(science, "NASA · MOXIE em Marte", "https://www.nasa.gov/solar-system/nasas-oxygen-generating-experiment-moxie-completes-mars-mission/", canInteract);
             Text(science, "Projeto educativo independente. A NASA não endossa este jogo.", "ox-muted");
+            ScienceLibrary.Build(more, canInteract);
         }
         static void Source(VisualElement parent, string title, string url, Func<bool> canInteract)
         { Button(parent, title + " ↗", () => { if (canInteract()) Application.OpenURL(url); }, "ghost ox-source"); }

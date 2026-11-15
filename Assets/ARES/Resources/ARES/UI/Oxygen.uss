@@ -13,9 +13,9 @@
 .computer-prompt-text { background-color: #fff7e6; border-width: 2px; border-color: #574662; border-radius: 13px; margin-top: 6px; padding: 5px 12px; font-size: 13px; -unity-font-style: bold; }
 .computer-page-title { font-size: 15px; color: #49695d; -unity-font-style: bold; }
 .computer-viewport { flex-grow: 1; overflow: hidden; position: relative; }
-.computer-track { width: 200%; height: 100%; flex-direction: row; flex-shrink: 0; transition-property: translate; transition-duration: 0.38s; transition-timing-function: ease-in-out; }
+.computer-track { width: 300%; height: 100%; flex-direction: row; flex-shrink: 0; transition-property: translate; transition-duration: 0.38s; transition-timing-function: ease-in-out; }
 .computer-reduced-motion .computer-track { transition-duration: 0s; }
-.computer-page { width: 50%; height: 100%; flex-shrink: 0; padding: 0 58px; }
+.computer-page { width: 33.333333%; height: 100%; flex-shrink: 0; padding: 0 58px; }
 .computer-page .unity-scroll-view__content-container { align-items: center; }
 .computer-page:disabled { opacity: 1; }
 .computer-energy-body { width: 100%; max-width: 1440px; padding-top: 18px; }

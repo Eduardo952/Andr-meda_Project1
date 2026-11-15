@@ -1,0 +1,574 @@
+{
+  "name": "Mars Mission Trainer - Bubble (Groq) + NASA por Sol",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bubble-narrator",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "162e1f16-45fd-4c4c-b22f-a359252435a0",
+      "name": "Webhook Narrator (POST)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "f9f7433e-c8da-499a-acc4-c1aebb1cef78"
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "nasa-sol",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "fb820d7b-3679-4f4c-b07b-aa63457fd931",
+      "name": "Webhook NASA por Sol (GET)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "acf64e77-3654-4481-a22c-f9b7e49d0b35"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============ ONDE COLOCAR AS CHAVES (SO AQUI) ============\nconst CFG = {\n  NASA_API_KEY: \"COLE_AQUI_SUA_CHAVE_NASA\",\n  GROQ_API_KEY: \"COLE_AQUI_SUA_CHAVE_GROQ (gsk_...)\",\n  WEBHOOK_SECRET: \"COLE_AQUI_O_MESMO_VALOR_DE_N8N_WEBHOOK_SECRET_DO_LOVABLE\",\n  GROQ_MODEL: \"llama-3.3-70b-versatile\",\n  // Se esta URL do DONKI nao responder, troque por: https://api.nasa.gov/DONKI\n  DONKI_BASE: \"https://ccmc.gsfc.nasa.gov/DONKI-API/get\",\n  // Cada Sol da campanha aponta para uma data da Terra (muda APOD, DONKI e a foto). Edite livremente.\n  SOL_DATES: { 1: \"2024-05-08\", 2: \"2024-05-09\", 3: \"2024-05-10\", 4: \"2024-05-11\", 5: \"2024-05-12\" }\n};\n// ============================================================\n\nconst inp = $input.first().json;\nconst headers = inp.headers || {};\nif (CFG.WEBHOOK_SECRET && !CFG.WEBHOOK_SECRET.startsWith(\"COLE_AQUI\") && headers[\"x-api-key\"] !== CFG.WEBHOOK_SECRET) {\n  throw new Error(\"unauthorized\");\n}\nconst isNasa = !!(inp.query && inp.query.sol !== undefined);\nconst addDays = (d, n) => { const t = new Date(d + \"T00:00:00Z\"); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };\nlet sol = 1, earth_date = CFG.SOL_DATES[1];\nif (isNasa) {\n  sol = Math.min(5, Math.max(1, parseInt(inp.query.sol, 10) || 1));\n  earth_date = CFG.SOL_DATES[sol];\n}\nreturn [{ json: { ...inp, cfg: CFG, is_nasa: isNasa, sol, earth_date, d_prev: addDays(earth_date, -1), d_next: addDays(earth_date, 1) } }];\n"
+      },
+      "id": "de373ae6-2dd2-40a9-9465-800aa0d1b643",
+      "name": "CONFIG",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        150
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.is_nasa }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "56174a39-0a95-44b5-8a9a-d9fb98fcc65c",
+      "name": "E chamada NASA?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        500,
+        150
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://science.nasa.gov/wp-json/wp/v2/apod-basic/",
+        "options": {
+          "timeout": 6000
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "api_key",
+              "value": "={{ $('CONFIG').first().json.cfg.NASA_API_KEY }}"
+            },
+            {
+              "name": "date",
+              "value": "={{ $('CONFIG').first().json.earth_date }}"
+            }
+          ]
+        }
+      },
+      "id": "ffee5ed2-1114-4df9-b452-c34b1eaef043",
+      "name": "APOD",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        760,
+        300
+      ],
+      "executeOnce": true,
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $('CONFIG').first().json.cfg.DONKI_BASE }}/FLR",
+        "options": {
+          "timeout": 6000
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "startDate",
+              "value": "={{ $('CONFIG').first().json.earth_date }}"
+            },
+            {
+              "name": "endDate",
+              "value": "={{ $('CONFIG').first().json.earth_date }}"
+            },
+            {
+              "name": "api_key",
+              "value": "={{ $('CONFIG').first().json.cfg.NASA_API_KEY }}"
+            }
+          ]
+        }
+      },
+      "id": "e827d7a2-8c3c-494a-a6bd-f841b72dfb1f",
+      "name": "DONKI FLR",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        300
+      ],
+      "executeOnce": true,
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $('CONFIG').first().json.cfg.DONKI_BASE }}/CMEAnalysis",
+        "options": {
+          "timeout": 6000
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "startDate",
+              "value": "={{ $('CONFIG').first().json.earth_date }}"
+            },
+            {
+              "name": "endDate",
+              "value": "={{ $('CONFIG').first().json.earth_date }}"
+            },
+            {
+              "name": "mostAccurateOnly",
+              "value": "true"
+            },
+            {
+              "name": "catalog",
+              "value": "ALL"
+            },
+            {
+              "name": "api_key",
+              "value": "={{ $('CONFIG').first().json.cfg.NASA_API_KEY }}"
+            }
+          ]
+        }
+      },
+      "id": "4a6df49c-c278-4894-a8cd-edffd2d4a18b",
+      "name": "DONKI CME",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        300
+      ],
+      "executeOnce": true,
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $('CONFIG').first().json.cfg.DONKI_BASE }}/WSAEnlilSimulations",
+        "options": {
+          "timeout": 6000
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "startDate",
+              "value": "={{ $('CONFIG').first().json.d_prev }}"
+            },
+            {
+              "name": "endDate",
+              "value": "={{ $('CONFIG').first().json.d_next }}"
+            },
+            {
+              "name": "api_key",
+              "value": "={{ $('CONFIG').first().json.cfg.NASA_API_KEY }}"
+            }
+          ]
+        }
+      },
+      "id": "9e2dff6c-4b39-44a0-9b48-21984adf2660",
+      "name": "DONKI WSA-Enlil",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1480,
+        300
+      ],
+      "executeOnce": true,
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.nasa.gov/insight_weather/",
+        "options": {
+          "timeout": 6000
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "api_key",
+              "value": "={{ $('CONFIG').first().json.cfg.NASA_API_KEY }}"
+            },
+            {
+              "name": "feedtype",
+              "value": "json"
+            },
+            {
+              "name": "ver",
+              "value": "1.0"
+            }
+          ]
+        }
+      },
+      "id": "2f18d738-dce3-438b-96dd-f0db73aad319",
+      "name": "InSight",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1720,
+        300
+      ],
+      "executeOnce": true,
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://images-api.nasa.gov/search",
+        "options": {
+          "timeout": 6000
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "Mars surface Curiosity"
+            },
+            {
+              "name": "media_type",
+              "value": "image"
+            },
+            {
+              "name": "page_size",
+              "value": "1"
+            },
+            {
+              "name": "page",
+              "value": "={{ $('CONFIG').first().json.sol }}"
+            }
+          ]
+        }
+      },
+      "id": "e00665f6-6566-495f-808a-329933647312",
+      "name": "NASA Images",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1960,
+        300
+      ],
+      "executeOnce": true,
+      "onError": "continueRegularOutput",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const cfgItem = $('CONFIG').first().json;\nconst sol = cfgItem.sol, date = cfgItem.earth_date;\nconst all = (name) => { try { return $(name).all().map(i => i.json).filter(j => j && !j.error); } catch (e) { return []; } };\n\n// ---- APOD (imagem astronomica do dia, muda por Sol) ----\nlet apod = null;\n{\n  let r = all(\"APOD\")[0];\n  if (Array.isArray(r)) r = r[0];\n  if (r) {\n    const t = (v) => (v && typeof v === \"object\" && \"rendered\" in v) ? v.rendered : v;\n    const url = r.hdurl || r.url || (r.acf && (r.acf.hdurl || r.acf.url)) || null;\n    if (url && String(url).startsWith(\"https://\")) {\n      apod = {\n        date: r.date || date,\n        title: String(t(r.title) || \"Astronomy Picture of the Day\"),\n        explanation: String(t(r.explanation) || t(r.content) || \"\").replace(/<[^>]+>/g, \"\").slice(0, 600),\n        media_type: r.media_type === \"video\" ? \"video\" : \"image\",\n        url, copyright: r.copyright || undefined\n      };\n    }\n  }\n}\n\n// ---- DONKI: erupcao solar (maior classe do dia) ----\nlet flare = null;\n{\n  const order = { A: 0, B: 1, C: 2, M: 3, X: 4 };\n  let best = null;\n  for (const f of all(\"DONKI FLR\")) {\n    const m = /^([ABCMX])(\\d+(?:\\.\\d+)?)/.exec(String(f.classType || \"\"));\n    if (!m) continue;\n    const cand = { class: m[1], magnitude: parseFloat(m[2]), source: \"DONKI/FLR\" };\n    if (!best || order[cand.class] > order[best.class] || (cand.class === best.class && cand.magnitude > best.magnitude)) best = cand;\n  }\n  flare = best;\n}\n\n// ---- DONKI: CME (maior velocidade) ----\nlet cme = null;\n{\n  const speeds = all(\"DONKI CME\").map(c => Number(c.speed)).filter(Number.isFinite);\n  if (speeds.length) cme = { speed_kms: Math.max(...speeds), source: \"DONKI/CMEAnalysis\" };\n}\n\n// ---- DONKI: simulacao WSA-Enlil -> impacto em Marte ----\nlet mars_impact = null;\n{\n  const sims = all(\"DONKI WSA-Enlil\");\n  if (sims.length || cme) {\n    let level = \"none\";\n    for (const s of sims) for (const imp of (s.impactList || [])) {\n      if (String(imp.location || \"\").toLowerCase() === \"mars\") {\n        if (imp.isGlancingBlow) { if (level === \"none\") level = \"glancing_blow\"; } else level = \"direct\";\n      }\n    }\n    mars_impact = { level, source: \"DONKI/WSAEnlilSimulations\" };\n  }\n}\n\n// ---- InSight (dados historicos: a missao acabou em 2022) ----\nlet weather = null, wind = null, insight_sol = null;\n{\n  const ins = all(\"InSight\")[0];\n  if (ins && Array.isArray(ins.sol_keys) && ins.sol_keys.length) {\n    insight_sol = ins.sol_keys[(sol - 1) % ins.sol_keys.length];\n    const d = ins[insight_sol] || {};\n    if (d.AT && Number.isFinite(d.AT.av)) weather = { temp_avg_c: Math.round(d.AT.av * 10) / 10, source: \"InSight/AT\" };\n    if (d.HWS && Number.isFinite(d.HWS.av)) wind = { speed_avg_ms: Math.round(d.HWS.av * 10) / 10, source: \"InSight/HWS\" };\n  }\n}\n\n// ---- Biblioteca de imagens da NASA (pagina = Sol, entao muda a cada Sol) ----\nlet photo = null;\n{\n  const lib = all(\"NASA Images\")[0];\n  const item = lib && lib.collection && lib.collection.items && lib.collection.items[0];\n  if (item && item.data && item.data[0]) {\n    const info = item.data[0];\n    const url = (item.links || []).find(l => l.rel === \"preview\" && String(l.href).startsWith(\"https://\"));\n    if (url) photo = { id: info.nasa_id, title: info.title, description: (info.description || \"\").slice(0, 400), credit: info.photographer || info.center || \"NASA\", url: url.href };\n  }\n}\n\nconst severity = (flare && flare.class === \"X\") || (mars_impact && mars_impact.level === \"direct\") ? \"alert\"\n  : (flare && flare.class === \"M\") || (mars_impact && mars_impact.level === \"glancing_blow\") ? \"attention\" : \"calm\";\n\nreturn [{ json: { sol, earth_date: date, insight_sol, facts: { flare, cme, mars_impact, weather, wind, severity }, apod, photo } }];\n"
+      },
+      "id": "e80b1f72-aa29-4c0e-a177-5e481e9864d2",
+      "name": "Montar resposta do Sol",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "fed6c0fb-d4f4-468f-8568-9ae695761eb2",
+      "name": "Responder NASA",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const cfg = $('CONFIG').first().json.cfg;\nconst b = $('CONFIG').first().json.body ?? {};\nconst ok = [\"en\", \"pt-BR\"].includes(b.lang) && typeof b.sol === \"number\" && b.facts && b.phase;\nif (!ok) throw new Error(\"bad input\");\nconst SYSTEM = \"You are **Bubble**, a friendly little fish astronaut who lives in a water-filled glass helmet at Base ARES on Mars. You talk to kids aged 7 to 12 who are training as junior astronauts.\\n\\nYou receive ONE JSON object (the user message) with these fields: `lang`, `sol`, `facts`, `demand_kwh`, `player_kwh`, `result`, `formula_version`, `phase`, `question_id`, `assigned_tasks`, `task_results`.\\n\\n`assigned_tasks` lists the five required task IDs for this Sol. It is NOT a list of completed tasks.\\n`task_results` contains ONLY successful tasks: `{ id, seconds, mistakes, stars }`. Empty means no completed tasks. Never mention an uncompleted task as completed; never invent a time, mistake count or star award. Task geometry is a GAME RULE, not NASA engineering. Task completion does not prove a real scientific event occurred.\\n\\nRules (never break them):\\n1. Write **at most 3 short sentences**, simple words, warm and encouraging. No scary words, no violence.\\n2. Use **ONLY** the fields you received. Never invent events, numbers, dates, causes or places.\\n3. If a field in `facts` is `null`, do **not** mention that event at all (for example, no flare talk when `facts.flare` is null).\\n4. Never contradict the data. If `facts.mars_impact.level` is `\\\"none\\\"`, say the storm should not reach Mars.\\n5. Speak about the **current** state of the simulation for this `phase`:\\n   - `sol_start`: a friendly overview of today's facts.\\n   - `alert`: tell the kid calmly to go to the Radiation Shelter.\\n   - `hint`: give a gradual hint about which system needs more or less energy, **without revealing any exact kWh number**.\\n   - `sol_summary`: comment on `result` (deficit / ideal / surplus). You **may** reveal the ideal values from `demand_kwh`.\\n   - `task_complete`: encourage the player about the last entry of `task_results`. Use its exact time and mistake count only; refer to its name in the requested language. Do not claim other assigned tasks are finished.\\n   - `answer`: answer the ready-made question in `question_id` (`what_is_a_flare`, `why_shelter`, `why_cold_energy`) in kid language, using no numbers that are not in the JSON.\\n6. Write numbers exactly as they appear in the JSON (you may use the language's decimal comma). Flare classes look like `X9.3` = `facts.flare.class` + `facts.flare.magnitude`.\\n7. Answer in the language of `lang` (`\\\"en\\\"` = English, `\\\"pt-BR\\\"` = Brazilian Portuguese). Default to English.\\n8. Reply with **JSON only**, no extra text:\\n\\n```json\\n{ \\\"text\\\": \\\"<at most 3 short sentences>\\\", \\\"mood\\\": \\\"happy\\\" | \\\"worried\\\" | \\\"excited\\\" | \\\"proud\\\" }\\n```\\n\\nThe game checks your text automatically. Any unknown number, flare class, absent event, uncompleted named task, incorrect task metric, more than 3 sentences, or the wrong language is rejected and replaced by a built-in line.\\n\\nTask IDs and names (English / Portuguese):\\n- SortFlares: Sort the Flares / Ordenar Erupções\\n- PhotoDetective: Photo Detective / Detetive de Fotos\\n- AlignCoils: Align the Coils / Alinhar Bobinas\\n- WireShield: Wire the Shield / Conectar o Escudo\\n- CmeCountdown: CME Countdown / Contagem da CME\\n- PipeFlow: Pipe Flow / Fluxo nos Canos\\n- ThermostatDial: Thermostat Dial / Ajustar Termostato\\n- SmartFarmCare: Smart Farm Care / Cuidado Inteligente da Horta\\n- CleanPanels: Clean the Panels / Limpar Painéis\\n- TiltSun: Tilt to the Sun / Inclinar para o Sol\\n\\nIf a title contains the words flare, CME or thermostat but the corresponding scientific fact is absent, prefer a generic completion sentence without the title. Practice snapshots do not establish an observation in the current Sol.\";\nreturn [{ json: {\n  groq_key: cfg.GROQ_API_KEY,\n  body: {\n    model: cfg.GROQ_MODEL,\n    temperature: 0.4,\n    max_tokens: 220,\n    response_format: { type: \"json_object\" },\n    messages: [\n      { role: \"system\", content: SYSTEM },\n      { role: \"user\", content: JSON.stringify(b) }\n    ]\n  }\n} }];\n"
+      },
+      "id": "a52606bf-3c1a-4a78-b521-e6de7fb7f614",
+      "name": "Montar pedido Groq",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.groq_key }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "7814b868-1fd3-4fb1-86ab-d6103a6a1742",
+      "name": "Groq (llama-3.3-70b)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const r = $input.first().json;\nconst content = r.choices && r.choices[0] && r.choices[0].message && r.choices[0].message.content;\nif (!content) throw new Error(\"empty groq response\");\nconst parsed = JSON.parse(content);\nconst mood = [\"happy\", \"worried\", \"excited\", \"proud\"].includes(parsed.mood) ? parsed.mood : \"happy\";\nreturn [{ json: { text: String(parsed.text || \"\").slice(0, 600), mood } }];\n"
+      },
+      "id": "90f22475-eed3-4235-b6e8-ca0b0dfff140",
+      "name": "Ler resposta Groq",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "13cb8061-e4ef-4730-94f7-9fa0d3d082a0",
+      "name": "Responder Narrador",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1480,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Narrator (POST)": {
+      "main": [
+        [
+          {
+            "node": "CONFIG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook NASA por Sol (GET)": {
+      "main": [
+        [
+          {
+            "node": "CONFIG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CONFIG": {
+      "main": [
+        [
+          {
+            "node": "E chamada NASA?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "E chamada NASA?": {
+      "main": [
+        [
+          {
+            "node": "APOD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Montar pedido Groq",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "APOD": {
+      "main": [
+        [
+          {
+            "node": "DONKI FLR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DONKI FLR": {
+      "main": [
+        [
+          {
+            "node": "DONKI CME",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DONKI CME": {
+      "main": [
+        [
+          {
+            "node": "DONKI WSA-Enlil",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DONKI WSA-Enlil": {
+      "main": [
+        [
+          {
+            "node": "InSight",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "InSight": {
+      "main": [
+        [
+          {
+            "node": "NASA Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NASA Images": {
+      "main": [
+        [
+          {
+            "node": "Montar resposta do Sol",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar resposta do Sol": {
+      "main": [
+        [
+          {
+            "node": "Responder NASA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar pedido Groq": {
+      "main": [
+        [
+          {
+            "node": "Groq (llama-3.3-70b)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq (llama-3.3-70b)": {
+      "main": [
+        [
+          {
+            "node": "Ler resposta Groq",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler resposta Groq": {
+      "main": [
+        [
+          {
+            "node": "Responder Narrador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

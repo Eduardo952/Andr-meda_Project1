@@ -49,8 +49,8 @@ namespace Ares.Editor
                     if(ui==null||explorer==null||ui.GreenhouseCare==null)return;
                     VerifyVisibility();
                     keyboard=InputSystem.AddDevice<Keyboard>("ARES greenhouse tools check");
-                    ui.StartMission();ui.Campaign.CloseReport();typeof(GameFrontend).GetMethod("CloseOverlay",Private).Invoke(ui,null);
-                    SetPlayer(GreenhouseCare.PickupPosition);elapsed=0;
+                    ui.StartMission(false);ui.Campaign.CloseReport();typeof(GameFrontend).GetMethod("CloseOverlay",Private).Invoke(ui,null);
+                    SetPlayer(ui.GreenhouseCare.PickupPosition);elapsed=0;
                 }
                 keyboard.MakeCurrent();var keys=new KeyboardState();var care=ui.GreenhouseCare;var can=care.Watering;
                 if(stage==0&&elapsed>.5f){Require(ui.Campaign.Phase==Phase.Plan&&care.CanPickUp,"Pickup must be available before planning");keys=new KeyboardState(Key.E);Next();}
@@ -59,11 +59,11 @@ namespace Ares.Editor
                 else if(stage==3&&elapsed>.25f)
                 {
                     Require(can.HasCan,"Re-pickup");ui.Campaign.SetAllocation(new Ares.Data.Allocation{shield=ui.Campaign.EnergyPool});ui.Campaign.StartSol();
-                    SetPlayer(GreenhouseCare.RefillPosition);Next();
+                    SetPlayer(ui.GreenhouseCare.RefillPosition);Next();
                 }
                 else if(stage==4&&elapsed>.25f){Require(care.AtRefill,"Refill zone");keys=new KeyboardState(Key.E);Next();}
                 else if(stage==5&&elapsed>.25f){Require(can.CanMl>0&&!ui.BlocksWorld,"Fill");water=can.CanMl;keys=new KeyboardState(Key.E);Next();}
-                else if(stage==6&&elapsed>.25f){Require(can.CanMl==water&&!ui.BlocksWorld,"E at full tap must not open task");SetPlayer(GreenhouseCare.PickupPosition);Next();}
+                else if(stage==6&&elapsed>.25f){Require(can.CanMl==water&&!ui.BlocksWorld,"E at full tap must not open task");SetPlayer(ui.GreenhouseCare.PickupPosition);Next();}
                 else if(stage==7&&elapsed>.25f){keys=new KeyboardState(Key.E);Next();}
                 else if(stage==8&&elapsed>.25f){Require(!can.HasCan&&can.CanMl==water&&can.ActiveShelf==-1&&!ui.BlocksWorld,"Return preserves water and stops pouring");keys=new KeyboardState(Key.E);Next();}
                 else if(stage==9&&elapsed>.25f)

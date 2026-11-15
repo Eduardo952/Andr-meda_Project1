@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[2]
-source = root / 'a896f420-3053-49eb-b6f2-a97f9b2dc6c8 (4)' / 'src'
+source = root / 'casa-marte-missao-n8n' / 'src'
 dest = root / 'Assets/ARES/Resources/ARES/UI'
 dest.mkdir(parents=True, exist_ok=True)
 

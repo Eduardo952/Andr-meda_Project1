@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwind from '@tailwindcss/vite';
 import path from 'node:path';
 import fs from 'node:fs';
-const source=path.resolve(import.meta.dirname,'../../a896f420-3053-49eb-b6f2-a97f9b2dc6c8 (4)/src');
+const source=path.resolve(import.meta.dirname,'../../casa-marte-missao-n8n/src');
 export default defineConfig({plugins:[{name:'original-styles',enforce:'pre',transform(code,id){if(id.endsWith('/preview.css'))return code+'\n'+fs.readFileSync(path.join(source,'styles.css'),'utf8').replace(/^@(?:import|source)[^;]+;\r?\n/gm,'');}},react(),tailwind()],resolve:{alias:[
  {find:'@/services/narrator/speak',replacement:path.resolve(import.meta.dirname,'narrator.ts')},
  {find:'@',replacement:source},

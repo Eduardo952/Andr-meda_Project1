@@ -8,8 +8,10 @@ import ts from 'typescript';
 import { createCanvas } from '@napi-rs/canvas';
 import { createHash } from 'node:crypto';
 import { exportConsequenceFixtures } from './consequence-fixtures.mjs';
+import { optimizeMesh } from './mesh-quality.mjs';
+import { movableProps, gardenLayout } from './visual-adapters.mjs';
 const root=path.resolve(import.meta.dirname,'../..');
-const reference='a896f420-3053-49eb-b6f2-a97f9b2dc6c8 (4)';
+const reference='casa-marte-missao-n8n';
 const source=path.join(root,reference,'src');
 // Only the local procedural texture functions use this Canvas adapter.
 globalThis.document={createElement(tag){if(tag!=='canvas')throw Error(`Unsupported element: ${tag}`);return createCanvas(1,1);}};
@@ -17,22 +19,24 @@ const cache=path.join(import.meta.dirname,'generated'); fs.mkdirSync(cache,{recu
 const output=path.join(root,'Assets/ARES/Import'); fs.mkdirSync(output,{recursive:true});
 const files=['config/theme','config/palette','config/rooms','config/telescope','config/balance','engine/rounding','engine/flare','engine/demand','engine/outcome','engine/normalize','engine/consequences','tasks/assignments','game/sim/world','game/terrain','game/scene/surfaceTextures','game/scene/Construction','game/scene/AresStructure','game/scene/AresInteriors'];
 function emit(id,code){
+ if(id==='game/scene/Construction')code=code.replace('for (const batch of this.batches.values())','for (const [batchKey,batch] of this.batches)').replace('mesh.instanceMatrix.needsUpdate = true; mesh.castShadow', 'if(batchKey.startsWith("container:"))mesh.userData.role="cultivation_container"; mesh.instanceMatrix.needsUpdate = true; mesh.castShadow');
  code=stripTypeScriptTypes(code,{mode:'strip'}).replace(/from\s+["'](@\/[^"']+|\.\.?\/[^"']+)["']/g,(_,p)=>{
  const resolved=p.startsWith('@/')?p.slice(2):path.posix.normalize(path.posix.join(path.posix.dirname(id),p));
  return `from './${resolved.replaceAll('/','_')}.mjs'`;
  });
  fs.writeFileSync(path.join(cache,id.replaceAll('/','_')+'.mjs'),code);
 }
+files.push('config/crew');
 for(const id of files)emit(id,fs.readFileSync(path.join(source,id+'.ts'),'utf8'));
 let materials=fs.readFileSync(path.join(source,'game/scene/materials.tsx'),'utf8');
 emit('game/scene/materials',materials.slice(0,materials.indexOf('export function Toon'))+materials.slice(materials.indexOf('export function seeded')));
-let greenhouse=fs.readFileSync(path.join(source,'game/scene/Greenhouse.tsx'),'utf8');
+let greenhouse=movableProps('game/scene/Greenhouse.tsx',fs.readFileSync(path.join(source,'game/scene/Greenhouse.tsx'),'utf8'));
 greenhouse=greenhouse.slice(0,greenhouse.indexOf('export function Greenhouse(')).replace(/^import .*?(?:from ["'][^"']+["']);?\r?\n/gm,line=>/Construction|three["']|materials|config\/theme|config\/rooms/.test(line)?line:'');
 const apples=fs.readFileSync(path.join(source,'game/greenhouse.ts'),'utf8');
 greenhouse=greenhouse.replace('const G =',apples.slice(apples.indexOf('export const APPLE_COUNT'),apples.indexOf('/** Presentation'))+'\nconst G =').replace('function makeGarden','export function makeGarden');
 emit('game/scene/Greenhouse',greenhouse);
 const get=id=>import(pathToFileURL(path.join(cache,id.replaceAll('/','_')+'.mjs')));
-const {MODULES,CORRIDORS,PATHS}=await get('config/rooms');
+const {MODULES,CORRIDORS,PATHS,ROOM_BY_ID,COMMAND_CONSOLE,consolePoint,consoleYaw,LANDMARKS,SATELLITE_ANGLES,SOLAR_YAW,solarFrame}=await get('config/rooms');
 const {buildStructure,buildTunnels}=await get('game/scene/AresStructure');
 const {buildAresInterior}=await get('game/scene/AresInteriors');
 const {buildGreenhouseShell,makeGarden}=await get('game/scene/Greenhouse');
@@ -56,15 +60,26 @@ function add(name,group,room='',layer='floor'){
  for(let i=0;i<count;i++){
  const matrix=obj.matrixWorld.clone(); if(obj.isInstancedMesh){const instance=new THREE.Matrix4();obj.getMatrixAt(i,instance);matrix.multiply(instance);}
  const geo=obj.geometry.clone().applyMatrix4(matrix); const pos=geo.getAttribute('position'),norm=geo.getAttribute('normal');
- const mat=obj.material; if(Array.isArray(mat))throw Error('Material groups need explicit handling');
- meshes.push({name:name+'_'+meshes.length,room,layer,vertices:Array.from(pos.array),normals:norm?Array.from(norm.array):[],uv:geo.getAttribute('uv')?Array.from(geo.getAttribute('uv').array):[],colors:geo.getAttribute('color')?Array.from(geo.getAttribute('color').array):[],indices:geo.index?Array.from(geo.index.array):Array.from({length:pos.count},(_,j)=>j),color:'#'+mat.color.getHexString(),emissive:mat.emissive?'#'+mat.emissive.getHexString():'#000000',glow:mat.emissiveIntensity??0,opacity:mat.opacity,transparent:mat.transparent,unlit:!!mat.isMeshBasicMaterial,metalness:mat.metalness??0,roughness:mat.roughness??.8,depthWrite:mat.depthWrite,side:mat.side,map:textureFile(mat.map),bumpMap:textureFile(mat.bumpMap),bumpScale:mat.bumpScale??0,repeat:mat.map?.repeat.toArray()??[1,1]}); geo.dispose();
+const mat=obj.material; if(Array.isArray(mat))throw Error('Material groups need explicit handling');
+if(mat.isShaderMaterial && mat.uniforms.uColor){mat.color=mat.uniforms.uColor.value;obj.userData.role='magnetic_shield';}
+ let role=obj.userData.role??'';for(let p=obj.parent;p&&!role;p=p.parent)role=p.userData.role??'';
+ meshes.push({name:name+'_'+meshes.length,room,layer,vertices:Array.from(pos.array),normals:norm?Array.from(norm.array):[],uv:geo.getAttribute('uv')?Array.from(geo.getAttribute('uv').array):[],colors:geo.getAttribute('color')?Array.from(geo.getAttribute('color').array):[],indices:geo.index?Array.from(geo.index.array):Array.from({length:pos.count},(_,j)=>j),color:'#'+mat.color.getHexString(),emissive:mat.emissive?'#'+mat.emissive.getHexString():'#000000',glow:mat.emissiveIntensity??0,opacity:mat.opacity,transparent:mat.transparent,unlit:!!mat.isMeshBasicMaterial,metalness:mat.metalness??0,roughness:mat.roughness??.8,depthWrite:mat.depthWrite,side:mat.side,map:textureFile(mat.map),bumpMap:textureFile(mat.bumpMap),bumpScale:mat.bumpScale??0,repeat:mat.map?.repeat.toArray()??[1,1]}); meshes.at(-1).toon=!!mat.isMeshToonMaterial; geo.dispose();
+ meshes.at(-1).role=role;meshes.at(-1).instance=obj.userData.instance??i;
  }
  });groups.push({name,first,count:meshes.length-first});
 }
 for(const m of MODULES.filter(m=>m.shape!=='park')){
  const built=m.id==='greenhouse'?buildGreenhouseShell(true):buildStructure(m,true);
  for(const layer of ['floor','walls','roof'])add(m.id+'_'+layer,built[layer].group,m.id,layer);
- add(m.id+'_interior',m.id==='greenhouse'?makeGarden(true).b.group:buildAresInterior(m,true).group,m.id,'interior');
+ if(m.id==='greenhouse'){
+  const garden=makeGarden(true);
+  garden.foliage.forEach((o,i)=>o.userData.role='foliage'+i);
+  garden.apples.userData.role='apple';garden.drone.group.userData.role='drone';garden.particles.userData.role='mist';
+  garden.drone.group.position.set(64,4.8,0);
+  const scratch=new THREE.Object3D();
+  for(let i=0;i<garden.particles.count;i++){const f=(i*.37)%1;scratch.position.set(38+(i*7.3)%29,i%3===0?3+f*2:7+f*2,Math.sin(i*3.7)*10);scratch.scale.setScalar(i%3===0?.55:2+f*2);scratch.updateMatrix();garden.particles.setMatrixAt(i,scratch.matrix);}
+  add(m.id+'_interior',garden.b.group,m.id,'interior');
+ }else add(m.id+'_interior',buildAresInterior(m,true).group,m.id,'interior');
 }
 const tunnels=buildTunnels(true);add('corridor_floor',tunnels.floor.group);add('corridor_shell',tunnels.shell.group,'','roof');
 // JSX model extraction executes only visual components, with a tiny React element adapter.
@@ -80,14 +95,17 @@ function element(type,props,...children){
  if(type.endsWith('Geometry'))return new ctor(...(props.args??[]));
  if(type.endsWith('Material')){const {ref,children,...settings}=props;object=new ctor(settings);}
  else {
- object=type==='group'?new THREE.Group():type==='instancedMesh'?new THREE.InstancedMesh(undefined,undefined,props.args[2]):new THREE.Mesh();
+ object=type==='group'?new THREE.Group():type==='pointLight'?new THREE.PointLight(props.color,props.intensity,props.distance,props.decay):type==='points'?new THREE.Points():type==='instancedMesh'?new THREE.InstancedMesh(...props.args):new THREE.Mesh();
  for(const child of children){if(child.isBufferGeometry)object.geometry=child;else if(child.isMaterial)object.material=child;else if(child.isObject3D)object.add(child);}
  for(const field of ['position','rotation','scale'])if(props[field]!=null){if(typeof props[field]==='number')object[field].setScalar(props[field]);else object[field].set(...props[field]);}
  for(const axis of ['x','y','z'])if(props['rotation-'+axis]!=null)object.rotation[axis]=props['rotation-'+axis];
+ for(const axis of ['x','y','z'])if(props['position-'+axis]!=null)object.position[axis]=props['position-'+axis];
   if(props.geometry)object.geometry=props.geometry;
+  if(props.material)object.material=props.material;
   if(props.visible!=null)object.visible=props.visible;
  }
- if(props.ref){props.ref.current=object;if(props.ref.binding && object.isObject3D)object.userData.binding=props.ref.binding;}return object;
+ if(typeof props.ref==='function')props.ref(object);
+ else if(props.ref){props.ref.current=object;if(props.ref.binding && object.isObject3D)object.userData.binding=props.ref.binding;}return object;
 }
 const React={createElement:element,Fragment:Symbol.for('fragment')};
 let refNames=[], capturedRefs={};
@@ -99,16 +117,18 @@ const {Construction}=await get('game/scene/Construction');
 const {regolithMaps,solarCellMap}=await get('game/scene/surfaceTextures');
 const {terrainClearance,terrainHeight}=await get('game/terrain');
 const consequences=await get('engine/consequences');
-const {seeded}=await get('game/scene/materials');
+const {seeded,toonGradient}=await get('game/scene/materials');
 const inspectionCampaign={solIdx:0,phase:'report',panelDust:[0,0,0,0],cleanedThisSol:false};
 const useCampaign={getState:()=>inspectionCampaign};
 Object.assign(runtime,{cleaning:0,cleaningSol:-1,cleaningFrom:[0,0,0,0],observeArrived:false});
 function model(file,exportName,cut,props={},reducedMotion=false){
- let code=fs.readFileSync(path.join(source,file),'utf8'); if(cut)code=code.slice(0,code.indexOf(cut));
+ let code=movableProps(file,fs.readFileSync(path.join(source,file),'utf8')); if(cut)code=code.slice(0,code.indexOf(cut));
  code=code.replace(/^import[^;]+;\r?\n/gm,'').replaceAll('export function','function');
  const js=ts.transpileModule(code,{compilerOptions:{target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.React}}).outputText;
- const fn=new Function('React','THREE','PALETTE','P','THEME','Toon','Outlines','useRef','useMemo','useEffect','useFrame','runtime','Construction','useGame','BALANCE','TELESCOPE','sfx','props','solarCellMap','useCampaign','panelDustAfterStorm','stormForSol','SOLS','T','regolithMaps','terrainClearance','terrainHeight','seeded',js+`;return ${exportName}(props);`);
- return fn(React,THREE,PALETTE,PALETTE,THEME,({children,...p})=>new THREE.MeshToonMaterial(p),()=>null,hooks.useRef,hooks.useMemo,hooks.useEffect,hooks.useFrame,runtime,Construction,fn=>fn({settings:{quality:'high',reducedMotion}}),BALANCE,TELESCOPE,{step(){},use(){},clean(){}},props,solarCellMap,useCampaign,consequences.panelDustAfterStorm,consequences.stormForSol,[],THEME,regolithMaps,terrainClearance,terrainHeight,seeded);
+ const fn=new Function('React','THREE','PALETTE','P','THEME','Toon','Outlines','useRef','useMemo','useEffect','useFrame','runtime','Construction','useGame','BALANCE','TELESCOPE','sfx','props','solarCellMap','useCampaign','panelDustAfterStorm','stormForSol','SOLS','T','regolithMaps','terrainClearance','terrainHeight','seeded','ROOM_BY_ID','SOLAR_YAW','LANDMARKS','MODULES','SATELLITE_ANGLES','polar','toonGradient','pendingTasks',js+`;return ${exportName}(props);`);
+ const state={settings:{quality:'high',reducedMotion}},useGame=Object.assign(select=>select(state),{getState:()=>state});
+ const polar=(deg,r)=>[Math.round(Math.sin(deg*Math.PI/180)*r*100)/100,Math.round(Math.cos(deg*Math.PI/180)*r*100)/100];
+ return fn(React,THREE,PALETTE,PALETTE,THEME,({children,...p})=>new THREE.MeshToonMaterial(p),()=>null,hooks.useRef,hooks.useMemo,hooks.useEffect,hooks.useFrame,runtime,Construction,useGame,BALANCE,TELESCOPE,{step(){},use(){},clean(){}},props,solarCellMap,useCampaign,consequences.panelDustAfterStorm,consequences.stormForSol,[],THEME,regolithMaps,terrainClearance,terrainHeight,seeded,ROOM_BY_ID,SOLAR_YAW,LANDMARKS,MODULES,SATELLITE_ANGLES,polar,toonGradient,()=>['preview']);
 }
 const bindings=Object.fromEntries(['bodyRef','lArm','rArm','lLeg','rLeg'].map(binding=>[binding,{current:null,binding}]));
 const astronaut=model('game/characters/Astronaut.tsx','AstronautModel','const DUST',bindings); add('astronaut',astronaut,'astronaut','character');
@@ -130,18 +150,60 @@ function character(id,root){
 }
 fs.writeFileSync(path.join(output,'characters.json'),JSON.stringify({characters:[character('astronaut',astronaut),character('bubble',bubble)]}));
 const bindGeometry=meshes.filter(m=>m.layer==='character').map(m=>({id:m.room,vertices:m.vertices}));
-frameCallbacks.length=0; const decor=model('game/scene/Decor.tsx','Decor');for(const callback of frameCallbacks)callback({clock:{elapsedTime:0}},0);add('decor',decor);
+frameCallbacks.length=0;capturedRefs={};refNames=['panels','dust','puffs','panelMaterial','robot','brush','sparkle','celebrated'];
+const decor=model('game/scene/Decor.tsx','Decor');for(const callback of frameCallbacks)callback({clock:{elapsedTime:0}},0);
+capturedRefs.panels.current.userData.role='solar_panel';capturedRefs.dust.current.userData.role='solar_dust';
+add('decor',decor);
+fs.writeFileSync(path.join(output,'cleaner.json'),JSON.stringify({characters:[character('cleaner',capturedRefs.robot.current)]}));
 // Execute the updated terrain component itself: relief, vertex colors, geology and textures.
 const {isWalkable}=await get('game/sim/world');
 frameCallbacks.length=0;add('landscape',model('game/scene/Terrain.tsx','Terrain'));
+frameCallbacks.length=0;capturedRefs={};refNames=['holoRefs','flies','canopy','health'];
+const landmarks=model('game/scene/BaseLandmarks.tsx','BaseLandmarks');
+for(const callback of frameCallbacks)callback({clock:{elapsedTime:0}},0);
+capturedRefs.canopy.current.children.forEach((mesh,i)=>{mesh.userData.role='hub_canopy';mesh.userData.instance=i;});
+capturedRefs.holoRefs.current.forEach((mesh,i)=>{mesh.userData.role='hub_hologram';mesh.userData.instance=i;});
+capturedRefs.flies.current.userData.role='hub_firefly';
+add('landmarks',landmarks,'','interior');
+// These are separate from Base/Decor in GameCanvas; execute their original builders too.
+const detailSource=fs.readFileSync(path.join(source,'game/scene/StationDetails.tsx'),'utf8');
+const archBody=detailSource.match(/const arches=useMemo\(\(\)=>\{([\s\S]*?)\},\[high\]\)/)?.[1];
+if(!archBody)throw Error('StationDetails builder changed; update extraction explicitly.');
+const portRoomSource=detailSource.slice(detailSource.indexOf('function portRoom'),detailSource.indexOf('function Station('));
+const arches=new Function('THREE','Construction','ROOM_BY_ID','SATELLITE_ANGLES','high',ts.transpileModule(portRoomSource+archBody,{compilerOptions:{target:ts.ScriptTarget.ES2022}}).outputText)(THREE,Construction,ROOM_BY_ID,SATELLITE_ANGLES,true);
+add('station_arches',arches.group,'control','interior');
+const knobSource=detailSource.slice(detailSource.indexOf('function EnergyKnobs'),detailSource.indexOf('function CommandDisplay'));
+const knobJs=ts.transpileModule(knobSource,{compilerOptions:{target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.React}}).outputText;
+const knobs=new Function('React','useRef','useFrame','P','consolePoint','consoleYaw','K',knobJs+';return EnergyKnobs();')(React,hooks.useRef,()=>{},PALETTE,consolePoint,consoleYaw,COMMAND_CONSOLE);
+for(const lever of knobs.children)lever.children[1].rotation.x=-.3;
+add('station_knobs',knobs,'control','interior');
+const stationSource=detailSource.slice(detailSource.indexOf('function Station('),detailSource.indexOf('export function StationDetails'));
+const stationJs=ts.transpileModule(stationSource,{compilerOptions:{target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.React}}).outputText;
+const createStation=new Function('React','useRef','useFrame','ROOM_BY_ID','Html','Billboard','RegionIcon',stationJs+';return Station;')(React,hooks.useRef,()=>{},ROOM_BY_ID,()=>null,({children,...props})=>element('group',props,...children),()=>null);
+for(const room of MODULES.filter(m=>m.room&&m.id!=='airlock'))add('station_ring_'+room.id,createStation({room:room.id}),room.id,'marker');
+// Extract the original moons, Earth, ringed planet and seeded star positions.
+frameCallbacks.length=0;
+const skyModel=model('game/scene/Sky.tsx','Sky');
+const stars=skyModel.children.filter(o=>o.isPoints).map((o,i)=>({positions:Array.from(o.geometry.attributes.position.array),size:i===0?1.6:2.4,speed:i===0?.9:.6}));
+for(const child of [...skyModel.children])if(child.isPoints||child.material?.isShaderMaterial)skyModel.remove(child);
+fs.writeFileSync(path.join(output,'celestial.json'),JSON.stringify({characters:[character('sky',skyModel)]}));
+fs.writeFileSync(path.join(output,'stars.json'),JSON.stringify({layers:stars}));
+const {CREW}=await get('config/crew');
+const ambienceSource=fs.readFileSync(path.join(source,'game/scene/Ambience.tsx'),'utf8');
+const crewSource=ambienceSource.slice(ambienceSource.indexOf('function Crewmate'),ambienceSource.indexOf('export function Ambience'));
+const crewJs=ts.transpileModule(crewSource,{compilerOptions:{target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.React}}).outputText;
+const createCrew=new Function('React','useRef','useMemo','useEffect','useFrame','Construction','CREW','P',crewJs+';return Crewmate;')(React,hooks.useRef,hooks.useMemo,()=>{},()=>{},Construction,CREW,PALETTE);
+fs.writeFileSync(path.join(output,'crew.json'),JSON.stringify({characters:CREW.flatMap((c,i)=>c.player?[]:[character('crew_'+c.id,createCrew({index:i}))])}));
 const worldMeshes=meshes.filter(m=>m.layer!=='character');
+const quality=worldMeshes.map(optimizeMesh);
+fs.writeFileSync(path.join(output,'mesh-quality.json'),JSON.stringify({method:'Exact attribute indexing; zero-area and same-winding duplicate removal; no silhouette decimation',meshes:quality},null,2));
 fs.writeFileSync(path.join(output,'world.json'),JSON.stringify({meshes:worldMeshes}));
 const {normalizeSnapshot,deriveSol}=await get('engine/normalize');
 const {assignTasks}=await get('tasks/assignments');
 const sols=Array.from({length:5},(_,i)=>{const raw=JSON.parse(fs.readFileSync(path.join(source,`data/snapshots/sol${i+1}.json`),'utf8')); const n=normalizeSnapshot(raw);return {sol:n.sol,date:n.earthDate,sample:n.sample,capturedAt:raw.captured_at,...deriveSol(n),facts:{flareClass:n.flare.value?.classType??'',hasCmeSpeed:n.cme.value!==null,cmeSpeed:n.cme.value?.speed??0,hasAirTempMean:n.airTemp.value!==null,airTempMean:n.airTemp.value?.av??0,hasWindSpeed:n.windSpeed.value!==null,windSpeed:n.windSpeed.value?.av??0},tasks:assignTasks(n.sol),raw:JSON.stringify(raw)};});
 fs.writeFileSync(path.join(output,'campaign.json'),JSON.stringify({sols}));
 const {INTERIOR_PATHS}=await get('config/rooms');
-fs.writeFileSync(path.join(output,'layout.json'),JSON.stringify({rooms:MODULES.map(m=>({...m,ports:m.ports.map(([x,z])=>({x,z})),stationX:m.entrance[0],stationZ:m.entrance[1]})),paths:[...PATHS,...INTERIOR_PATHS],corridors:CORRIDORS}));
+fs.writeFileSync(path.join(output,'layout.json'),JSON.stringify({rooms:MODULES.map(m=>({...m,ports:m.ports.map(([x,z])=>({x,z})),stationX:m.entrance[0],stationZ:m.entrance[1]})),paths:[...PATHS,...INTERIOR_PATHS],corridors:CORRIDORS,solarYaw:SOLAR_YAW,garden:gardenLayout(worldMeshes),landmarks:Object.entries(LANDMARKS).filter(([,v])=>v.p).map(([id,v])=>({id,x:v.p[0],z:v.p[1],radius:v.r}))}));
 fs.writeFileSync(path.join(output,'balance.json'),JSON.stringify(BALANCE));
 fs.writeFileSync(path.join(output,'telescope.json'),JSON.stringify(TELESCOPE));
 for(const locale of ['pt-BR','en'])fs.copyFileSync(path.join(source,`locales/${locale}.json`),path.join(output,locale+'.json'));

@@ -12,12 +12,12 @@ namespace Ares.UI
         }
         public static Label Text(VisualElement parent, string text, string classes = "")
         {
-            var label = new Label(text); foreach (var c in classes.Split(' ')) if (c.Length > 0) label.AddToClassList(c);
+            var label = new Label(PresentationLocalizer.Text(text)); foreach (var c in classes.Split(' ')) if (c.Length > 0) label.AddToClassList(c);
             parent.Add(label); return label;
         }
         public static Button Button(VisualElement parent, string text, Action action, string classes = "")
         {
-            var button = new Button(action) { text = text }; foreach (var c in classes.Split(' ')) if (c.Length > 0) button.AddToClassList(c);
+            var button = new Button(action) { text = PresentationLocalizer.Text(text) }; foreach (var c in classes.Split(' ')) if (c.Length > 0) button.AddToClassList(c);
             parent.Add(button); return button;
         }
         public static SliderInt Slider(VisualElement parent, string title, int value, int max, int step, Action<int> changed)

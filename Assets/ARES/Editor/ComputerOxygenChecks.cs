@@ -44,6 +44,28 @@ namespace Ares.Editor
                 {File.Delete(Request);OxygenPresentationChecks.Begin();return;}
                 if(File.ReadAllText(Request).Trim()=="wind-preview")
                 {File.Delete(Request);MartianWindPreview.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="storm-preview")
+                {File.Delete(Request);DustStormPreview.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="command-console")
+                {File.Delete(Request);CommandConsolePreview.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="telescope-preview")
+                {File.Delete(Request);ObservatoryPresentationChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="casa-marte")
+                {File.Delete(Request);GreenhouseChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="communications")
+                {File.Delete(Request);CommunicationsChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="visual-learning")
+                {File.Delete(Request);VisualLearningChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="world-map")
+                {File.Delete(Request);WorldMapChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="tutorial")
+                {File.Delete(Request);TutorialChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="mission-visual")
+                {File.Delete(Request);MissionVisualChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="mission-events")
+                {File.Delete(Request);MissionEventChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="english")
+                {File.Delete(Request);EnglishPresentationChecks.Begin();return;}
                 File.Delete(Request);Directory.CreateDirectory("Logs");File.WriteAllText("Logs/ares-computer.txt","RUNNING");
                 stage=0;frame=-1;elapsed=0;started=EditorApplication.timeSinceStartup;SessionState.SetBool(Pending,true);
                 background=Application.runInBackground;Application.runInBackground=true;EditorApplication.isPaused=false;EditorApplication.EnterPlaymode();return;
@@ -58,7 +80,7 @@ namespace Ares.Editor
                     frontend=UnityEngine.Object.FindAnyObjectByType<GameFrontend>();explorer=UnityEngine.Object.FindAnyObjectByType<ReferenceExplorer>();
                     if(frontend==null||explorer?.Rover==null)return;
                     DomainChecks();keyboard=InputSystem.AddDevice<Keyboard>("ARES computer check");
-                    frontend.StartMission();frontend.Campaign.CloseReport();Call("CloseOverlay");
+                    frontend.StartMission(false);frontend.Campaign.CloseReport();Call("CloseOverlay");
                     frontend.Apod.BeginMission(10);string firstDate=frontend.Apod.Collection.entries[0].date;
                     var dates=new System.Collections.Generic.HashSet<string>();
                     for(int i=0;i<5;i++){var entry=frontend.Apod.Collection.entries[i];Require(dates.Add(entry.date)&&frontend.Apod.Image(i)!=null&&!string.IsNullOrWhiteSpace(entry.credit),"Shuffled photo lost identity, credit or local image");}
@@ -170,7 +192,7 @@ namespace Ares.Editor
                 else if(stage==12&&elapsed>.4f)
                 {
                     Require(Mathf.Abs(frontend.Campaign.SolElapsedSeconds-pausedAt)<.001f,"Settings failed to pause the actual day clock");Call("CloseOverlay");
-                    frontend.StartMission();Require(frontend.Campaign.OxygenSystem.TotalConsumed==0,"New mission reused oxygen telemetry");
+                    frontend.StartMission(false);Require(frontend.Campaign.OxygenSystem.TotalConsumed==0,"New mission reused oxygen telemetry");
                     Finish("PASS: 600-second day, pause/terminal/task clock, unfinished task close; NASA metabolic loads, electrolysis/water, separate CO2, energy limits and mass balance at 30/120 Hz; randomized discovery deck; actual E near computer, oxygen controls, animated energy/oxygen arrows, remote energy blocked, camera return/reduced motion; mission reset. Captures: prompt, transition, oxygen, energy.");
                     EditorApplication.ExitPlaymode();return;
                 }

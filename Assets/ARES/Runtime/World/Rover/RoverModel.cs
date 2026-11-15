@@ -18,6 +18,10 @@ namespace Ares.World.Rover
         public void Build(RoverSettings settings)
         {
             wheelRadius = settings.wheelRadius;
+            var explorer=GetComponentInParent<ReferenceExplorer>();
+            if(explorer!=null&&ReferenceRoverBinding.TryBind(transform,explorer.definition.layout,
+                steering,wheelCenters,out var referenceBody,out var referenceWheels))
+            { Body=referenceBody;Wheels=referenceWheels;return; }
             ivory = Material("Ceramic / warm ivory", new Color(.84f,.84f,.72f), .28f, .42f);
             orange = Material("Safety / burnt orange", new Color(.92f,.27f,.075f), .3f, .38f);
             dark = Material("Frame / graphite", new Color(.085f,.13f,.16f), .55f, .38f);

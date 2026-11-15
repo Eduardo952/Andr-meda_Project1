@@ -48,7 +48,7 @@ Shader "ARES/Reference Terrain"
             half4 Frag(Varyings v) : SV_Target
             {
                 float3 n = normalize(v.normalWS);
-                float height = SAMPLE_TEXTURE2D(_HeightMap, sampler_HeightMap, v.uv).r * _HeightScale;
+                float height = SAMPLE_TEXTURE2D(_HeightMap, sampler_HeightMap, v.uv).r * _HeightScale * .32;
                 float3 dx = ddx(v.positionWS), dy = ddy(v.positionWS);
                 float3 r1 = cross(dy, n), r2 = cross(n, dx);
                 float determinant = dot(dx, r1);
@@ -60,7 +60,10 @@ Shader "ARES/Reference Terrain"
                 input.bakedGI = SampleSH(n); input.shadowMask = half4(1,1,1,1);
                 input.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(v.positionCS);
                 SurfaceData surface = (SurfaceData)0;
-                surface.albedo = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, v.uv).rgb * v.color.rgb * _BaseColor.rgb;
+                half3 grain=SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, v.uv).rgb;
+                grain=lerp(half3(.72,.49,.35),grain,.48);
+                float dune=.5+.5*sin(v.positionWS.x*.075+sin(v.positionWS.z*.09)*2);
+                surface.albedo = grain * v.color.rgb * _BaseColor.rgb * lerp(half3(1.06,.94,.88),half3(1.12,1.05,.94),dune);
                 surface.metallic = _Metallic; surface.smoothness = _Smoothness;
                 surface.normalTS = half3(0,0,1); surface.occlusion = 1; surface.alpha = 1;
                 half4 color = UniversalFragmentPBR(input, surface);

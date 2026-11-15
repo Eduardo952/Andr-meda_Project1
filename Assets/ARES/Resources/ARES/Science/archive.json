@@ -1,0 +1,213 @@
+{
+  "provider": "NASA CCMC / DONKI + NASA OSDR",
+  "mode": "archive",
+  "retrievedUtc": "2026-11-15T13:04:50.496604+00:00",
+  "records": [
+    {
+      "kind": "flare",
+      "id": "2024-05-10T00:10:00-FLR-001",
+      "date": "2024-05-10T00:10Z",
+      "label": "M1.3",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30665/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T03:15:00-FLR-001",
+      "date": "2024-05-10T03:15Z",
+      "label": "M1.4",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30735/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T06:14:00-FLR-001",
+      "date": "2024-05-10T06:14Z",
+      "label": "M1.3",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30736/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T06:27:00-FLR-001",
+      "date": "2024-05-10T06:27Z",
+      "label": "X3.9",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30666/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T10:10:00-FLR-001",
+      "date": "2024-05-10T10:10Z",
+      "label": "M2.2",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30737/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T13:58:00-FLR-001",
+      "date": "2024-05-10T13:58Z",
+      "label": "M5.9",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30680/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T17:14:00-FLR-001",
+      "date": "2024-05-10T17:14Z",
+      "label": "M1.2",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30767/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T17:54:00-FLR-001",
+      "date": "2024-05-10T17:54Z",
+      "label": "M1.2",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30768/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T18:26:00-FLR-001",
+      "date": "2024-05-10T18:26Z",
+      "label": "M1.1",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30697/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T18:38:00-FLR-001",
+      "date": "2024-05-10T18:38Z",
+      "label": "M1.7",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30699/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T18:57:00-FLR-001",
+      "date": "2024-05-10T18:57Z",
+      "label": "M2.0",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30700/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T19:35:00-FLR-001",
+      "date": "2024-05-10T19:35Z",
+      "label": "M1.1",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30701/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T19:56:00-FLR-001",
+      "date": "2024-05-10T19:56Z",
+      "label": "M1.9",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30709/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T20:59:00-FLR-001",
+      "date": "2024-05-10T20:59Z",
+      "label": "M3.8",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30710/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "flare",
+      "id": "2024-05-10T21:15:00-FLR-001",
+      "date": "2024-05-10T21:15Z",
+      "label": "M2.4",
+      "value": 0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/30769/-1",
+      "preliminary": false
+    },
+    {
+      "kind": "cme",
+      "id": "2024-05-10T02:12:00-CME-001",
+      "date": "2024-05-10T02:12Z",
+      "label": "Nuvem solar",
+      "value": 232.0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/CMEAnalysis/30789/-1",
+      "preliminary": true
+    },
+    {
+      "kind": "cme",
+      "id": "2024-05-10T07:12:00-CME-001",
+      "date": "2024-05-10T07:12Z",
+      "label": "Nuvem solar",
+      "value": 1018.0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/CMEAnalysis/30671/-1",
+      "preliminary": true
+    },
+    {
+      "kind": "cme",
+      "id": "2024-05-10T16:36:00-CME-001",
+      "date": "2024-05-10T16:36Z",
+      "label": "Nuvem solar",
+      "value": 393.0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/CMEAnalysis/30787/-1",
+      "preliminary": true
+    },
+    {
+      "kind": "cme",
+      "id": "2024-05-10T21:17:00-CME-001",
+      "date": "2024-05-10T21:17Z",
+      "label": "Nuvem solar",
+      "value": 678.0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/CMEAnalysis/30752/-1",
+      "preliminary": true
+    },
+    {
+      "kind": "cme",
+      "id": "2024-05-10T21:28:00-CME-001",
+      "date": "2024-05-10T21:28Z",
+      "label": "Nuvem solar",
+      "value": 717.0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/CMEAnalysis/30754/-1",
+      "preliminary": true
+    },
+    {
+      "kind": "cme",
+      "id": "2024-05-10T23:13:00-CME-001",
+      "date": "2024-05-10T23:13Z",
+      "label": "Nuvem solar",
+      "value": 445.0,
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI/view/CMEAnalysis/30785/-1",
+      "preliminary": true
+    }
+  ],
+  "studies": [
+    {
+      "id": "GLDS-177",
+      "title": "Draft Genome Sequences of Two Fusarium oxysporum Isolates Cultured from Infected Zinnia hybrida Plants Grown on the International Space Station",
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-177"
+    },
+    {
+      "id": "GLDS-520",
+      "title": "Changes in DNA Methylation in Arabidopsis thaliana Plants Exposed Over Multiple Generations to Gamma Radiation",
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-520"
+    },
+    {
+      "id": "GLDS-134",
+      "title": "Dissecting Low Atmospheric Pressure Stress: Transcriptome Responses to the Components of Hypobaria in Arabidopsis [Experiment 1]",
+      "url": "https://osdr.nasa.gov/bio/repo/data/studies/OSD-134"
+    }
+  ]
+}

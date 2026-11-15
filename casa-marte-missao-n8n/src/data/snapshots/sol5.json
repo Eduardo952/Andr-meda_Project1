@@ -1,0 +1,89 @@
+{
+  "_notice": "SAMPLE - replace with real data",
+  "sample": true,
+  "snapshot": true,
+  "sol": 5,
+  "earth_date": "SAMPLE-DATE-5",
+  "captured_at": "2026-11-14T00:00:00Z",
+  "donki": {
+    "FLR": [
+      {
+        "flrID": "SAMPLE-FLR-5",
+        "classType": "B7.5",
+        "peakTime": "SAMPLE"
+      }
+    ],
+    "CMEAnalysis": [
+      {
+        "associatedCMEID": "SAMPLE-CME-5",
+        "speed": 450,
+        "halfAngle": 20,
+        "isMostAccurate": true,
+        "time21_5": "SAMPLE"
+      }
+    ],
+    "SEP": [],
+    "WSAEnlilSimulations": [
+      {
+        "simulationID": "SAMPLE-ENLIL-5",
+        "impactList": []
+      }
+    ],
+    "notifications": [
+      {
+        "messageType": "CME",
+        "messageID": "SAMPLE-MSG-5-0",
+        "messageBody": "A slow CME was detected; no impact at Mars is expected (SAMPLE text)."
+      }
+    ]
+  },
+  "insight": {
+    "sol_key": "SAMPLE",
+    "recalculable": true,
+    "AT": {
+      "av": -58.9,
+      "mn": -93.0,
+      "mx": -14.8,
+      "ct": 178000
+    },
+    "HWS": {
+      "av": 3.8,
+      "mn": 0.1,
+      "mx": 14.2,
+      "ct": 89000
+    },
+    "PRE": {
+      "av": 733.0,
+      "mn": 712.0,
+      "mx": 754.0,
+      "ct": 178000
+    },
+    "WD": {
+      "12": {
+        "compass_point": "W",
+        "compass_degrees": 270.0,
+        "ct": 15000
+      },
+      "13": {
+        "compass_point": "WNW",
+        "compass_degrees": 292.5,
+        "ct": 28000
+      },
+      "14": {
+        "compass_point": "NW",
+        "compass_degrees": 315.0,
+        "ct": 16000
+      },
+      "most_common": {
+        "compass_point": "WNW",
+        "ct": 28000
+      }
+    }
+  },
+  "image_library": {
+    "nasa_id": "SAMPLE-IMG-5",
+    "illustration": "olympus",
+    "credit": "SAMPLE - real NASA Image and Video Library credit goes here"
+  },
+  "apod": null
+}

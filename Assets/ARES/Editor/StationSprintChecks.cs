@@ -75,7 +75,7 @@ namespace Ares.Editor
                     var shader = Resources.Load<Shader>("ARES/Effects/CartoonDust");
                     Require(shader != null && !ShaderUtil.ShaderHasError(shader), "Dust shader failed to compile");
                     keyboard = InputSystem.AddDevice<Keyboard>("ARES station/sprint test");
-                    ui.StartMission(); ui.Campaign.CloseReport(); Call("CloseOverlay");
+                    ui.StartMission(false); ui.Campaign.CloseReport(); Call("CloseOverlay");
                     ui.Campaign.SetAllocation(new Allocation { shield = ui.Campaign.EnergyPool });
                     Require(ui.Campaign.StartSol(), "Could not start Sol fixture");
                     MoveToStation(); elapsed = 0;

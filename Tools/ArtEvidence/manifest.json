@@ -1,0 +1,34 @@
+[
+  {
+    "file": "Assets/ARES/Resources/ARES/UI/HudIcons/integrity-v1.png",
+    "source": "OpenAI built-in imagegen",
+    "usage": "Generated original game artwork",
+    "technical_checks_passed": true
+  },
+  {
+    "file": "Assets/ARES/Resources/ARES/UI/HudIcons/oxygen-v1.png",
+    "source": "OpenAI built-in imagegen",
+    "usage": "Generated original game artwork",
+    "technical_checks_passed": true
+  },
+  {
+    "file": "Assets/ARES/Resources/ARES/UI/HudIcons/dose-v1.png",
+    "source": "OpenAI built-in imagegen",
+    "usage": "Generated original game artwork",
+    "technical_checks_passed": true
+  },
+  {
+    "file": "Assets/ARES/Resources/ARES/UI/HudIcons/energy-v1.png",
+    "source": "OpenAI built-in imagegen",
+    "usage": "Generated original game artwork",
+    "technical_checks_passed": true
+  },
+  {
+    "file": "Assets/ARES/Resources/ARES/UI/HudIcons/map-v1.png",
+    "source": "OpenAI built-in imagegen",
+    "usage": "Generated original game artwork",
+    "technical_checks_passed": true,
+    "validation": "Tools/ArtEvidence/map-icon-report.json",
+    "prompt": "Assets/ARES/Runtime/UI/WORLD_MAP.md"
+  }
+]

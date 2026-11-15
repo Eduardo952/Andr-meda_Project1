@@ -1,137 +1,171 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
+using Ares.Data;
 using Ares.Domain;
 using Ares.UI;
 using Ares.World;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UIElements;
 
 namespace Ares.Editor
 {
+    /// <summary>Opt-in Casa Marte checks: resource invariants, five-day persistence and greenhouse-only presentation.</summary>
     [InitializeOnLoad]
     public static class GreenhouseChecks
     {
-        const string Request="Temp/ares-greenhouse-check.request", Pending="ARES.GreenhouseChecks";
-        const BindingFlags Private=BindingFlags.Instance|BindingFlags.NonPublic;
+        const string Pending = "ARES.CasaMarteCheck";
+        const BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
         static GameFrontend ui;
-        static Keyboard keyboard;
+        static ReferenceExplorer explorer;
+        static VisualElement root;
         static int stage, frame;
-        static double started, next;
+        static float elapsed;
+        static double started;
         static bool background;
-        static GreenhouseChecks() { EditorApplication.update+=Tick; }
-        static void Require(bool condition,string message) { if(!condition)throw new InvalidOperationException(message); }
-        static void ModelChecks()
+        static GreenhouseChecks() { EditorApplication.update += Tick; }
+        [MenuItem("ARES/Checks/Casa Marte - water and daily care")]
+        public static void RequestCheck() => File.WriteAllText("Temp/ares-computer-check.request", "casa-marte");
+        public static void Begin()
         {
-            var game=new GreenhouseSimulation();
-            Require(game.WaterMl==11000 && game.Soil==SoilMoisture.Moderate && game.Light==GrowLight.Moderate,"Initial state");
-            Require(game.Shelves.Select(s=>s.Crop).SequenceEqual(new[]{"Fruta","Legume","Verdura","Verdura"}),"Four shelf crops");
-            var expected=new[]{SoilMoisture.Dry,SoilMoisture.Moderate,SoilMoisture.Moderate,SoilMoisture.Dry,SoilMoisture.Moderate,SoilMoisture.Wet,SoilMoisture.Moderate,SoilMoisture.Wet,SoilMoisture.Wet};
-            for(int soil=0;soil<3;soil++)for(int level=0;level<3;level++)
-                Require(GreenhouseSimulation.SoilAfter((SoilMoisture)soil,(IrrigationLevel)level)==expected[soil*3+level],"Irrigation table");
-            Require(game.Decide(IrrigationLevel.Medium,GreenhouseAdjustment.MoreLight)==GreenhouseDecisionError.InvalidAdjustment && game.WaterMl==11000,"Irrelevant adjustment spent water");
-            game.Decide(IrrigationLevel.Medium,GreenhouseAdjustment.None);
-            Require(game.WaterMl==8960 && game.LastResult.Health==ShelfHealth.Healthy && game.Light==GrowLight.Low,"First balance/weather");
-            game.Decide(IrrigationLevel.Medium,GreenhouseAdjustment.MoreLight);
-            Require(game.WaterMl==6920 && game.LastResult.Light==GrowLight.Moderate && game.Soil==SoilMoisture.Dry && game.Light==GrowLight.Excessive,"Light correction/sun");
-            Require(game.CanAdjust(IrrigationLevel.Low,GreenhouseAdjustment.MoreWater),"Dry water adjustment missing");
-            game.Decide(IrrigationLevel.Low,GreenhouseAdjustment.MoreWater);
-            Require(game.WaterMl==4880 && game.LastResult.UsedMl==2040 && game.LastResult.Soil==SoilMoisture.Moderate,"Final level accounting");
-            var wet=new GreenhouseSimulation(); wet.Decide(IrrigationLevel.High,GreenhouseAdjustment.None); wet.Decide(IrrigationLevel.High,GreenhouseAdjustment.None);
-            Require(wet.LastResult.Waterlogged && wet.LastResult.Health==ShelfHealth.AtRisk,"Waterlogging and risk");
-            var repeated=new GreenhouseSimulation(); repeated.Decide(IrrigationLevel.High,GreenhouseAdjustment.None); repeated.Decide(IrrigationLevel.Medium,GreenhouseAdjustment.MoreLight);
-            Require(repeated.LastResult.Health==ShelfHealth.AtRisk,"Repeated single-factor problems must become risk");
-            var shortage=new GreenhouseSimulation(); for(int i=0;i<4;i++)shortage.Decide(IrrigationLevel.High,GreenhouseAdjustment.None);
-            Require(shortage.WaterMl==1720,"Four high cycles arithmetic"); int cycle=shortage.Cycle; var last=shortage.LastResult;
-            Require(shortage.Decide(IrrigationLevel.Medium,GreenhouseAdjustment.None)==GreenhouseDecisionError.InsufficientWater,"Unaffordable decision accepted");
-            Require(shortage.WaterMl==1720 && shortage.Cycle==cycle && shortage.LastResult==last,"Rejected decision mutated state");
-            shortage.Decide(IrrigationLevel.Low,GreenhouseAdjustment.None);
-            Require(shortage.Finished && shortage.WaterMl==360,"Residual-water ending");
-            Require(shortage.Decide(IrrigationLevel.Low,GreenhouseAdjustment.None)==GreenhouseDecisionError.Finished && shortage.WaterMl==360,"Ended game changed");
-            Require(GreenhouseNarrator.Ending(shortage).Contains("0,36") && GreenhouseNarrator.Result(shortage.LastResult).Contains("1,72 − 1,36 = 0,36"),"Portuguese arithmetic/narration");
-            var definition=AssetDatabase.LoadAssetAtPath<Ares.Data.GameDefinition>("Assets/ARES/Generated/GameDefinition.asset");
-            var campaign=new Campaign(definition.campaign,definition.rules); campaign.CloseReport(); campaign.SetAllocation(new Ares.Data.Allocation{shield=campaign.EnergyPool}); campaign.StartSol();
-            string id=campaign.Current.tasks.First(t=>t.room=="greenhouse").id;
-            campaign.BeginTask(id,"greenhouse"); Require(!campaign.FinishGreenhouseTask() && !campaign.FinishTask(id,true,1,0),"Premature/bypass reward");
-            GreenhouseCheckFixture.ManualCycle(campaign,IrrigationLevel.Low,GreenhouseAdjustment.None); campaign.CancelTask(); campaign.BeginTask(id,"greenhouse");
-            Require(campaign.Greenhouse.WaterMl==9640,"Reopening refilled reservoir");
-            Require(GreenhouseCheckFixture.Complete(campaign,id) && !campaign.FinishGreenhouseTask(),"Completion/duplicate guard");
+            stage = 0; frame = -1; elapsed = 0; ui = null; started = EditorApplication.timeSinceStartup;
+            background = Application.runInBackground; Application.runInBackground = true;
+            SessionState.SetBool(Pending, true); File.WriteAllText("Logs/ares-casa-marte.txt", "RUNNING");
+            EditorApplication.isPaused = false; EditorApplication.EnterPlaymode();
+        }
+        static GreenhouseSimulation Uniform(SoilMoisture soil) => new GreenhouseSimulation(new GreenhouseDayConditions("Fixture", GrowLight.Moderate, soil, soil, soil, soil));
+        static void Conservation(GreenhouseSimulation game, GreenhouseWatering can)
+            => Require(game.ReservoirMl + can.CanMl + game.TotalDeliveredMl == 11000, "Water created/lost");
+        static void ModelChecks(GameDefinition definition)
+        {
+            foreach (var state in new[] { SoilMoisture.Moderate, SoilMoisture.Dry, SoilMoisture.Wet })
+            {
+                var game = Uniform(state); var can = new GreenhouseWatering(game);
+                GreenhouseCheckFixture.CareForToday(game, can);
+                Require(game.TodayDeliveredMl == GreenhouseRules.DailyMl(state), "Daily arithmetic: " + state);
+                Require(game.TodayDeliveredMl == (state == SoilMoisture.Dry ? 4080 : state == SoilMoisture.Moderate ? 2040 : 0), "Requested totals");
+                Require(game.Day == 1 && !game.DayEnded && game.CareReady, "Watering must not advance day");
+                can.Fill(); int before = can.CanMl;
+                Require(!can.StartPour(0) && can.CanMl == before, "Extra watering must not consume water"); Conservation(game, can);
+            }
+            var interrupted = Uniform(SoilMoisture.Dry); var tool = new GreenhouseWatering(interrupted);
+            Require(!tool.Fill() && !tool.StartPour(0), "Cannot water without tool");
+            tool.PickUp(); tool.Fill(); Require(tool.ReservoirMl == 10490 && tool.CanMl == 510, "Refill debit must be immediate");
+            tool.StartPour(0); tool.Tick(0, false, 1); tool.ReturnCan();
+            Require(tool.ActiveShelf == -1 && tool.CanMl == 510 && interrupted.TodayDeliveredMl == 0, "Return must cancel only pending action");
+            tool.PickUp(); tool.StartPour(0); tool.Tick(0, true, 3); Conservation(interrupted, tool);
+            Require(tool.ActiveShelf == -1 && tool.CanMl == 510, "Blocked pouring must stop");
+            tool.StartPour(0); tool.Tick(1, false, 3); Require(tool.CanMl == 510, "Moving away must cancel");
+            tool.StartPour(0); tool.Tick(0, false, float.NaN); Require(tool.CanMl == 510, "NaN time");
+            tool.Tick(0, false, 3); Require(interrupted.Shelves[0].Soil == SoilMoisture.Dry && interrupted.Shelves[0].DeliveredDoses == 1, "Dry shelf needs two distinct doses");
+            tool.Fill(); tool.StartPour(0); tool.Tick(0, false, 3); Require(interrupted.Shelves[0].Soil == SoilMoisture.Moderate, "Second dry dose");
+            Conservation(interrupted, tool);
+            var mission = new GreenhouseSimulation(); var canMission = new GreenhouseWatering(mission);
+            for (int day = 1; day <= 5; day++)
+            {
+                GreenhouseCheckFixture.CareForToday(mission, canMission); Conservation(mission, canMission);
+                mission.EndDay(); int total = mission.TotalDeliveredMl; mission.EndDay();
+                Require(total == mission.TotalDeliveredMl, "Repeated EndDay changed water");
+                mission.BeginDay(day + 1);
+            }
+            Require(mission.Finished && mission.HealthyDays == 5 && mission.ReservoirMl == 800, "Five-day sustainable route must leave 800 mL");
+            Require(!canMission.Fill() && !canMission.StartPour(0), "Mission-end watering");
+            var shortage = new GreenhouseSimulation(); var emptyCan = new GreenhouseWatering(shortage); emptyCan.PickUp();
+            // Simulate other habitat reservoir withdrawals through the same ledger, including a partial final fill.
+            typeof(GreenhouseSimulation).GetMethod("Withdraw", Private).Invoke(shortage, new object[] { 10800 });
+            emptyCan.Fill(); Require(shortage.ReservoirMl == 0 && emptyCan.CanMl == 200, "Last partial refill");
+            Require(!emptyCan.StartPour(0) && !emptyCan.Fill(), "Insufficient water must not create a full dose");
+            shortage.AdjustLight(-1); shortage.EndDay();
+            Require(shortage.Shelves[0].Health == ShelfHealth.AtRisk, "Missed irrigation and low light consequences");
+            var campaign = new Campaign(definition.campaign, definition.rules);
+            campaign.CloseReport(); var allocation = campaign.Current.demand; allocation.shield += campaign.EnergyPool - allocation.Total;
+            Require(campaign.SetAllocation(allocation) && campaign.StartSol(), "Campaign fixture start"); campaign.ReachShelter();
+            GreenhouseCheckFixture.CareForToday(campaign.Greenhouse, campaign.Watering);
+            campaign.Watering.Fill(); int stored = campaign.Watering.CanMl, reservoir = campaign.Greenhouse.ReservoirMl;
+            var original = campaign.Greenhouse; var originalCan = campaign.Watering;
+            campaign.Tick(MissionTime.RealSecondsPerSol, false); CommunicationCheckFixture.SendRequiredReport(campaign); campaign.NextSol();
+            Require(ReferenceEquals(original, campaign.Greenhouse) && ReferenceEquals(originalCan, campaign.Watering), "Campaign replaced greenhouse ledger");
+            Require(campaign.Greenhouse.Day == 2 && campaign.Greenhouse.ReservoirMl == reservoir && campaign.Watering.CanMl == stored, "Campaign day transition refilled/lost water");
+            Conservation(campaign.Greenhouse, campaign.Watering);
         }
         static void Tick()
         {
-            if(EditorApplication.isCompiling || EditorApplication.isUpdating)return;
-            if(!EditorApplication.isPlayingOrWillChangePlaymode && File.Exists(Request))
-            {
-                string token=File.GetLastWriteTimeUtc(Request).Ticks.ToString();
-                if(SessionState.GetString(Pending+".refresh","")!=token) { SessionState.SetString(Pending+".refresh",token); AssetDatabase.Refresh(); return; }
-                File.Delete(Request);
-                try { ModelChecks(); } catch(Exception error) { File.WriteAllText("Logs/ares-greenhouse.txt","FAIL model: "+error);return; }
-                SessionState.SetBool(Pending,true); stage=0; frame=-1; started=EditorApplication.timeSinceStartup; next=started+1;
-                background=Application.runInBackground; Application.runInBackground=true;
-                File.WriteAllText("Logs/ares-greenhouse.txt","RUNNING "+DateTime.UtcNow.ToString("O")); EditorApplication.EnterPlaymode(); return;
-            }
-            if(!SessionState.GetBool(Pending,false)||!EditorApplication.isPlaying||Time.frameCount==frame||EditorApplication.timeSinceStartup<next)return;
-            frame=Time.frameCount; next=EditorApplication.timeSinceStartup+.3;
+            if (!SessionState.GetBool(Pending, false) || !EditorApplication.isPlaying || EditorApplication.isCompiling) return;
             try
             {
-                Require(EditorApplication.timeSinceStartup-started<60,"Play test timeout");
-                if(keyboard==null)
+                Require(EditorApplication.timeSinceStartup - started < 70, "Timeout");
+                if (frame == Time.frameCount) return; frame = Time.frameCount; elapsed += Mathf.Min(Time.deltaTime, .05f);
+                if (ui == null)
                 {
-                    ui=UnityEngine.Object.FindAnyObjectByType<GameFrontend>(); if(ui==null)return;
-                    var explorer=ui.GetComponent<ReferenceExplorer>();
-                    var player=(PlayerMotion)typeof(ReferenceExplorer).GetField("player",Private).GetValue(explorer); if(player==null)return;
-                    ui.StartMission(); ui.Campaign.CloseReport(); Call("CloseOverlay"); ui.Campaign.SetAllocation(new Ares.Data.Allocation{shield=ui.Campaign.EnergyPool}); ui.Campaign.StartSol();
-                    player.X=52; player.Z=0; player.VelocityX=player.VelocityZ=player.Speed=0;
-                    keyboard=InputSystem.AddDevice<Keyboard>("ARES greenhouse keyboard");
+                    var found = UnityEngine.Object.FindAnyObjectByType<GameFrontend>();
+                    var actor = found?.GetComponent<ReferenceExplorer>();
+                    if (actor == null || typeof(ReferenceExplorer).GetField("player", Private).GetValue(actor) == null) return;
+                    ui = found; explorer = actor; ModelChecks(explorer.definition);
+                    ui.StartMission(false); ui.Campaign.CloseReport(); Call("CloseOverlay");
+                    ui.Campaign.SetAllocation(new Allocation { shield = ui.Campaign.EnergyPool }); ui.Campaign.StartSol();
+                    root = ui.GetComponent<UIDocument>().rootVisualElement;
+                    SetPlayer(ui.GreenhouseCare.PickupPosition); elapsed = 0;
                 }
-                var root=ui.GetComponent<UIDocument>().rootVisualElement; var game=ui.Campaign.Greenhouse;
-                keyboard.MakeCurrent(); var keys=new KeyboardState();
-                switch(stage)
+                var care = ui.GreenhouseCare; var water = care.Watering;
+                if (stage == 0 && elapsed > .4f)
                 {
-                    case 0: keys=new KeyboardState(Key.E); break;
-                    case 1:
-                        Require(root.Q("greenhouse-view")!=null && ui.BlocksWorld,"E did not open new activity");
-                        Require(root.Q<Image>().image!=null && root.Query(className:"greenhouse-shelf").ToList().Count==4,"Art/four shelves missing");
-                        Require(!root.Q<Button>("greenhouse-confirm").enabledInHierarchy,"Choice preselected");
-                        ScreenCapture.CaptureScreenshot("Logs/ares-greenhouse-start.png"); break;
-                    case 2: GreenhouseCheckFixture.Press(root,"greenhouse-level-1"); GreenhouseCheckFixture.Press(root,"greenhouse-confirm"); GreenhouseCheckFixture.ManualCycle(ui.Campaign,IrrigationLevel.Medium,GreenhouseAdjustment.None); GreenhouseCheckFixture.Reopen(ui); break;
-                    case 3:
-                        Require(game.WaterMl==8960 && root.Q<Label>("greenhouse-result").text.Contains("8,96"),"Native choice/result");
-                        GreenhouseCheckFixture.Press(root,"greenhouse-level-1");
-                        Require(root.Q<Button>("greenhouse-adjust-MoreLight")!=null && root.Q<Button>("greenhouse-adjust-LessLight")==null,"Context adjustment visibility");
-                        ScreenCapture.CaptureScreenshot("Logs/ares-greenhouse-weather.png"); break;
-                    case 4: keys=new KeyboardState(Key.Escape); break;
-                    case 5: Require(!ui.BlocksWorld && ui.Campaign.OpenTask==null,"Close did not release task"); keys=new KeyboardState(Key.E); break;
-                    case 6:
-                        Require(game.WaterMl==8960 && game.Cycle==2,"Reopening reset state");
-                        GreenhouseCheckFixture.Press(root,"greenhouse-level-1"); GreenhouseCheckFixture.Press(root,"greenhouse-adjust-MoreLight"); GreenhouseCheckFixture.Press(root,"greenhouse-confirm");
-                        GreenhouseCheckFixture.ManualCycle(ui.Campaign,IrrigationLevel.Medium,GreenhouseAdjustment.MoreLight);GreenhouseCheckFixture.Reopen(ui);
-                        Require(game.LastResult.Light==GrowLight.Moderate,"Light button did not correct light"); break;
-                    case 7: GreenhouseCheckFixture.CompleteThroughControls(root,ui); break;
-                    case 8:
-                        Require(root.Q("greenhouse-ending")!=null && root.Q<Button>("greenhouse-confirm")==null,"Ending still accepts cycles");
-                        root.Q<TextField>("greenhouse-reflection").value="A água é limitada e a luz ajuda as plantas.";
-                        Require(game.Reflection.Contains("limitada"),"Reflection not saved");
-                        var footer=root.Q(className:"mini-footer"); Require(footer.worldBound.yMax<=root.worldBound.yMax+1,"Footer outside viewport");
-                        ScreenCapture.CaptureScreenshot("Logs/ares-greenhouse-end.png"); break;
-                    case 9: GreenhouseCheckFixture.Press(root,"greenhouse-accept"); break;
-                    case 10:
-                        Require(!ui.BlocksWorld && ui.Campaign.Completed("SmartFarmCare"),"Lesson not recorded in campaign");
-                        Finish("PASS: initial/crop states; all 9 soil transitions; exact ml and final-level cost; weather and light correction; repeated-problem risk; insufficiency without mutation; residual ending; reward guards; actual E/Escape/reopen; native decisions/reflection; generated art and four shelves; screenshots inspected separately."); return;
+                    Require(care.TryClick(DownRay(ui.GreenhouseCare.PickupPosition)), "Click pickup target");
+                    Require(water.HasCan, "Click did not pick up");
+                    Require(care.TryClick(DownRay(ui.GreenhouseCare.PickupPosition)) && !water.HasCan, "Click return");
+                    care.TryClick(DownRay(ui.GreenhouseCare.PickupPosition)); SetPlayer(ui.GreenhouseCare.RefillPosition); Next();
                 }
-                stage++; InputSystem.QueueStateEvent(keyboard,keys);
+                else if (stage == 1 && elapsed > .3f)
+                {
+                    Require(care.TryClick(DownRay(ui.GreenhouseCare.RefillPosition)), "Click reservoir");
+                    Require(water.CanMl == 510 && water.ReservoirMl == 10490, "World fill amount");
+                    SetPlayer(ui.GreenhouseCare.ShelfPositions[0]); Next();
+                }
+                else if (stage == 2 && elapsed > .3f)
+                {
+                    Require(care.TryClick(DownRay(ui.GreenhouseCare.Layout.rows[0].Center)), "Click shelf");
+                    Require(water.ActiveShelf == 0, "Shelf click did not start dose");
+                    water.Tick(0, false, 3); Require(water.CanMl == 0 && ui.Campaign.Greenhouse.TodayDeliveredMl == 510, "World dose amount");
+                    int gardenMeshes = 0;
+                    foreach (var renderer in ui.GetComponentsInChildren<MeshRenderer>())
+                        if (renderer.name.StartsWith("greenhouse_interior_") && renderer.enabled) gardenMeshes++;
+                    Require(gardenMeshes == 842, "Reference garden must remain visible during manual care");
+                    var orbit = (OrbitCamera)typeof(ReferenceExplorer).GetField("rig", Private).GetValue(explorer);
+                    SetPlayer(new Vector3(51, 0, -1)); orbit.Yaw = orbit.TargetYaw = .35f; orbit.Pitch = orbit.TargetPitch = .75f; orbit.Distance = orbit.TargetDistance = 16;
+                    Next();
+                }
+                else if (stage == 3 && elapsed > .7f)
+                { ScreenCapture.CaptureScreenshot("Logs/ares-casa-marte-world.png"); Next(); }
+                else if (stage == 4 && elapsed > .3f)
+                { GreenhouseCheckFixture.Reopen(ui); Next(); }
+                else if (stage == 5 && elapsed > .5f)
+                {
+                    Require(root.Q("greenhouse-water") != null, "Daily care UI missing");
+                    Require(!root.Q<Button>("greenhouse-accept").enabledSelf, "Incomplete care accepted");
+                    GreenhouseCheckFixture.Press(root, "greenhouse-light-less"); Require(ui.Campaign.Greenhouse.Light == GrowLight.Low, "Decrease light");
+                    GreenhouseCheckFixture.Press(root, "greenhouse-light-more"); Require(ui.Campaign.Greenhouse.Light == GrowLight.Moderate, "Increase light");
+                    ScreenCapture.CaptureScreenshot("Logs/ares-casa-marte-ui.png"); Next();
+                }
+                else if (stage == 6 && elapsed > .3f)
+                {
+                    GreenhouseCheckFixture.CareForToday(ui.Campaign.Greenhouse, water); GreenhouseCheckFixture.Reopen(ui);
+                    GreenhouseCheckFixture.Press(root, "greenhouse-accept");
+                    Require(ui.Campaign.Completed("SmartFarmCare") && !ui.BlocksWorld, "Daily care reward/close");
+                    Finish("PASS: 2040/4080/0 mL daily totals, exact refill/dose ledger, cancellation/return, insufficient water, five days with 800 mL left, campaign persistence, click pickup/return/refill/shelf, original garden visible, light UI and daily completion. Only greenhouse views opened.");
+                }
             }
-            catch(Exception error) { Finish("FAIL stage "+stage+": "+error); }
+            catch (Exception error) { Finish("FAIL stage " + stage + ": " + error); }
         }
-        static void Call(string name)=>typeof(GameFrontend).GetMethod(name,Private).Invoke(ui,null);
+        static Ray DownRay(Vector3 point) => new Ray(point + Vector3.up * 6, Vector3.down);
+        static void SetPlayer(Vector3 p)
+        { var player = (PlayerMotion)typeof(ReferenceExplorer).GetField("player", Private).GetValue(explorer); player.X = p.x; player.Z = -p.z; player.Speed = player.VelocityX = player.VelocityZ = 0; }
+        static void Call(string method) => typeof(GameFrontend).GetMethod(method, Private).Invoke(ui, null);
+        static void Next() { stage++; elapsed = 0; }
+        static void Require(bool condition, string message) { if (!condition) throw new InvalidOperationException(message); }
         static void Finish(string result)
         {
-            File.WriteAllText("Logs/ares-greenhouse.txt",DateTime.UtcNow.ToString("O")+" "+result); SessionState.SetBool(Pending,false);
-            if(keyboard!=null)InputSystem.RemoveDevice(keyboard); keyboard=null; Application.runInBackground=background; EditorApplication.ExitPlaymode();
+            SessionState.SetBool(Pending, false); File.WriteAllText("Logs/ares-casa-marte.txt", result);
+            Application.runInBackground = background; EditorApplication.ExitPlaymode();
         }
     }
 }

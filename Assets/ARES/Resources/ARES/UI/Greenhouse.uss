@@ -1,4 +1,4 @@
-.greenhouse-view { width: 1120px; }
+.greenhouse-view { width: 94%; }
 .greenhouse-view Label { white-space: normal; }
 .greenhouse-welcome { margin: 16px 24px 6px; font-size: 17px; }
 .greenhouse-columns { align-items: flex-start; flex-wrap: nowrap; padding: 16px 24px 20px; }
@@ -30,3 +30,18 @@
 .greenhouse-care-hud .unity-progress-bar__progress { background-color: #77bed2; }
 .greenhouse-care-shelf { font-size: 14px; margin-top: 5px; padding-left: 7px; border-left-width: 3px; border-left-color: #86ad76; }
 .greenhouse-care-instruction { font-size: 15px; -unity-font-style: bold; margin-top: 10px; }
+.greenhouse-view { max-width: 1380px; }
+.greenhouse-water-step { flex-grow: 1; align-items: center; margin: 8px; padding: 8px; border-radius: 12px; background-color: #e4eee3; }
+.greenhouse-daily { padding: 12px 24px 20px; }
+.greenhouse-water-card { padding: 16px; border-radius: 18px; background-color: #e0eef0; margin-bottom: 14px; }
+.greenhouse-water-card .unity-progress-bar__progress { background-color: #56a8bb; }
+.greenhouse-water-card ProgressBar { height: 28px; margin: 8px 0; }
+.greenhouse-daily-shelves { align-items: stretch; flex-wrap: wrap; }
+.greenhouse-daily-shelf { flex-grow: 1; flex-basis: 210px; margin: 5px; padding: 14px; border-radius: 18px; background-color: #edf1df; border-top-width: 4px; border-top-color: #6f9a64; }
+.greenhouse-daily-shelf.shelf-problem { background-color: #fff0d7; border-top-color: #d0a35a; }
+.greenhouse-daily-shelf.shelf-atrisk { background-color: #fae1d6; border-top-color: #c9795c; }
+.greenhouse-daily-shelf .heading { font-size: 21px; }
+.greenhouse-daily-shelf Label { font-size: 16px; }
+.greenhouse-daily-shelf Button { font-size: 16px; padding: 8px 12px; margin: 8px 0 0; }
+.greenhouse-soil { -unity-font-style: bold; }
+.greenhouse-light-card { background-color: #faf0cd; border-radius: 18px; padding: 16px; margin: 12px 4px; }

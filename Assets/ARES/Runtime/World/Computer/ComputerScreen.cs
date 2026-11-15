@@ -27,7 +27,9 @@ namespace Ares.World.Computer
             documentObject=new GameObject("Computer / offscreen document");
             document=documentObject.AddComponent<UIDocument>();document.panelSettings=panel;
             var root=document.rootVisualElement;root.AddToClassList("ares-root");root.pickingMode=PickingMode.Ignore;
-            foreach(string sheet in new[]{"Game","Oxygen"})root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/"+sheet));
+            foreach(string sheet in new[]{"Game","Oxygen","MissionTheme"})root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/"+sheet));
+            root.AddToClassList("computer-physical-screen");PresentationLocalizer.Attach(root);
+            documentObject.AddComponent<PresentationLocalizationLoop>().Bind(root);
             surface=new GameObject("Computer / live screen surface");surface.transform.SetParent(parent,false);
             surface.transform.SetPositionAndRotation(settings.screenCenter,Quaternion.LookRotation(-settings.screenNormal.normalized));
             float x=settings.screenSize.x*.5f,y=settings.screenSize.y*.5f;
@@ -40,7 +42,7 @@ namespace Ares.World.Computer
         }
         public void Bind(Campaign campaign)
         {document.rootVisualElement.Clear();view=new ComputerPanel(document.rootVisualElement,campaign,()=>false,()=>{},null);}
-        public void Refresh() => view?.Refresh();
+        public void Refresh() {view?.Refresh();PresentationLocalizer.Refresh(document.rootVisualElement);}
         public void Dispose()
         {
             Object.Destroy(surface);Object.Destroy(documentObject);Object.Destroy(mesh);Object.Destroy(material);Object.Destroy(panel);texture.Release();Object.Destroy(texture);

@@ -34,7 +34,7 @@ namespace Ares.Editor
                     var readyExplorer=ready.GetComponent<ReferenceExplorer>();
                     if(typeof(ReferenceExplorer).GetField("player",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(readyExplorer)==null)return;
                     ui=ready;
-                    ui.StartMission();ui.Campaign.CloseReport();
+                    ui.StartMission(false);ui.Campaign.CloseReport();
                     typeof(GameFrontend).GetMethod("CloseOverlay",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(ui,null);
                     var explorer=ui.GetComponent<ReferenceExplorer>();explorer.reducedMotion=false;
                     var player=(PlayerMotion)typeof(ReferenceExplorer).GetField("player",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(explorer);

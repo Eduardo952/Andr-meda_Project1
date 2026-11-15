@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Ares.World
 {
-    public enum StationAction { None, PlanEnergy, OpenTask, SealSol, NeedsPlan, Completed, FindComputer }
+    public enum StationAction { None, PlanEnergy, OpenTask, SealSol, NeedsPlan, Completed, FindComputer, RegulateShield }
 
     public readonly struct StationOffer
     {
         public readonly RoomData Room;
         public readonly StationAction Action;
         public readonly string TaskId;
-        public bool CanUse => Action == StationAction.PlanEnergy || Action == StationAction.OpenTask || Action == StationAction.SealSol;
+        public bool CanUse => Action == StationAction.PlanEnergy || Action == StationAction.OpenTask || Action == StationAction.SealSol || Action == StationAction.RegulateShield;
         public StationOffer(RoomData room, StationAction action, string taskId = null)
         { Room = room; Action = action; TaskId = taskId; }
     }
@@ -39,10 +39,16 @@ namespace Ares.World
             if (campaign.Phase != Phase.Tasks || campaign.OpenTask != null) return new StationOffer(room, StationAction.None);
             if (room.id == "control")
                 return new StationOffer(room, StationAction.FindComputer);
+            bool completed = false;
             foreach (var task in campaign.Current.tasks)
                 if (task.room == room.id)
-                    return new StationOffer(room, campaign.Completed(task.id) ? StationAction.Completed : StationAction.OpenTask, task.id);
-            return new StationOffer(room, StationAction.None);
+                {
+                    if (!campaign.Completed(task.id)) return new StationOffer(room, StationAction.OpenTask, task.id);
+                    completed = true;
+                }
+            if (room.id == "shield" && campaign.Demands.ShieldTaskAvailable && !campaign.Demands.ShieldRegulated)
+                return new StationOffer(room, StationAction.RegulateShield, ConflictingDemands.ShieldTaskId);
+            return new StationOffer(room, completed ? StationAction.Completed : StationAction.None);
         }
     }
 }

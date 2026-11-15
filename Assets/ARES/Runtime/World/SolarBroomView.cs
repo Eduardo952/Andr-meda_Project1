@@ -5,13 +5,14 @@ namespace Ares.World
     /// <summary>Small code-built cartoon prop; the same broom moves from its rack to the astronaut.</summary>
     public sealed class SolarBroomView
     {
-        public static readonly Vector3 PickupPosition = new Vector3(3, 0, -69);
+        public Vector3 PickupPosition { get; }
         // These sockets match the imported glove and the centre of the padded handle.
         public static readonly Vector3 HandSocket = new Vector3(0, -.55f, 0);
         public static readonly Vector3 GripSocket = new Vector3(0, .95f, 0);
         readonly Transform broom;
         public SolarBroomView(Transform parent, Material material)
         {
+            PickupPosition = parent.GetComponentInParent<ReferenceExplorer>().definition.layout.SolarPoint(3,0,69);
             var rack = new GameObject("Broom rack").transform; rack.SetParent(parent, false); rack.position = PickupPosition;
             Part(rack, "Foot", PrimitiveType.Cube, new Vector3(0,.1f,0), new Vector3(1.3f,.2f,.8f), new Color(.26f,.32f,.35f), material);
             Part(rack, "Back", PrimitiveType.Cube, new Vector3(0,.6f,.22f), new Vector3(.12f,1.1f,.12f), new Color(.9f,.68f,.25f), material);

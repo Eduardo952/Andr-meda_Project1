@@ -19,7 +19,8 @@ namespace Ares.World
         public SolarPlant Plant { get; private set; }
         public SolarCleaningSession Cleaning { get; private set; }
         public int NearbyPanel { get; private set; } = -1;
-        public bool NearBroom => explorer != null && Vector3.Distance(explorer.PlayerPosition, SolarBroomView.PickupPosition) <= 2;
+        public Vector3 BroomPickupPosition => broom!=null?broom.PickupPosition:Vector3.zero;
+        public bool NearBroom => explorer != null && broom!=null && Vector3.Distance(explorer.PlayerPosition, BroomPickupPosition) <= 2;
         public bool CanPickUp => Cleaning != null && !Cleaning.HasBroom && NearBroom;
         public bool CanReturn => Cleaning != null && Cleaning.HasBroom && NearBroom;
         public bool CapturesPointer => Cleaning != null && Cleaning.HasBroom && NearbyPanel >= 0;
@@ -37,15 +38,17 @@ namespace Ares.World
             for (int i = 0; i < panels.Length; i++)
             {
                 int col = i % 8, row = i / 8;
-                var expected = new Vector3(-21 + col * 6 + (col < 4 ? -1 : 1), 1.5f, -(72 + row * 6));
+                var expected = explorer.definition.layout.SolarPoint(-21 + col * 6 + (col < 4 ? -1 : 1), 1.5f, 72 + row * 6);
                 foreach (var source in sources)
                 {
-                    if (Vector3.Distance(source.bounds.center, expected) > .1f || source.bounds.size.x < 4.7f || source.sharedMaterial.mainTexture == null) continue;
-                    panels[i] = new SolarPanelView(visuals, source, material, i); BoundPanels++; break;
+                    if (Vector3.Distance(source.bounds.center, expected) > .1f || source.sharedMaterial.mainTexture == null) continue;
+                    panels[i] = new SolarPanelView(visuals, source, material, i, explorer.definition.layout.SolarRotation); BoundPanels++; break;
                 }
             }
             if (BoundPanels != SolarPlant.PanelCount) Debug.LogError($"Solar maintenance needs 32 imported panels; found {BoundPanels}. Recheck the geometry adapter.", this);
             broom = new SolarBroomView(visuals, material);
+            foreach(var part in GetComponentsInChildren<ReferenceWorldPart>())
+                if(part.role=="solar_dust")part.GetComponent<Renderer>().enabled=false;
         }
         public void Bind(SolarPlant plant)
         {
@@ -76,7 +79,7 @@ namespace Ares.World
             bool active = frontend != null && frontend.Campaign != null && Plant != null;
             visuals.gameObject.SetActive(active);
             if (!active) return;
-            bool visible = explorer.PlayerPosition.z < -60;
+            bool visible = Vector3.Distance(explorer.PlayerPosition, explorer.definition.layout.Room("solar").Center) < 40;
             for (int i=0;i<panels.Length;i++) panels[i]?.Update(Plant.Dust(i), NearbyPanel == i, visible);
             broom.Update(astronaut, Cleaning.HasBroom, Cleaning.ActivePanel >= 0, explorer.reducedMotion, NearbyPanel >= 0 ? panels[NearbyPanel].Center : Vector3.zero,frontend.GreenhouseCare==null || !frontend.GreenhouseCare.Inside);
         }

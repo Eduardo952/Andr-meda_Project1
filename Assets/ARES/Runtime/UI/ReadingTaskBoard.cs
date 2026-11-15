@@ -79,12 +79,19 @@ namespace Ares.UI
             var a = c.Attempt;
             if (a.Stage != 0)
             { Text(c.Root, c.T("challenge.impactQuestion")); c.Choices("yes", "no"); Text(c.Root, c.T("challenge.impactAnswer"), "small"); return; }
-            c.Root.Add(new SnapshotArt(a.Readings.PictureKind)); Text(c.Root, c.T("tasks.T10.sampleArt"), "small");
+            var photo = a.Readings.ArchivedPhoto;
+            if (photo != null)
+            {
+                var image = new Image { image = UnityEngine.Resources.Load<UnityEngine.Texture2D>(photo.resource), scaleMode = UnityEngine.ScaleMode.ScaleToFit };
+                image.style.width = Length.Percent(100); image.style.height = 280; c.Root.Add(image);
+                Text(c.Root, photo.credit + " · arquivo NASA/APOD", "small");
+            }
+            else { c.Root.Add(new SnapshotArt(a.Readings.PictureKind)); Text(c.Root, c.T("tasks.T10.sampleArt"), "small"); }
             var cards = Box(c.Root, "row mini-caption-cards"); var buttons = new Button[3];
             for (int i = 0; i < 3; i++)
             {
                 int index = i;
-                string caption = i == 1 ? c.T("photo." + a.Readings.PictureKind) : c.T(i == 0 ? "mini.PhotoDetective.decoyLab" : "mini.PhotoDetective.decoyMap");
+                string caption = i == 1 ? photo?.title ?? c.T("photo." + a.Readings.PictureKind) : c.T(i == 0 ? "mini.PhotoDetective.decoyLab" : "mini.PhotoDetective.decoyMap");
                 buttons[i] = Button(cards, caption, () => { a.Selected = index; for (int k = 0; k < 3; k++) buttons[k].EnableInClassList("selected", k == index); });
                 buttons[i].EnableInClassList("selected", a.Selected == i);
             }

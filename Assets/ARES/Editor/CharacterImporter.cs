@@ -24,14 +24,15 @@ namespace Ares.Editor
         }
         public const string Root = "Assets/ARES/Generated/Characters";
 
-        public static void ImportInto(Transform world)
+        public static void ImportInto(Transform world, string file = "characters.json")
         {
             Directory.CreateDirectory(Root);
             AssetDatabase.Refresh();
-            var data = JsonUtility.FromJson<FileData>(File.ReadAllText("Assets/ARES/Import/characters.json"));
+            var data = JsonUtility.FromJson<FileData>(File.ReadAllText("Assets/ARES/Import/" + file));
             foreach (var model in data.characters)
             {
                 var root = new GameObject(model.id + "_character");
+                root.AddComponent<ReferenceRig>().id = model.id;
                 try
                 {
                     var transforms = new Transform[model.nodes.Length];
@@ -68,6 +69,7 @@ namespace Ares.Editor
                         animator.fish = bindings["fish"]; animator.tail = bindings["tail"]; animator.mouth = bindings["mouth"];
                         animator.fin = bindings["fin"]; animator.bubbles = bindings["bubbles"]; animator.eyes = bindings["eyes"];
                     }
+                    if (model.id == "sky") ReferenceCelestials.PrepareImportedSky(root.transform);
                     var prefab = PrefabUtility.SaveAsPrefabAsset(root, Root + "/" + model.id + ".prefab");
                     PrefabUtility.InstantiatePrefab(prefab, world);
                 }
@@ -96,7 +98,8 @@ namespace Ares.Editor
 
         static Material Material(GeometryData data)
         {
-            var material = new Material(Shader.Find(data.unlit ? "Universal Render Pipeline/Unlit" : "Universal Render Pipeline/Lit"));
+            var material = new Material(Shader.Find(data.name.StartsWith("sky_") ? "ARES/Celestial" : data.unlit ? "Universal Render Pipeline/Unlit" : "Universal Render Pipeline/Lit"));
+            material.name = data.name;
             ColorUtility.TryParseHtmlString(data.color, out var color); color.a = data.opacity;
             material.SetColor("_BaseColor", color);
             if (!data.unlit)

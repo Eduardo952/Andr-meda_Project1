@@ -1,5 +1,6 @@
 {
   "entries": [
+    { "key": "task.waterPlants", "value": "Water plants" },
     { "key": "solar.title", "value": "SOLAR PARK · 32 PANELS" },
     { "key": "solar.reserve", "value": "Reserve: {{n}} kWh" },
     { "key": "solar.generation", "value": "Generation: {{n}} kWh / {{seconds}} s · {{dirty}} dusty" },
@@ -17,6 +18,23 @@
     { "key": "howTo.use", "value": "Enter a task area and press USE (E, Space or Enter). Plan energy in the Control Room before starting tasks." },
     { "key": "station.needsPlan", "value": "Plan energy in the Control Room" },
     { "key": "station.completed", "value": "This area's task is complete for this Sol" },
-    { "key": "station.approach", "value": "Approach a task area" }
+    { "key": "station.approach", "value": "Approach a task area" },
+    {"key": "map.title", "value": "Base map"},
+    {"key": "map.button", "value": "Map"},
+    {"key": "map.open", "value": "Open map [M]"},
+    {"key": "map.close", "value": "Back [Esc]"},
+    {"key": "map.player", "value": "You are here · the tip shows your heading"},
+    {"key": "map.rover", "value": "NOMAD 06 rover · the tip shows your heading"},
+    {"key": "map.hint", "value": "Wheel: zoom · Drag: explore · Mission paused"},
+    {"key": "map.zoomIn", "value": "Zoom in (+)"},
+    {"key": "map.zoomOut", "value": "Zoom out (−)"},
+    {"key": "map.locate", "value": "Locate"},
+    {"key": "map.base", "value": "View base"},
+    {"key": "map.landmark.generator", "value": "Magnetic generator"},
+    {"key": "map.landmark.landingPad", "value": "Rocket / landing pad"},
+    {"key": "map.landmark.rover", "value": "Rover"},
+    {"key": "map.landmark.mast", "value": "Communications"},
+    {"key": "map.reset", "value": "Overview"},
+    {"key": "map.offscreen", "value": "Out of view · use Locate"}
   ]
 }

@@ -46,7 +46,7 @@ namespace Ares.Data
     [Serializable]
     public sealed class ObservatoryCollection
     {
-        public string endpoint = "https://api.nasa.gov/planetary/apod";
+        public string endpoint = "https://science.nasa.gov/wp-json/wp/v2/apod-basic";
         public ObservatoryEntry[] entries;
     }
 }

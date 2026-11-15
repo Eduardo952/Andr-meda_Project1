@@ -22,6 +22,10 @@ namespace Ares.UI
             var additions = Resources.Load<TextAsset>("ARES/UI/" + language + ".unity");
             if (additions != null)
                 foreach (var entry in JsonUtility.FromJson<Catalog>(additions.text).entries) entries[entry.key] = entry.value;
+            // Reviewed teaching copy is independent of the original reference export.
+            var child = Resources.Load<TextAsset>("ARES/UI/" + language + ".child");
+            if (child != null)
+                foreach (var entry in JsonUtility.FromJson<Catalog>(child.text).entries) entries[entry.key] = entry.value;
         }
         public string T(string key, params object[] replacements)
         {

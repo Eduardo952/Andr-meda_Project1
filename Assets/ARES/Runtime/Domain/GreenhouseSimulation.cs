@@ -1,127 +1,117 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Ares.Domain
 {
     public enum SoilMoisture { Dry, Moderate, Wet }
     public enum GrowLight { Low, Moderate, Excessive }
-    public enum IrrigationLevel { Low, Medium, High }
-    public enum GreenhouseAdjustment { None, MoreWater, LessWater, MoreLight, LessLight }
     public enum ShelfHealth { Healthy, Problem, AtRisk }
-    public enum GreenhouseWeather { Stable, DustStorm, StrongSun, ClearSky }
-    public enum GreenhouseDecisionError { None, Finished, InvalidChoice, InvalidAdjustment, InsufficientWater }
 
     public sealed class GreenhouseShelf
     {
         public string Crop { get; }
+        public int Containers => GreenhouseRules.ContainersPerShelf;
+        public SoilMoisture Soil { get; internal set; }
+        public int RequiredDoses { get; internal set; }
+        public int DeliveredDoses { get; internal set; }
+        public bool Inspected { get; internal set; }
+        public bool CaredFor => Inspected && DeliveredDoses >= RequiredDoses;
         public ShelfHealth Health { get; internal set; }
-        public int ProblemCycles { get; internal set; }
+        public int ProblemDays { get; internal set; }
         internal GreenhouseShelf(string crop) { Crop = crop; }
     }
 
     public sealed class GreenhouseResult
     {
-        public int Cycle { get; internal set; }
-        public int BeforeMl { get; internal set; }
+        public int Day { get; internal set; }
         public int UsedMl { get; internal set; }
-        public int RemainingMl { get; internal set; }
-        public SoilMoisture Soil { get; internal set; }
-        public GrowLight Light { get; internal set; }
-        public bool Waterlogged { get; internal set; }
-        public ShelfHealth Health { get; internal set; }
-        public IrrigationLevel FinalLevel { get; internal set; }
+        public int HealthyShelves { get; internal set; }
     }
 
-    /// <summary>Child-paced teaching simulation. Integer millilitres avoid rounding or negative balances.</summary>
+    /// <summary>Five-day crop state and reservoir ledger. No rendering, input, clock or NASA API dependency.</summary>
     public sealed class GreenhouseSimulation
     {
-        public const int InitialWaterMl = 11000;
-        static readonly GreenhouseWeather[] WeatherSequence = {
-            GreenhouseWeather.Stable, GreenhouseWeather.DustStorm, GreenhouseWeather.StrongSun,
-            GreenhouseWeather.ClearSky, GreenhouseWeather.Stable, GreenhouseWeather.DustStorm,
-            GreenhouseWeather.ClearSky, GreenhouseWeather.StrongSun
-        };
-        readonly GreenhouseShelf[] shelves = { new GreenhouseShelf("Fruta"), new GreenhouseShelf("Legume"), new GreenhouseShelf("Verdura"), new GreenhouseShelf("Verdura") };
+        public const int InitialWaterMl = GreenhouseRules.InitialWaterMl;
+        readonly GreenhouseShelf[] shelves = { new GreenhouseShelf("Frutas"), new GreenhouseShelf("Legumes"), new GreenhouseShelf("Verduras"), new GreenhouseShelf("Verduras") };
         public IReadOnlyList<GreenhouseShelf> Shelves { get; }
-        public int Cycle { get; private set; } = 1;
-        public int WaterMl { get; private set; } = InitialWaterMl;
-        public SoilMoisture Soil { get; private set; } = SoilMoisture.Moderate;
+        public int Day { get; private set; } = 1;
+        public int ReservoirMl { get; private set; } = InitialWaterMl;
+        public int TotalDeliveredMl { get; private set; }
+        public int TodayDeliveredMl { get; private set; }
         public GrowLight Light { get; private set; } = GrowLight.Moderate;
-        public GreenhouseWeather Weather { get; private set; } = GreenhouseWeather.Stable;
-        public bool Waterlogged { get; private set; }
-        public bool Finished => WaterMl < ConsumptionMl(IrrigationLevel.Low);
-        public int CompletedCycles { get; private set; }
-        public int HealthyCycles { get; private set; }
+        public string Environment { get; private set; }
+        public bool DayEnded { get; private set; }
+        public bool Finished => DayEnded && Day == GreenhouseRules.MissionDays;
+        public bool CanCare => !DayEnded;
+        public bool CareReady { get { foreach (var shelf in shelves) if (!shelf.CaredFor) return false; return Light == GrowLight.Moderate; } }
+        public int HealthyDays { get; private set; }
         public GreenhouseResult LastResult { get; private set; }
-        public string Reflection { get; private set; } = "";
-        public GreenhouseSimulation() { Shelves = Array.AsReadOnly(shelves); }
+        public GreenhouseSimulation(GreenhouseDayConditions initial = null)
+        { Shelves = Array.AsReadOnly(shelves); ApplyConditions(initial ?? GreenhouseDayConditions.ForDay(1)); }
         public static bool IsTask(string id) => id == "SmartFarmCare" || id == "IrrigationPlan";
-        public static int ConsumptionMl(IrrigationLevel level)
+        public void BeginDay(int day)
         {
-            switch(level) { case IrrigationLevel.Low: return 1360; case IrrigationLevel.Medium: return 2040; case IrrigationLevel.High: return 2320; default: throw new ArgumentOutOfRangeException(nameof(level)); }
+            if (!DayEnded || day != Day + 1 || day > GreenhouseRules.MissionDays) return;
+            Day = day; DayEnded = false; TodayDeliveredMl = 0;
+            ApplyConditions(GreenhouseDayConditions.ForDay(day));
         }
-        public bool CanAdjust(IrrigationLevel level, GreenhouseAdjustment adjustment)
+        void ApplyConditions(GreenhouseDayConditions conditions)
         {
-            switch(adjustment)
+            Environment = conditions.Description; Light = conditions.Light;
+            for (int i = 0; i < shelves.Length; i++)
             {
-                case GreenhouseAdjustment.None: return true;
-                case GreenhouseAdjustment.MoreWater: return Soil == SoilMoisture.Dry && level < IrrigationLevel.High;
-                case GreenhouseAdjustment.LessWater: return Soil == SoilMoisture.Wet && level > IrrigationLevel.Low;
-                case GreenhouseAdjustment.MoreLight: return Light == GrowLight.Low;
-                case GreenhouseAdjustment.LessLight: return Light == GrowLight.Excessive;
-                default: return false;
+                var shelf = shelves[i]; shelf.Soil = conditions.Soil(i);
+                shelf.RequiredDoses = GreenhouseRules.Doses(shelf.Soil); shelf.DeliveredDoses = 0; shelf.Inspected = false;
+                UpdateHealth(shelf);
             }
         }
-        public static IrrigationLevel FinalLevel(IrrigationLevel chosen, GreenhouseAdjustment adjustment)
-            => (IrrigationLevel)((int)chosen + (adjustment == GreenhouseAdjustment.MoreWater ? 1 : adjustment == GreenhouseAdjustment.LessWater ? -1 : 0));
-        public GreenhouseDecisionError Decide(IrrigationLevel chosen, GreenhouseAdjustment adjustment)
+        public bool Inspect(int index)
         {
-            if (Finished) return GreenhouseDecisionError.Finished;
-            if (!Enum.IsDefined(typeof(IrrigationLevel), chosen)) return GreenhouseDecisionError.InvalidChoice;
-            if (!CanAdjust(chosen, adjustment)) return GreenhouseDecisionError.InvalidAdjustment;
-            var final = FinalLevel(chosen, adjustment); int used = ConsumptionMl(final);
-            if (WaterMl < used) return GreenhouseDecisionError.InsufficientWater;
-            int before = WaterMl;
-            // Rules are explicit: high irrigation on dry soil resolves to Moderate (the allowed deterministic option).
-            Waterlogged = Soil == SoilMoisture.Wet && final == IrrigationLevel.High;
-            Soil = SoilAfter(Soil, final);
-            if (adjustment == GreenhouseAdjustment.MoreLight || adjustment == GreenhouseAdjustment.LessLight) Light = GrowLight.Moderate;
-            WaterMl -= used; CompletedCycles++;
-            if (Soil == SoilMoisture.Moderate && Light == GrowLight.Moderate) HealthyCycles++;
-            UpdateShelves(true);
-            LastResult = new GreenhouseResult { Cycle = Cycle, BeforeMl = before, UsedMl = used, RemainingMl = WaterMl,
-                Soil = Soil, Light = Light, Waterlogged = Waterlogged, Health = shelves[0].Health, FinalLevel = final };
-            if (!Finished) { Cycle++; ApplyWeather(WeatherSequence[(Cycle - 1) % WeatherSequence.Length]); UpdateShelves(false); }
-            return GreenhouseDecisionError.None;
+            if (!CanCare || index < 0 || index >= shelves.Length) return false;
+            shelves[index].Inspected = true; return true;
         }
-        public static SoilMoisture SoilAfter(SoilMoisture soil, IrrigationLevel level)
+        public bool AdjustLight(int direction)
         {
-            switch(soil)
+            if (!CanCare || (direction != -1 && direction != 1)) return false;
+            int value = Math.Max(0, Math.Min(2, (int)Light + direction));
+            if (value == (int)Light) return false;
+            Light = (GrowLight)value; foreach (var shelf in shelves) UpdateHealth(shelf); return true;
+        }
+        internal int Withdraw(int requestedMl)
+        {
+            if (!CanCare || requestedMl <= 0) return 0;
+            int amount = Math.Min(requestedMl, ReservoirMl); ReservoirMl -= amount; return amount;
+        }
+        internal bool DeliverDose(int index)
+        {
+            if (!CanCare || index < 0 || index >= shelves.Length) return false;
+            var shelf = shelves[index];
+            if (!shelf.Inspected || shelf.DeliveredDoses >= shelf.RequiredDoses) return false;
+            shelf.DeliveredDoses++; TodayDeliveredMl += GreenhouseRules.DoseMl; TotalDeliveredMl += GreenhouseRules.DoseMl;
+            if (shelf.DeliveredDoses >= shelf.RequiredDoses) shelf.Soil = SoilMoisture.Moderate;
+            UpdateHealth(shelf); return true;
+        }
+        void UpdateHealth(GreenhouseShelf shelf)
+        {
+            int problems = (shelf.Soil == SoilMoisture.Moderate ? 0 : 1) + (Light == GrowLight.Moderate ? 0 : 1);
+            shelf.Health = problems == 0 ? ShelfHealth.Healthy : problems > 1 || shelf.ProblemDays >= 2 ? ShelfHealth.AtRisk : ShelfHealth.Problem;
+        }
+        public void EndDay()
+        {
+            if (DayEnded) return;
+            int healthy = 0;
+            foreach (var shelf in shelves)
             {
-                case SoilMoisture.Dry: return level == IrrigationLevel.Low ? SoilMoisture.Dry : SoilMoisture.Moderate;
-                case SoilMoisture.Moderate: return level == IrrigationLevel.Low ? SoilMoisture.Dry : level == IrrigationLevel.Medium ? SoilMoisture.Moderate : SoilMoisture.Wet;
-                case SoilMoisture.Wet: return level == IrrigationLevel.Low ? SoilMoisture.Moderate : SoilMoisture.Wet;
-                default: throw new ArgumentOutOfRangeException(nameof(soil));
+                if (shelf.DeliveredDoses < shelf.RequiredDoses) shelf.Soil = SoilMoisture.Dry;
+                // Leaving wet soil alone lets it drain during the day; extra watering is blocked.
+                else if (shelf.RequiredDoses == 0) shelf.Soil = SoilMoisture.Moderate;
+                bool good = shelf.Soil == SoilMoisture.Moderate && Light == GrowLight.Moderate;
+                shelf.ProblemDays = good ? 0 : shelf.ProblemDays + 1;
+                UpdateHealth(shelf); if (good) healthy++;
             }
+            if (healthy == shelves.Length) HealthyDays++;
+            LastResult = new GreenhouseResult { Day = Day, UsedMl = TodayDeliveredMl, HealthyShelves = healthy };
+            DayEnded = true;
         }
-        void ApplyWeather(GreenhouseWeather weather)
-        {
-            Weather = weather;
-            if (weather == GreenhouseWeather.DustStorm) Light = GrowLight.Low;
-            else if (weather == GreenhouseWeather.StrongSun)
-            { Light = GrowLight.Excessive; Soil = Soil == SoilMoisture.Wet ? SoilMoisture.Moderate : SoilMoisture.Dry; Waterlogged = false; }
-            else if (weather == GreenhouseWeather.ClearSky) Light = GrowLight.Moderate;
-        }
-        void UpdateShelves(bool countCycle)
-        {
-            int factors = (Soil == SoilMoisture.Moderate ? 0 : 1) + (Light == GrowLight.Moderate ? 0 : 1);
-            foreach(var shelf in shelves)
-            {
-                if (countCycle) shelf.ProblemCycles = factors > 0 ? shelf.ProblemCycles + 1 : 0;
-                shelf.Health = factors == 0 ? ShelfHealth.Healthy : factors == 2 || shelf.ProblemCycles >= 2 ? ShelfHealth.AtRisk : ShelfHealth.Problem;
-            }
-        }
-        public void SaveReflection(string value)
-        { if (Finished) { value = (value ?? "").Trim(); Reflection = value.Substring(0, Math.Min(value.Length, 240)); } }
     }
 }

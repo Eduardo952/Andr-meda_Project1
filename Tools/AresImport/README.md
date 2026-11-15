@@ -1,4 +1,4 @@
-# Extração offline da referência (4)
+# Extração offline de casa-marte-missao-n8n
 
 Executar na raiz do projeto Unity:
 
@@ -7,7 +7,7 @@ npm.cmd ci --prefix Tools/AresImport --cache Temp/npm-cache
 node Tools/AresImport/export.mjs
 ```
 
-A ferramenta usa Node, Three.js, TypeScript e `@napi-rs/canvas`, com versões resolvidas em `package-lock.json`. O jogo Unity não depende dessas ferramentas. A origem é exclusivamente `a896f420-3053-49eb-b6f2-a97f9b2dc6c8 (4)/src`; não há fallback para a versão antiga.
+A ferramenta usa Node, Three.js, TypeScript e `@napi-rs/canvas`, com versões resolvidas em `package-lock.json`. O jogo Unity não depende dessas ferramentas. A origem é exclusivamente `casa-marte-missao-n8n/src`; não há fallback para a versão antiga.
 
 `export.mjs` transpila os módulos locais necessários, executa os geradores de geometria e adapta JSX/refs/callbacks de animação. O adaptador Canvas executa as texturas procedurais originais e grava PNGs. Não executa o servidor da referência, carrega `.env`, consulta NASA ou chama o narrador.
 
@@ -21,4 +21,6 @@ No editor Unity existente, executar **ARES > Import reference geometry and creat
 
 **ARES > Validate port against reference** verifica dados, navegação, regras, consequências, campanha, personagens e geometria importada. **ARES > Validate controls in Play** usa dispositivos virtuais e sai de Play ao terminar. Logs em `Logs/ares-parity.txt` e `Logs/ares-play.txt` são locais; resultados e limitações relevantes devem ser registrados também nos READMEs versionados.
 
-Limites atuais: shaders/iluminação URP ainda diferem da referência; texturas Canvas são rasterizadas por Skia local; animações de estufa/robô, UI, puzzles, céu e serviços remotos continuam pendentes. Checks de geometria/fórmulas não substituem comparação visual e funcional do jogo inteiro.
+O cenário atual e seus módulos estão documentados em `Assets/ARES/SCENERY.md`. `visual-adapters.mjs` preserva o rover e o regador como peças móveis e extrai as coordenadas de interação da estufa. Para importação focada, escreva `scenery` em `Temp/ares-import.request`; os outros modos de validação continuam disponíveis.
+
+A extração preserva a geometria original e limpa apenas degenerados/duplicados. URP e Three.js ainda diferem na renderização. A implementação Unity mantém sua campanha e seus serviços; o importador não conecta serviços remotos da referência.

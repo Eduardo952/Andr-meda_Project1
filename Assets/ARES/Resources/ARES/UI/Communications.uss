@@ -1,0 +1,26 @@
+﻿.comms-view { width: 100%; max-width: 1100px; padding: 16px; }
+.comms-view Label { white-space: normal; }
+.comms-connection { background-color: #dceee6; border-radius: 18px; padding: 16px; margin: 12px 0; border-left-width: 5px; border-left-color: #539b80; }
+.comms-offline .comms-connection { background-color: #fff0d3; border-left-color: #cb8b40; }
+.comms-small { font-size: 15px; color: #605d6d; margin: 6px 0; }
+.comms-content { margin: 12px 0; }
+.comms-message { padding: 16px 20px; border-radius: 18px; margin: 8px 0; }
+.comms-message.incoming { background-color: #e3edf6; margin-right: 36px; }
+.comms-message.outgoing { background-color: #e5efdc; margin-left: 36px; }
+.comms-message-title { -unity-font-style: bold; font-size: 17px; color: #355d68; }
+.comms-view Button { font-size: 17px; }
+.comms-view .selected { background-color: #c9e3d8; border-color: #638d7f; }
+.comms-report-grid { flex-direction: row; flex-wrap: wrap; align-items: stretch; }
+.comms-report-card { width: 47%; flex-grow: 1; min-width: 210px; padding: 16px; margin: 5px; background-color: #eef0e3; border-radius: 18px; }
+.comms-report-card .heading { font-size: 22px; }
+.comms-report-card Label { font-size: 17px; }
+.comms-report-card .comms-small { font-size: 15px; }
+.comms-success { color: #306f55; -unity-font-style: bold; margin: 12px; }
+.communications-dialog { width: 1120px; max-width: 96%; }
+.communications-dialog .comms-view { padding: 0; }
+.communications-dialog .comms-view .title { font-size: 28px; margin-bottom: 4px; }
+.communications-dialog .comms-connection { padding: 10px 14px; margin: 8px 0; }
+.communications-dialog .comms-content { margin: 6px 0; }
+.communications-dialog .comms-report-card { padding: 12px; }
+.communications-dialog .comms-report-card Label { margin-bottom: 4px; }
+.communications-dialog .comms-view Button { min-height: 44px; padding: 8px 14px; margin: 4px; }

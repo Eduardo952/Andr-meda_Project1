@@ -62,7 +62,7 @@ namespace Ares.Editor
             campaign.Tick(1, true); Require(campaign.Phase == Phase.Summary && campaign.EndedByClock && campaign.OpenTask == null, "Exactly 600 seconds ends unfinished day safely");
             Near(campaign.SolRemainingSeconds, 0, "Countdown complete");
             Require(!campaign.Completed(task.id), "Clock never awards unfinished task");
-            campaign.NextSol(); Require(campaign.SolIndex == 1 && campaign.Phase == Phase.Report, "Next day report");
+            CommunicationCheckFixture.SendRequiredReport(campaign); campaign.NextSol(); Require(campaign.SolIndex == 1 && campaign.Phase == Phase.Report, "Next day report");
             Near(campaign.SolRemainingSeconds, 600, "New day duration");
             var first = DiscoveryDeck.Shuffle(5, 10); var repeat = DiscoveryDeck.Shuffle(5, 10); var different = DiscoveryDeck.Shuffle(5, 20);
             var used = new bool[5]; bool changed = false;

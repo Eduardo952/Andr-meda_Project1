@@ -1,0 +1,839 @@
+{
+  "title": {
+    "name": "Base ARES",
+    "tagline": "Junior astronaut training at Base ARES",
+    "play": "Play",
+    "language": "Language",
+    "howTo": "How to play"
+  },
+  "howTo": {
+    "title": "How to play",
+    "move": "Move with WASD or the arrow keys. On a phone, drag the joystick.",
+    "use": "Walk to a glowing station and press USE (E or Space).",
+    "follow": "Follow the yellow arrow to your next stop.",
+    "bubble": "Bubble will tell you what each room does!",
+    "close": "Got it!"
+  },
+  "hud": {
+    "integrity": "Integrity",
+    "oxygen": "Oxygen",
+    "dose": "Dose",
+    "doseDetail": "Crew radiation dose: 0–100 game units, not real dose. Mars lacks a thick atmosphere and global magnetic field to block particles.",
+    "energy": "Energy",
+    "sol": "Sol {{n}} of {{total}}",
+    "stars": "Stars",
+    "viewData": "View data",
+    "settings": "Settings",
+    "use": "USE",
+    "camera": "Camera",
+    "recenterCamera": "Recenter camera",
+    "next": "Next: {{room}}",
+    "tourDone": "Tour complete!",
+    "report": "Report",
+    "energyPanel": "Energy",
+    "endSol": "End Sol",
+    "objective": "Goal",
+    "minimap": "Base ARES map",
+    "roofs": "Roofs: {{mode}}",
+    "performance": "Performance",
+    "fps": "FPS",
+    "polygons": "polygons",
+    "polygonsDetail": "Triangles rendered per frame, including rendering passes"
+  },
+  "settings": {
+    "title": "Settings",
+    "sound": "Sound",
+    "language": "Language",
+    "largeText": "Larger text",
+    "reducedMotion": "Reduced motion",
+    "invertCamera": "Invert camera",
+    "cameraSensitivity": "Camera sensitivity",
+    "on": "On",
+    "off": "Off",
+    "close": "Close",
+    "home": "Title screen",
+    "quality": "Quality",
+    "low": "Low",
+    "high": "High",
+    "roofs": "Roofs",
+    "roofauto": "Auto",
+    "roofoff": "Off"
+  },
+  "lang": {
+    "en": "English",
+    "pt-BR": "Português (BR)"
+  },
+  "data": {
+    "title": "Mission data",
+    "solLength": "Length of one Sol (Mars day)",
+    "solLengthValue": "24 h 39 min {{s}} s",
+    "solSeconds": "{{n}} seconds",
+    "localTime": "Base ARES local time",
+    "barsNote": "Integrity and Oxygen starting values and damage are provisional game rules. The Energy bar shows how much of today's need your plan covers.",
+    "close": "Close"
+  },
+  "rooms": {
+    "control": "Control Room",
+    "observatory": "Observatory",
+    "shield": "Magnetic Shield",
+    "lifeSupport": "Life Support",
+    "greenhouse": "Greenhouse",
+    "solar": "Solar Power Park",
+    "airlock": "Airlock"
+  },
+  "bubble": {
+    "name": "Bubble",
+    "welcome": "Hi, I'm Bubble! Welcome to Base ARES on Mars. Follow the yellow arrow!",
+    "near": "This station glows. Press USE!",
+    "room": {
+      "control": "The Control Room is the heart of the base. We plan every Sol from here.",
+      "weather": "The Weather Station watches wind, temperature and pressure on Mars.",
+      "lab": "In the Laboratory we study rocks and dust. Science time!",
+      "greenhouse": "Plants grow here. Look, they get bigger every Sol!",
+      "lifeSupport": "Life Support keeps our air fresh so we can breathe.",
+      "comms": "Communications sends messages all the way to Earth. Hi, Earth!",
+      "shelter": "The Magnetic Shield refuge has thick walls. We hide here during solar storms.",
+      "observatory": "From the Observatory we watch the Sun and the sky.",
+      "airlock": "The Airlock is the door to the outside. Suits on before going out!",
+      "shield": "The Magnetic Shield protects the base. Its reinforced refuge keeps the crew safe.",
+      "solar": "The solar panels supply our game energy budget."
+    },
+    "tourDone": "You visited every room. Great job, junior astronaut!",
+    "night": "It's getting dark. Look up, can you spot Earth? It's the tiny blue dot!",
+    "report": "New Sol! Let's read today's space report together.",
+    "plan": "Now go to the Energy Panel in the Control Room and share all the available energy.",
+    "start": "Systems on! Follow the yellow arrow to your tasks.",
+    "alarm": {
+      "sep": "Alert! Energetic particles! Run to the Magnetic Shield refuge!",
+      "cme": "Alert! A CME may hit Mars! Let's go to the Shelter.",
+      "flare": "Alert! A strong solar flare! Let's be safe in the Shelter."
+    },
+    "noImpact": "The Sun is active, but this storm should not reach Mars. Phew!",
+    "safe": "We're safe in the Shelter. Great running!",
+    "alarmOver": "The alert is over.",
+    "taskDone": "Awesome! Task complete!",
+    "taskTry": "Good try! We learn every time.",
+    "sumGood": "Great planning! The base is happy.",
+    "sumBad": "Oops, some systems needed more energy. Let's plan better next Sol.",
+    "energyFirst": "Plan the energy first at the Control Room."
+  },
+  "sys": {
+    "shield": "Magnetic Shield",
+    "life": "Life Support / Heat",
+    "greenhouse": "Greenhouse"
+  },
+  "report": {
+    "title": "Sol {{n}} Report",
+    "realData": "REAL NASA DATA",
+    "gameRule": "GAME RULE",
+    "sample": "SAMPLE - replace with real data",
+    "dateNote": "Sol {{n}} uses data captured on Earth date {{date}}. This pairing is a story choice: an Earth day and a Mars Sol are not the same length.",
+    "continue": "Plan energy",
+    "close": "Close",
+    "noReading": "No reading this Sol",
+    "noCme": "No CME today",
+    "noSep": "No particle storm",
+    "noFlare": "No flare recorded",
+    "flare": "Solar flare",
+    "flareClass": "Class {{c}}",
+    "cme": "Coronal mass ejection (CME)",
+    "cmeSpeed": "{{v}} km/s",
+    "sep": "Energetic particles (SEP)",
+    "sepYes": "Particle storm detected!",
+    "marsImpact": "Forecast for Mars",
+    "impactYes": "Expected to reach Mars",
+    "impactGlancing": "Glancing blow at Mars",
+    "impactNo": "Not expected to reach Mars",
+    "noSim": "No forecast today",
+    "weather": "Mars weather",
+    "weatherWhere": "Measured by the InSight probe in Elysium Planitia, not at Base ARES.",
+    "temp": "Air temperature",
+    "tempValue": "{{v}} °C",
+    "wind": "Wind",
+    "windValue": "{{v}} m/s",
+    "pressure": "Pressure",
+    "pressureValue": "{{v}} Pa",
+    "energyNeeded": "Energy needed today",
+    "kwh": "{{n}} kWh",
+    "fallback": "No temperature reading: a standard game value is used.",
+    "sunActive": "The Sun is active, but this storm should not reach Mars."
+  },
+  "info": {
+    "api": "API",
+    "endpoint": "Endpoint",
+    "field": "Source field",
+    "captured": "Captured (UTC)",
+    "snapshot": "Snapshot",
+    "yes": "true",
+    "sample": "Sample data",
+    "show": "Where does this number come from?"
+  },
+  "energy": {
+    "title": "Energy Panel",
+    "pool": "Today's energy: {{n}} kWh",
+    "free": "Free energy",
+    "need": "Needs about {{n}}",
+    "start": "Start Sol",
+    "save": "Save",
+    "hint": "Use all the energy. Free energy must be 0 to start.",
+    "budgetNote": "The 100 kWh base budget is a game rule, not a real measurement.",
+    "dustNote": "Simulated panel dust reduces this Sol's pool by {{loss}}%. Clean the arrays to restore future output.",
+    "close": "Close"
+  },
+  "tasks": {
+    "title": "Sol {{n}} tasks",
+    "progress": "Mission progress",
+    "none": "All tasks done!",
+    "time": "{{s}} s",
+    "success": "Great job!",
+    "fail": "Nice try!",
+    "continue": "Continue",
+    "badgeReal": "REAL DATA: {{src}}",
+    "badgeRule": "GAME RULE",
+    "check": "Check",
+    "sampleNote": "Sample data",
+    "T02": {
+      "name": "Classify the Flare",
+      "goal": "Tap the flares from weakest to strongest.",
+      "fact": "Each letter is 10 times stronger than the one before. X flares can go beyond X10!",
+      "today": "Today"
+    },
+    "T03": {
+      "name": "CME Arrival",
+      "goal": "Drag to today's CME speed to see when it would reach Mars.",
+      "dist": "Mars is about 1.524 AU from the Sun: about 228,000,000 km.",
+      "time": "Travel time: {{h}} hours (about {{d}} days)",
+      "note": "Simplification: constant speed.",
+      "speed": "Speed: {{v}} km/s",
+      "target": "Today's CME: {{v}} km/s"
+    },
+    "T04": {
+      "name": "Check the Forecast",
+      "goal": "Will today's CME reach Mars?",
+      "yes": "Yes",
+      "no": "No",
+      "yours": "Your estimate: about {{d}} days",
+      "enlilYes": "WSA+Enlil forecast: it reaches Mars ({{t}}).",
+      "enlilGlancing": "It only grazes Mars (glancing blow).",
+      "enlilNo": "WSA+Enlil forecast: no impact on Mars.",
+      "noSim": "There is no WSA+Enlil forecast in today's data."
+    },
+    "T05": {
+      "name": "Go to the Shelter",
+      "goal": "Reach the Magnetic Shield refuge before time runs out!"
+    },
+    "T06": {
+      "name": "Mission Control Reading",
+      "goal": "Which message talks about today's main event?",
+      "event": "Today's main event: {{e}}"
+    },
+    "T07": {
+      "name": "Thermostat",
+      "goal": "Outside it is {{t}} °C. Set the heater so we stay cozy at {{tin}} °C inside.",
+      "heater": "Heater: {{n}} kWh",
+      "rule": "Heat needed = {{base}} + {{k}} × ({{tin}} − outside), rounded to 5"
+    },
+    "T08": {
+      "name": "Wind Rose",
+      "goal": "Tap the direction the wind came from most often."
+    },
+    "T10": {
+      "name": "Photo Album",
+      "goal": "Pick the right caption for this picture.",
+      "credit": "Credit: {{c}}",
+      "sampleArt": "Drawn placeholder: a real NASA photo will go here."
+    },
+    "T14": {
+      "name": "Greenhouse Care",
+      "goal": "Water every thirsty plant!"
+    },
+    "T15": {
+      "name": "Recycle Water and Air",
+      "goal": "Send each item to the right machine.",
+      "water": "Water recycler",
+      "air": "Air system",
+      "wash": "Wash water",
+      "vapor": "Breath vapor",
+      "co2": "Breathed-out CO₂",
+      "fog": "Window fog"
+    },
+    "T11": {
+      "name": "APOD Question",
+      "goal": "What does APOD mean?",
+      "right": "Astronomy Picture of the Day",
+      "wrong": "Base Power Consumption"
+    }
+  },
+  "event": {
+    "FLR": "Solar flare",
+    "CME": "CME",
+    "SEP": "Energetic particles"
+  },
+  "photo": {
+    "rover": "A rover driving on red Martian rocks",
+    "sunset": "A blue sunset on Mars",
+    "dunes": "Wavy sand dunes on Mars",
+    "dustDevil": "A dust devil spinning across Mars",
+    "olympus": "Olympus Mons, the biggest volcano on Mars"
+  },
+  "compass": {
+    "N": "N",
+    "NNE": "NNE",
+    "NE": "NE",
+    "ENE": "ENE",
+    "E": "E",
+    "ESE": "ESE",
+    "SE": "SE",
+    "SSE": "SSE",
+    "S": "S",
+    "SSW": "SSW",
+    "SW": "SW",
+    "WSW": "WSW",
+    "W": "W",
+    "WNW": "WNW",
+    "NW": "NW",
+    "NNW": "NNW"
+  },
+  "alarm": {
+    "title": "Space weather alert!",
+    "goShelter": "Go to the Magnetic Shield refuge!",
+    "adjust": "You can also adjust energy at the Control Room."
+  },
+  "summary": {
+    "title": "Sol {{n}} summary",
+    "given": "Given",
+    "needed": "Needed",
+    "ideal": "Just right",
+    "deficit": "Not enough",
+    "surplus": "Extra (wasted)",
+    "integrity": "Integrity",
+    "oxygen": "Oxygen",
+    "dose": "Dose (game units)",
+    "next": "Next Sol",
+    "finish": "Finish mission",
+    "sparks": "The shield was weak: sparks hit the domes!",
+    "tasks": "Tasks done: {{n}}"
+  },
+  "consequences": {
+    "simulated": "SIMULATED EVENT · GAME RULE",
+    "trainingWind": "Training schedule",
+    "allClear": "Recovery complete. Base systems are returning to normal.",
+    "acknowledge": "I understand",
+    "shelterTimer": "Shelter time remaining: {{seconds}} seconds.",
+    "stages": { "advisory": "Advisory", "warning": "Warning", "emergency": "Emergency", "recovery": "Recovery" },
+    "kinds": {
+      "solar": "Solar particle alarm", "lifeSupport": "Life Support alert", "dust": "Dust storm", "greenhouse": "Greenhouse alert", "info": "Mission information", "perfect": "Perfect Sol",
+      "solarBody": "A solar particle event is separate from Martian weather. Follow the shelter guidance.", "lifeSupportBody": "Cold and low oxygen need attention.", "dustBody": "Simulated dust can cover the solar arrays.", "greenhouseBody": "The plants need energy and care.", "infoBody": "Review the mission feedback.", "perfectBody": "Every system received the right energy."
+    },
+    "storm": {
+      "title": "Simulated Martian dust storm",
+      "cause": "Trigger: {{wind}}. This is a game simulation, not a NASA dust measurement or a solar flare.",
+      "effect": "Dust is covering the arrays. Inspect and clean the most-soiled group first to protect the next Sol's energy."
+    },
+    "events": {
+      "shield-deficit": {
+        "title": "Magnetic Shield deficit",
+        "cause": "You gave the shield {{allocated}} kWh; it needed {{demand}} kWh, leaving {{missing}} kWh missing. Solar reading: {{flare}}.",
+        "effect": "Electronics flicker and crew dose rises by {{dose}} game units. Shelter timeout penalty: {{penalty}}. Integrity effect: {{integrity}}."
+      },
+      "life-deficit": {
+        "title": "Cold Life Support",
+        "cause": "Life Support received {{allocated}} of {{demand}} kWh. InSight AT mean: {{temp}} °C; colder air increases the existing heat demand.",
+        "causeNoTemp": "Life Support received {{allocated}} of {{demand}} kWh. No AT reading was available, so the labeled game fallback set demand.",
+        "effect": "Cold cabins and frost slow oxygen generation. Oxygen effect: {{oxygen}}."
+      },
+      "greenhouse-deficit": {
+        "title": "Greenhouse underpowered",
+        "cause": "The Greenhouse received {{allocated}} of {{demand}} kWh, leaving {{missing}} kWh missing.",
+        "effect": "Leaves droop, grow lights dim and oxygen contribution falls. Oxygen effect: {{oxygen}}."
+      },
+      "solar-dust": {
+        "title": "Solar arrays dusty",
+        "cause": "Simulated storm wind: {{wind}}. Average array dust is now {{dust}}%.",
+        "effect": "Next Sol's energy pool loses {{loss}}%, capped at 20%. This is a game rule, not measured dust opacity."
+      },
+      "solar-cleaned": {
+        "title": "Solar output restored",
+        "cause": "Every array was inspected and cleaned in priority order. Remaining average dust: {{dust}}%.",
+        "effect": "The panels shine again. Next Sol's dust loss is {{loss}}%."
+      },
+      "energy-surplus": {
+        "title": "Extra energy vented",
+        "cause": "A system received more energy than it needed. Surplus never adds dose or reserves.",
+        "effect": "The gentle venting glow is harmless, but that energy could help another system."
+      },
+      "perfect-sol": {
+        "title": "Perfect Sol!",
+        "cause": "Every system is in its ideal energy band and the crew completed the plan.",
+        "effect": "Warm lights, ripe apples and {{integrity}} Integrity / {{oxygen}} Oxygen regeneration, using the existing task reward."
+      }
+    }
+  },
+  "gameover": {
+    "title": "Mission paused",
+    "body": "The base needs help. Let's train again!",
+    "retry": "Try again",
+    "home": "Title screen",
+    "evacuated": "The crew evacuated safely. No one was hurt on screen; use the cause below to train again.",
+    "radiation": { "title": "Radiation limit reached", "body": "The crew dose reached 100 game units. The shield needed more energy or the crew missed shelter." },
+    "suffocation": { "title": "Oxygen depleted", "body": "Oxygen reached zero. Life Support and the Greenhouse did not receive enough energy." },
+    "powerCollapse": { "title": "Base integrity lost", "body": "Integrity reached zero after the Magnetic Shield deficit. The crew evacuated before further danger." }
+  },
+  "cert": {
+    "title": "Junior Astronaut Certificate",
+    "body": "{{name}} kept Base ARES safe for 5 Sols!",
+    "nickname": "Your nickname",
+    "placeholder": "Astronaut name",
+    "show": "Show my certificate",
+    "again": "Play again",
+    "stats": "Integrity {{i}}% · Oxygen {{o}}% · Dose {{d}} game units",
+    "tiers": { "gold": "Gold mission: excellent protection!", "silver": "Silver mission: strong recovery!", "bronze": "Bronze mission: you kept learning!" },
+    "local": "Your nickname stays only on this device."
+  },
+  "narrator": {
+    "start": {
+      "calm": "Sol {{sol}} looks calm.",
+      "attention": "Sol {{sol}}: the Sun is busy today!",
+      "alert": "Sol {{sol}}: big space weather news!"
+    },
+    "flare": "A {{c}} flare was recorded.",
+    "cme": "A CME is traveling at {{v}} km/s.",
+    "cmeNoImpact": "A CME left the Sun at {{v}} km/s, but it should not reach Mars.",
+    "weather": "Outside it is about {{t}} °C.",
+    "alert": "Let's hurry to the Magnetic Shield refuge!",
+    "trainingWind": "training schedule",
+    "dustStorm": "A simulated dust storm is using the {{v}} trigger; clean the arrays before sealing.",
+    "consequences": {
+      "shield-deficit": "The shield received {{a}} kWh but needed {{d}}, so dose rose {{dose}} game units.",
+      "life-deficit": "Life Support received {{a}} of {{d}} kWh, leaving the cabin cold.",
+      "greenhouse-deficit": "The Greenhouse received {{a}} of {{d}} kWh, so growth and oxygen slowed.",
+      "solar-dust": "Simulated dust reduces the next energy pool by {{loss}}%.",
+      "solar-cleaned": "The cleaned arrays restored future solar output."
+    },
+    "hint": "Hint: today the {{system}} needs the most energy. Look at the report!",
+    "summary": {
+      "good": "Great planning, every system was happy!",
+      "bad": "Some systems needed more energy: {{systems}}.",
+      "reveal": "The ideal plan was Shield {{s}}, Life Support {{l}} and Greenhouse {{g}} kWh."
+    },
+    "answers": {
+      "what_is_a_flare": "A solar flare is a super bright flash on the Sun. Scientists sort them by letters: each letter is 10 times stronger than the one before!",
+      "why_shelter": "Some space storms send fast tiny particles. The shelter has thick walls that keep astronauts safe until it is over.",
+      "why_cold_energy": "The colder it is outside, the faster our base loses heat. So the heaters need more energy to keep us cozy!"
+    }
+  },
+  "ask": {
+    "title": "Ask Bubble",
+    "what_is_a_flare": "What is a solar flare?",
+    "why_shelter": "Why do I need a shelter?",
+    "why_cold_energy": "Why does cold use more energy?",
+    "hint": "Give me a hint"
+  },
+  "areas": {
+    "control": "Control Room",
+    "observatory": "Observatory",
+    "shield": "Magnetic Shield",
+    "lifeSupport": "Life Support",
+    "greenhouse": "Greenhouse",
+    "solar": "Solar Power Park",
+    "airlock": "Airlock"
+  },
+  "observatory": {
+    "viewImage": "View image",
+    "lensClose": "Leave the telescope",
+    "title": "Observatory",
+    "apod": "REAL DATA: APOD",
+    "library": "NASA Image and Video Library",
+    "unavailable": "No authentic image is available for this sample date.",
+    "archiveNote": "A real picture from NASA’s archive. It is not tied to this Sol’s sample date.",
+    "date": "Earth date: {{date}}",
+    "video": "Open video",
+    "explanation": "A window into the Universe, recorded by scientists and photographers.",
+    "loading": "Checking pictures…",
+    "credit": "Credit: {{credit}}",
+    "snapshot": "Snapshot",
+    "sample": "Sample",
+    "view": "View pictures"
+  },
+  "refine": {
+    "bubbleToasts": "Bubble speech toasts",
+    "expandMap": "Expand map",
+    "rotateMap": "Rotate map",
+    "northUp": "North up",
+    "cameraUp": "Camera up",
+    "clearGuide": "Follow next task",
+    "corridor": "Connecting corridor",
+    "dismissWalk": "Dismiss first walk",
+    "readMore": "Read more",
+    "readLess": "Read less",
+    "imageFailed": "This picture could not load. Let’s try another window into space!",
+    "nasaMore": "APOD shares astronomy pictures. The NASA library collects images from space missions. Picture dates belong to Earth, not to our game’s Sol clock.",
+    "librarySource": "NASA Image Library",
+    "walk": {
+      "control": "Find the coral Energy Panel by the wall.",
+      "observatory": "The violet door leads to the sky watchers.",
+      "shield": "The blue door leads to our protective shield.",
+      "lifeSupport": "The teal door leads to fresh air and warmth.",
+      "greenhouse": "The green door leads to our growing plants.",
+      "solar": "Go through Life Support and the Airlock to the yellow solar park."
+    }
+  },
+  "garden": {
+    "learning": "Plants grow food for the crew. They also help keep the air fresh.",
+    "sourcePending": "Source pending",
+    "basket": "Basket · {{n}}",
+    "harvest": "Pick a ripe apple",
+    "learn": "About our plants",
+    "cosmetic": "Just for fun — apples do not change mission energy or rewards.",
+    "thirsty": "Thirsty plant",
+    "happy": "Happy plant"
+  },
+  "mini": {
+    "loading": "Preparing your station…",
+    "timer": "Seconds",
+    "mistakes": "Mistakes",
+    "stars": "Stars",
+    "retryTitle": "Another try?",
+    "retryBody": "Nothing was lost. Your station is ready for another try.",
+    "retry": "Try again",
+    "learned": "What you learned:",
+    "practice": "Snapshot practice — not a reading from this Sol.",
+    "practiceLearned": "This practice used a labeled snapshot rather than an observation from this Sol.",
+    "rulesNote": "Puzzle targets, timing and stars are provisional game rules.",
+    "place": "Place next card",
+    "placeCaption": "Attach caption",
+    "dial": "Coil",
+    "pipe": "Pipe",
+    "position": "Position",
+    "dialValue": "Dial {{n}} position",
+    "rotateLeft": "Rotate {{n}} left",
+    "rotateRight": "Rotate {{n}} right",
+    "flow": "Send flow",
+    "oxygenTank": "Oxygen tank",
+    "waterTank": "Water tank",
+    "wireStart": "Pick wire {{symbol}}",
+    "wireEnd": "Connect wire {{symbol}}",
+    "speed": "Speed (km/s)",
+    "hours": "Travel time (hours)",
+    "constantSpeed": "Simplification: constant speed over the mean Sun–Mars distance, not an actual arrival forecast.",
+    "outside": "Outside temperature (°C)",
+    "heating": "Heating (kWh)",
+    "drop": "Water drop",
+    "bed": "Water bed {{n}}",
+    "lightTarget": "Game light target",
+    "light": "Light level",
+    "harvest": "Harvest the ripe apples",
+    "apple": "Harvest apple {{n}}",
+    "patch": "Clean patch {{n}}",
+    "weatherInspired": "GAME RULE inspired by Mars weather",
+    "targetAngle": "Game target angle (degrees)",
+    "angle": "Panel angle",
+    "returnControl": "Return to Control to seal the report.",
+    "sealTitle": "Seal the Sol Report",
+    "sealGoal": "Match the levers to your confirmed energy plan.",
+    "confirmed": "Confirmed (kWh)",
+    "seal": "Seal report",
+    "taskNarration": "You completed {{task}} with {{mistakes}} mistakes in {{seconds}} seconds.",
+    "cancel": "Cancel",
+    "SortFlares": {
+      "name": "Sort the Flares",
+      "goal": "Tap the class cards from weakest to strongest: A, B, C, M, X.",
+      "learned": "The snapshot records a {{value}} flare.",
+      "reading": "Recorded reading: {{value}}",
+      "readingHint": "The letter is the class; the number is its strength within that class.",
+      "instruction": "Tap one card at a time. It goes straight into the next space.",
+      "weakest": "Weakest",
+      "strongest": "Strongest",
+      "orderLabel": "Flare classes from weakest to strongest",
+      "choose": "Place class {{value}}",
+      "next": "Now find card {{value}}."
+    },
+    "PhotoDetective": {
+      "name": "Photo Detective",
+      "goal": "Match the source caption to the picture.",
+      "learned": "NASA labels this archive picture “{{value}}”.",
+      "decoyLab": "A game wiring diagram",
+      "decoyMap": "A floor plan of Base ARES"
+    },
+    "AlignCoils": {
+      "name": "Align the Coils",
+      "goal": "Turn each pointer toward its triangle mark.",
+      "learned": "In this game, the coil pointers match the marked targets."
+    },
+    "WireShield": {
+      "name": "Wire the Shield",
+      "goal": "Join endpoints with the same color and symbol.",
+      "learned": "In this game, matching symbols identify connected wires."
+    },
+    "CmeCountdown": {
+      "name": "CME Countdown",
+      "goal": "Match the recorded speed, then choose the travel time.",
+      "learned": "The snapshot records a CME speed of {{value}} km/s.",
+      "reading": "Snapshot CME speed (km/s)",
+      "arrival": "Choose the rounded constant-speed travel time (hours)."
+    },
+    "PipeFlow": {
+      "name": "Pipe Flow",
+      "goal": "Tap each pipe until it turns green, then send the flow.",
+      "learned": "The game routes reach their marked oxygen and water tanks.",
+      "instruction": "Tap a pipe to rotate it. Cover the dashed guide; green means connected.",
+      "rotate": "Rotate pipe {{n}}",
+      "connectedPipe": "Pipe {{n}} connected",
+      "turn": "Rotate",
+      "connected": "Connected",
+      "ready": "All pipes connected. Send the flow!",
+      "keepGoing": "Rotate every pipe that is not green yet."
+    },
+    "ThermostatDial": {
+      "name": "Thermostat Dial",
+      "goal": "Read the temperature and match the game heating requirement.",
+      "learned": "The InSight snapshot records an average of {{value}} °C."
+    },
+    "SmartFarmCare": {
+      "name": "Smart Farm Care",
+      "goal": "Water the beds, adjust the light, then pick ripe apples.",
+      "learned": "This game care sequence uses water, light and ripe-apple targets."
+    },
+    "CleanPanels": {
+      "name": "Solar Array Rescue",
+      "goal": "Inspect each array, clean the most-soiled one first, then verify restored output.",
+      "learned": "Dust lowers the next Sol's game energy by at most 20%; complete cleaning restores output.",
+      "instruction": "Start with the highlighted, most-soiled array. Tap its brush once for each required pass.",
+      "array": "Array {{n}}",
+      "level": { "clear": "Clear", "light": "Light dust", "heavy": "Heavy dust", "buried": "Buried" },
+      "dust": "Dust: {{n}}%",
+      "output": "Output: {{n}}%",
+      "efficiency": "Array {{n}} efficiency",
+      "wipe": "Clean array {{n}}, pass {{pass}} of {{total}}",
+      "pass": "Brush pass {{pass}} / {{total}}",
+      "restore": "Full maintenance restores the next Sol's output.",
+      "alreadyClean": "Every array is clear. Verify the restored photovoltaic shine.",
+      "verify": "Verify output"
+    },
+    "TiltSun": {
+      "name": "Tilt to the Sun",
+      "goal": "Turn the panel onto the highlighted game angle.",
+      "learned": "The highlighted angle comes from the game’s simulated Sun."
+    },
+    "IrrigationPlan": {
+      "name": "Share the Water",
+      "goal": "Subtract each bed moisture from the target and share the drops.",
+      "learned": "Distributing only the missing water avoids waste."
+    },
+    "ResourcePriority": {
+      "name": "Life Support Priorities",
+      "goal": "Below full oxygen, restore air; otherwise compare heating and greenhouse demand.",
+      "learned": "Life support prioritizes the resource that needs attention."
+    },
+    "PowerBalance": {
+      "name": "Power Check",
+      "goal": "Compare the available bar with the combined system demands.",
+      "learned": "Comparing supply and demand helps us plan without changing the budget."
+    },
+    "WindReading": {
+      "name": "Read the Wind",
+      "goal": "Choose the compass direction written in the snapshot.",
+      "learned": "Reading weather supports maintenance; this is not a sensor at Base ARES."
+    }
+  },
+  "challenge": {
+    "marks": "Coil target marks",
+    "connections": "Matching endpoints",
+    "dust": "Game dust patches",
+    "dataNotes": {
+      "flare": "Class recorded in the DONKI snapshot. A missing reading uses a training snapshot.",
+      "temperature": "Average air temperature recorded by InSight, not a sensor at Base ARES.",
+      "wind": "Wind direction from the InSight snapshot. Without a reading, the task uses a training snapshot."
+    },
+    "begin": "Begin task",
+    "happening": "What is happening",
+    "action": "Your mission",
+    "importance": "Why it matters",
+    "hint": "Hint",
+    "correct": "Station ready!",
+    "preview": "After confirming",
+    "maintained": "Already at maximum — maintained",
+    "rewardNote": "Continue confirms the existing game reward.",
+    "impactQuestion": "Can this picture alone tell us whether a storm reaches Mars?",
+    "impactAnswer": "No. We need the DONKI forecast for Mars.",
+    "observeQuestion": "Which description belongs to this picture?",
+    "observe": "Observe",
+    "zoom": "Image zoom",
+    "unknown": "No arrival forecast this Sol.",
+    "forecastYes": "The snapshot forecasts an impact at Mars.",
+    "forecastNo": "The snapshot does not forecast an impact at Mars.",
+    "no": "No",
+    "yes": "Yes",
+    "waterBudget": "Training water available",
+    "moisture": "Training moisture",
+    "moistureTarget": "Training target",
+    "addWater": "Water bed {{n}}",
+    "resetWater": "Empty bed {{n}}",
+    "air": "Restore air circulation",
+    "heat": "Maintain heating",
+    "water": "Recycle water",
+    "available": "Game energy available",
+    "demand": "Game demand",
+    "matches": "The available budget covers the demand",
+    "shortfall": "The demand exceeds the available budget",
+    "wind": "Recorded wind direction",
+    "oxygen": "Current game oxygen",
+    "briefings": {
+      "SortFlares": {
+        "happening": "The shield needs the recorded flare class.",
+        "importance": "Class letters help us interpret the solar alert.",
+        "hint": "Follow the cards above the spaces: A first, then B, C, M and X.",
+        "error": "That card is not next. Follow A, B, C, M, X from left to right."
+      },
+      "PhotoDetective": {
+        "happening": "The telescope shows a NASA archive picture.",
+        "importance": "A source caption describes what was observed, not a storm warning.",
+        "hint": "Match the source title, then consider what a picture can prove.",
+        "error": "That caption is not the source title, or a picture alone cannot predict an impact."
+      },
+      "AlignCoils": {
+        "happening": "The snapshot sets the shield alert level.",
+        "importance": "Aligned game coils prepare the protective station.",
+        "hint": "Each triangle is the target for its pointer.",
+        "error": "A pointer still misses its triangle target."
+      },
+      "WireShield": {
+        "happening": "The shield circuit needs matching connections.",
+        "importance": "Correct connections prepare the shield during the Sol alert.",
+        "hint": "Follow both the symbol and the color.",
+        "error": "These endpoints have different symbols and colors."
+      },
+      "CmeCountdown": {
+        "happening": "The snapshot records a CME speed.",
+        "importance": "Travel time is a simplified estimate, not an impact forecast.",
+        "hint": "Match the recorded speed and its constant-speed time.",
+        "error": "The speed or time does not match the recorded speed calculation."
+      },
+      "PipeFlow": {
+        "happening": "Air and water circuits need their correct routes.",
+        "importance": "The station keeps the crew supplied with air and recycled water.",
+        "hint": "Tap each pipe until the colored line covers the dashed guide and the card turns green.",
+        "error": "Some pipes are not green yet. Rotate those pieces before sending the flow."
+      },
+      "ThermostatDial": {
+        "happening": "The InSight snapshot supplies the outside temperature.",
+        "importance": "Heating demand changes with the temperature in our game.",
+        "hint": "Use the displayed heating requirement, not the temperature as kWh.",
+        "error": "Your lever does not match the heating requirement calculated by the game."
+      },
+      "SmartFarmCare": {
+        "happening": "Some training beds need water before harvest.",
+        "importance": "Careful irrigation avoids watering beds that are already moist.",
+        "hint": "Read moisture, water only thirsty beds, then set light and harvest.",
+        "error": "This bed already has enough training moisture."
+      },
+      "CleanPanels": {
+        "happening": "A labeled simulated storm can leave four solar arrays dusty.",
+        "importance": "Cleaning the most-soiled arrays first protects the next Sol's energy pool.",
+        "hint": "Use the highlighted brush. Light dust needs one pass, heavy dust two, and buried arrays three.",
+        "error": "Finish the highlighted array before moving to the next one."
+      },
+      "TiltSun": {
+        "happening": "The game Sun marks a panel orientation.",
+        "importance": "This calibration prepares the solar park without inventing generation readings.",
+        "hint": "Align the panel with its highlighted angle.",
+        "error": "The panel angle does not match the highlighted game target."
+      },
+      "IrrigationPlan": {
+        "happening": "The training tank has a limited water supply.",
+        "importance": "Distributing only the missing water avoids waste.",
+        "hint": "Subtract each bed moisture from the target and share the drops.",
+        "error": "A bed has too much or too little water; check its moisture."
+      },
+      "ResourcePriority": {
+        "happening": "Read current oxygen and the Sol heating demand.",
+        "importance": "Life support prioritizes the resource that needs attention.",
+        "hint": "Below full oxygen, restore air; otherwise compare heating and greenhouse demand.",
+        "error": "Check oxygen first, then compare the displayed energy demands."
+      },
+      "PowerBalance": {
+        "happening": "The park provides the existing game energy budget.",
+        "importance": "Comparing supply and demand helps us plan without changing the budget.",
+        "hint": "Compare the available bar with the combined system demands.",
+        "error": "Compare the total demand with the available budget, not a single system."
+      },
+      "WindReading": {
+        "happening": "The InSight snapshot records a prevailing wind direction.",
+        "importance": "Reading weather supports maintenance; this is not a sensor at Base ARES.",
+        "hint": "Choose the compass direction written in the snapshot.",
+        "error": "That direction does not match the recorded prevailing wind."
+      }
+    }
+  },
+  "trainer": {
+    "title": "Greenhouse Master",
+    "welcome": "Welcome, new greenhouse astronomer!",
+    "mission": "Your mission is to care for plants with limited water. Observe soil and light before deciding.",
+    "source": "Training inspired by VEG-04 averages: 34, 51 and 58 mL per container/day. The 1.36, 2.04 and 2.32 L levels are game adaptations, not official NASA levels. This activity does not change mission resources.",
+    "scoreboard": "Crop health",
+    "crops": {
+      "fruit": "Fruit",
+      "vegetable": "Vegetable",
+      "greens": "Leafy greens"
+    },
+    "health": {
+      "healthy": "Healthy",
+      "stressed": "Stressed",
+      "risk": "At risk"
+    },
+    "soilBands": {
+      "low": "Dry",
+      "medium": "Moderate",
+      "high": "Wet"
+    },
+    "lightBands": {
+      "low": "Low",
+      "medium": "Moderate",
+      "high": "Excessive"
+    },
+    "cycle": "Cycle {{n}}",
+    "reservoir": "Reservoir: {{water}} L",
+    "focus": "Crop in focus: {{crop}}",
+    "soil": "Soil: {{state}}",
+    "light": "Light: {{state}}",
+    "hint": "Hint: {{hint}}",
+    "question": "Which irrigation level do you choose: Low, Medium or High?",
+    "levels": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "optional": "One optional adjustment",
+    "adjustments": {
+      "none": "No adjustment",
+      "moreWater": "Provide more water",
+      "lessWater": "Provide less water",
+      "moreLight": "Increase light temperature",
+      "lessLight": "Decrease light temperature"
+    },
+    "adjustmentRule": "In training, water adjustments redistribute the selected irrigation, without extra use or refills. Light temperature adjustments represent lighting correction, not a scientific measurement.",
+    "confirm": "Confirm decision",
+    "result": "Result: {{crop}} — {{health}}.",
+    "updatedWater": "Updated water: {{water}} L.",
+    "explainHealthy": "Soil and light are balanced! Roots receive water and leaves receive light to grow.",
+    "explainSoil": "The soil is out of balance. Roots need water, but too much can also cause problems. Let’s observe next cycle!",
+    "explainLight": "Light is out of balance. Leaves need light to grow, but too much can be harmful.",
+    "explainBoth": "Soil and light are out of balance. Caring for both helps plants grow. Every attempt teaches something!",
+    "dustEvent": "Simulated event: Martian dust reduced the light.",
+    "sunEvent": "Simulated event: strong sunlight increased the light.",
+    "calmEvent": "Simulated event: lighting returned to balance.",
+    "hintDry": "The soil looks dry… what might the roots be feeling?",
+    "hintWet": "The soil is very wet… can the roots breathe?",
+    "hintLight": "Observe the leaves. What changed in the lighting?",
+    "hintBalanced": "Everything looks balanced. How can we care for plants and save water?",
+    "lowWater": "Less than 4 L left! Water on Mars is limited. Think about saving it.",
+    "insufficient": "Not enough water for this level. Choose a lower level.",
+    "noLevel": "Water remains, but not enough for the lowest irrigation level. Let’s save it and reflect on what we learned.",
+    "finish": "Finish learning",
+    "finished": "What did we learn?",
+    "empty": "The reservoir is empty. Thank you for caring for the plants!",
+    "saved": "We saved the remaining water. Each decision taught us about resources.",
+    "reflection": "How did water and light affect your plants? What would you try differently? Saving water supports life on Mars.",
+    "restart": "Start again"
+  }
+}

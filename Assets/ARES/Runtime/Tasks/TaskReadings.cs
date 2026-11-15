@@ -16,6 +16,8 @@ namespace Ares.Tasks
         public int Heating, Tilt, CoilMarks, DustPatches;
         public string WindDirection, PictureKind, Flare;
         public bool CmePractice, TempPractice, WindPractice, FlarePractice;
+        public ScienceRecord ArchivedFlare, ArchivedCme;
+        public ObservatoryEntry ArchivedPhoto;
         public TaskReadings(GameDefinition definition, SolData sol)
         {
             var cme = sol; var temp = sol;
@@ -44,6 +46,23 @@ namespace Ares.Tasks
             DustPatches = definition.rules.miniGames.dustPatches;
             if (definition.rules.marsWeatherModifier && sol.facts.hasWindSpeed)
                 DustPatches = Mathf.Min((int)definition.rules.miniGames.weatherDustCap, DustPatches + Mathf.FloorToInt(sol.facts.windSpeed + .5f));
+            // Real observations teach classification and travel estimates. They do NOT
+            // imply a Mars impact or overwrite the scenario's simulated weather/demand.
+            var archive = ScienceArchive.Load();
+            ArchivedFlare = archive?.ForDay("flare", sol.sol);
+            ArchivedCme = archive?.ForDay("cme", sol.sol);
+            if (ArchivedFlare != null) { Flare = ArchivedFlare.label; FlarePractice = false; }
+            if (ArchivedCme != null) { Speed = ArchivedCme.value; CmePractice = false; }
+            var photoCatalog = Resources.Load<TextAsset>("ARES/Observatory/collection");
+            if (photoCatalog != null)
+            {
+                var photos = JsonUtility.FromJson<ObservatoryCollection>(photoCatalog.text).entries;
+                if (photos != null && photos.Length > 0)
+                {
+                    var photo = photos[Math.Max(0, sol.sol - 1) % photos.Length];
+                    if (OfficialSources.IsOfficial(photo.sourceUrl) && Resources.Load<Texture2D>(photo.resource) != null) ArchivedPhoto = photo;
+                }
+            }
         }
         public static double TravelHoursExact(float speed) => speed > 0 ? 228000000d / speed / 3600 : 0;
         public static int TravelHours(float speed) => speed > 0 ? Mathf.FloorToInt(228000000f / speed / 3600 + .5f) : 0;

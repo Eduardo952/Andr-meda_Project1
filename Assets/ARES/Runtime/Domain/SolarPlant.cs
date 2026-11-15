@@ -24,6 +24,8 @@ namespace Ares.Domain
         readonly SolarMaintenanceSettings settings;
         readonly float[] ages = new float[PanelCount];
         readonly float[] dust = new float[PanelCount];
+        readonly bool[] buried = new bool[PanelCount];
+        public int BuriedPanels { get; private set; }
         public float ReserveKwh { get; private set; }
         public float CapacityKwh => settings.reserveCapacityKwh;
         public float CycleSeconds => settings.energyCycleSeconds;
@@ -50,6 +52,16 @@ namespace Ares.Domain
         public float Dust(int panel) => dust[panel];
         public float Generation(int panel) => settings.cleanPanelKwh * (1 - dust[panel]);
         public bool NeedsCleaning(int panel) => panel >= 0 && panel < PanelCount && dust[panel] >= .05f;
+        /// <summary>Burial persists through simulation and days until the real cleaning tool removes it.</summary>
+        internal void BuryPanels()
+        {
+            BuriedPanels = PanelCount;
+            for (int i = 0; i < PanelCount; i++)
+            {
+                buried[i] = true; dust[i] = 1;
+                ages[i] = settings.dustDelaySeconds + ((i * 13) % PanelCount) * settings.dustStaggerSeconds + settings.dustBuildSeconds;
+            }
+        }
         /// <summary>Returns the energy actually supplied; consumers cannot drive the battery below zero.</summary>
         public float DrawEnergy(float requestedKwh)
         {
@@ -78,6 +90,7 @@ namespace Ares.Domain
         internal bool Clean(int panel)
         {
             if (!NeedsCleaning(panel)) return false;
+            if (buried[panel]) { buried[panel] = false; BuriedPanels--; }
             ages[panel] = dust[panel] = 0; CleanedPanels++; return true;
         }
     }

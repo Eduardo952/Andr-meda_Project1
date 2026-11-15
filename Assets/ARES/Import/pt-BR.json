@@ -764,5 +764,76 @@
         "error": "Essa direção não corresponde ao vento predominante registrado."
       }
     }
+  },
+  "trainer": {
+    "title": "Mestre da Estufa",
+    "welcome": "Boas-vindas, novo(a) astrônomo(a) da estufa!",
+    "mission": "Sua missão é cuidar das plantas com água limitada. Observe o solo e a luz antes de decidir.",
+    "source": "Treino inspirado nas médias VEG-04: 34, 51 e 58 mL por recipiente/dia. Os níveis de 1,36, 2,04 e 2,32 L são adaptações para o jogo, não níveis oficiais da NASA. Esta atividade não muda os recursos da missão.",
+    "scoreboard": "Saúde das plantações",
+    "crops": {
+      "fruit": "Fruta",
+      "vegetable": "Legume",
+      "greens": "Verdura"
+    },
+    "health": {
+      "healthy": "Saudável",
+      "stressed": "Estressada",
+      "risk": "Em risco"
+    },
+    "soilBands": {
+      "low": "Seco",
+      "medium": "Moderado",
+      "high": "Úmido"
+    },
+    "lightBands": {
+      "low": "Pouca",
+      "medium": "Moderada",
+      "high": "Excessiva"
+    },
+    "cycle": "Ciclo {{n}}",
+    "reservoir": "Reservatório: {{water}} L",
+    "focus": "Plantação em foco: {{crop}}",
+    "soil": "Solo: {{state}}",
+    "light": "Luz: {{state}}",
+    "hint": "Dica: {{hint}}",
+    "question": "Qual nível de irrigação você escolhe: Baixa, Mediana ou Alta?",
+    "levels": {
+      "low": "Baixa",
+      "medium": "Mediana",
+      "high": "Alta"
+    },
+    "optional": "Um ajuste opcional",
+    "adjustments": {
+      "none": "Sem ajuste",
+      "moreWater": "Fornecer mais água",
+      "lessWater": "Fornecer menos água",
+      "moreLight": "Aumentar a temperatura da luz",
+      "lessLight": "Diminuir a temperatura da luz"
+    },
+    "adjustmentRule": "No treino, o ajuste de água redistribui a irrigação escolhida, sem gasto extra nem recarga. Ajustar a temperatura da luz representa corrigir a iluminação; não é uma medição científica.",
+    "confirm": "Confirmar decisão",
+    "result": "Resultado: {{crop}} — {{health}}.",
+    "updatedWater": "Água atualizada: {{water}} L.",
+    "explainHealthy": "Solo e luz ficaram equilibrados! As raízes recebem água e as folhas recebem luz para crescer.",
+    "explainSoil": "Ops, o solo ficou fora do equilíbrio. As raízes precisam de água, mas o excesso também atrapalha. Vamos observar no próximo ciclo?",
+    "explainLight": "A luz ficou fora do equilíbrio. As folhas precisam de luz para crescer, mas luz demais também pode prejudicar.",
+    "explainBoth": "Solo e luz ficaram fora do equilíbrio. Cuidar dos dois ajuda a planta a crescer; cada tentativa ensina algo!",
+    "dustEvent": "Evento simulado: poeira marciana diminuiu a luz.",
+    "sunEvent": "Evento simulado: um período de sol forte aumentou a luz.",
+    "calmEvent": "Evento simulado: a iluminação voltou ao equilíbrio.",
+    "hintDry": "Hmm, o solo parece sequinho… o que será que as raízes estão sentindo?",
+    "hintWet": "O solo está bem molhado… será que as raízes conseguem respirar?",
+    "hintLight": "Observe a luz nas folhas. O que mudou desde o último ciclo?",
+    "hintBalanced": "Tudo parece equilibrado. Como cuidar das plantas e guardar água para depois?",
+    "lowWater": "Atenção: temos menos de 4 L! A água em Marte é limitada. Pense em como economizar.",
+    "insufficient": "Não temos água suficiente para esse nível. Escolha um nível menor.",
+    "noLevel": "Ainda há água, mas não o suficiente para a menor irrigação. Vamos guardar o saldo e conversar sobre o que aprendemos?",
+    "finish": "Concluir aprendizado",
+    "finished": "O que aprendemos na estufa?",
+    "empty": "O reservatório zerou. Obrigado por cuidar das plantas!",
+    "saved": "Guardamos a água restante. Cada decisão ajudou a entender nossos recursos.",
+    "reflection": "Como a água e a luz mudaram suas plantas? Qual decisão você tentaria de outra forma? Economizar água ajuda a vida em Marte.",
+    "restart": "Começar de novo"
   }
 }

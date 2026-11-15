@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Ares.Domain;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,22 +6,18 @@ using static Ares.UI.UiElements;
 
 namespace Ares.UI
 {
-    /// <summary>Four-shelf teaching activity. Explicit choices only; decisions never run on a timer.</summary>
+    /// <summary>Daily observations and light controls. Water is delivered only by the world watering can.</summary>
     internal sealed class GreenhouseView
     {
         readonly GreenhouseSimulation game;
         readonly GreenhouseWatering watering;
-        readonly Action returnToWorld;
+        readonly Action accept, close;
         readonly VisualElement body, footer;
-        readonly Action accept;
-        IrrigationLevel? chosen;
-        GreenhouseAdjustment adjustment;
-        string error;
         bool information;
         public GreenhouseView(VisualElement root, GreenhouseSimulation game, GreenhouseWatering watering, Action accept, Action close)
         {
-            this.game = game; this.watering=watering; this.accept = accept; returnToWorld=close;
-            var panel = new ChallengePanel(root, new Localization("pt-BR"), "Mestre da Estufa", "greenhouse", null, false,
+            this.game = game; this.watering = watering; this.accept = accept; this.close = close;
+            var panel = new ChallengePanel(root, new Localization(PresentationLocalizer.Language), "Estufa · Ares Base", "greenhouse", null, false,
                 () => { information = !information; Render(); }, close);
             root.AddToClassList("greenhouse-view"); root.name = "greenhouse-view";
             body = panel.Body; footer = panel.Footer; Render();
@@ -29,81 +25,58 @@ namespace Ares.UI
         public void Render()
         {
             body.Clear(); footer.Clear();
-            if (game.CompletedCycles == 0) Text(body, GreenhouseNarrator.Welcome, "greenhouse-welcome");
+            Text(body, GreenhouseNarrator.Welcome, "greenhouse-welcome");
+            var content = Box(body, "greenhouse-daily");
+            var reserve = Box(content, "greenhouse-water-card");
+            Text(reserve, $"Dia {game.Day} de 5 · Reservatório: {GreenhouseNarrator.Litres(watering.ReservoirMl)} L", "heading").name = "greenhouse-water";
+            var gauge = new ProgressBar { lowValue = 0, highValue = GreenhouseRules.InitialWaterMl, value = watering.ReservoirMl, title = "Reserva para toda a missão" }; reserve.Add(gauge);
+            Text(reserve, $"No regador: {watering.CanMl} / 510 mL · Usados hoje: {GreenhouseNarrator.Litres(game.TodayDeliveredMl)} L", "small");
+            if (watering.AvailableMl < GreenhouseRules.DoseMl)
+                Text(reserve, "Não há água suficiente para outra rega de 510 mL. Você ainda pode observar as plantas e ajustar a luz.", "greenhouse-error");
+            var shelves = Box(content, "row greenhouse-daily-shelves");
+            for (int i = 0; i < game.Shelves.Count; i++)
+            {
+                int index = i; var shelf = game.Shelves[i];
+                var card = Box(shelves, "greenhouse-daily-shelf shelf-" + shelf.Health.ToString().ToLowerInvariant());
+                Text(card, $"{i + 1} · {shelf.Crop}", "heading");
+                Text(card, "10 recipientes", "small");
+                Text(card, "Solo: " + GreenhouseNarrator.Soil(shelf.Soil), "greenhouse-soil");
+                Text(card, GreenhouseNarrator.WaterHint(shelf));
+                Text(card, $"Regas: {shelf.DeliveredDoses} / {shelf.RequiredDoses}", "small");
+                var observe = Button(card, shelf.Inspected ? "Observado" : "Observar solo", () => { game.Inspect(index); Render(); }, "ghost");
+                observe.name = "greenhouse-inspect-" + i; observe.SetEnabled(!shelf.Inspected && game.CanCare);
+            }
+            var light = Box(content, "greenhouse-light-card");
+            Text(light, "Luz: " + GreenhouseNarrator.Light(game.Light), "heading").name = "greenhouse-light";
+            Text(light, GreenhouseNarrator.LightHint(game.Light));
+            var controls = Box(light, "row");
+            var less = Button(controls, "− Diminuir", () => { game.AdjustLight(-1); Render(); }, "ghost");
+            less.name = "greenhouse-light-less"; less.SetEnabled(game.CanCare && game.Light != GrowLight.Low);
+            var more = Button(controls, "+ Aumentar", () => { game.AdjustLight(1); Render(); }, "ghost");
+            more.name = "greenhouse-light-more"; more.SetEnabled(game.CanCare && game.Light != GrowLight.Excessive);
+            Text(light, game.Environment, "small");
+            var steps = Box(content, "row mini-data-grid");
+            Step(steps, "1 · Pegar regador", "drop");
+            Step(steps, "2 · Encher: 510 mL", "drop");
+            Step(steps, "3 · Clicar na prateleira", "sprout");
+            if (game.LastResult != null) Text(content, GreenhouseNarrator.Result(game.LastResult), "greenhouse-result");
             if (information)
             {
-                var note = Box(body,"mini-hint"); Text(note,GreenhouseNarrator.Inspiration); Text(note,GreenhouseNarrator.WaterNote);
-                Text(note,"O clima desta atividade é simulado. O ciclo avança depois de regar as quatro prateleiras.");
+                var science = Box(content, "greenhouse-cycle");
+                Text(science, GreenhouseNarrator.Inspiration); Text(science, GreenhouseNarrator.WaterNote); Text(science, GreenhouseNarrator.EnvironmentNote);
+                Text(science, "Nas 4 prateleiras: todas moderadas = 2,04 L/dia; todas secas = 4,08 L/dia; todas muito úmidas = 0 L/dia.");
+                Text(science, "Solo seco pode desidratar as plantas. Água demais pode prejudicar as raízes. Pouca luz prejudica o crescimento; luz demais pode causar estresse.");
+                Button(science, "Pesquisa VEG-04 · NASA", () => Application.OpenURL("https://ntrs.nasa.gov/citations/20240000823"), "ghost");
             }
-            var columns = Box(body, "row greenhouse-columns");
-            Illustration(Box(columns, "greenhouse-art"));
-            var decisions = Box(columns, "greenhouse-decisions");
-            if (game.LastResult != null) Text(decisions, GreenhouseNarrator.Result(game.LastResult), "greenhouse-result").name = "greenhouse-result";
-            if (game.Finished) { Ending(decisions); return; }
-            if(watering.HasPlan)
-            {
-                Text(decisions,$"Rega preparada: {GreenhouseNarrator.Litres(watering.PlannedMl)} L para as quatro prateleiras.\nJá aplicados: {GreenhouseNarrator.Litres(watering.DeliveredMl)} L · {watering.WateredShelves}/4 prateleiras concluídas.\nPegue o regador, abasteça no ponto ÁGUA e segure o clique nas áreas marcadas. A água aplicada fica registrada ao parar.","greenhouse-cycle");
-                Button(footer,"Voltar para regar",returnToWorld).name="greenhouse-return";return;
-            }
-            Text(decisions,GreenhouseNarrator.CycleBlock(game),"greenhouse-cycle").name="greenhouse-cycle";
-            var levels = Box(decisions,"row greenhouse-levels");
-            foreach (IrrigationLevel level in Enum.GetValues(typeof(IrrigationLevel)))
-            {
-                var captured = level;
-                var button = Button(levels, GreenhouseNarrator.Level(level) + "\n" + GreenhouseNarrator.Litres(GreenhouseSimulation.ConsumptionMl(level)) + " L",
-                    () => { chosen=captured; adjustment=GreenhouseAdjustment.None; error=null; Render(); }, "greenhouse-level");
-                button.name="greenhouse-level-"+(int)level; button.EnableInClassList("selected",chosen==level);
-            }
-            if (chosen.HasValue)
-            {
-                var options = Box(decisions,"row greenhouse-adjustments");
-                Adjustment(options,GreenhouseAdjustment.MoreWater,"Fornecer mais água");
-                Adjustment(options,GreenhouseAdjustment.LessWater,"Fornecer menos água");
-                Adjustment(options,GreenhouseAdjustment.MoreLight,"Aumentar a luz");
-                Adjustment(options,GreenhouseAdjustment.LessLight,"Diminuir a luz");
-                if(adjustment!=GreenhouseAdjustment.None) Button(options,"Retirar ajuste",()=>{adjustment=GreenhouseAdjustment.None;Render();},"ghost");
-                var final = GreenhouseSimulation.FinalLevel(chosen.Value,adjustment);
-                Text(decisions,"Escolha final: "+GreenhouseNarrator.Level(final)+" · "+GreenhouseNarrator.Litres(GreenhouseSimulation.ConsumptionMl(final))+" L para a estufa inteira.","greenhouse-preview").name="greenhouse-preview";
-            }
-            if(!string.IsNullOrEmpty(error)) Text(decisions,error,"greenhouse-error").name="greenhouse-error";
-            Text(footer,"A água é limitada. Você decide com calma.","small");
-            var confirm=Button(footer,"Preparar rega manual",Decide); confirm.name="greenhouse-confirm"; confirm.SetEnabled(chosen.HasValue);
+            Button(footer, "Voltar à estufa", close, "ghost").name = "greenhouse-return";
+            var done = Button(footer, "Registrar cuidados de hoje", accept);
+            done.name = "greenhouse-accept"; done.SetEnabled(game.CareReady);
         }
-        void Illustration(VisualElement parent)
+        static void Step(VisualElement parent, string text, string icon)
         {
-            var image = new Image { image = Resources.Load<Texture2D>("ARES/UI/Greenhouse/veggie-rack"), scaleMode = ScaleMode.ScaleToFit };
-            image.AddToClassList("greenhouse-rack"); image.pickingMode=PickingMode.Ignore; parent.Add(image);
-            for(int i=0;i<game.Shelves.Count;i++)
-            {
-                var shelf=game.Shelves[i]; var row=Box(parent,"greenhouse-shelf shelf-"+shelf.Health.ToString().ToLowerInvariant()); row.name="greenhouse-shelf-"+i;
-                Text(row,$"{i+1} · {shelf.Crop}","greenhouse-crop"); Text(row,GreenhouseNarrator.Health(shelf.Health),"small");
-            }
-            Text(parent,"Inspiração: Veggie. Regras adaptadas para o jogo.","greenhouse-caption");
-        }
-        void Adjustment(VisualElement parent,GreenhouseAdjustment option,string label)
-        {
-            if(!game.CanAdjust(chosen.Value,option))return;
-            var button=Button(parent,label,()=>{adjustment=option;error=null;Render();},"ghost");
-            button.name="greenhouse-adjust-"+option; button.EnableInClassList("selected",adjustment==option);
-        }
-        void Decide()
-        {
-            if(!chosen.HasValue)return;
-            var result=watering.Plan(chosen.Value,adjustment);
-            if(result==GreenhouseDecisionError.InsufficientWater)
-                error=$"Restam {GreenhouseNarrator.Litres(game.WaterMl)} L. Esse nível precisa de mais água. Escolha um nível menor para cuidar da reserva.";
-            else if(result!=GreenhouseDecisionError.None) error="Vamos observar a estufa e escolher de novo? Nenhuma água foi usada.";
-            else { chosen=null; adjustment=GreenhouseAdjustment.None; error=null; returnToWorld(); return; }
-            Render();
-        }
-        void Ending(VisualElement parent)
-        {
-            Text(parent,GreenhouseNarrator.Ending(game),"greenhouse-cycle").name="greenhouse-ending";
-            var reflection=new TextField("O que você aprendeu? (opcional)") {multiline=true,maxLength=240,value=game.Reflection};
-            reflection.name="greenhouse-reflection"; reflection.AddToClassList("greenhouse-reflection"); parent.Add(reflection);
-            reflection.RegisterValueChangedCallback(e=>game.SaveReflection(e.newValue));
-            Text(footer,"Observar, escolher e aprender também é fazer ciência!","small");
-            Button(footer,"Registrar aprendizado",accept).name="greenhouse-accept";
+            var step = Box(parent, "row greenhouse-water-step");
+            step.Add(new ChallengeIcon(icon, ChallengePalette.Life, 30));
+            Text(step, text, "small");
         }
     }
 }

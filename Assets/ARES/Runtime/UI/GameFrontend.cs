@@ -20,18 +20,29 @@ namespace Ares.UI
         StationInteraction stations;
         UIDocument document;
         PanelSettings panel;
-        VisualElement root, overlay;
+        VisualElement root, overlay, missionHudRoot;
+        internal TutorialDirector Tutorial { get; private set; }
+        public bool TutorialActive => Tutorial != null && Tutorial.Active;
+        public TutorialStage TutorialStage => Tutorial?.Flow.Stage ?? Ares.Domain.TutorialStage.Inactive;
         Localization locale;
         Campaign campaign;
+        Ares.Infrastructure.CommunicationsArchive communicationsArchive;
         MissionHud hud;
+        MissionEventBanner eventBanner;
+        StormWindHud stormWindHud;
+        MissionCommandConsole commandConsole;
+        WorldMapView worldMap;
+        readonly System.Collections.Generic.List<VisualElement> mapDisabledElements = new System.Collections.Generic.List<VisualElement>();
+        public bool IsMapOpen => worldMap != null;
         MissionGuidance guidance;
         readonly TourProgress tourProgress = new TourProgress();
         TaskView taskView;
         TaskAttempt attempt;
         TitleBackdrop backdrop;
+        MissionMainMenu mainMenu;
         StationOffer stationOffer;
         bool title = true, paused, pointerOverUi, dirty;
-        public bool BlocksWorld => title || paused || overlay != null || (Terminal != null && Terminal.OwnsCamera);
+        public bool BlocksWorld => title || paused || (commandConsole?.IsOpen ?? false) || overlay != null || campaign?.Phase == Phase.GameOver || campaign?.Phase == Phase.Victory || (Tutorial?.BlocksWorld ?? false) || (Terminal != null && Terminal.OwnsCamera);
         public bool BlocksPointer => BlocksWorld || pointerOverUi;
         public Campaign Campaign => campaign;
         public SolarMaintenance Solar { get; private set; }
@@ -49,6 +60,9 @@ namespace Ares.UI
         void Awake()
         {
             explorer = GetComponent<ReferenceExplorer>(); definition = explorer.definition;
+            if(GetComponent<MissionHabitatArt>()==null)gameObject.AddComponent<MissionHabitatArt>();
+            if(GetComponent<MissionAstronautArt>()==null)gameObject.AddComponent<MissionAstronautArt>();
+            if(GetComponent<MissionStormPresentation>()==null)gameObject.AddComponent<MissionStormPresentation>();
             Solar = GetComponent<SolarMaintenance>();
             if (Solar == null) Solar = gameObject.AddComponent<SolarMaintenance>();
             GreenhouseCare=GetComponent<GreenhouseCare>();
@@ -68,7 +82,14 @@ namespace Ares.UI
             root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/Greenhouse"));
             root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/Observatory"));
             root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/Oxygen"));
+            root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/Communications"));
+            root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/Map"));
+            root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/Tutorial"));
+            root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/MissionTheme"));
+            PresentationLocalizer.Attach(root);
+            gameObject.AddComponent<PresentationLocalizationLoop>().Bind(root);
             root.pickingMode = PickingMode.Ignore;
+            commandConsole = new MissionCommandConsole(root, () => campaign, () => TutorialActive);
             Terminal = gameObject.AddComponent<ComputerTerminal>();
             Terminal.Initialize(explorer, this, root);
             explorer.reducedMotion = PlayerPrefs.GetInt("ARES.ReducedMotion", 0) == 1;
@@ -76,27 +97,49 @@ namespace Ares.UI
             explorer.cameraSensitivity = PlayerPrefs.GetFloat("ARES.CameraSensitivity", 1);
             ShowTitle();
         }
-        void OnDestroy() { backdrop?.Dispose(); if (campaign != null) campaign.Changed -= Changed; if (panel != null) Destroy(panel); }
+        void OnDestroy() { commandConsole?.Dispose(); DisposeTutorial(); mainMenu?.Dispose(); CloseMap(); if (campaign != null) communicationsArchive?.Save(campaign.Communications); backdrop?.Dispose(); if (campaign != null) campaign.Changed -= Changed; if (panel != null) Destroy(panel); }
+        void OnDisable() { commandConsole?.Close(); DisposeTutorial(); CloseMap(); }
+        void DisposeTutorial() { Tutorial?.Dispose(); Tutorial = null; }
         void Changed() { dirty = true; }
         void Update()
         {
             if (root == null) return;
+            root.EnableInClassList("reduced-motion", explorer.reducedMotion);
+            if (commandConsole.HandleInput(!title && campaign != null)) return;
             backdrop?.Tick(Time.unscaledDeltaTime, explorer.reducedMotion);
+            mainMenu?.Tick(Time.unscaledDeltaTime, explorer.reducedMotion);
+            Tutorial?.Tick();
+            if (Tutorial != null && !TutorialActive) DisposeTutorial();
             var keyboard = Keyboard.current;
-            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame && !title)
+            // Handle map input first so Escape never opens settings behind it.
+            if (keyboard != null && !title && !TutorialActive)
+            {
+                if (IsMapOpen && (keyboard.mKey.wasPressedThisFrame || keyboard.escapeKey.wasPressedThisFrame))
+                { CloseOverlay(); return; }
+                if (keyboard.mKey.wasPressedThisFrame && !BlocksWorld) ToggleMap();
+            }
+            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame && !title && !TutorialActive)
             { if (Terminal.OwnsCamera) Terminal.Close(); else if (overlay == null) Settings(); else if (campaign.Phase == Phase.Plan || campaign.Phase == Phase.Tasks) CloseOverlay(); }
             if (title || campaign == null) return;
             stationOffer = stations.Resolve(campaign, explorer.PlayerPosition);
-            campaign.Tick(Time.deltaTime, BlocksWorld, paused);
+            if (TutorialActive && keyboard != null && keyboard.escapeKey.wasPressedThisFrame && !(Tutorial?.BlocksWorld ?? false)) Terminal.Close();
+            campaign.Tick(Time.deltaTime, BlocksWorld, paused || TutorialActive);
+            eventBanner?.Update(campaign, !TutorialActive && !paused, overlay != null || Terminal.OwnsCamera);
+            stormWindHud?.Update(campaign, !TutorialActive && !BlocksWorld);
+            communicationsArchive?.Save(campaign.Communications);
+            if (campaign.Phase == Phase.GameOver && dirty)
+            { dirty = false; attempt = null; taskView = null; ShowEnd(); return; }
             if (campaign.Phase == Phase.Summary && dirty)
             { dirty = false; attempt = null; taskView = null; ShowSummary(); return; }
-            Solar.Tick(Time.deltaTime);
+            if (!TutorialActive) Solar.Tick(Time.deltaTime);
             GreenhouseCare.Tick(Time.deltaTime);
-            Observatory.Tick();
+            if (!TutorialActive) Observatory.Tick();
             if (!BlocksWorld && !string.IsNullOrEmpty(campaign.Alarm))
                 foreach (var room in definition.layout.rooms) if (room.id == "shield" && WorldNavigation.Inside(explorer.PlayerPosition.x, -explorer.PlayerPosition.z, room, 0)) { campaign.ReachShelter(); break; }
-            attempt?.Tick(Time.unscaledDeltaTime); taskView?.Update(); hud?.Update(stationOffer, explorer.ControlledPosition);
-            guidance?.Update(campaign, explorer.PlayerPosition, BlocksWorld || explorer.IsDrivingRover, Time.deltaTime);
+            attempt?.Tick(Time.unscaledDeltaTime); taskView?.Update();
+            if (!IsMapOpen && !TutorialActive) hud?.Update(stationOffer, explorer.ControlledPosition);
+            worldMap?.Update();
+            if (!TutorialActive) guidance?.Update(campaign, explorer.PlayerPosition, BlocksWorld || explorer.IsDrivingRover, Time.deltaTime);
             if (!BlocksWorld && keyboard != null && (keyboard.eKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame || keyboard.enterKey.wasPressedThisFrame)) UseStation();
             if (dirty) { dirty = false; if (campaign.Phase == Phase.Summary) ShowSummary(); else if (campaign.Phase == Phase.Report && overlay == null) ShowReport(); }
             var mouse = Mouse.current;
@@ -106,46 +149,92 @@ namespace Ares.UI
                 pointerOverUi = picked != null && picked != root;
             }
         }
-        public void StartMission()
+        public void StartMission() => StartMission(true);
+        // The explicit overload lets existing integration fixtures enter the standard campaign directly.
+        public void StartMission(bool offerTutorial)
         {
+            DisposeTutorial();
+            if (campaign != null) communicationsArchive?.Save(campaign.Communications);
             if (campaign != null) campaign.Changed -= Changed;
             campaign = new Campaign(definition.campaign, definition.rules, explorer.solarSettings, explorer.oxygenSettings); campaign.Changed += Changed;
+            communicationsArchive = new Ares.Infrastructure.CommunicationsArchive();
+            communicationsArchive.Save(campaign.Communications);
             Solar.Bind(campaign.Solar);
             Apod.BeginMission();
             Terminal.Bind(campaign);
-            title = false; BuildHud(); ShowReport();
+            title = false; BuildHud();
+            if (offerTutorial)
+            {
+                explorer.ResetMissionSpawn();
+                campaign.CloseReport();
+                Tutorial = new TutorialDirector(root, missionHudRoot, explorer, this);
+            }
+            else ShowReport();
         }
         void BuildHud()
         {
+            commandConsole?.Close();
+            DisposeTutorial();
+            mainMenu?.Dispose(); mainMenu = null;
+            CloseMap();
             Terminal.Reset();
             backdrop?.Dispose(); backdrop = null;
             root.Clear(); overlay = null; taskView = null; attempt = null; paused = false;
-            hud = new MissionHud(root, definition, campaign, locale, explorer, UseStation, ShowReport, Settings);
-            guidance = new MissionGuidance(root, definition, locale, tourProgress);
-            Terminal.AttachPrompt();
+            missionHudRoot = Box(root, "mission-hud-root"); missionHudRoot.name = "mission-hud-root"; missionHudRoot.pickingMode = PickingMode.Ignore;
+            hud = new MissionHud(missionHudRoot, definition, campaign, locale, explorer, UseStation, ShowReport, Settings, ToggleMap);
+            guidance = new MissionGuidance(missionHudRoot, definition, locale, tourProgress);
+            Terminal.AttachPrompt(missionHudRoot);
+            eventBanner = new MissionEventBanner(root);
+            stormWindHud = new StormWindHud(missionHudRoot, explorer);
         }
         VisualElement Dialog(string titleText = null)
         {
+            CloseMap();
             Terminal.Reset();
             if (overlay != null) overlay.RemoveFromHierarchy();
             overlay = Box(root, "overlay"); var scroll = new ScrollView(); scroll.AddToClassList("dialog"); scroll.AddToClassList("panel"); overlay.Add(scroll);
-            if (titleText != null) Text(scroll.contentContainer, titleText, "title"); return scroll.contentContainer;
+            if (titleText != null) Text(scroll.contentContainer, titleText, "title"); MissionVisualStyle.Open(scroll); return scroll.contentContainer;
         }
         void CloseOverlay()
         {
+            bool returnToMapButton = IsMapOpen;
+            CloseMap();
             if (campaign != null && campaign.OpenTask != null) campaign.CancelTask();
             overlay?.RemoveFromHierarchy(); overlay = null; attempt = null; taskView = null; paused = false;
+            if (returnToMapButton) root.Q<Button>("hud-map")?.Focus();
+        }
+        public void ToggleMap()
+        {
+            if (TutorialActive) return;
+            if (IsMapOpen) { CloseOverlay(); return; }
+            if (campaign == null || BlocksWorld || (campaign.Phase != Phase.Plan && campaign.Phase != Phase.Tasks)) return;
+            // Disable underlying controls as well as world input: keyboard focus cannot leak into the HUD.
+            foreach (var child in root.Children())
+                if (child.enabledSelf) { mapDisabledElements.Add(child); child.SetEnabled(false); }
+            overlay = Box(root); overlay.name = "map-overlay";
+            overlay.style.position = Position.Absolute; overlay.style.left = 0; overlay.style.right = 0;
+            overlay.style.top = 0; overlay.style.bottom = 0;
+            paused = true;
+            worldMap = new WorldMapView(overlay, explorer, locale, CloseOverlay);
+        }
+        void CloseMap()
+        {
+            if (worldMap == null) return;
+            worldMap.Dispose(); worldMap = null;
+            overlay?.RemoveFromHierarchy(); overlay = null; paused = false;
+            foreach (var child in mapDisabledElements) child.SetEnabled(true);
+            mapDisabledElements.Clear();
         }
         void ShowTitle()
         {
+            commandConsole?.Close();
+            DisposeTutorial();
+            CloseMap();
             Terminal.Reset();
             title = true; hud = null; root.Clear(); overlay = null; attempt = null; taskView = null;
             backdrop?.Dispose(); backdrop = null;
-            var screen = Box(root, "title-screen"); backdrop = new TitleBackdrop(screen, explorer.GetComponentInChildren<BubbleAnimator>());
-            Text(screen, locale.T("title.name"), "logo"); Text(screen, locale.T("title.tagline"), "panel tagline");
-            var buttons = Box(screen, "row"); Button(buttons, "▶ " + locale.T("title.play"), StartMission);
-            Button(buttons, locale.T("title.language"), Languages, "alt"); Button(buttons, locale.T("title.howTo"), Help, "ghost");
-            Button(buttons, locale.T("title.exit"), ApplicationExit.Quit, "ghost").name = "title-exit";
+            mainMenu?.Dispose();
+            mainMenu = new MissionMainMenu(root, locale, StartMission, Help, Settings, Languages, ApplicationExit.Quit);
         }
         void Languages()
         {
@@ -175,6 +264,7 @@ namespace Ares.UI
         { if (attempt == null && Terminal.Near) Terminal.TryInteract(); }
         VisualElement StationPanel()
         {
+            CloseMap();
             Terminal.Reset();
             overlay?.RemoveFromHierarchy();
             overlay = Box(root, "overlay challenge-backdrop");
@@ -183,6 +273,7 @@ namespace Ares.UI
         void UseStation()
         {
             if (BlocksWorld || explorer.IsDrivingRover) return;
+            if (TutorialActive) { Tutorial.Interact(); return; }
             if (Terminal.TryInteract()) return;
             if (Observatory.TryInteract()) return;
             if (GreenhouseCare.TryInteract()) return;
@@ -192,6 +283,7 @@ namespace Ares.UI
             {
                 case StationAction.PlanEnergy: ShowEnergy(); break;
                 case StationAction.SealSol: ShowSeal(); break;
+                case StationAction.RegulateShield: ShowShieldRegulation(); break;
                 case StationAction.OpenTask:
                     if (campaign.BeginTask(offer.TaskId, offer.Room.id)) OpenTask(offer.TaskId);
                     break;
@@ -210,12 +302,21 @@ namespace Ares.UI
             taskView = new TaskView(content, attempt, locale, () => { OpenTask(id); attempt.Begin(); taskView.Render(); }, () =>
             { if (campaign.FinishTask(id, attempt.Solved, attempt.Seconds, attempt.Mistakes)) { attempt = null; CloseOverlay(); } }, CloseOverlay, explorer.reducedMotion);
         }
+        internal void ShowShieldRegulation()
+        {
+            if (BlocksWorld || TutorialActive || explorer.IsDrivingRover) return;
+            var offer = stations.Resolve(campaign, explorer.PlayerPosition);
+            if (!campaign.BeginShieldRegulation(offer.Room?.id)) return;
+            new ShieldRegulationView(StationPanel(), campaign, locale, CloseOverlay);
+        }
         internal void BuildComputerEnergy(VisualElement parent, Action close)
         { if (Terminal.Focused && Terminal.Near) EnergyView.Build(parent, campaign, definition.rules, locale, close); }
+        internal void BuildComputerCommunications(VisualElement parent, Func<bool> canInteract)
+        { new CommunicationsView(parent, campaign, canInteract, null, () => communicationsArchive?.Error); }
         internal void SealFromComputer() { ShowSeal(); }
         public void ShowObservatory()
         {
-            if (campaign == null || title || attempt != null) return;
+            if (TutorialActive || campaign == null || title || attempt != null) return;
             new ObservatoryView(StationPanel(), campaign, Apod, () =>
             {
                 CloseOverlay();
@@ -234,14 +335,32 @@ namespace Ares.UI
         }
         void ShowSummary()
         {
+            CloseMap();Terminal.Reset();overlay?.RemoveFromHierarchy();
+            overlay=Box(root,"overlay");var view=Box(overlay,"mission-report-popup");
+            MissionReportView.Build(view, campaign, locale, explorer, ShowDailyTransmission);
+        }
+        void ShowDailyTransmission()
+        {
             var view = Dialog();
-            if (campaign.EndedByClock) Text(view, "Os 10 minutos terminaram! As tarefas concluídas ficaram registradas. Vamos ver como a base passou o dia.", "heading");
-            CampaignScreens.Summary(view, campaign, locale, () => { campaign.NextSol(); if (campaign.Phase == Phase.Report) { BuildHud(); ShowReport(); } else ShowEnd(); });
+            view.GetFirstAncestorOfType<ScrollView>().AddToClassList("communications-dialog");
+            new CommunicationsView(view, campaign, () => true, () =>
+            {
+                if (!campaign.CanAdvanceDay) return;
+                communicationsArchive?.Save(campaign.Communications);
+                campaign.NextSol(); if (campaign.Phase == Phase.Report) { BuildHud(); ShowReport(); } else ShowEnd();
+            }, () => communicationsArchive?.Error);
+            Button(view, "Voltar ao resumo", ShowSummary, "ghost");
         }
         void ShowEnd()
         {
+            eventBanner?.Hide();
             var view = Dialog(locale.T(campaign.Phase == Phase.Victory ? "cert.title" : "gameover." + campaign.FailureCause + ".title"));
+            view.name = "mission-end";
             Text(view, campaign.Phase == Phase.Victory ? locale.T("cert.tiers." + campaign.SuccessTier) : locale.T("gameover." + campaign.FailureCause + ".body"), "heading");
+            if (campaign.Phase == Phase.GameOver && campaign.FailureCause == "radiation" && campaign.Demands.ImpactedToday && !campaign.Demands.ShieldRegulated)
+                Text(view, "A erupção solar atingiu a base sem o escudo regulado. Nos dias 2 e 5, faça a regulagem antes do impacto.");
+            if (campaign.Phase == Phase.GameOver && campaign.FailureCause == "suffocation" && campaign.Solar.BuriedPanels > 0)
+                Text(view, "Os painéis ficaram soterrados. A bateria acabou, a produção de oxigênio parou e a reserva de ar chegou a zero. Limpe os painéis a tempo na próxima tentativa.");
             if(campaign.Phase==Phase.Victory)
             {
                 var nickname=new TextField(locale.T("cert.nickname")) {maxLength=20,value=PlayerPrefs.GetString("ARES.Nickname","")}; view.Add(nickname);
@@ -250,8 +369,15 @@ namespace Ares.UI
             }
             Button(view, locale.T("title.play"), StartMission); Button(view, locale.T("settings.home"), ShowTitle, "ghost");
             Button(view, "Diário de descobertas", ShowObservatory, "ghost").name = "end-observatory";
+            Button(view, "Histórico de comunicação", ShowCommunicationHistory, "ghost").name = "end-communications";
+        }
+        void ShowCommunicationHistory()
+        {
+            var view = Dialog(); view.GetFirstAncestorOfType<ScrollView>().AddToClassList("communications-dialog");
+            new CommunicationsView(view, campaign, () => false, null, () => communicationsArchive?.Error);
+            Button(view, "Voltar", ShowEnd, "ghost");
         }
         // Explicit test fixture entry point: the control suite tests locomotion independently of menus.
-        public void SetInspectionTestMode() { Terminal.Reset(); backdrop?.Dispose(); backdrop = null; title = false; root.Clear(); overlay = null; campaign = null; hud = null; }
+        public void SetInspectionTestMode() { DisposeTutorial(); mainMenu?.Dispose(); mainMenu=null; CloseMap(); Terminal.Reset(); backdrop?.Dispose(); backdrop = null; title = false; root.Clear(); overlay = null; campaign = null; hud = null; }
     }
 }

@@ -32,7 +32,12 @@ namespace Ares.World
         }
         static bool Door(float x, float z, RoomData room)
         {
-            foreach (var p in room.ports) { bool axisX = Mathf.Abs(p.x - room.x) > Mathf.Abs(p.z - room.z); if (Mathf.Abs(axisX ? z - p.z : x - p.x) < 2.25f && Mathf.Abs(axisX ? x - p.x : z - p.z) < 1.5f) return true; }
+            foreach (var p in room.ports)
+            {
+                var direction = new Vector2(p.x - room.x, p.z - room.z).normalized;
+                var offset = new Vector2(x - p.x, z - p.z);
+                if (Mathf.Abs(offset.x * direction.y - offset.y * direction.x) < 2.25f && Mathf.Abs(Vector2.Dot(offset, direction)) < 1.5f) return true;
+            }
             return false;
         }
         public RoomData Near(Vector3 position, float radius = 3.6f)

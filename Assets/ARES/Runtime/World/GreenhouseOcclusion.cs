@@ -23,7 +23,8 @@ namespace Ares.World
         {
             foreach(var renderer in root.GetComponentsInChildren<MeshRenderer>(true))
             {
-                var mesh=renderer.GetComponent<MeshFilter>()?.sharedMesh;
+                if(!renderer.enabled || !renderer.TryGetComponent<MeshFilter>(out var filter))continue;
+                var mesh=filter.sharedMesh;
                 if(mesh==null || renderer.GetComponentInParent<AstronautAnimator>()!=null)continue;
                 // Renderer bounds may not be initialized during Awake; imported mesh bounds are stable.
                 var p=renderer.transform.TransformPoint(mesh.bounds.center);var material=renderer.sharedMaterial;

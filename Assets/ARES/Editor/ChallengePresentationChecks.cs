@@ -44,7 +44,7 @@ namespace Ares.Editor
                 var root = ui.GetComponent<UIDocument>().rootVisualElement;
                 if (stage == 0)
                 {
-                    ui.StartMission();
+                    ui.StartMission(false);
                     var explorer=ui.GetComponent<Ares.World.ReferenceExplorer>();
                     bool iso=explorer.Isometric, roofs=explorer.RoofsVisible;
                     Press(root.Q<Button>("hud-camera")); Require(explorer.Isometric!=iso,"HUD camera toggle failed");
@@ -69,7 +69,7 @@ namespace Ares.Editor
                 }
                 if (stage == 4)
                 {
-                    if(Ares.Domain.GreenhouseSimulation.IsTask(Tasks[task])) { GreenhouseCheckFixture.Press(root,"greenhouse-level-1"); GreenhouseCheckFixture.Press(root,"greenhouse-confirm"); GreenhouseCheckFixture.ManualCycle(ui.Campaign,Ares.Domain.IrrigationLevel.Medium,Ares.Domain.GreenhouseAdjustment.None); Call(ui,"OpenTask",Tasks[task]); }
+                    if(Ares.Domain.GreenhouseSimulation.IsTask(Tasks[task])) { GreenhouseCheckFixture.CareForToday(ui.Campaign.Greenhouse,ui.Campaign.Watering); Call(ui,"OpenTask",Tasks[task]); }
                     else Exercise(root, Attempt(ui)); stage++; return;
                 }
                 if (stage == 5)

@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / 'a896f420-3053-49eb-b6f2-a97f9b2dc6c8 (4)/src/styles.css'
+SOURCE = ROOT / 'casa-marte-missao-n8n/src/styles.css'
 text = SOURCE.read_text(encoding='utf-8')
 tokens = {name: tuple(map(float, values.split())) for name, values in
           re.findall(r'--([\w-]+):\s*oklch\(([^)]+)\)', text)}

@@ -65,7 +65,11 @@ namespace Ares.World
             string endpoint = Collection.endpoint;
             if (!Uri.TryCreate(endpoint, UriKind.Absolute, out var address) || address.Scheme != "https")
             { Finish(day, "Conexão indisponível · imagem real do arquivo APOD"); yield break; }
-            string query = endpoint + (endpoint.Contains("?") ? "&" : "?") + "date=" + Collection.entries[day].date;
+            // The current WordPress route takes YYMMDD in its path. Its date query can
+            // silently return a recent feed instead, so exact-date validation stays mandatory.
+            string query = address.Host == "science.nasa.gov" && endpoint.TrimEnd('/').EndsWith("apod-basic", StringComparison.Ordinal)
+                ? endpoint.TrimEnd('/') + "/" + Collection.entries[day].date.Substring(2).Replace("-", "")
+                : endpoint + (endpoint.Contains("?") ? "&" : "?") + "date=" + Collection.entries[day].date;
             // A configured proxy owns its credentials. Never send the NASA key to another host.
             if (address.Host == "api.nasa.gov") query += "&api_key=" + UnityWebRequest.EscapeURL(key);
             ApodRecord record = null;
@@ -76,7 +80,7 @@ namespace Ares.World
                 yield return request.SendWebRequest();
                 if (request.result == UnityWebRequest.Result.Success)
                 {
-                    try { record = JsonUtility.FromJson<ApodRecord>(request.downloadHandler.text); }
+                    try { record = ApodResponse.Parse(request.downloadHandler.text, Collection.entries[day].date); }
                     catch (ArgumentException) { }
                 }
             }
@@ -96,7 +100,7 @@ namespace Ares.World
                 downloaded[day] = texture;
                 records[day] = record;
             }
-            Finish(day, "Imagem recebida pela API APOD da NASA · " + record.date);
+            Finish(day, "Foto do arquivo NASA recebida");
         }
 
         void Finish(int day, string message)

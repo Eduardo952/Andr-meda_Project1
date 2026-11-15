@@ -1,0 +1,20 @@
+.mission-hud-root, .tutorial-layer { position: absolute; left: 0; top: 0; right: 0; bottom: 0; }
+.tutorial-dialogue { position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(36,26,61,.58); justify-content: center; align-items: center; }
+.tutorial-composition { width: 92%; max-width: 1380px; flex-direction: row; align-items: center; justify-content: center; }
+.tutorial-portrait { width: 32%; height: 440px; flex-shrink: 0; }
+.tutorial-balloon { width: 68%; height: 580px; -unity-background-scale-mode: stretch-to-fill; justify-content: center; }
+.tutorial-balloon-content { margin-left: 12%; margin-right: 9%; padding-top: 22px; padding-bottom: 26px; }
+.tutorial-eyebrow { font-size: 14px; letter-spacing: 2px; color: #6d6079; margin-bottom: 10px; }
+.tutorial-speech { -unity-font: resource("ARES/UI/Fonts/Fredoka"); font-size: 27px; margin-top: 18px; margin-bottom: 14px; white-space: normal; }
+.tutorial-actions { flex-direction: row; flex-wrap: wrap; margin-left: -6px; }
+.tutorial-actions Button { font-size: 19px; min-height: 52px; }
+.tutorial-objective { position: absolute; top: 24px; left: 24px; width: 540px; max-width: 72%; padding: 22px 26px; background-color: #fff6df; border-width: 3px; border-color: #30243e; border-bottom-width: 6px; border-radius: 24px; }
+.tutorial-objective-title { -unity-font: resource("ARES/UI/Fonts/Fredoka"); font-size: 26px; color: #30243e; }
+.tutorial-instruction { font-size: 20px; margin-bottom: 12px; }
+.tutorial-progress { font-size: 17px; color: #496b63; }
+.tutorial-exit { position: absolute; top: 24px; right: 24px; font-size: 17px; }
+.tutorial-compact .tutorial-portrait { width: 27%; height: 300px; }
+.tutorial-compact .tutorial-balloon { width: 73%; height: 500px; }
+.tutorial-compact .tutorial-speech { font-size: 23px; }
+.tutorial-compact .tutorial-actions Button { font-size: 17px; padding-left: 14px; padding-right: 14px; }
+.tutorial-compact .tutorial-objective { width: 460px; }

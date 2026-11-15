@@ -22,10 +22,10 @@ namespace Ares.UI
         {
             switch (id)
             {
-                case "SortFlares": return "DONKI FLR.classType";
-                case "CmeCountdown": return "DONKI CMEAnalysis.speed";
-                case "ThermostatDial": return "InSight AT.av";
-                case "WindReading": return "InSight WD";
+                case "SortFlares": return "Explosões no Sol · NASA/DONKI";
+                case "CmeCountdown": return "Nuvens solares · NASA/DONKI";
+                case "ThermostatDial": return "Temperatura de Marte · InSight";
+                case "WindReading": return "Vento em Marte · InSight";
                 case "CleanPanels": return locale.T("consequences.simulated");
                 default: return null;
             }

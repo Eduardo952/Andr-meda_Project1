@@ -1,6 +1,6 @@
 /* Native counterpart of styles.css / light challenge roles. Scoped to avoid changing the world HUD. */
 .challenge-backdrop { background-color: rgba(248, 243, 229, .30); padding: 16px; }
-.mini-overlay { width: 860px; max-width: 100%; max-height: 100%; flex-shrink: 1; background-color: var(--challenge-surface); color: var(--challenge-text); border-width: 1px; border-color: var(--challenge-border); border-radius: 24px; overflow: hidden; font-size: 17px; }
+.mini-overlay { width: 94%; max-width: 1380px; height: 92%; max-height: 100%; flex-shrink: 1; background-color: var(--challenge-surface); color: var(--challenge-text); border-width: 1px; border-color: var(--challenge-border); border-radius: 24px; overflow: hidden; font-size: 18px; }
 .mini-overlay Label { flex-shrink: 1; }
 .mini-header { padding: 20px 24px 16px; border-bottom-width: 1px; border-bottom-color: var(--challenge-border); align-items: flex-start; flex-wrap: nowrap; flex-shrink: 0; }
 .mini-header-title { flex-grow: 1; flex-shrink: 1; align-items: flex-start; }
@@ -21,7 +21,8 @@
 .mini-overlay Button.ghost { background-color: var(--challenge-card); border-color: var(--challenge-border); color: var(--challenge-info); }
 .mini-header-actions { flex-wrap: nowrap; }
 .mini-header-actions Button { padding: 8px; font-size: 24px; }
-.mini-scroll { flex-shrink: 1; min-height: 0; }
+.mini-scroll { flex-grow: 1; flex-shrink: 1; min-height: 0; }
+.mini-equipment-preview:disabled { opacity: 1; }
 .mini-scroll .unity-scroll-view__content-container { flex-shrink: 0; }
 .mini-context { margin: 20px 24px 16px; }
 .mini-context .small { margin-top: 6px; margin-bottom: 3px; font-size: 14px; -unity-font-style: bold; }

@@ -29,8 +29,8 @@ namespace Ares.UI
         }
 
         string Sector => ChallengeReadings.Sector(attempt.Id);
-        string Source => ChallengeReadings.Source(attempt.Id, locale);
-        bool Practice => attempt.Id == "PhotoDetective" || attempt.Id == "CmeCountdown" && attempt.Readings.CmePractice
+        string Source => attempt.Id == "PhotoDetective" && attempt.Readings.ArchivedPhoto != null ? "Foto real · NASA/APOD" : ChallengeReadings.Source(attempt.Id, locale);
+        bool Practice => attempt.Id == "PhotoDetective" && attempt.Readings.ArchivedPhoto == null || attempt.Id == "CmeCountdown" && attempt.Readings.CmePractice
             || attempt.Id == "ThermostatDial" && attempt.Readings.TempPractice || attempt.Id == "SortFlares" && attempt.Readings.FlarePractice
             || attempt.Id == "WindReading" && attempt.Readings.WindPractice;
 
@@ -50,26 +50,29 @@ namespace Ares.UI
                 Text(info, Source ?? locale.T("tasks.badgeRule"), "mini-instruction");
                 if (attempt.Sample) Text(info, locale.T("tasks.sampleNote"));
                 Text(info, locale.T("mini.rulesNote")); Text(info, locale.T("info.snapshot"));
+                Text(info, locale.T("challenge.briefings." + attempt.Id + ".importance"));
+                Text(info, locale.T("challenge.briefings." + attempt.Id + ".happening"));
+                var record = attempt.Id == "SortFlares" ? attempt.Readings.ArchivedFlare : attempt.Id == "CmeCountdown" ? attempt.Readings.ArchivedCme : null;
+                if (record != null)
+                {
+                    Text(info, "Arquivo NASA/DONKI · " + record.date + (record.preliminary ? " · análise inicial" : ""));
+                    Text(info, "Não é um alerta de agora. Este registro sozinho não diz se uma tempestade chega a Marte.");
+                    Button(info, "Ver registro oficial", () => Application.OpenURL(record.url), "ghost");
+                }
+                if (attempt.Id == "PhotoDetective" && attempt.Readings.ArchivedPhoto != null)
+                    Button(info, "Fonte da foto · NASA/APOD", () => Application.OpenURL(attempt.Readings.ArchivedPhoto.sourceUrl), "ghost");
             }
             if (attempt.Solved || attempt.Expired) { Result(); return; }
             var context = Box(body, "mini-context");
-            bool compact = attempt.Id == "SortFlares" || attempt.Id == "PipeFlow" || attempt.Id == "CleanPanels";
-            if (!compact || !attempt.Begun)
-            { Text(context, locale.T("challenge.happening"), "small"); Text(context, locale.T("challenge.briefings." + attempt.Id + ".happening")); }
-            Text(context, locale.T("challenge.action"), "small"); Text(context, locale.T("mini." + attempt.Id + ".goal"), "mini-instruction");
+            Text(context, locale.T("mini." + attempt.Id + ".goal"), "mini-instruction");
             if (Practice) Text(body, locale.T("report.noReading") + " · " + locale.T("mini.practice"), "mini-practice");
             ChallengeReadings.Build(body, attempt, locale);
-            if (!attempt.Begun)
-            {
-                var briefing = Box(body, "mini-briefing");
-                Text(briefing, locale.T("challenge.importance"), "small");
-                Text(briefing, locale.T("challenge.briefings." + attempt.Id + ".importance"));
-            }
-            else
-            {
-                var board = new ChallengeGrid(); body.Add(board);
-                new TaskBoard(board, attempt, locale, Render, reducedMotion).Build();
-            }
+            // Show the actual equipment first. The clock and input start only after Begin.
+            var board = new ChallengeGrid(); body.Add(board);
+            new TaskBoard(board, attempt, locale, Render, reducedMotion).Build();
+            board.SetEnabled(attempt.Begun);
+            board.EnableInClassList("mini-equipment-preview", !attempt.Begun);
+            if (!attempt.Begun) board.Query<VisualElement>().ForEach(element => element.style.opacity = 1);
             if (attempt.Mistakes > 0)
                 Text(body, locale.T("challenge.briefings." + attempt.Id + ".error"), "mini-feedback");
             if (hint)
@@ -93,8 +96,10 @@ namespace Ares.UI
             { Text(result, locale.T("mini.retryBody")); Button(result, locale.T("mini.retry"), retry); return; }
             Text(result, new string('★', Ares.Domain.Rules.Score(attempt.Seconds, attempt.Mistakes)), "title stars");
             string value = attempt.Id == "SortFlares" ? attempt.Readings.Flare : attempt.Id == "CmeCountdown" ? attempt.Readings.Speed.ToString() : attempt.Readings.Temperature.ToString();
-            Text(result, locale.T("mini.learned"), "mini-instruction");
-            Text(result, locale.T(Practice ? "mini.practiceLearned" : "mini." + attempt.Id + ".learned", "value", value));
+            if (attempt.Id == "PhotoDetective") value = attempt.Readings.ArchivedPhoto?.title ?? locale.T("photo." + attempt.Readings.PictureKind);
+            var learning = new Foldout { text = "O que mudou?", value = false };
+            result.Add(learning);
+            Text(learning, locale.T(Practice ? "mini.practiceLearned" : "mini." + attempt.Id + ".learned", "value", value));
             var rewards = Box(result, "row mini-consequence");
             Reward(rewards, "integrity", attempt.IntegrityBefore, attempt.Rules.taskReward.integrity);
             Reward(rewards, "oxygen", attempt.OxygenBefore, attempt.Rules.taskReward.oxygen);

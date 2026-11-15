@@ -1,4 +1,14 @@
+> Cenário atual (15/11/2026): a referência ativa é **casa-marte-missao-n8n**, com base radial, árvore central, marcos externos e 40 recipientes na estufa. Consulte [SCENERY.md](Assets/ARES/SCENERY.md) para arquitetura, comandos de atualização e evidências. Referências à pasta `(4)` abaixo são histórico da migração anterior.
+
 # Base ARES — migração para Unity
+
+## Cenário da referência (4)
+
+O cenário agora inclui a estufa original completa, arcos e marcadores das estações, materiais toon e céu com estrelas e corpos celestes. As malhas preservam as formas originais com 24,5% menos vértices; a verificação de 66.692 pontos não encontrou lacunas nos pisos e conexões. Implementação, testes e limites de fidelidade: [SCENERY.md](Assets/ARES/SCENERY.md).
+
+## Mapa panorâmico
+
+Clique em **Mapa [M]** no HUD ou pressione **M** para consultar a vista aérea do cenário em tela cheia. Use a **roda ou +/−** para ampliar até **6×** e **arraste com o botão esquerdo** para explorar. **Localizar** centraliza o astronauta/rover; **Visão geral** restaura o enquadramento. O ponto com ponta mostra a posição e a direção do personagem controlado. **M**, **Escape** ou **Voltar** retornam ao jogo. A consulta pausa a missão. Arte gerada com `imagegen`, interface alinhada à estética existente e módulos separados de captura, navegação, projeção e apresentação. Configuração, arquitetura, prompt e verificação: [WORLD_MAP.md](Assets/ARES/Runtime/UI/WORLD_MAP.md).
 
 ## Computador central e oxigênio
 

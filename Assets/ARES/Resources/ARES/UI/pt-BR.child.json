@@ -1,0 +1,2524 @@
+{
+  "entries": [
+    {
+      "key": "title.name",
+      "value": "Base ARES"
+    },
+    {
+      "key": "title.tagline",
+      "value": "Sua casa em Marte por 5 dias"
+    },
+    {
+      "key": "title.play",
+      "value": "Jogar"
+    },
+    {
+      "key": "title.language",
+      "value": "Idioma"
+    },
+    {
+      "key": "title.howTo",
+      "value": "Como jogar"
+    },
+    {
+      "key": "howTo.title",
+      "value": "Como jogar"
+    },
+    {
+      "key": "howTo.move",
+      "value": "WASD ou setas: andar."
+    },
+    {
+      "key": "howTo.use",
+      "value": "Chegue perto de um equipamento e aperte E. Planeje a energia no computador."
+    },
+    {
+      "key": "howTo.follow",
+      "value": "Siga a seta amarela até a próxima parada."
+    },
+    {
+      "key": "howTo.bubble",
+      "value": "A Bubble ajuda quando você precisar."
+    },
+    {
+      "key": "howTo.close",
+      "value": "Entendi!"
+    },
+    {
+      "key": "hud.integrity",
+      "value": "Base"
+    },
+    {
+      "key": "hud.oxygen",
+      "value": "Oxigênio"
+    },
+    {
+      "key": "hud.dose",
+      "value": "Radiação"
+    },
+    {
+      "key": "hud.doseDetail",
+      "value": "Radiação recebida pela equipe. Menos é melhor. A escala de 0 a 100 é do jogo, não uma medida médica."
+    },
+    {
+      "key": "hud.energy",
+      "value": "Bateria"
+    },
+    {
+      "key": "hud.sol",
+      "value": "Dia {{n}} de {{total}}"
+    },
+    {
+      "key": "hud.stars",
+      "value": "Estrelas"
+    },
+    {
+      "key": "hud.viewData",
+      "value": "Ver dados"
+    },
+    {
+      "key": "hud.settings",
+      "value": "Configurações"
+    },
+    {
+      "key": "hud.use",
+      "value": "USAR"
+    },
+    {
+      "key": "hud.camera",
+      "value": "Câmera"
+    },
+    {
+      "key": "hud.recenterCamera",
+      "value": "Centralizar câmera"
+    },
+    {
+      "key": "hud.next",
+      "value": "Próximo: {{room}}"
+    },
+    {
+      "key": "hud.tourDone",
+      "value": "Tour completo!"
+    },
+    {
+      "key": "hud.report",
+      "value": "Relatório"
+    },
+    {
+      "key": "hud.energyPanel",
+      "value": "Energia"
+    },
+    {
+      "key": "hud.endSol",
+      "value": "Encerrar Sol"
+    },
+    {
+      "key": "hud.objective",
+      "value": "Objetivo"
+    },
+    {
+      "key": "hud.minimap",
+      "value": "Mapa da Base ARES"
+    },
+    {
+      "key": "hud.roofs",
+      "value": "Tetos: {{mode}}"
+    },
+    {
+      "key": "hud.performance",
+      "value": "Desempenho"
+    },
+    {
+      "key": "hud.fps",
+      "value": "FPS"
+    },
+    {
+      "key": "hud.polygons",
+      "value": "polígonos"
+    },
+    {
+      "key": "hud.polygonsDetail",
+      "value": "Triângulos renderizados por quadro, incluindo as passagens de renderização"
+    },
+    {
+      "key": "settings.title",
+      "value": "Configurações"
+    },
+    {
+      "key": "settings.sound",
+      "value": "Som"
+    },
+    {
+      "key": "settings.language",
+      "value": "Idioma"
+    },
+    {
+      "key": "settings.largeText",
+      "value": "Texto maior"
+    },
+    {
+      "key": "settings.reducedMotion",
+      "value": "Menos movimento"
+    },
+    {
+      "key": "settings.invertCamera",
+      "value": "Inverter câmera"
+    },
+    {
+      "key": "settings.cameraSensitivity",
+      "value": "Sensibilidade da câmera"
+    },
+    {
+      "key": "settings.on",
+      "value": "Ligado"
+    },
+    {
+      "key": "settings.off",
+      "value": "Desligado"
+    },
+    {
+      "key": "settings.close",
+      "value": "Fechar"
+    },
+    {
+      "key": "settings.home",
+      "value": "Tela inicial"
+    },
+    {
+      "key": "settings.quality",
+      "value": "Qualidade"
+    },
+    {
+      "key": "settings.low",
+      "value": "Baixa"
+    },
+    {
+      "key": "settings.high",
+      "value": "Alta"
+    },
+    {
+      "key": "settings.roofs",
+      "value": "Tetos"
+    },
+    {
+      "key": "settings.roofauto",
+      "value": "Automático"
+    },
+    {
+      "key": "settings.roofoff",
+      "value": "Desligados"
+    },
+    {
+      "key": "lang.en",
+      "value": "English"
+    },
+    {
+      "key": "lang.pt-BR",
+      "value": "Português (BR)"
+    },
+    {
+      "key": "data.title",
+      "value": "Dados da missão"
+    },
+    {
+      "key": "data.solLength",
+      "value": "Duração de um Sol (dia em Marte)"
+    },
+    {
+      "key": "data.solLengthValue",
+      "value": "24 h 39 min {{s}} s"
+    },
+    {
+      "key": "data.solSeconds",
+      "value": "{{n}} segundos"
+    },
+    {
+      "key": "data.localTime",
+      "value": "Hora local da Base ARES"
+    },
+    {
+      "key": "data.barsNote",
+      "value": "Base: estado dos equipamentos. Oxigênio: ar guardado. Radiação: quanto a equipe recebeu no jogo. Bateria: energia guardada."
+    },
+    {
+      "key": "data.close",
+      "value": "Fechar"
+    },
+    {
+      "key": "rooms.control",
+      "value": "Sala de Controle"
+    },
+    {
+      "key": "rooms.observatory",
+      "value": "Observatório"
+    },
+    {
+      "key": "rooms.shield",
+      "value": "Escudo Magnético"
+    },
+    {
+      "key": "rooms.lifeSupport",
+      "value": "Ar e calor"
+    },
+    {
+      "key": "rooms.greenhouse",
+      "value": "Estufa"
+    },
+    {
+      "key": "rooms.solar",
+      "value": "Parque Solar"
+    },
+    {
+      "key": "rooms.airlock",
+      "value": "Porta de saída"
+    },
+    {
+      "key": "bubble.name",
+      "value": "Bubble"
+    },
+    {
+      "key": "bubble.welcome",
+      "value": "Oi, eu sou a Bubble! Bem-vindo à Base ARES em Marte. Siga a seta amarela!"
+    },
+    {
+      "key": "bubble.near",
+      "value": "Esta estação está brilhando. Aperte USAR!"
+    },
+    {
+      "key": "bubble.room.control",
+      "value": "A Sala de Controle é o coração da base. Daqui planejamos cada Sol."
+    },
+    {
+      "key": "bubble.room.weather",
+      "value": "A Estação Meteorológica observa o vento, a temperatura e a pressão em Marte."
+    },
+    {
+      "key": "bubble.room.lab",
+      "value": "No Laboratório estudamos rochas e poeira. Hora da ciência!"
+    },
+    {
+      "key": "bubble.room.greenhouse",
+      "value": "As plantas precisam de água e luz. Vamos cuidar delas!"
+    },
+    {
+      "key": "bubble.room.lifeSupport",
+      "value": "Aqui fazemos oxigênio e limpamos o ar que respiramos."
+    },
+    {
+      "key": "bubble.room.comms",
+      "value": "As Comunicações mandam mensagens até a Terra. Oi, Terra!"
+    },
+    {
+      "key": "bubble.room.shelter",
+      "value": "O abrigo do Escudo Magnético tem paredes grossas. Nos protegemos aqui nas tempestades solares."
+    },
+    {
+      "key": "bubble.room.observatory",
+      "value": "Do Observatório olhamos o Sol e o céu."
+    },
+    {
+      "key": "bubble.room.airlock",
+      "value": "A Eclusa é a porta para fora. Traje antes de sair!"
+    },
+    {
+      "key": "bubble.room.shield",
+      "value": "O abrigo tem paredes reforçadas. O escudo magnético é uma ideia em estudo, usada aqui como fantasia científica."
+    },
+    {
+      "key": "bubble.room.solar",
+      "value": "Limpe a poeira para os painéis captarem mais luz."
+    },
+    {
+      "key": "bubble.tourDone",
+      "value": "Você visitou todas as salas. Muito bem, astronauta júnior!"
+    },
+    {
+      "key": "bubble.night",
+      "value": "Está escurecendo. Olhe para cima: consegue ver a Terra? É o pontinho azul!"
+    },
+    {
+      "key": "bubble.report",
+      "value": "Um novo dia em Marte! Vamos ver o plano?"
+    },
+    {
+      "key": "bubble.plan",
+      "value": "Vá ao computador e divida a energia entre os equipamentos."
+    },
+    {
+      "key": "bubble.start",
+      "value": "Sistemas ligados! Siga a seta amarela até as tarefas."
+    },
+    {
+      "key": "bubble.alarm.sep",
+      "value": "Alerta de radiação! Vá ao abrigo!"
+    },
+    {
+      "key": "bubble.alarm.cme",
+      "value": "Uma nuvem do Sol pode chegar! Vá ao abrigo!"
+    },
+    {
+      "key": "bubble.alarm.flare",
+      "value": "Alerta no Sol! Vá ao abrigo!"
+    },
+    {
+      "key": "bubble.noImpact",
+      "value": "O Sol está ativo, mas esta tempestade não deve atingir Marte. Ufa!"
+    },
+    {
+      "key": "bubble.safe",
+      "value": "Estamos seguros no Abrigo. Que corrida!"
+    },
+    {
+      "key": "bubble.alarmOver",
+      "value": "O alerta acabou."
+    },
+    {
+      "key": "bubble.taskDone",
+      "value": "Incrível! Tarefa concluída!"
+    },
+    {
+      "key": "bubble.taskTry",
+      "value": "Boa tentativa! A gente aprende sempre."
+    },
+    {
+      "key": "bubble.sumGood",
+      "value": "Ótimo planejamento! A base está feliz."
+    },
+    {
+      "key": "bubble.sumBad",
+      "value": "Faltou energia em alguns equipamentos. Amanhã podemos ajustar."
+    },
+    {
+      "key": "bubble.energyFirst",
+      "value": "Primeiro planeje a energia na Sala de Controle."
+    },
+    {
+      "key": "sys.shield",
+      "value": "Escudo Magnético"
+    },
+    {
+      "key": "sys.life",
+      "value": "Ar e calor"
+    },
+    {
+      "key": "sys.greenhouse",
+      "value": "Estufa"
+    },
+    {
+      "key": "report.title",
+      "value": "Relatório do Dia {{n}}"
+    },
+    {
+      "key": "report.realData",
+      "value": "DADOS REAIS DA NASA"
+    },
+    {
+      "key": "report.gameRule",
+      "value": "REGRA DO JOGO"
+    },
+    {
+      "key": "report.sample",
+      "value": "SIMULAÇÃO DO JOGO"
+    },
+    {
+      "key": "report.dateNote",
+      "value": "O dia {{n}} do jogo usa registros de {{date}}. É uma história de treino, não o clima de agora."
+    },
+    {
+      "key": "report.continue",
+      "value": "Planejar energia"
+    },
+    {
+      "key": "report.close",
+      "value": "Fechar"
+    },
+    {
+      "key": "report.noReading",
+      "value": "Sem medição"
+    },
+    {
+      "key": "report.noCme",
+      "value": "Sem nuvem solar registrada"
+    },
+    {
+      "key": "report.noSep",
+      "value": "Sem tempestade de partículas"
+    },
+    {
+      "key": "report.noFlare",
+      "value": "Nenhuma erupção registrada"
+    },
+    {
+      "key": "report.flare",
+      "value": "Explosão de luz no Sol"
+    },
+    {
+      "key": "report.flareClass",
+      "value": "Classe {{c}}"
+    },
+    {
+      "key": "report.cme",
+      "value": "Nuvem de partículas do Sol (CME)"
+    },
+    {
+      "key": "report.cmeSpeed",
+      "value": "{{v}} km/s"
+    },
+    {
+      "key": "report.sep",
+      "value": "Partículas rápidas do Sol"
+    },
+    {
+      "key": "report.sepYes",
+      "value": "Partículas rápidas detectadas!"
+    },
+    {
+      "key": "report.marsImpact",
+      "value": "Previsão para Marte"
+    },
+    {
+      "key": "report.impactYes",
+      "value": "Deve chegar a Marte"
+    },
+    {
+      "key": "report.impactGlancing",
+      "value": "Raspão em Marte"
+    },
+    {
+      "key": "report.impactNo",
+      "value": "Não deve chegar a Marte"
+    },
+    {
+      "key": "report.noSim",
+      "value": "Sem previsão hoje"
+    },
+    {
+      "key": "report.weather",
+      "value": "Clima em Marte"
+    },
+    {
+      "key": "report.weatherWhere",
+      "value": "Medição da sonda InSight em outro lugar de Marte."
+    },
+    {
+      "key": "report.temp",
+      "value": "Temperatura do ar"
+    },
+    {
+      "key": "report.tempValue",
+      "value": "{{v}} °C"
+    },
+    {
+      "key": "report.wind",
+      "value": "Vento"
+    },
+    {
+      "key": "report.windValue",
+      "value": "{{v}} m/s"
+    },
+    {
+      "key": "report.pressure",
+      "value": "Pressão"
+    },
+    {
+      "key": "report.pressureValue",
+      "value": "{{v}} Pa"
+    },
+    {
+      "key": "report.energyNeeded",
+      "value": "Energia necessária hoje"
+    },
+    {
+      "key": "report.kwh",
+      "value": "{{n}} kWh"
+    },
+    {
+      "key": "report.fallback",
+      "value": "Sem medição: usamos uma temperatura de treino."
+    },
+    {
+      "key": "report.sunActive",
+      "value": "O Sol está ativo, mas esta tempestade não deve atingir Marte."
+    },
+    {
+      "key": "info.api",
+      "value": "Serviço de dados"
+    },
+    {
+      "key": "info.endpoint",
+      "value": "Endereço da fonte"
+    },
+    {
+      "key": "info.field",
+      "value": "Nome na fonte"
+    },
+    {
+      "key": "info.captured",
+      "value": "Quando foi salvo (UTC)"
+    },
+    {
+      "key": "info.snapshot",
+      "value": "Registro salvo"
+    },
+    {
+      "key": "info.yes",
+      "value": "Sim"
+    },
+    {
+      "key": "info.sample",
+      "value": "Valor de treino"
+    },
+    {
+      "key": "info.show",
+      "value": "De onde vem este número?"
+    },
+    {
+      "key": "energy.title",
+      "value": "Dividir energia"
+    },
+    {
+      "key": "energy.pool",
+      "value": "Para dividir: {{n}} kWh"
+    },
+    {
+      "key": "energy.free",
+      "value": "Ainda sem destino"
+    },
+    {
+      "key": "energy.need",
+      "value": "Precisa de {{n}}"
+    },
+    {
+      "key": "energy.start",
+      "value": "Começar o dia"
+    },
+    {
+      "key": "energy.save",
+      "value": "Salvar"
+    },
+    {
+      "key": "energy.hint",
+      "value": "Divida toda a energia para começar."
+    },
+    {
+      "key": "energy.budgetNote",
+      "value": "kWh mede energia. Os 100 kWh deste plano são uma regra do jogo."
+    },
+    {
+      "key": "energy.dustNote",
+      "value": "A poeira tira {{loss}}% da energia do próximo dia. Limpe os painéis."
+    },
+    {
+      "key": "energy.close",
+      "value": "Fechar"
+    },
+    {
+      "key": "tasks.title",
+      "value": "Tarefas do Dia {{n}}"
+    },
+    {
+      "key": "tasks.progress",
+      "value": "Progresso da missão"
+    },
+    {
+      "key": "tasks.none",
+      "value": "Todas as tarefas feitas!"
+    },
+    {
+      "key": "tasks.time",
+      "value": "{{s}} s"
+    },
+    {
+      "key": "tasks.success",
+      "value": "Muito bem!"
+    },
+    {
+      "key": "tasks.fail",
+      "value": "Boa tentativa!"
+    },
+    {
+      "key": "tasks.continue",
+      "value": "Continuar"
+    },
+    {
+      "key": "tasks.badgeReal",
+      "value": "ARQUIVO REAL: {{src}}"
+    },
+    {
+      "key": "tasks.badgeRule",
+      "value": "REGRA DO JOGO"
+    },
+    {
+      "key": "tasks.check",
+      "value": "Conferir"
+    },
+    {
+      "key": "tasks.sampleNote",
+      "value": "Valores de treino, não medições da NASA."
+    },
+    {
+      "key": "tasks.T02.name",
+      "value": "Classificar a Erupção"
+    },
+    {
+      "key": "tasks.T02.goal",
+      "value": "Toque nas erupções da mais fraca para a mais forte."
+    },
+    {
+      "key": "tasks.T02.fact",
+      "value": "Cada letra é 10 vezes mais forte que a anterior. Erupções X podem passar de X10!"
+    },
+    {
+      "key": "tasks.T02.today",
+      "value": "Hoje"
+    },
+    {
+      "key": "tasks.T03.name",
+      "value": "A viagem da nuvem solar"
+    },
+    {
+      "key": "tasks.T03.goal",
+      "value": "Ajuste a velocidade da nuvem e veja o tempo de viagem."
+    },
+    {
+      "key": "tasks.T03.dist",
+      "value": "Marte fica a cerca de 1,524 UA do Sol: uns 228.000.000 km."
+    },
+    {
+      "key": "tasks.T03.time",
+      "value": "Tempo de viagem: {{h}} horas (cerca de {{d}} dias)"
+    },
+    {
+      "key": "tasks.T03.note",
+      "value": "Simplificação: velocidade constante."
+    },
+    {
+      "key": "tasks.T03.speed",
+      "value": "Velocidade: {{v}} km/s"
+    },
+    {
+      "key": "tasks.T03.target",
+      "value": "CME de hoje: {{v}} km/s"
+    },
+    {
+      "key": "tasks.T04.name",
+      "value": "Conferir a Previsão"
+    },
+    {
+      "key": "tasks.T04.goal",
+      "value": "A previsão diz que a nuvem chega a Marte?"
+    },
+    {
+      "key": "tasks.T04.yes",
+      "value": "Sim"
+    },
+    {
+      "key": "tasks.T04.no",
+      "value": "Não"
+    },
+    {
+      "key": "tasks.T04.yours",
+      "value": "Sua estimativa: cerca de {{d}} dias"
+    },
+    {
+      "key": "tasks.T04.enlilYes",
+      "value": "Previsão WSA+Enlil: chega a Marte ({{t}})."
+    },
+    {
+      "key": "tasks.T04.enlilGlancing",
+      "value": "Ela só passa de raspão em Marte."
+    },
+    {
+      "key": "tasks.T04.enlilNo",
+      "value": "Previsão WSA+Enlil: sem impacto em Marte."
+    },
+    {
+      "key": "tasks.T04.noSim",
+      "value": "Não há previsão WSA+Enlil nos dados de hoje."
+    },
+    {
+      "key": "tasks.T05.name",
+      "value": "Ir ao Abrigo"
+    },
+    {
+      "key": "tasks.T05.goal",
+      "value": "Chegue ao abrigo do Escudo Magnético antes do tempo acabar!"
+    },
+    {
+      "key": "tasks.T06.name",
+      "value": "Notícias da Terra"
+    },
+    {
+      "key": "tasks.T06.goal",
+      "value": "Qual mensagem fala do evento principal de hoje?"
+    },
+    {
+      "key": "tasks.T06.event",
+      "value": "Evento principal de hoje: {{e}}"
+    },
+    {
+      "key": "tasks.T07.name",
+      "value": "Termostato"
+    },
+    {
+      "key": "tasks.T07.goal",
+      "value": "Lá fora está {{t}} °C. Ajuste o aquecedor para ficarmos quentinhos a {{tin}} °C aqui dentro."
+    },
+    {
+      "key": "tasks.T07.heater",
+      "value": "Aquecedor: {{n}} kWh"
+    },
+    {
+      "key": "tasks.T07.rule",
+      "value": "Calor necessário = {{base}} + {{k}} × ({{tin}} − fora), arredondado para 5"
+    },
+    {
+      "key": "tasks.T08.name",
+      "value": "Rosa dos Ventos"
+    },
+    {
+      "key": "tasks.T08.goal",
+      "value": "Toque na direção de onde o vento veio mais vezes."
+    },
+    {
+      "key": "tasks.T10.name",
+      "value": "Álbum de Fotos"
+    },
+    {
+      "key": "tasks.T10.goal",
+      "value": "Escolha a legenda certa para esta imagem."
+    },
+    {
+      "key": "tasks.T10.credit",
+      "value": "Crédito: {{c}}"
+    },
+    {
+      "key": "tasks.T10.sampleArt",
+      "value": "Desenho do jogo, não uma foto da NASA."
+    },
+    {
+      "key": "tasks.T14.name",
+      "value": "Cuidar da Estufa"
+    },
+    {
+      "key": "tasks.T14.goal",
+      "value": "Olhe o solo antes de regar."
+    },
+    {
+      "key": "tasks.T15.name",
+      "value": "Reciclar Água e Ar"
+    },
+    {
+      "key": "tasks.T15.goal",
+      "value": "Mande cada item para a máquina certa."
+    },
+    {
+      "key": "tasks.T15.water",
+      "value": "Reciclador de água"
+    },
+    {
+      "key": "tasks.T15.air",
+      "value": "Sistema de ar"
+    },
+    {
+      "key": "tasks.T15.wash",
+      "value": "Água de lavar"
+    },
+    {
+      "key": "tasks.T15.vapor",
+      "value": "Vapor da respiração"
+    },
+    {
+      "key": "tasks.T15.co2",
+      "value": "CO₂ que expiramos"
+    },
+    {
+      "key": "tasks.T15.fog",
+      "value": "Vapor na janela"
+    },
+    {
+      "key": "tasks.T11.name",
+      "value": "Pergunta APOD"
+    },
+    {
+      "key": "tasks.T11.goal",
+      "value": "O que significa APOD?"
+    },
+    {
+      "key": "tasks.T11.right",
+      "value": "Imagem Astronômica do Dia"
+    },
+    {
+      "key": "tasks.T11.wrong",
+      "value": "Consumo de Energia da Base"
+    },
+    {
+      "key": "event.FLR",
+      "value": "Erupção solar"
+    },
+    {
+      "key": "event.CME",
+      "value": "CME"
+    },
+    {
+      "key": "event.SEP",
+      "value": "Partículas energéticas"
+    },
+    {
+      "key": "photo.rover",
+      "value": "Um rover andando sobre rochas vermelhas de Marte"
+    },
+    {
+      "key": "photo.sunset",
+      "value": "Um pôr do sol azul em Marte"
+    },
+    {
+      "key": "photo.dunes",
+      "value": "Dunas de areia onduladas em Marte"
+    },
+    {
+      "key": "photo.dustDevil",
+      "value": "Um redemoinho de poeira cruzando Marte"
+    },
+    {
+      "key": "photo.olympus",
+      "value": "Monte Olimpo, o maior vulcão de Marte"
+    },
+    {
+      "key": "compass.N",
+      "value": "N"
+    },
+    {
+      "key": "compass.NNE",
+      "value": "NNE"
+    },
+    {
+      "key": "compass.NE",
+      "value": "NE"
+    },
+    {
+      "key": "compass.ENE",
+      "value": "ENE"
+    },
+    {
+      "key": "compass.E",
+      "value": "L"
+    },
+    {
+      "key": "compass.ESE",
+      "value": "LSE"
+    },
+    {
+      "key": "compass.SE",
+      "value": "SE"
+    },
+    {
+      "key": "compass.SSE",
+      "value": "SSE"
+    },
+    {
+      "key": "compass.S",
+      "value": "S"
+    },
+    {
+      "key": "compass.SSW",
+      "value": "SSO"
+    },
+    {
+      "key": "compass.SW",
+      "value": "SO"
+    },
+    {
+      "key": "compass.WSW",
+      "value": "OSO"
+    },
+    {
+      "key": "compass.W",
+      "value": "O"
+    },
+    {
+      "key": "compass.WNW",
+      "value": "ONO"
+    },
+    {
+      "key": "compass.NW",
+      "value": "NO"
+    },
+    {
+      "key": "compass.NNW",
+      "value": "NNO"
+    },
+    {
+      "key": "alarm.title",
+      "value": "Alerta do Sol!"
+    },
+    {
+      "key": "alarm.goShelter",
+      "value": "Vá para o abrigo do Escudo Magnético!"
+    },
+    {
+      "key": "alarm.adjust",
+      "value": "Você também pode ajustar a energia na Sala de Controle."
+    },
+    {
+      "key": "summary.title",
+      "value": "Resumo do Dia {{n}}"
+    },
+    {
+      "key": "summary.given",
+      "value": "Dado"
+    },
+    {
+      "key": "summary.needed",
+      "value": "Necessário"
+    },
+    {
+      "key": "summary.ideal",
+      "value": "Na medida"
+    },
+    {
+      "key": "summary.deficit",
+      "value": "Faltou"
+    },
+    {
+      "key": "summary.surplus",
+      "value": "Sobrou aqui"
+    },
+    {
+      "key": "summary.integrity",
+      "value": "Estado da base"
+    },
+    {
+      "key": "summary.oxygen",
+      "value": "Oxigênio"
+    },
+    {
+      "key": "summary.dose",
+      "value": "Radiação (escala do jogo)"
+    },
+    {
+      "key": "summary.next",
+      "value": "Próximo Sol"
+    },
+    {
+      "key": "summary.finish",
+      "value": "Concluir missão"
+    },
+    {
+      "key": "summary.sparks",
+      "value": "Faltou energia no escudo do jogo. Os equipamentos sofreram danos."
+    },
+    {
+      "key": "summary.tasks",
+      "value": "Tarefas feitas: {{n}}"
+    },
+    {
+      "key": "consequences.simulated",
+      "value": "SIMULAÇÃO DO JOGO"
+    },
+    {
+      "key": "consequences.trainingWind",
+      "value": "Agenda de treino"
+    },
+    {
+      "key": "consequences.allClear",
+      "value": "Equipamentos prontos de novo!"
+    },
+    {
+      "key": "consequences.acknowledge",
+      "value": "Entendi"
+    },
+    {
+      "key": "consequences.shelterTimer",
+      "value": "Tempo restante para o abrigo: {{seconds}} segundos."
+    },
+    {
+      "key": "consequences.stages.advisory",
+      "value": "Aviso"
+    },
+    {
+      "key": "consequences.stages.warning",
+      "value": "Alerta"
+    },
+    {
+      "key": "consequences.stages.emergency",
+      "value": "Emergência"
+    },
+    {
+      "key": "consequences.stages.recovery",
+      "value": "Recuperação"
+    },
+    {
+      "key": "consequences.kinds.solar",
+      "value": "Alarme de partículas solares"
+    },
+    {
+      "key": "consequences.kinds.lifeSupport",
+      "value": "Alerta do Suporte de Vida"
+    },
+    {
+      "key": "consequences.kinds.dust",
+      "value": "Tempestade de poeira"
+    },
+    {
+      "key": "consequences.kinds.greenhouse",
+      "value": "Alerta da Estufa"
+    },
+    {
+      "key": "consequences.kinds.info",
+      "value": "Informação da missão"
+    },
+    {
+      "key": "consequences.kinds.perfect",
+      "value": "Sol Perfeito"
+    },
+    {
+      "key": "consequences.kinds.solarBody",
+      "value": "Um evento de partículas solares é diferente do clima em Marte. Siga a orientação para o abrigo."
+    },
+    {
+      "key": "consequences.kinds.lifeSupportBody",
+      "value": "Frio e pouco oxigênio precisam de atenção."
+    },
+    {
+      "key": "consequences.kinds.dustBody",
+      "value": "A poeira simulada pode cobrir os painéis."
+    },
+    {
+      "key": "consequences.kinds.greenhouseBody",
+      "value": "As plantas precisam de energia e cuidado."
+    },
+    {
+      "key": "consequences.kinds.infoBody",
+      "value": "Veja o retorno da missão."
+    },
+    {
+      "key": "consequences.kinds.perfectBody",
+      "value": "Todos os sistemas receberam a energia certa."
+    },
+    {
+      "key": "consequences.storm.title",
+      "value": "Poeira chegando!"
+    },
+    {
+      "key": "consequences.storm.cause",
+      "value": "Vento do treino: {{wind}}. Esta tempestade foi criada para o jogo."
+    },
+    {
+      "key": "consequences.storm.effect",
+      "value": "A poeira cobre os painéis. Limpe primeiro os mais sujos."
+    },
+    {
+      "key": "consequences.events.shield-deficit.title",
+      "value": "Faltou energia no escudo"
+    },
+    {
+      "key": "consequences.events.shield-deficit.cause",
+      "value": "Escudo: {{allocated}} de {{demand}} kWh. Faltaram {{missing}} kWh. Registro solar: {{flare}}."
+    },
+    {
+      "key": "consequences.events.shield-deficit.effect",
+      "value": "Radiação: +{{dose}}. Fora do abrigo: +{{penalty}}. Estado da base: {{integrity}}. São efeitos do jogo."
+    },
+    {
+      "key": "consequences.events.life-deficit.title",
+      "value": "Suporte de Vida com frio"
+    },
+    {
+      "key": "consequences.events.life-deficit.cause",
+      "value": "Ar e calor: {{allocated}} de {{demand}} kWh. Registro de temperatura: {{temp}} °C."
+    },
+    {
+      "key": "consequences.events.life-deficit.causeNoTemp",
+      "value": "Ar e calor: {{allocated}} de {{demand}} kWh. Sem medição, usamos uma temperatura de treino."
+    },
+    {
+      "key": "consequences.events.life-deficit.effect",
+      "value": "A base esfriou. No jogo, isso reduz o oxigênio: {{oxygen}}."
+    },
+    {
+      "key": "consequences.events.greenhouse-deficit.title",
+      "value": "Estufa sem energia suficiente"
+    },
+    {
+      "key": "consequences.events.greenhouse-deficit.cause",
+      "value": "Estufa: {{allocated}} de {{demand}} kWh. Faltaram {{missing}} kWh."
+    },
+    {
+      "key": "consequences.events.greenhouse-deficit.effect",
+      "value": "As luzes enfraqueceram. As plantas sofrem. Efeito no oxigênio do jogo: {{oxygen}}."
+    },
+    {
+      "key": "consequences.events.solar-dust.title",
+      "value": "Painéis solares com poeira"
+    },
+    {
+      "key": "consequences.events.solar-dust.cause",
+      "value": "Vento de treino: {{wind}}. Poeira nos painéis: {{dust}}%."
+    },
+    {
+      "key": "consequences.events.solar-dust.effect",
+      "value": "Próximo dia: {{loss}}% menos energia. O limite de 20% é uma regra do jogo."
+    },
+    {
+      "key": "consequences.events.solar-cleaned.title",
+      "value": "Produção solar recuperada"
+    },
+    {
+      "key": "consequences.events.solar-cleaned.cause",
+      "value": "Painéis limpos! Poeira restante: {{dust}}%."
+    },
+    {
+      "key": "consequences.events.solar-cleaned.effect",
+      "value": "Perda de energia no próximo dia: {{loss}}%."
+    },
+    {
+      "key": "consequences.events.energy-surplus.title",
+      "value": "Energia extra liberada"
+    },
+    {
+      "key": "consequences.events.energy-surplus.cause",
+      "value": "Este equipamento recebeu mais energia do que precisava."
+    },
+    {
+      "key": "consequences.events.energy-surplus.effect",
+      "value": "A sobra poderia ajudar outro equipamento."
+    },
+    {
+      "key": "consequences.events.perfect-sol.title",
+      "value": "Sol Perfeito!"
+    },
+    {
+      "key": "consequences.events.perfect-sol.cause",
+      "value": "Todos receberam a energia necessária!"
+    },
+    {
+      "key": "consequences.events.perfect-sol.effect",
+      "value": "Recompensa do jogo: +{{integrity}} para a base e +{{oxygen}} de oxigênio."
+    },
+    {
+      "key": "gameover.title",
+      "value": "Missão pausada"
+    },
+    {
+      "key": "gameover.body",
+      "value": "A base precisa de ajuda. Vamos treinar de novo!"
+    },
+    {
+      "key": "gameover.retry",
+      "value": "Tentar de novo"
+    },
+    {
+      "key": "gameover.home",
+      "value": "Tela inicial"
+    },
+    {
+      "key": "gameover.evacuated",
+      "value": "A equipe saiu em segurança. Podemos tentar outro plano!"
+    },
+    {
+      "key": "gameover.radiation.title",
+      "value": "Limite de radiação atingido"
+    },
+    {
+      "key": "gameover.radiation.body",
+      "value": "A barra de radiação chegou ao limite do jogo. Dê energia ao escudo e vá ao abrigo durante os alertas."
+    },
+    {
+      "key": "gameover.suffocation.title",
+      "value": "Oxigênio esgotado"
+    },
+    {
+      "key": "gameover.suffocation.body",
+      "value": "O ar acabou. Confira a água, a energia e a produção de oxigênio antes de tentar de novo."
+    },
+    {
+      "key": "gameover.powerCollapse.title",
+      "value": "A base precisa de reparos"
+    },
+    {
+      "key": "gameover.powerCollapse.body",
+      "value": "A base chegou a zero. A equipe saiu em segurança. Cuide dos equipamentos e do plano de energia."
+    },
+    {
+      "key": "cert.title",
+      "value": "Certificado de Astronauta Júnior"
+    },
+    {
+      "key": "cert.body",
+      "value": "{{name}} manteve a Base ARES segura por 5 dias em Marte!"
+    },
+    {
+      "key": "cert.nickname",
+      "value": "Seu apelido"
+    },
+    {
+      "key": "cert.placeholder",
+      "value": "Nome de astronauta"
+    },
+    {
+      "key": "cert.show",
+      "value": "Ver meu certificado"
+    },
+    {
+      "key": "cert.again",
+      "value": "Jogar de novo"
+    },
+    {
+      "key": "cert.stats",
+      "value": "Base {{i}}% · Oxigênio {{o}}% · Radiação {{d}} na escala do jogo"
+    },
+    {
+      "key": "cert.tiers.gold",
+      "value": "Missão ouro: proteção excelente!"
+    },
+    {
+      "key": "cert.tiers.silver",
+      "value": "Missão prata: ótima recuperação!"
+    },
+    {
+      "key": "cert.tiers.bronze",
+      "value": "Missão bronze: você continuou aprendendo!"
+    },
+    {
+      "key": "cert.local",
+      "value": "Seu apelido fica só neste aparelho."
+    },
+    {
+      "key": "narrator.start.calm",
+      "value": "O Dia {{sol}} parece tranquilo."
+    },
+    {
+      "key": "narrator.start.attention",
+      "value": "Dia {{sol}}: o Sol está agitado hoje!"
+    },
+    {
+      "key": "narrator.start.alert",
+      "value": "Dia {{sol}}: grande notícia de clima espacial!"
+    },
+    {
+      "key": "narrator.flare",
+      "value": "Uma erupção {{c}} foi registrada."
+    },
+    {
+      "key": "narrator.cme",
+      "value": "Uma nuvem do Sol viaja a {{v}} km/s."
+    },
+    {
+      "key": "narrator.cmeNoImpact",
+      "value": "A nuvem viaja a {{v}} km/s, mas a previsão não indica chegada a Marte."
+    },
+    {
+      "key": "narrator.weather",
+      "value": "Lá fora está cerca de {{t}} °C."
+    },
+    {
+      "key": "narrator.alert",
+      "value": "Vamos correr para o abrigo do Escudo Magnético!"
+    },
+    {
+      "key": "narrator.trainingWind",
+      "value": "agenda de treino"
+    },
+    {
+      "key": "narrator.dustStorm",
+      "value": "Vento de treino: {{v}}. Limpe a poeira dos painéis."
+    },
+    {
+      "key": "narrator.consequences.shield-deficit",
+      "value": "Escudo: {{a}} de {{d}} kWh. A radiação subiu {{dose}} na escala do jogo."
+    },
+    {
+      "key": "narrator.consequences.life-deficit",
+      "value": "Ar e calor: {{a}} de {{d}} kWh. A base esfriou."
+    },
+    {
+      "key": "narrator.consequences.greenhouse-deficit",
+      "value": "Estufa: {{a}} de {{d}} kWh. As plantas ficaram sem energia."
+    },
+    {
+      "key": "narrator.consequences.solar-dust",
+      "value": "A poeira simulada reduz a próxima energia em {{loss}}%."
+    },
+    {
+      "key": "narrator.consequences.solar-cleaned",
+      "value": "Os painéis limpos recuperaram a produção solar futura."
+    },
+    {
+      "key": "narrator.hint",
+      "value": "Dica: hoje o sistema {{system}} precisa de mais energia. Olhe o relatório!"
+    },
+    {
+      "key": "narrator.summary.good",
+      "value": "Ótimo planejamento, todos os sistemas ficaram felizes!"
+    },
+    {
+      "key": "narrator.summary.bad",
+      "value": "Alguns sistemas precisavam de mais energia: {{systems}}."
+    },
+    {
+      "key": "narrator.summary.reveal",
+      "value": "O plano necessário era: escudo {{s}}, ar e calor {{l}}, estufa {{g}} kWh."
+    },
+    {
+      "key": "narrator.answers.what_is_a_flare",
+      "value": "Uma erupção solar é um clarão superforte no Sol. Os cientistas separam por letras: cada letra é 10 vezes mais forte que a anterior!"
+    },
+    {
+      "key": "narrator.answers.why_shelter",
+      "value": "Algumas tempestades espaciais mandam partículas minúsculas e rápidas. O abrigo tem paredes grossas que protegem os astronautas até passar."
+    },
+    {
+      "key": "narrator.answers.why_cold_energy",
+      "value": "Quanto mais frio lá fora, mais rápido a base perde calor. Então os aquecedores precisam de mais energia para nos manter quentinhos!"
+    },
+    {
+      "key": "ask.title",
+      "value": "Pergunte à Bubble"
+    },
+    {
+      "key": "ask.what_is_a_flare",
+      "value": "O que é uma erupção solar?"
+    },
+    {
+      "key": "ask.why_shelter",
+      "value": "Por que preciso de um abrigo?"
+    },
+    {
+      "key": "ask.why_cold_energy",
+      "value": "Por que o frio gasta mais energia?"
+    },
+    {
+      "key": "ask.hint",
+      "value": "Me dá uma dica"
+    },
+    {
+      "key": "areas.control",
+      "value": "Sala de Controle"
+    },
+    {
+      "key": "areas.observatory",
+      "value": "Observatório"
+    },
+    {
+      "key": "areas.shield",
+      "value": "Escudo Magnético"
+    },
+    {
+      "key": "areas.lifeSupport",
+      "value": "Ar e calor"
+    },
+    {
+      "key": "areas.greenhouse",
+      "value": "Estufa"
+    },
+    {
+      "key": "areas.solar",
+      "value": "Parque Solar"
+    },
+    {
+      "key": "areas.airlock",
+      "value": "Porta de saída"
+    },
+    {
+      "key": "observatory.viewImage",
+      "value": "Visualizar imagem"
+    },
+    {
+      "key": "observatory.lensClose",
+      "value": "Sair do telescópio"
+    },
+    {
+      "key": "observatory.title",
+      "value": "Observatório"
+    },
+    {
+      "key": "observatory.apod",
+      "value": "DADO REAL: APOD"
+    },
+    {
+      "key": "observatory.library",
+      "value": "NASA Image and Video Library"
+    },
+    {
+      "key": "observatory.unavailable",
+      "value": "Sem foto para este registro."
+    },
+    {
+      "key": "observatory.archiveNote",
+      "value": "Foto real do arquivo NASA. Não é uma imagem de hoje."
+    },
+    {
+      "key": "observatory.date",
+      "value": "Data terrestre: {{date}}"
+    },
+    {
+      "key": "observatory.video",
+      "value": "Abrir vídeo"
+    },
+    {
+      "key": "observatory.explanation",
+      "value": "Uma janela para o Universo, registrada por cientistas e fotógrafos."
+    },
+    {
+      "key": "observatory.loading",
+      "value": "Consultando imagens…"
+    },
+    {
+      "key": "observatory.credit",
+      "value": "Crédito: {{credit}}"
+    },
+    {
+      "key": "observatory.snapshot",
+      "value": "Registro salvo"
+    },
+    {
+      "key": "observatory.sample",
+      "value": "Amostra"
+    },
+    {
+      "key": "observatory.view",
+      "value": "Ver imagens"
+    },
+    {
+      "key": "refine.bubbleToasts",
+      "value": "Balões de fala da Bubble"
+    },
+    {
+      "key": "refine.expandMap",
+      "value": "Ampliar mapa"
+    },
+    {
+      "key": "refine.rotateMap",
+      "value": "Girar mapa"
+    },
+    {
+      "key": "refine.northUp",
+      "value": "Norte para cima"
+    },
+    {
+      "key": "refine.cameraUp",
+      "value": "Câmera para cima"
+    },
+    {
+      "key": "refine.clearGuide",
+      "value": "Seguir próxima tarefa"
+    },
+    {
+      "key": "refine.corridor",
+      "value": "Corredor de ligação"
+    },
+    {
+      "key": "refine.dismissWalk",
+      "value": "Dispensar primeira caminhada"
+    },
+    {
+      "key": "refine.readMore",
+      "value": "Ler mais"
+    },
+    {
+      "key": "refine.readLess",
+      "value": "Ler menos"
+    },
+    {
+      "key": "refine.imageFailed",
+      "value": "Esta imagem não carregou. Vamos tentar outra janela para o espaço!"
+    },
+    {
+      "key": "refine.nasaMore",
+      "value": "APOD reúne imagens do espaço. A biblioteca NASA guarda fotos das missões. Veja a fonte de cada imagem."
+    },
+    {
+      "key": "refine.librarySource",
+      "value": "Biblioteca de Imagens da NASA"
+    },
+    {
+      "key": "refine.walk.control",
+      "value": "Encontre o Painel de Energia coral junto à parede."
+    },
+    {
+      "key": "refine.walk.observatory",
+      "value": "A porta violeta leva aos observadores do céu."
+    },
+    {
+      "key": "refine.walk.shield",
+      "value": "A porta azul leva ao nosso escudo protetor."
+    },
+    {
+      "key": "refine.walk.lifeSupport",
+      "value": "A porta verde-água leva ao ar fresco e ao calor."
+    },
+    {
+      "key": "refine.walk.greenhouse",
+      "value": "A porta verde leva às nossas plantinhas."
+    },
+    {
+      "key": "refine.walk.solar",
+      "value": "Passe pelo Suporte de Vida e pela Eclusa até o parque solar amarelo."
+    },
+    {
+      "key": "garden.learning",
+      "value": "As plantas produzem comida para a tripulação. Elas também ajudam a manter o ar fresco."
+    },
+    {
+      "key": "garden.sourcePending",
+      "value": "Fonte pendente"
+    },
+    {
+      "key": "garden.basket",
+      "value": "Cesta · {{n}}"
+    },
+    {
+      "key": "garden.harvest",
+      "value": "Colher uma maçã madura"
+    },
+    {
+      "key": "garden.learn",
+      "value": "Sobre nossas plantas"
+    },
+    {
+      "key": "garden.cosmetic",
+      "value": "Colher é uma brincadeira: não muda a energia ou as recompensas."
+    },
+    {
+      "key": "garden.thirsty",
+      "value": "Plantinha com sede"
+    },
+    {
+      "key": "garden.happy",
+      "value": "Plantinha feliz"
+    },
+    {
+      "key": "mini.loading",
+      "value": "Preparando sua estação…"
+    },
+    {
+      "key": "mini.timer",
+      "value": "Segundos"
+    },
+    {
+      "key": "mini.mistakes",
+      "value": "Erros"
+    },
+    {
+      "key": "mini.stars",
+      "value": "Estrelas"
+    },
+    {
+      "key": "mini.retryTitle",
+      "value": "Mais uma tentativa?"
+    },
+    {
+      "key": "mini.retryBody",
+      "value": "Nada foi perdido. Sua estação está pronta para tentar de novo."
+    },
+    {
+      "key": "mini.retry",
+      "value": "Tentar de novo"
+    },
+    {
+      "key": "mini.learned",
+      "value": "O que você aprendeu:"
+    },
+    {
+      "key": "mini.practice",
+      "value": "Treino com outro registro."
+    },
+    {
+      "key": "mini.practiceLearned",
+      "value": "Você treinou com outro registro. Ele não mostra o clima deste dia do jogo."
+    },
+    {
+      "key": "mini.rulesNote",
+      "value": "Alvos, tempo e estrelas são regras do jogo."
+    },
+    {
+      "key": "mini.place",
+      "value": "Colocar próxima carta"
+    },
+    {
+      "key": "mini.placeCaption",
+      "value": "Colocar legenda"
+    },
+    {
+      "key": "mini.dial",
+      "value": "Bobina"
+    },
+    {
+      "key": "mini.pipe",
+      "value": "Cano"
+    },
+    {
+      "key": "mini.position",
+      "value": "Posição"
+    },
+    {
+      "key": "mini.dialValue",
+      "value": "Posição do controle {{n}}"
+    },
+    {
+      "key": "mini.rotateLeft",
+      "value": "Girar {{n}} para a esquerda"
+    },
+    {
+      "key": "mini.rotateRight",
+      "value": "Girar {{n}} para a direita"
+    },
+    {
+      "key": "mini.flow",
+      "value": "Liberar fluxo"
+    },
+    {
+      "key": "mini.oxygenTank",
+      "value": "Tanque de oxigênio"
+    },
+    {
+      "key": "mini.waterTank",
+      "value": "Tanque de água"
+    },
+    {
+      "key": "mini.wireStart",
+      "value": "Selecionar fio {{symbol}}"
+    },
+    {
+      "key": "mini.wireEnd",
+      "value": "Conectar fio {{symbol}}"
+    },
+    {
+      "key": "mini.speed",
+      "value": "Velocidade (km/s)"
+    },
+    {
+      "key": "mini.hours",
+      "value": "Tempo de viagem (horas)"
+    },
+    {
+      "key": "mini.constantSpeed",
+      "value": "Conta de treino: a velocidade não muda. Não é uma previsão de chegada."
+    },
+    {
+      "key": "mini.outside",
+      "value": "Temperatura externa (°C)"
+    },
+    {
+      "key": "mini.heating",
+      "value": "Aquecimento (kWh)"
+    },
+    {
+      "key": "mini.drop",
+      "value": "Gota de água"
+    },
+    {
+      "key": "mini.bed",
+      "value": "Regar canteiro {{n}}"
+    },
+    {
+      "key": "mini.lightTarget",
+      "value": "Alvo de luz do jogo"
+    },
+    {
+      "key": "mini.light",
+      "value": "Nível de luz"
+    },
+    {
+      "key": "mini.harvest",
+      "value": "Colha as maçãs maduras"
+    },
+    {
+      "key": "mini.apple",
+      "value": "Colher maçã {{n}}"
+    },
+    {
+      "key": "mini.patch",
+      "value": "Limpar área {{n}}"
+    },
+    {
+      "key": "mini.weatherInspired",
+      "value": "REGRA DO JOGO inspirada no clima de Marte"
+    },
+    {
+      "key": "mini.targetAngle",
+      "value": "Ângulo-alvo do jogo (graus)"
+    },
+    {
+      "key": "mini.angle",
+      "value": "Ângulo do painel"
+    },
+    {
+      "key": "mini.returnControl",
+      "value": "Volte ao computador."
+    },
+    {
+      "key": "mini.sealTitle",
+      "value": "Conferir o plano"
+    },
+    {
+      "key": "mini.sealGoal",
+      "value": "Copie o plano de energia que você escolheu."
+    },
+    {
+      "key": "mini.confirmed",
+      "value": "Confirmado (kWh)"
+    },
+    {
+      "key": "mini.seal",
+      "value": "Confirmar plano"
+    },
+    {
+      "key": "mini.taskNarration",
+      "value": "Você concluiu {{task}} com {{mistakes}} erros em {{seconds}} segundos."
+    },
+    {
+      "key": "mini.cancel",
+      "value": "Cancelar"
+    },
+    {
+      "key": "mini.SortFlares.name",
+      "value": "Ordenar Erupções"
+    },
+    {
+      "key": "mini.SortFlares.goal",
+      "value": "Toque da mais fraca para a mais forte."
+    },
+    {
+      "key": "mini.SortFlares.learned",
+      "value": "O registro mostra uma explosão solar {{value}}."
+    },
+    {
+      "key": "mini.SortFlares.reading",
+      "value": "Leitura registrada: {{value}}"
+    },
+    {
+      "key": "mini.SortFlares.readingHint",
+      "value": "A letra indica a força. O número dá mais detalhes."
+    },
+    {
+      "key": "mini.SortFlares.instruction",
+      "value": "Toque nas cartas para colocá-las em ordem."
+    },
+    {
+      "key": "mini.SortFlares.weakest",
+      "value": "Mais fraca"
+    },
+    {
+      "key": "mini.SortFlares.strongest",
+      "value": "Mais forte"
+    },
+    {
+      "key": "mini.SortFlares.orderLabel",
+      "value": "Classes de erupção da mais fraca para a mais forte"
+    },
+    {
+      "key": "mini.SortFlares.choose",
+      "value": "Colocar classe {{value}}"
+    },
+    {
+      "key": "mini.SortFlares.next",
+      "value": "Agora procure a carta {{value}}."
+    },
+    {
+      "key": "mini.PhotoDetective.name",
+      "value": "Detetive de Fotos"
+    },
+    {
+      "key": "mini.PhotoDetective.goal",
+      "value": "Combine a legenda da fonte com a imagem."
+    },
+    {
+      "key": "mini.PhotoDetective.learned",
+      "value": "Você comparou a imagem com a legenda: {{value}}."
+    },
+    {
+      "key": "mini.PhotoDetective.decoyLab",
+      "value": "Um diagrama de fios do jogo"
+    },
+    {
+      "key": "mini.PhotoDetective.decoyMap",
+      "value": "Uma planta da Base ARES"
+    },
+    {
+      "key": "mini.AlignCoils.name",
+      "value": "Alinhar Bobinas"
+    },
+    {
+      "key": "mini.AlignCoils.goal",
+      "value": "Gire cada ponteiro até sua marca triangular."
+    },
+    {
+      "key": "mini.AlignCoils.learned",
+      "value": "Neste jogo, os ponteiros das bobinas correspondem aos alvos marcados."
+    },
+    {
+      "key": "mini.WireShield.name",
+      "value": "Conectar o Escudo"
+    },
+    {
+      "key": "mini.WireShield.goal",
+      "value": "Ligue as pontas com a mesma cor e símbolo."
+    },
+    {
+      "key": "mini.WireShield.learned",
+      "value": "Neste jogo, símbolos iguais identificam os fios conectados."
+    },
+    {
+      "key": "mini.CmeCountdown.name",
+      "value": "Viagem da nuvem solar"
+    },
+    {
+      "key": "mini.CmeCountdown.goal",
+      "value": "Copie a velocidade e escolha o tempo de viagem."
+    },
+    {
+      "key": "mini.CmeCountdown.learned",
+      "value": "A nuvem solar do registro viajava a {{value}} km/s."
+    },
+    {
+      "key": "mini.CmeCountdown.reading",
+      "value": "Velocidade registrada"
+    },
+    {
+      "key": "mini.CmeCountdown.arrival",
+      "value": "Quanto tempo a viagem levaria? Escolha em horas."
+    },
+    {
+      "key": "mini.PipeFlow.name",
+      "value": "Ligar os canos"
+    },
+    {
+      "key": "mini.PipeFlow.goal",
+      "value": "Gire os canos e ligue o caminho até os tanques."
+    },
+    {
+      "key": "mini.PipeFlow.learned",
+      "value": "As rotas do jogo chegam aos tanques marcados de oxigênio e água."
+    },
+    {
+      "key": "mini.PipeFlow.instruction",
+      "value": "Cubra a linha pontilhada com o cano."
+    },
+    {
+      "key": "mini.PipeFlow.rotate",
+      "value": "Girar cano {{n}}"
+    },
+    {
+      "key": "mini.PipeFlow.connectedPipe",
+      "value": "Cano {{n}} conectado"
+    },
+    {
+      "key": "mini.PipeFlow.turn",
+      "value": "Girar"
+    },
+    {
+      "key": "mini.PipeFlow.connected",
+      "value": "Conectado"
+    },
+    {
+      "key": "mini.PipeFlow.ready",
+      "value": "Todos os canos conectados. Libere o fluxo!"
+    },
+    {
+      "key": "mini.PipeFlow.keepGoing",
+      "value": "Ainda há canos fora do caminho."
+    },
+    {
+      "key": "mini.ThermostatDial.name",
+      "value": "Aquecer a base"
+    },
+    {
+      "key": "mini.ThermostatDial.goal",
+      "value": "Ajuste o aquecedor para o valor mostrado."
+    },
+    {
+      "key": "mini.ThermostatDial.learned",
+      "value": "A sonda InSight mediu {{value}} °C em outro lugar de Marte."
+    },
+    {
+      "key": "mini.SmartFarmCare.name",
+      "value": "Cuidar da horta"
+    },
+    {
+      "key": "mini.SmartFarmCare.goal",
+      "value": "Regue os canteiros, ajuste a luz e colha as maçãs maduras."
+    },
+    {
+      "key": "mini.SmartFarmCare.learned",
+      "value": "Água na medida e luz ajudam as plantas a crescer."
+    },
+    {
+      "key": "mini.CleanPanels.name",
+      "value": "Limpar os painéis"
+    },
+    {
+      "key": "mini.CleanPanels.goal",
+      "value": "Limpe primeiro o conjunto com mais poeira."
+    },
+    {
+      "key": "mini.CleanPanels.learned",
+      "value": "A poeira reduz a energia do próximo dia em no máximo 20%; a limpeza completa recupera a produção."
+    },
+    {
+      "key": "mini.CleanPanels.instruction",
+      "value": "Toque na escova destacada para limpar."
+    },
+    {
+      "key": "mini.CleanPanels.array",
+      "value": "Conjunto {{n}}"
+    },
+    {
+      "key": "mini.CleanPanels.level.clear",
+      "value": "Limpo"
+    },
+    {
+      "key": "mini.CleanPanels.level.light",
+      "value": "Poeira leve"
+    },
+    {
+      "key": "mini.CleanPanels.level.heavy",
+      "value": "Poeira pesada"
+    },
+    {
+      "key": "mini.CleanPanels.level.buried",
+      "value": "Soterrado"
+    },
+    {
+      "key": "mini.CleanPanels.dust",
+      "value": "Poeira: {{n}}%"
+    },
+    {
+      "key": "mini.CleanPanels.output",
+      "value": "Produção: {{n}}%"
+    },
+    {
+      "key": "mini.CleanPanels.efficiency",
+      "value": "Eficiência do conjunto {{n}}"
+    },
+    {
+      "key": "mini.CleanPanels.wipe",
+      "value": "Limpar conjunto {{n}}, passada {{pass}} de {{total}}"
+    },
+    {
+      "key": "mini.CleanPanels.pass",
+      "value": "Passada {{pass}} / {{total}}"
+    },
+    {
+      "key": "mini.CleanPanels.restore",
+      "value": "A manutenção completa recupera a produção do próximo dia."
+    },
+    {
+      "key": "mini.CleanPanels.alreadyClean",
+      "value": "Tudo limpo! Veja quanta energia voltou."
+    },
+    {
+      "key": "mini.CleanPanels.verify",
+      "value": "Conferir produção"
+    },
+    {
+      "key": "mini.TiltSun.name",
+      "value": "Inclinar para o Sol"
+    },
+    {
+      "key": "mini.TiltSun.goal",
+      "value": "Gire o painel até o ângulo destacado do jogo."
+    },
+    {
+      "key": "mini.TiltSun.learned",
+      "value": "O ângulo destacado vem do Sol simulado do jogo."
+    },
+    {
+      "key": "mini.IrrigationPlan.name",
+      "value": "Distribuir Água"
+    },
+    {
+      "key": "mini.IrrigationPlan.goal",
+      "value": "Complete cada canteiro até a marca. Economize gotas!"
+    },
+    {
+      "key": "mini.IrrigationPlan.learned",
+      "value": "Distribuir só a água que falta evita desperdício."
+    },
+    {
+      "key": "mini.ResourcePriority.name",
+      "value": "O que cuidar primeiro?"
+    },
+    {
+      "key": "mini.ResourcePriority.goal",
+      "value": "Confira o ar. Depois compare o calor e a estufa."
+    },
+    {
+      "key": "mini.ResourcePriority.learned",
+      "value": "O suporte de vida prioriza o recurso que precisa de atenção."
+    },
+    {
+      "key": "mini.PowerBalance.name",
+      "value": "Conferir Energia"
+    },
+    {
+      "key": "mini.PowerBalance.goal",
+      "value": "A energia dá para todos os equipamentos?"
+    },
+    {
+      "key": "mini.PowerBalance.learned",
+      "value": "Quando a energia é pouca, precisamos escolher onde usar."
+    },
+    {
+      "key": "mini.WindReading.name",
+      "value": "Ler o Vento"
+    },
+    {
+      "key": "mini.WindReading.goal",
+      "value": "Toque na direção mostrada na bússola."
+    },
+    {
+      "key": "mini.WindReading.learned",
+      "value": "O vento foi medido em outro lugar de Marte."
+    },
+    {
+      "key": "challenge.marks",
+      "value": "Marcas das bobinas"
+    },
+    {
+      "key": "challenge.connections",
+      "value": "Pontas para conectar"
+    },
+    {
+      "key": "challenge.dust",
+      "value": "Manchas de poeira do jogo"
+    },
+    {
+      "key": "challenge.dataNotes.flare",
+      "value": "Registro de explosão solar. Sem dados, usamos um treino identificado."
+    },
+    {
+      "key": "challenge.dataNotes.temperature",
+      "value": "Temperatura média do ar registrada pelo InSight, não por um sensor na Base ARES."
+    },
+    {
+      "key": "challenge.dataNotes.wind",
+      "value": "Vento medido pela InSight. Sem medição, usamos um treino identificado."
+    },
+    {
+      "key": "challenge.begin",
+      "value": "Começar desafio"
+    },
+    {
+      "key": "challenge.happening",
+      "value": "O que acontece"
+    },
+    {
+      "key": "challenge.action",
+      "value": "Sua missão"
+    },
+    {
+      "key": "challenge.importance",
+      "value": "Por que importa"
+    },
+    {
+      "key": "challenge.hint",
+      "value": "Dica"
+    },
+    {
+      "key": "challenge.correct",
+      "value": "Estação pronta!"
+    },
+    {
+      "key": "challenge.preview",
+      "value": "Após confirmar"
+    },
+    {
+      "key": "challenge.maintained",
+      "value": "Já no máximo — mantido"
+    },
+    {
+      "key": "challenge.rewardNote",
+      "value": "Aperte Continuar para guardar a recompensa."
+    },
+    {
+      "key": "challenge.impactQuestion",
+      "value": "Só a imagem prova que a tempestade chegará a Marte?"
+    },
+    {
+      "key": "challenge.impactAnswer",
+      "value": "Não. Precisamos de uma previsão para Marte."
+    },
+    {
+      "key": "challenge.observeQuestion",
+      "value": "Qual descrição pertence a esta imagem?"
+    },
+    {
+      "key": "challenge.observe",
+      "value": "Observar"
+    },
+    {
+      "key": "challenge.zoom",
+      "value": "Zoom da imagem"
+    },
+    {
+      "key": "challenge.unknown",
+      "value": "Sem previsão de chegada neste dia."
+    },
+    {
+      "key": "challenge.forecastYes",
+      "value": "O registro salvo prevê impacto em Marte."
+    },
+    {
+      "key": "challenge.forecastNo",
+      "value": "O registro salvo não prevê impacto em Marte."
+    },
+    {
+      "key": "challenge.no",
+      "value": "Não"
+    },
+    {
+      "key": "challenge.yes",
+      "value": "Sim"
+    },
+    {
+      "key": "challenge.waterBudget",
+      "value": "Água disponível no treino"
+    },
+    {
+      "key": "challenge.moisture",
+      "value": "Umidade do treino"
+    },
+    {
+      "key": "challenge.moistureTarget",
+      "value": "Alvo do treino"
+    },
+    {
+      "key": "challenge.addWater",
+      "value": "Regar canteiro {{n}}"
+    },
+    {
+      "key": "challenge.resetWater",
+      "value": "Esvaziar canteiro {{n}}"
+    },
+    {
+      "key": "challenge.air",
+      "value": "Cuidar do ar"
+    },
+    {
+      "key": "challenge.heat",
+      "value": "Aquecer a base"
+    },
+    {
+      "key": "challenge.water",
+      "value": "Cuidar da água"
+    },
+    {
+      "key": "challenge.available",
+      "value": "Temos"
+    },
+    {
+      "key": "challenge.demand",
+      "value": "Precisamos"
+    },
+    {
+      "key": "challenge.matches",
+      "value": "Dá para todos"
+    },
+    {
+      "key": "challenge.shortfall",
+      "value": "Vai faltar energia"
+    },
+    {
+      "key": "challenge.wind",
+      "value": "Direção do vento registrada"
+    },
+    {
+      "key": "challenge.oxygen",
+      "value": "Oxigênio atual do jogo"
+    },
+    {
+      "key": "challenge.briefings.SortFlares.happening",
+      "value": "O escudo precisa da classe de erupção registrada."
+    },
+    {
+      "key": "challenge.briefings.SortFlares.importance",
+      "value": "As classes ajudam a interpretar o alerta solar."
+    },
+    {
+      "key": "challenge.briefings.SortFlares.hint",
+      "value": "Siga a ordem acima dos espaços: primeiro A, depois B, C, M e X."
+    },
+    {
+      "key": "challenge.briefings.SortFlares.error",
+      "value": "Essa carta não é a próxima. Siga A, B, C, M, X da esquerda para a direita."
+    },
+    {
+      "key": "challenge.briefings.PhotoDetective.happening",
+      "value": "O telescópio mostra uma imagem do acervo NASA."
+    },
+    {
+      "key": "challenge.briefings.PhotoDetective.importance",
+      "value": "A legenda da fonte descreve a observação, não um alerta de tempestade."
+    },
+    {
+      "key": "challenge.briefings.PhotoDetective.hint",
+      "value": "Combine o título da fonte e pense no que uma imagem pode provar."
+    },
+    {
+      "key": "challenge.briefings.PhotoDetective.error",
+      "value": "Essa legenda não é o título da fonte, ou uma imagem sozinha não prevê impacto."
+    },
+    {
+      "key": "challenge.briefings.AlignCoils.happening",
+      "value": "Os ponteiros precisam de ajuste."
+    },
+    {
+      "key": "challenge.briefings.AlignCoils.importance",
+      "value": "Bobinas alinhadas no jogo preparam a estação protetora."
+    },
+    {
+      "key": "challenge.briefings.AlignCoils.hint",
+      "value": "Cada triângulo é o alvo do seu ponteiro."
+    },
+    {
+      "key": "challenge.briefings.AlignCoils.error",
+      "value": "Um ponteiro ainda não corresponde ao triângulo-alvo."
+    },
+    {
+      "key": "challenge.briefings.WireShield.happening",
+      "value": "Alguns fios estão soltos."
+    },
+    {
+      "key": "challenge.briefings.WireShield.importance",
+      "value": "Conexões corretas preparam o escudo durante o alerta do Sol."
+    },
+    {
+      "key": "challenge.briefings.WireShield.hint",
+      "value": "Siga o símbolo e a cor."
+    },
+    {
+      "key": "challenge.briefings.WireShield.error",
+      "value": "Essas pontas têm símbolos e cores diferentes."
+    },
+    {
+      "key": "challenge.briefings.CmeCountdown.happening",
+      "value": "Uma nuvem de partículas saiu do Sol."
+    },
+    {
+      "key": "challenge.briefings.CmeCountdown.importance",
+      "value": "O tempo de viagem é uma estimativa simplificada, não uma previsão de impacto."
+    },
+    {
+      "key": "challenge.briefings.CmeCountdown.hint",
+      "value": "Combine a velocidade registrada e seu tempo a velocidade constante."
+    },
+    {
+      "key": "challenge.briefings.CmeCountdown.error",
+      "value": "A velocidade ou o tempo não corresponde ao cálculo da velocidade registrada."
+    },
+    {
+      "key": "challenge.briefings.PipeFlow.happening",
+      "value": "Os circuitos de ar e água precisam das rotas corretas."
+    },
+    {
+      "key": "challenge.briefings.PipeFlow.importance",
+      "value": "A estação mantém ar e água reciclada para a tripulação."
+    },
+    {
+      "key": "challenge.briefings.PipeFlow.hint",
+      "value": "Toque em cada cano até a linha colorida cobrir a guia tracejada e o cartão ficar verde."
+    },
+    {
+      "key": "challenge.briefings.PipeFlow.error",
+      "value": "Ainda há canos que não estão verdes. Gire essas peças antes de liberar o fluxo."
+    },
+    {
+      "key": "challenge.briefings.ThermostatDial.happening",
+      "value": "O frio faz a base perder calor."
+    },
+    {
+      "key": "challenge.briefings.ThermostatDial.importance",
+      "value": "A demanda de aquecimento muda com a temperatura no jogo."
+    },
+    {
+      "key": "challenge.briefings.ThermostatDial.hint",
+      "value": "Copie o valor de energia do aquecedor."
+    },
+    {
+      "key": "challenge.briefings.ThermostatDial.error",
+      "value": "Confira o valor pedido para o aquecedor."
+    },
+    {
+      "key": "challenge.briefings.SmartFarmCare.happening",
+      "value": "Alguns canteiros de treino precisam de água antes da colheita."
+    },
+    {
+      "key": "challenge.briefings.SmartFarmCare.importance",
+      "value": "Irrigação cuidadosa evita regar canteiros que já estão úmidos."
+    },
+    {
+      "key": "challenge.briefings.SmartFarmCare.hint",
+      "value": "Leia a umidade, regue só os canteiros secos, ajuste a luz e colha."
+    },
+    {
+      "key": "challenge.briefings.SmartFarmCare.error",
+      "value": "Este canteiro já tem umidade suficiente no treino."
+    },
+    {
+      "key": "challenge.briefings.CleanPanels.happening",
+      "value": "A poeira impede parte da luz de chegar aos painéis."
+    },
+    {
+      "key": "challenge.briefings.CleanPanels.importance",
+      "value": "Limpar primeiro os conjuntos mais sujos protege a energia do próximo dia."
+    },
+    {
+      "key": "challenge.briefings.CleanPanels.hint",
+      "value": "Use a escova destacada. Poeira leve pede uma passada, pesada duas e soterrada três."
+    },
+    {
+      "key": "challenge.briefings.CleanPanels.error",
+      "value": "Termine o conjunto destacado antes de passar para o próximo."
+    },
+    {
+      "key": "challenge.briefings.TiltSun.happening",
+      "value": "O Sol do jogo marca uma orientação do painel."
+    },
+    {
+      "key": "challenge.briefings.TiltSun.importance",
+      "value": "Virar os painéis ajuda a captar luz. O alvo é uma regra do jogo."
+    },
+    {
+      "key": "challenge.briefings.TiltSun.hint",
+      "value": "Alinhe o painel ao ângulo destacado."
+    },
+    {
+      "key": "challenge.briefings.TiltSun.error",
+      "value": "O ângulo do painel não corresponde ao alvo destacado do jogo."
+    },
+    {
+      "key": "challenge.briefings.IrrigationPlan.happening",
+      "value": "O tanque de treino tem água limitada."
+    },
+    {
+      "key": "challenge.briefings.IrrigationPlan.importance",
+      "value": "Distribuir só a água que falta evita desperdício."
+    },
+    {
+      "key": "challenge.briefings.IrrigationPlan.hint",
+      "value": "Complete as marcas de cada canteiro com as gotas disponíveis."
+    },
+    {
+      "key": "challenge.briefings.IrrigationPlan.error",
+      "value": "Um canteiro tem água demais ou de menos; confira sua umidade."
+    },
+    {
+      "key": "challenge.briefings.ResourcePriority.happening",
+      "value": "Leia o oxigênio atual e a demanda de aquecimento do Sol."
+    },
+    {
+      "key": "challenge.briefings.ResourcePriority.importance",
+      "value": "O suporte de vida prioriza o recurso que precisa de atenção."
+    },
+    {
+      "key": "challenge.briefings.ResourcePriority.hint",
+      "value": "Ar abaixo do máximo? Cuide dele. Senão, escolha entre calor e água para a estufa pelo maior valor mostrado."
+    },
+    {
+      "key": "challenge.briefings.ResourcePriority.error",
+      "value": "Veja primeiro o ar. Depois compare calor e estufa."
+    },
+    {
+      "key": "challenge.briefings.PowerBalance.happening",
+      "value": "O parque fornece o orçamento de energia atual do jogo."
+    },
+    {
+      "key": "challenge.briefings.PowerBalance.importance",
+      "value": "Comparar oferta e demanda ajuda a planejar sem mudar o orçamento."
+    },
+    {
+      "key": "challenge.briefings.PowerBalance.hint",
+      "value": "Compare o que temos com o total que precisamos."
+    },
+    {
+      "key": "challenge.briefings.PowerBalance.error",
+      "value": "Some os três equipamentos antes de comparar."
+    },
+    {
+      "key": "challenge.briefings.WindReading.happening",
+      "value": "A sonda registrou de onde o vento veio."
+    },
+    {
+      "key": "challenge.briefings.WindReading.importance",
+      "value": "Ler o clima ajuda a manutenção; não é um sensor na Base ARES."
+    },
+    {
+      "key": "challenge.briefings.WindReading.hint",
+      "value": "Escolha a direção mostrada."
+    },
+    {
+      "key": "challenge.briefings.WindReading.error",
+      "value": "Confira a direção da bússola."
+    },
+    {
+      "key": "solar.title",
+      "value": "PARQUE SOLAR · 32 PAINÉIS"
+    },
+    {
+      "key": "solar.reserve",
+      "value": "Reserva: {{n}} kWh"
+    },
+    {
+      "key": "solar.generation",
+      "value": "Produzindo {{n}} kWh a cada {{seconds}} s · {{dirty}} painéis sujos"
+    },
+    {
+      "key": "solar.critical",
+      "value": "Bateria abaixo de {{threshold}} kWh. Limpe os painéis para recuperar energia."
+    },
+    {
+      "key": "solar.pickup",
+      "value": "[E] Pegar vassoura"
+    },
+    {
+      "key": "solar.return",
+      "value": "[E] Guardar vassoura"
+    },
+    {
+      "key": "solar.findBroom",
+      "value": "Vassoura disponível na entrada do parque solar."
+    },
+    {
+      "key": "solar.enterZone",
+      "value": "Chegue perto de um painel com poeira."
+    },
+    {
+      "key": "solar.clean",
+      "value": "Painel {{n}} limpo! Procure outro com poeira."
+    },
+    {
+      "key": "solar.hold",
+      "value": "Painel {{n}}: segure o clique esquerdo por {{seconds}} s para limpar."
+    },
+    {
+      "key": "solar.cleaning",
+      "value": "Limpando · {{n}}%"
+    },
+    {
+      "key": "howTo.solar",
+      "value": "Pegue a vassoura com E. Chegue perto de um painel sujo e segure o clique para limpar. Painéis limpos geram mais energia."
+    },
+    {
+      "key": "title.exit",
+      "value": "Sair"
+    },
+    {
+      "key": "howTo.sprint",
+      "value": "Segure Shift para correr."
+    },
+    {
+      "key": "station.needsPlan",
+      "value": "Divida a energia no computador."
+    },
+    {
+      "key": "station.completed",
+      "value": "Tarefa pronta por hoje!"
+    },
+    {
+      "key": "station.approach",
+      "value": "Chegue perto de um equipamento."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "retrievedUtc": "2026-11-15T13:04:50.496604+00:00",
+  "sources": [
+    {
+      "file": "flares.json",
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI-API/get/FLR?startDate=2024-05-10&endDate=2024-05-10",
+      "sha256": "77cd9c51213b52db7f5a5894ff70a61718d6ce0c87ef344b08c40467eea09ad1"
+    },
+    {
+      "file": "cmes.json",
+      "url": "https://ccmc.gsfc.nasa.gov/DONKI-API/get/CME?startDate=2024-05-10&endDate=2024-05-10",
+      "sha256": "cdd17670ab00a2aea42ca374da3a6637a7d4d9037cfabf0bd399dae00fbc19c4"
+    },
+    {
+      "file": "osdr.json",
+      "url": "https://osdr.nasa.gov/osdr/data/search?term=plants&from=0&size=3&type=cgene",
+      "sha256": "83dca53b453454a523b1811c1a96b89ec4bcf7b2bd5c90264f0282263c4704b5"
+    }
+  ]
+}

@@ -60,12 +60,12 @@ namespace Ares.Editor
                     Require(!session.HasBroom && session.Progress == 0 && session.ActivePanel == -1, "Return cancels cleaning");
                     Require(!session.Tick(0, true, false, 5), "Cannot clean after return");
                     keyboard = InputSystem.AddDevice<Keyboard>("ARES broom check");
-                    ui.StartMission(); ui.Campaign.CloseReport();
+                    ui.StartMission(false); ui.Campaign.CloseReport();
                     typeof(GameFrontend).GetMethod("CloseOverlay", Private).Invoke(ui, null);
                     ui.Campaign.SetAllocation(new Ares.Data.Allocation { shield = ui.Campaign.EnergyPool }); ui.Campaign.StartSol();
                     actor = explorer.GetComponentInChildren<AstronautAnimator>();
                     broom = ui.transform.Find("Solar maintenance/Solar cleaning broom");
-                    SetPlayer(SolarBroomView.PickupPosition + Vector3.back); elapsed = 0;
+                    SetPlayer(ui.Solar.BroomPickupPosition + Vector3.back); elapsed = 0;
                 }
                 keyboard.MakeCurrent(); var keys = new KeyboardState();
                 if (stage == 0 && elapsed > .6f)
@@ -82,7 +82,7 @@ namespace Ares.Editor
                 }
                 else if (stage == 3 && elapsed > .2f)
                 {
-                    SetPlayer(SolarBroomView.PickupPosition + Vector3.back);
+                    SetPlayer(ui.Solar.BroomPickupPosition + Vector3.back);
                     var view = (SolarBroomView)typeof(SolarMaintenance).GetField("broom", Private).GetValue(ui.Solar);
                     view.Update(actor, true, true, false, actor.transform.position - actor.transform.forward * 2 + Vector3.up * 1.5f);
                     CheckGrip(); Capture("cleaning"); Next();
@@ -91,7 +91,7 @@ namespace Ares.Editor
                 else if (stage == 5 && elapsed > .3f)
                 {
                     Require(!ui.Solar.Cleaning.HasBroom && !ui.BlocksWorld && ui.Solar.CanPickUp, "E must return before opening a station task");
-                    Require(Vector3.Distance(broom.position, SolarBroomView.PickupPosition + Vector3.up * .21f) < .001f, "Returned to rack");
+                    Require(Vector3.Distance(broom.position, ui.Solar.BroomPickupPosition + Vector3.up * .21f) < .001f, "Returned to rack");
                     keys = new KeyboardState(Key.E); Next();
                 }
                 else if (stage == 6 && elapsed > .3f)

@@ -1,5 +1,5 @@
 {
-  "reference": "a896f420-3053-49eb-b6f2-a97f9b2dc6c8 (4)",
+  "reference": "casa-marte-missao-n8n",
   "generator": "Tools/AresImport/export.mjs",
   "three": "187",
   "sourceHashes": [
@@ -205,7 +205,7 @@
     },
     {
       "file": "config/rooms.ts",
-      "sha256": "ab5f5c20a2b505b75099db488f0f7363873ccb117364f76416e0bf776576886c"
+      "sha256": "55f34a3413df83eaf542de0e541926aa716a9e611666c1ce2da753f6ec35166f"
     },
     {
       "file": "config/telescope.ts",
@@ -273,11 +273,11 @@
     },
     {
       "file": "game/actions.ts",
-      "sha256": "71f57af326aca7a82fabf8754768498aae08cc928d4a24057597c143a784e2be"
+      "sha256": "53d388423209a6bc1139502e02205d9847b5a61be454b6bd681103646cf36bfd"
     },
     {
       "file": "game/campaign.ts",
-      "sha256": "3cc95114f13202198791c55332f477b34e8a1a3e4da44215551c52d57f4f1d70"
+      "sha256": "87a63e5019b168819018364d08943fcadfde0a8462415c559d35986d36b17373"
     },
     {
       "file": "game/characters/Astronaut.tsx",
@@ -290,6 +290,14 @@
     {
       "file": "game/greenhouse.ts",
       "sha256": "967e6097ff0a05ef37c0cb54ab251d873b3d1d2f473d88a6b5df853f690fb1b3"
+    },
+    {
+      "file": "game/greenhouseTrainer.ts",
+      "sha256": "dfb4fb6088ec01d5218878b52ca26021d9af66026f99821359981afb773ae9dd"
+    },
+    {
+      "file": "game/mission.ts",
+      "sha256": "79f851096a77c4dcedbff3824f4ac087695c93327af0d8b922a027718d16ca7b"
     },
     {
       "file": "game/presentation.ts",
@@ -305,15 +313,19 @@
     },
     {
       "file": "game/scene/AresInteriors.ts",
-      "sha256": "90389a6592b75defc887d511300498b24124bce6079cc902685827ebdab82166"
+      "sha256": "aa207fe0d4848d84138d95d07ec9cb87a9e82aaecf397090b63b1704f1de408e"
     },
     {
       "file": "game/scene/AresStructure.ts",
-      "sha256": "382af13dda504bcb85abd0d8c4c95f2388819591b9e21ec7b2f0d20dcfb866da"
+      "sha256": "cd3169565803946a23e5ddadda43c4c001496151eb22f381181ca578df96c16f"
     },
     {
       "file": "game/scene/Base.tsx",
       "sha256": "5545a809d295858608c13a2eb0ef04434e30382968e0579ec4f72fcbc5988602"
+    },
+    {
+      "file": "game/scene/BaseLandmarks.tsx",
+      "sha256": "6091eaf213eca140edb2f5ecf2af4e89decf97fefc98120e7d57d4d88aaa41dd"
     },
     {
       "file": "game/scene/CameraControls.tsx",
@@ -325,15 +337,15 @@
     },
     {
       "file": "game/scene/Decor.tsx",
-      "sha256": "cbd2a6ae84169353abbd91c379e6eba100c00e8857f01c6ac9fcb0d787b175d8"
+      "sha256": "4eff23aa5ab9a6d45ddaf03b05a666a5d08cffdad47b0f58fc37061cfebfc5d4"
     },
     {
       "file": "game/scene/GameCanvas.tsx",
-      "sha256": "7ee8b480f9a180e210a4d7f1e6f2206324c57231f9349a55e9056740919bba60"
+      "sha256": "ea75774ac873f6f4d06d078971ff95d2019103af69be3edeb2835ab449f66f6a"
     },
     {
       "file": "game/scene/Greenhouse.tsx",
-      "sha256": "bdc3dd2d2466aa5136482a4047b0993715c0701212ca6e753c386b813396e1a3"
+      "sha256": "448d56ca926b65bfdcc0af7a8034fde2f0b898f07ad39f247a1728893bd21349"
     },
     {
       "file": "game/scene/InteriorRooms.tsx",
@@ -349,7 +361,7 @@
     },
     {
       "file": "game/scene/StationDetails.tsx",
-      "sha256": "67695780d1cd8b9e06048c45afb1e0a3d6f1c190cc5c670e84af3a2b8a9f3a63"
+      "sha256": "4baeb44c3bc8b86af75c36313269f6b381d9bbafc8da67e1894d16aee8cfae7e"
     },
     {
       "file": "game/scene/Terrain.tsx",
@@ -385,7 +397,7 @@
     },
     {
       "file": "game/sim/world.ts",
-      "sha256": "0e8cd8bb5c075ed32cdddcf93e2424aa0402ac09ac072b595810223d16a9eefd"
+      "sha256": "be5479fbbd2dc3a6e79f532fd91f17e99029bb6ccc5d2297fd56df39a92c552b"
     },
     {
       "file": "game/store.ts",
@@ -393,7 +405,7 @@
     },
     {
       "file": "game/terrain.ts",
-      "sha256": "4f2c0ee87b287f76d404a5b7e73f8ea9a9b00949403ecbd62d4e5c9e57c3769d"
+      "sha256": "0aab25b397ac94969fde862cd28a4508dba571a65db237b5be1f34855fff7c07"
     },
     {
       "file": "hooks/use-mobile.tsx",
@@ -402,34 +414,6 @@
     {
       "file": "i18n/index.ts",
       "sha256": "3f403bee7d45352a3745bfb22a19a6fae4aaa09422eb183d04c921e5b947fb6a"
-    },
-    {
-      "file": "integrations/supabase/auth-attacher.ts",
-      "sha256": "24d0dbdf8dc0fd49b391a948bd04e1db43b97a1d851acc391dd3d1b13b9797fd"
-    },
-    {
-      "file": "integrations/supabase/auth-middleware.ts",
-      "sha256": "ae40b141ce933b52252e00bfacd3e69fa7a8e6ef88a2c92809780bf7d1bb76cc"
-    },
-    {
-      "file": "integrations/supabase/client.server.ts",
-      "sha256": "56ec7f9ac40ccdf96d8aba4f7fe33a586590ac63420b81e6cd5dc1e4777ee28e"
-    },
-    {
-      "file": "integrations/supabase/client.ts",
-      "sha256": "b300e9491d5b8500ee77137fbaeef8e5b46b5f5e8a9463fc2dc01adc104e1807"
-    },
-    {
-      "file": "integrations/supabase/cron-auth.ts",
-      "sha256": "18430aa4c7faff5b44c572a8a4dfa6482daa52acbea09f384b872f087e58e738"
-    },
-    {
-      "file": "integrations/supabase/previewAuthStorage.ts",
-      "sha256": "03dd0ffe0501fa1f0b055d8644e079c573e7197a36e2e08fd494e70831484d18"
-    },
-    {
-      "file": "integrations/supabase/types.ts",
-      "sha256": "11a5a8cfb960be04750cea9134fca29d52807d21c97751848ec4e76a6ff686bf"
     },
     {
       "file": "lib/error-capture.ts",
@@ -444,8 +428,12 @@
       "sha256": "0a2e8b5f3ffd2dd682ab78be1a9b0998b73284a6525080e4960f85827cd608d3"
     },
     {
+      "file": "lib/n8n.ts",
+      "sha256": "a9a503956ba476e99c26784c8fb89f8fcd89fe087fa16483317ae1aa4455077f"
+    },
+    {
       "file": "lib/narrator.functions.ts",
-      "sha256": "20e949ac56fb047c96245b4d450ad905c1b1ebdf6c8c36f2af09b280460c6d52"
+      "sha256": "251df93d74b1c397a54f04ba28aa22ed4f370c324bd66793e7ce3db7eea4e01e"
     },
     {
       "file": "lib/observatory-data.ts",
@@ -453,19 +441,27 @@
     },
     {
       "file": "lib/observatory.functions.ts",
-      "sha256": "e1b6a9c734b47249e10c86a16e3851b65014f07cfadb4401743702783fbc06b7"
+      "sha256": "1ff800e38bd272cf463ee8db20e9ca6faa5265f52509246c6f9aeff9189000d9"
+    },
+    {
+      "file": "lib/solfacts.functions.ts",
+      "sha256": "5868ba16f543b348af2c58669b75bcde9f1fe2b42bc758cc4ea5dfd6302d6651"
     },
     {
       "file": "lib/utils.ts",
       "sha256": "d1f1e0d62cb8d8d1e04c26e14de842d8a151f75812d81b046c65b5d1fe8e4b27"
     },
     {
+      "file": "lib/webhook-response.ts",
+      "sha256": "cc349ba1bc531d0173cdb91c9db5cf96bd0904f65777dc10aafa629715b7bad2"
+    },
+    {
       "file": "locales/en.json",
-      "sha256": "9e2a5978c184a344cf56a1a49cb0ee5abe5b9110e6aecda3e7669fb1f1f1849e"
+      "sha256": "152221b898e22a0983e694e2959aff2553ecc25e6f02c50d1cd8185649b2792f"
     },
     {
       "file": "locales/pt-BR.json",
-      "sha256": "d70f55b9c62cb81e56a08d0fec137c05c656cd15fc7cc5d9c57267046ab19d93"
+      "sha256": "573b91e776418fe64fb454989d903ea86314ea1c9fd7b07e4023c4a2a36c81ab"
     },
     {
       "file": "routeTree.gen.ts",
@@ -489,11 +485,15 @@
     },
     {
       "file": "services/narrator/NarratorService.ts",
-      "sha256": "e9376fb204da7ca59a56258f41148039da817feae88fa4ba8d508086d4a288dd"
+      "sha256": "0630a5294ba8b3f106a5f6c1cc4f8cbd3289e6d21498ac4d9e89827c7d425d16"
     },
     {
       "file": "services/narrator/facts.ts",
       "sha256": "87da769dfbf259bf228243878d6b1a5089efa399b6cf2b490df214563deb78f3"
+    },
+    {
+      "file": "services/narrator/media.ts",
+      "sha256": "70221a30916bbe55b77ef91a38d513388dce14382267363b20260f51fa38c113"
     },
     {
       "file": "services/narrator/speak.ts",
@@ -513,11 +513,11 @@
     },
     {
       "file": "start.ts",
-      "sha256": "f3679c32558fb8ae503ed1d14393d10d7b8f13124769fe6cd00a862a18414679"
+      "sha256": "8d14a8f08be12af9a8495b4d2479edc1f5f7e35fd549d08b7bab8ad2dd4ab9a1"
     },
     {
       "file": "styles.css",
-      "sha256": "fd478912f4a6fc34909f1083d8475e68f0d9c2143137f78557f12c6b621a076a"
+      "sha256": "10049faa116b049245a1b5697beb879abe6fb5f5ca82027f762bf2f58530d7d1"
     },
     {
       "file": "tasks/AlignCoils.tsx",
@@ -525,7 +525,7 @@
     },
     {
       "file": "tasks/ChallengePanel.tsx",
-      "sha256": "059e7bc797842e5055f884caf965f2ac563144a5f1eb19e843137e20f5694c35"
+      "sha256": "215bd992eacf19e3adc52eaaf83e179732b69fa1d5cf2b219e8f8b5cc41953e4"
     },
     {
       "file": "tasks/ChallengeReadings.tsx",
@@ -557,7 +557,7 @@
     },
     {
       "file": "tasks/PhotoDetective.tsx",
-      "sha256": "237cf633da57e5cd7b89461c76c00b6999d3d2f1bf1b7306c6bef1e9171a1338"
+      "sha256": "51add73a64f4a998cbfc8f481e6773993e128b357825313a0f6a254e1ca8beca"
     },
     {
       "file": "tasks/PipeFlow.tsx",
@@ -677,7 +677,7 @@
     },
     {
       "file": "test/base-layout.test.ts",
-      "sha256": "1145cf7b31a710f73f53c5826411b09a2eb10d146b36bbba17b9c102ce8cb403"
+      "sha256": "b8d8f03a8c5ad641cd6e28dd6a6f29517df5fe1c2e33152ace1881c72d4fd5da"
     },
     {
       "file": "test/camera.test.ts",
@@ -700,12 +700,20 @@
       "sha256": "765397acd10739802d05742bdd1b6f4f93c16f94a877b0f6708f1882f3a800c9"
     },
     {
+      "file": "test/greenhouse-trainer.test.ts",
+      "sha256": "438f5cdb3f49613eec1072f110757bb6e74e1fbaa7699296587e3354efac3dea"
+    },
+    {
       "file": "test/greenhouse.test.ts",
       "sha256": "2796a64b473c55fdfe1ff1c7cc91bb73ce71841018b75b3fdc0abdbaa05c7f62"
     },
     {
       "file": "test/mini-games.test.ts",
       "sha256": "f6d3081dff400109cdd9bf3f369e0d6e2756ca05ed470afaa29b6b4fa6ad685e"
+    },
+    {
+      "file": "test/n8n.test.ts",
+      "sha256": "744620c6fcebd0e8a1aad598cf169f591e2e87cb8023a5fbbef55e23ba067042"
     },
     {
       "file": "test/narrator.test.ts",
@@ -732,12 +740,16 @@
       "sha256": "bc2090190796e6bc9fe9c2d10bd3212c06c5aec1588f98fa48682513b23fd429"
     },
     {
+      "file": "test/webhook-response.test.ts",
+      "sha256": "f276fd5a20a059db61d66c97b4d27d71721b7a4c3abbd921c10e4baa707b0585"
+    },
+    {
       "file": "types/r3f.d.ts",
       "sha256": "b21e8b41d646c8e9a806866f3b37c9d8439cbe8b91fea1a1e8a241e4de6da158"
     },
     {
       "file": "ui/BubblePanel.tsx",
-      "sha256": "895e9a61bfd4fdd6b9e96634d1d8f4dcb95dbdcb8ea774b5dd968389c232a6b8"
+      "sha256": "5897a61922b8e520426e7700af5add61fa0ad96d9b84f646d7f7d6c1c9cbec68"
     },
     {
       "file": "ui/ConsequenceList.tsx",
@@ -765,11 +777,15 @@
     },
     {
       "file": "ui/GameScreen.tsx",
-      "sha256": "1571e8b8129449de309974ac699ba092149e9a001e1ffad290e99a36fee5376e"
+      "sha256": "10219b4dd40b01565845a7fbefd664de271c87a3cf5c28c544ddc7e555fb268d"
     },
     {
       "file": "ui/GreenhousePanel.tsx",
-      "sha256": "575112cb076720b1dadfcb00d8a4626ab2bbf00f9dcdfccb2bc9e0f5fc6e3f52"
+      "sha256": "49cf37f4f3e290929d69a7641997f62b289ca77896a9e0aa060f9cf144179b02"
+    },
+    {
+      "file": "ui/GreenhouseTrainer.tsx",
+      "sha256": "b8945bc2caa5953ab96f45850cc432bc5217f3d96dd0f44583660c71e75188b5"
     },
     {
       "file": "ui/HowToPlay.tsx",
@@ -801,11 +817,11 @@
     },
     {
       "file": "ui/NasaCards.tsx",
-      "sha256": "76b434861d912bb9269f2d03838b99656287c48e1fe200c7fc98a7c24058f483"
+      "sha256": "3ecdd7ae12692b54acaa31f8c8a8f21b4eef6ed6174b3e00899ebf5ebdea8130"
     },
     {
       "file": "ui/ObservatoryDialog.tsx",
-      "sha256": "0340c6f972d1dcbdc723cfc9d60101710365762dc46c920b6a6114b437f2dd60"
+      "sha256": "c60613b9bc3cff824fb377a9e4e193fd842ea0689df616a915e4d513bc05836b"
     },
     {
       "file": "ui/RegionIcon.tsx",
@@ -836,146 +852,191 @@
     {
       "name": "control_floor",
       "first": 0,
-      "count": 43
+      "count": 31
     },
     {
       "name": "control_walls",
-      "first": 43,
+      "first": 31,
       "count": 2
     },
     {
       "name": "control_roof",
-      "first": 45,
+      "first": 33,
       "count": 3
     },
     {
       "name": "control_interior",
-      "first": 48,
+      "first": 36,
       "count": 4
     },
     {
       "name": "observatory_floor",
-      "first": 52,
-      "count": 44
+      "first": 40,
+      "count": 26
     },
     {
       "name": "observatory_walls",
-      "first": 96,
+      "first": 66,
       "count": 2
     },
     {
       "name": "observatory_roof",
-      "first": 98,
-      "count": 3
+      "first": 68,
+      "count": 4
     },
     {
       "name": "observatory_interior",
-      "first": 101,
+      "first": 72,
       "count": 5
     },
     {
       "name": "shield_floor",
-      "first": 106,
-      "count": 45
+      "first": 77,
+      "count": 26
     },
     {
       "name": "shield_walls",
-      "first": 151,
+      "first": 103,
       "count": 2
     },
     {
       "name": "shield_roof",
-      "first": 153,
-      "count": 2
+      "first": 105,
+      "count": 3
     },
     {
       "name": "shield_interior",
-      "first": 155,
+      "first": 108,
       "count": 3
     },
     {
       "name": "greenhouse_floor",
-      "first": 158,
+      "first": 111,
       "count": 5
     },
     {
       "name": "greenhouse_walls",
-      "first": 163,
+      "first": 116,
       "count": 3
     },
     {
       "name": "greenhouse_roof",
-      "first": 166,
+      "first": 119,
       "count": 2
     },
     {
       "name": "greenhouse_interior",
-      "first": 168,
-      "count": 842
+      "first": 121,
+      "count": 618
     },
     {
       "name": "lifeSupport_floor",
-      "first": 1010,
-      "count": 43
+      "first": 739,
+      "count": 26
     },
     {
       "name": "lifeSupport_walls",
-      "first": 1053,
+      "first": 765,
       "count": 2
     },
     {
       "name": "lifeSupport_roof",
-      "first": 1055,
-      "count": 2
+      "first": 767,
+      "count": 3
     },
     {
       "name": "lifeSupport_interior",
-      "first": 1057,
+      "first": 770,
       "count": 2
     },
     {
       "name": "airlock_floor",
-      "first": 1059,
-      "count": 35
+      "first": 772,
+      "count": 19
     },
     {
       "name": "airlock_walls",
-      "first": 1094,
+      "first": 791,
       "count": 2
     },
     {
       "name": "airlock_roof",
-      "first": 1096,
-      "count": 2
+      "first": 793,
+      "count": 3
     },
     {
       "name": "airlock_interior",
-      "first": 1098,
+      "first": 796,
       "count": 2
     },
     {
       "name": "corridor_floor",
-      "first": 1100,
-      "count": 86
+      "first": 798,
+      "count": 107
     },
     {
       "name": "corridor_shell",
-      "first": 1186,
+      "first": 905,
       "count": 1
     },
     {
       "name": "decor",
-      "first": 1187,
-      "count": 151
+      "first": 906,
+      "count": 143
     },
     {
       "name": "landscape",
-      "first": 1338,
+      "first": 1049,
       "count": 444
+    },
+    {
+      "name": "landmarks",
+      "first": 1493,
+      "count": 147
+    },
+    {
+      "name": "station_arches",
+      "first": 1640,
+      "count": 5
+    },
+    {
+      "name": "station_knobs",
+      "first": 1645,
+      "count": 6
+    },
+    {
+      "name": "station_ring_control",
+      "first": 1651,
+      "count": 1
+    },
+    {
+      "name": "station_ring_observatory",
+      "first": 1652,
+      "count": 1
+    },
+    {
+      "name": "station_ring_shield",
+      "first": 1653,
+      "count": 1
+    },
+    {
+      "name": "station_ring_greenhouse",
+      "first": 1654,
+      "count": 1
+    },
+    {
+      "name": "station_ring_lifeSupport",
+      "first": 1655,
+      "count": 1
+    },
+    {
+      "name": "station_ring_solar",
+      "first": 1656,
+      "count": 1
     }
   ],
-  "meshCount": 1818,
-  "worldMeshCount": 1782,
+  "meshCount": 1693,
+  "worldMeshCount": 1657,
   "characterMeshCount": 36,
   "outputHashes": [
     {
@@ -987,36 +1048,56 @@
       "sha256": "b88cd110646852985cac738387541b252f0abc417ad580000a738e0a9cab15cd"
     },
     {
+      "file": "celestial.json",
+      "sha256": "a111c2ddf517075fd14e93d1d72aa80c871614555c6b592434f4a704c37164f4"
+    },
+    {
       "file": "character-parity.json",
-      "sha256": "69e7b663c860405a1c338cdc1420d909e156cfdba6866ebf3d9f302d65752669"
+      "sha256": "b58ef9899bf926afd6af5ed729be27942199e6e7f30cfba8afbb907f6249d93c"
     },
     {
       "file": "characters.json",
       "sha256": "e83cf66761d0164b4b003eafb1a29df6fb9a421935a76cba6bfd5e16718e11ee"
     },
     {
+      "file": "cleaner.json",
+      "sha256": "fa518b65e215159257822039ea72803626bfa877c3b415248b0d95fea675348d"
+    },
+    {
       "file": "consequence-parity.json",
       "sha256": "ce26abc3476431620e4d458ff18ced66b2298f24c304768112fb7dd68de44c2a"
     },
     {
+      "file": "crew.json",
+      "sha256": "25fa6d865219a2117974a30bc73902791c8a6262ad7b754f7d3ac12026b91e53"
+    },
+    {
       "file": "en.json",
-      "sha256": "9e2a5978c184a344cf56a1a49cb0ee5abe5b9110e6aecda3e7669fb1f1f1849e"
+      "sha256": "152221b898e22a0983e694e2959aff2553ecc25e6f02c50d1cd8185649b2792f"
     },
     {
       "file": "layout.json",
-      "sha256": "7189b2580f78eacf6c3accdf238c452f3899d65133339429bd9d819c266cb01d"
+      "sha256": "43bb62ef7a4afd2d168564b66838039804d881513508dec6a00be3b49c6a68e9"
+    },
+    {
+      "file": "mesh-quality.json",
+      "sha256": "ac3beca16e15565698beb583b9f62c40089c3c682ea0fc078c98573e8a912734"
     },
     {
       "file": "parity.json",
-      "sha256": "c85cb88f5eb20d89aa975d303bdb12c0c77593fc39423a3181bae0fe952b63f2"
+      "sha256": "113f2b09438b91236b5c8c5a41086d36a427257a6f9a557a2ba49814a1de5ce3"
     },
     {
       "file": "pt-BR.json",
-      "sha256": "d70f55b9c62cb81e56a08d0fec137c05c656cd15fc7cc5d9c57267046ab19d93"
+      "sha256": "573b91e776418fe64fb454989d903ea86314ea1c9fd7b07e4023c4a2a36c81ab"
+    },
+    {
+      "file": "stars.json",
+      "sha256": "02462ae242df9456e263f14601051afe7af69597752eba89efd1370677eb4be6"
     },
     {
       "file": "telescope.json",
-      "sha256": "78c0ed6df82214ddc98190909542f9adfc8ae31c9deb932f2a456833b6583202"
+      "sha256": "f48dd9f51d9984005b9f93554613d4ed2688354681ba6aa442e79ee24f4e2696"
     },
     {
       "file": "texture-33f6dec3a38141c7.png",
@@ -1032,7 +1113,7 @@
     },
     {
       "file": "world.json",
-      "sha256": "0a0ac7e2c6a3d9071d2b5c18ea1e065271176976eca8bac623d1baeda327be4f"
+      "sha256": "e445b36c1e344a34b803173218ee35a2653313c4596a24e0df77bd14f62dfe01"
     }
   ]
 }

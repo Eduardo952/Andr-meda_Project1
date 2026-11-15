@@ -7,75 +7,92 @@ using static Ares.UI.UiElements;
 
 namespace Ares.UI
 {
-    /// <summary>Five-day photo diary, using the shared station design and real APOD assets.</summary>
+    /// <summary>Reference-inspired eyepiece. Presentation stays separate from the APOD service and journal.</summary>
     internal sealed class ObservatoryView
     {
         readonly Campaign campaign;
         readonly ApodService service;
-        readonly VisualElement body, footer;
-        readonly Action close;
+        readonly VisualElement root, details;
+        readonly ObservatoryLens lens;
+        readonly Label title, credit;
         int selected;
-        bool information;
 
         public ObservatoryView(VisualElement root, Campaign campaign, ApodService service, Action close)
         {
-            this.campaign = campaign; this.service = service; this.close = close;
-            selected = Math.Min(campaign.SolIndex, 4);
-            root.name = "observatory-view";
-            var panel = new ChallengePanel(root, new Localization("pt-BR"), "Diário de descobertas", "observatory",
-                "APOD", false, () => { information = !information; Render(); }, close);
-            body = panel.Body; footer = panel.Footer;
-            service.Changed += Render;
-            root.RegisterCallback<DetachFromPanelEvent>(_ => service.Changed -= Render);
-            Render(); service.Load(selected);
+            this.root = root; this.campaign = campaign; this.service = service;
+            selected = Math.Min(campaign.SolIndex, DiscoveryJournal.Days - 1);
+            root.name = "observatory-view"; root.AddToClassList("telescope-view");
+            root.parent.AddToClassList("telescope-backdrop");
+            var exit = Button(root, "×", close, "telescope-exit");
+            exit.name = "observatory-close"; exit.tooltip = "Voltar à missão (Esc)";
+            var content = Box(root, "telescope-content");
+            lens = new ObservatoryLens(content);
+            title = Text(content, "", "telescope-title"); title.name = "observatory-title";
+            credit = Text(content, "", "telescope-credit");
+            var controls = Box(content, "telescope-controls");
+            lens.BuildControls(controls);
+            Button(controls, "Observar", () => ShowDetails(true), "telescope-observe").name = "observatory-observe";
+            var sources = Box(content, "telescope-sources");
+            Button(sources, "Imagem real: APOD", () => OpenSource(service.Collection.entries[selected].sourceUrl));
+            Button(sources, "Biblioteca NASA", () => OpenSource("https://images.nasa.gov/"));
+            details = Box(root, "telescope-details"); details.name = "observatory-details";
+            ShowDetails(false);
+            root.RegisterCallback<GeometryChangedEvent>(_ => Resize());
+            service.Changed += Refresh;
+            root.RegisterCallback<DetachFromPanelEvent>(_ => service.Changed -= Refresh);
+            Refresh(); service.Load(selected);
+        }
+
+        void Resize()
+        {
+            // Keep the lens circular and reserve room for controls, including on short windows.
+            float diameter = Mathf.Max(100, Mathf.Min(root.contentRect.width - 40, root.contentRect.height - 228));
+            lens.Resize(diameter);
+            root.EnableInClassList("telescope-compact", root.contentRect.width < 600);
         }
 
         void Select(int day)
         {
             if (!campaign.Discoveries.CanView(day, campaign.SolIndex)) return;
-            selected = day; Render(); service.Load(day);
+            selected = day; lens.ResetZoom(); Refresh(); service.Load(day);
         }
 
-        void Render()
+        void Refresh()
         {
-            body.Clear(); footer.Clear();
-            var content = Box(body, "observatory-content");
-            Text(content, "Uma imagem sorteada a cada Sol, sem repetir. O que você consegue observar?", "heading");
-            var days = Box(content, "row observatory-days");
+            var entry = service.Collection.entries[selected];
+            var texture = service.Image(selected);
+            lens.SetImage(texture); title.text = entry.title;
+            string author = service.Record(selected)?.copyright;
+            credit.text = "Créditos: " + Ares.Data.ApodRecord.PlainText(string.IsNullOrWhiteSpace(author) ? entry.credit : author);
+            if (texture != null) campaign.Discoveries.Record(selected, campaign.SolIndex);
+            details.Clear();
+            Button(details, "Voltar à lente", () => ShowDetails(false)).name = "observatory-details-close";
+            var scroll = new ScrollView(); details.Add(scroll);
+            Text(scroll, entry.title, "telescope-details-title");
+            Text(scroll, entry.summary).name = "observatory-summary";
+            Text(scroll, entry.question, "telescope-question");
+            Text(scroll, "Uma imagem sorteada a cada Sol, sem repetir. Reveja suas descobertas:");
+            var days = Box(scroll, "telescope-days");
             for (int i = 0; i < DiscoveryJournal.Days; i++)
             {
                 int day = i;
-                bool unlocked = campaign.Discoveries.CanView(day, campaign.SolIndex);
-                var button = Button(days, "Sol " + (day + 1) + (campaign.Discoveries.Observed(day) ? " ✓" : ""), () => Select(day), day == selected ? "" : "ghost");
-                button.name = "observatory-day-" + day;
-                button.SetEnabled(unlocked);
-                button.tooltip = unlocked ? "Explorar esta descoberta" : "Disponível no Sol " + (day + 1);
+                var button = Button(days, "Sol " + (i + 1), () => Select(day));
+                button.name = "observatory-day-" + i;
+                button.EnableInClassList("selected", i == selected);
+                button.SetEnabled(campaign.Discoveries.CanView(i, campaign.SolIndex));
             }
-            var entry = service.Collection.entries[selected];
-            var texture = service.Image(selected);
-            var photo = new Image { image = texture, scaleMode = ScaleMode.ScaleToFit, name = "observatory-photo" };
-            photo.AddToClassList("observatory-photo"); content.Add(photo);
-            photo.tooltip = entry.title;
-            if (texture != null) campaign.Discoveries.Record(selected, campaign.SolIndex);
-            Text(content, entry.title, "heading").name = "observatory-title";
-            Text(content, entry.summary, "observatory-summary").name = "observatory-summary";
-            Text(content, entry.question, "mini-hint");
-            Text(content, "Sol " + (selected + 1) + " da missão · APOD publicado em " + entry.date, "small");
-            Text(content, "Créditos: " + entry.credit, "small");
-            var remote = service.Record(selected);
-            if (!string.IsNullOrWhiteSpace(remote?.copyright)) Text(content, "Crédito informado pela API: " + Ares.Data.ApodRecord.PlainText(remote.copyright), "small");
-            Text(content, service.Status(selected), "small").name = "observatory-status";
-            if (information)
-            {
-                Text(content, "Este telescópio abre imagens reais publicadas no APOD. A coleção usa datas históricas: o dia da missão não é a data de publicação. Os resumos em português foram adaptados das explicações oficiais. As cores podem representar luz que nossos olhos não enxergam.", "mini-hint");
-                var record = service.Record(selected);
-                if (record != null) Text(content, "Título original: " + Ares.Data.ApodRecord.PlainText(record.title), "small");
-                Text(content, entry.sourceUrl, "small");
-                if (!string.IsNullOrWhiteSpace(entry.licenseUrl)) Text(content, "Licença da imagem: " + entry.licenseUrl + " · imagem sem alterações", "small");
-            }
-            var retry = Button(footer, "Consultar NASA", () => service.Load(selected, true), "ghost");
+            Text(scroll, "Estas são fotos reais do arquivo APOD, não uma transmissão ao vivo de Marte. As cores podem mostrar luz que nossos olhos não enxergam.");
+            Text(scroll, service.Status(selected), "telescope-detail-credit").name = "observatory-status";
+            if (!string.IsNullOrWhiteSpace(entry.licenseUrl))
+                Button(scroll, "Licença da imagem", () => OpenSource(entry.licenseUrl));
+            var retry = Button(scroll, "Consultar NASA", () => service.Load(selected, true));
             retry.name = "observatory-retry"; retry.SetEnabled(!service.Loading(selected));
-            Button(footer, "Voltar à missão", close).name = "observatory-close";
+        }
+
+        void ShowDetails(bool visible) => details.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+        static void OpenSource(string url)
+        {
+            if (Uri.TryCreate(url, UriKind.Absolute, out var uri) && uri.Scheme == "https") Application.OpenURL(uri.AbsoluteUri);
         }
     }
 }
