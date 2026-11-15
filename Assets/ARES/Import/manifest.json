@@ -1,0 +1,154 @@
+{
+  "generator": "Tools/AresImport/export.mjs",
+  "three": "187",
+  "groups": [
+    {
+      "name": "control_floor",
+      "first": 0,
+      "count": 43
+    },
+    {
+      "name": "control_walls",
+      "first": 43,
+      "count": 2
+    },
+    {
+      "name": "control_roof",
+      "first": 45,
+      "count": 3
+    },
+    {
+      "name": "control_interior",
+      "first": 48,
+      "count": 4
+    },
+    {
+      "name": "observatory_floor",
+      "first": 52,
+      "count": 44
+    },
+    {
+      "name": "observatory_walls",
+      "first": 96,
+      "count": 2
+    },
+    {
+      "name": "observatory_roof",
+      "first": 98,
+      "count": 3
+    },
+    {
+      "name": "observatory_interior",
+      "first": 101,
+      "count": 5
+    },
+    {
+      "name": "shield_floor",
+      "first": 106,
+      "count": 45
+    },
+    {
+      "name": "shield_walls",
+      "first": 151,
+      "count": 2
+    },
+    {
+      "name": "shield_roof",
+      "first": 153,
+      "count": 2
+    },
+    {
+      "name": "shield_interior",
+      "first": 155,
+      "count": 3
+    },
+    {
+      "name": "greenhouse_floor",
+      "first": 158,
+      "count": 5
+    },
+    {
+      "name": "greenhouse_walls",
+      "first": 163,
+      "count": 3
+    },
+    {
+      "name": "greenhouse_roof",
+      "first": 166,
+      "count": 2
+    },
+    {
+      "name": "greenhouse_interior",
+      "first": 168,
+      "count": 842
+    },
+    {
+      "name": "lifeSupport_floor",
+      "first": 1010,
+      "count": 43
+    },
+    {
+      "name": "lifeSupport_walls",
+      "first": 1053,
+      "count": 2
+    },
+    {
+      "name": "lifeSupport_roof",
+      "first": 1055,
+      "count": 2
+    },
+    {
+      "name": "lifeSupport_interior",
+      "first": 1057,
+      "count": 2
+    },
+    {
+      "name": "airlock_floor",
+      "first": 1059,
+      "count": 35
+    },
+    {
+      "name": "airlock_walls",
+      "first": 1094,
+      "count": 2
+    },
+    {
+      "name": "airlock_roof",
+      "first": 1096,
+      "count": 2
+    },
+    {
+      "name": "airlock_interior",
+      "first": 1098,
+      "count": 2
+    },
+    {
+      "name": "corridor_floor",
+      "first": 1100,
+      "count": 86
+    },
+    {
+      "name": "corridor_shell",
+      "first": 1186,
+      "count": 1
+    },
+    {
+      "name": "decor",
+      "first": 1187,
+      "count": 107
+    },
+    {
+      "name": "landscape",
+      "first": 1294,
+      "count": 133
+    },
+    {
+      "name": "ground",
+      "first": 1427,
+      "count": 1
+    }
+  ],
+  "meshCount": 1464,
+  "worldMeshCount": 1428,
+  "characterMeshCount": 36
+}

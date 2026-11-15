@@ -1,0 +1,521 @@
+{
+  "title": {
+    "name": "Base ARES",
+    "tagline": "Treinamento de astronauta júnior na Base ARES",
+    "play": "Jogar",
+    "language": "Idioma",
+    "howTo": "Como jogar"
+  },
+  "howTo": {
+    "title": "Como jogar",
+    "move": "Ande com WASD ou as setas. No celular, arraste o joystick.",
+    "use": "Vá até uma estação brilhante e aperte USAR (E ou Espaço).",
+    "follow": "Siga a seta amarela até a próxima parada.",
+    "bubble": "A Bubble vai contar o que cada sala faz!",
+    "close": "Entendi!"
+  },
+  "hud": {
+    "integrity": "Integridade",
+    "oxygen": "Oxigênio",
+    "energy": "Energia",
+    "sol": "Sol {{n}} de {{total}}",
+    "stars": "Estrelas",
+    "viewData": "Ver dados",
+    "settings": "Configurações",
+    "use": "USAR",
+    "camera": "Câmera",
+    "recenterCamera": "Centralizar câmera",
+    "next": "Próximo: {{room}}",
+    "tourDone": "Tour completo!",
+    "report": "Relatório",
+    "energyPanel": "Energia",
+    "endSol": "Encerrar Sol",
+    "objective": "Objetivo",
+    "minimap": "Mapa da Base ARES",
+    "roofs": "Tetos: {{mode}}",
+    "performance": "Desempenho",
+    "fps": "FPS",
+    "polygons": "polígonos",
+    "polygonsDetail": "Triângulos renderizados por quadro, incluindo as passagens de renderização"
+  },
+  "settings": {
+    "title": "Configurações",
+    "sound": "Som",
+    "language": "Idioma",
+    "largeText": "Texto maior",
+    "reducedMotion": "Menos movimento",
+    "invertCamera": "Inverter câmera",
+    "cameraSensitivity": "Sensibilidade da câmera",
+    "on": "Ligado",
+    "off": "Desligado",
+    "close": "Fechar",
+    "home": "Tela inicial",
+    "quality": "Qualidade",
+    "low": "Baixa",
+    "high": "Alta",
+    "roofs": "Tetos",
+    "roofauto": "Automático",
+    "roofoff": "Desligados"
+  },
+  "lang": {
+    "en": "English",
+    "pt-BR": "Português (BR)"
+  },
+  "data": {
+    "title": "Dados da missão",
+    "solLength": "Duração de um Sol (dia em Marte)",
+    "solLengthValue": "24 h 39 min {{s}} s",
+    "solSeconds": "{{n}} segundos",
+    "localTime": "Hora local da Base ARES",
+    "barsNote": "Os valores iniciais e os danos de Integridade e Oxigênio são regras provisórias do jogo. A barra de Energia mostra quanto da necessidade de hoje o seu plano cobre.",
+    "close": "Fechar"
+  },
+  "rooms": {
+    "control": "Sala de Controle",
+    "observatory": "Observatório",
+    "shield": "Escudo Magnético",
+    "lifeSupport": "Suporte de Vida",
+    "greenhouse": "Estufa",
+    "solar": "Parque Solar",
+    "airlock": "Eclusa"
+  },
+  "bubble": {
+    "name": "Bubble",
+    "welcome": "Oi, eu sou a Bubble! Bem-vindo à Base ARES em Marte. Siga a seta amarela!",
+    "near": "Esta estação está brilhando. Aperte USAR!",
+    "room": {
+      "control": "A Sala de Controle é o coração da base. Daqui planejamos cada Sol.",
+      "weather": "A Estação Meteorológica observa o vento, a temperatura e a pressão em Marte.",
+      "lab": "No Laboratório estudamos rochas e poeira. Hora da ciência!",
+      "greenhouse": "As plantas crescem aqui. Olha, elas ficam maiores a cada Sol!",
+      "lifeSupport": "O Suporte de Vida mantém o ar fresquinho para a gente respirar.",
+      "comms": "As Comunicações mandam mensagens até a Terra. Oi, Terra!",
+      "shelter": "O abrigo do Escudo Magnético tem paredes grossas. Nos protegemos aqui nas tempestades solares.",
+      "observatory": "Do Observatório olhamos o Sol e o céu.",
+      "airlock": "A Eclusa é a porta para fora. Traje antes de sair!",
+      "shield": "O Escudo Magnético protege a base. Seu abrigo reforçado mantém a tripulação segura.",
+      "solar": "Os painéis solares abastecem o orçamento de energia do jogo."
+    },
+    "tourDone": "Você visitou todas as salas. Muito bem, astronauta júnior!",
+    "night": "Está escurecendo. Olhe para cima: consegue ver a Terra? É o pontinho azul!",
+    "report": "Novo Sol! Vamos ler o relatório espacial de hoje juntos.",
+    "plan": "Agora vá ao Painel de Energia na Sala de Controle e divida os 100 kWh.",
+    "start": "Sistemas ligados! Siga a seta amarela até as tarefas.",
+    "alarm": {
+      "sep": "Alerta! Partículas energéticas! Corra para o abrigo do Escudo Magnético!",
+      "cme": "Alerta! Uma CME pode atingir Marte! Vamos para o Abrigo.",
+      "flare": "Alerta! Uma erupção solar forte! Vamos ficar seguros no Abrigo."
+    },
+    "noImpact": "O Sol está ativo, mas esta tempestade não deve atingir Marte. Ufa!",
+    "safe": "Estamos seguros no Abrigo. Que corrida!",
+    "alarmOver": "O alerta acabou.",
+    "taskDone": "Incrível! Tarefa concluída!",
+    "taskTry": "Boa tentativa! A gente aprende sempre.",
+    "sumGood": "Ótimo planejamento! A base está feliz.",
+    "sumBad": "Ops, alguns sistemas precisavam de mais energia. Vamos planejar melhor no próximo Sol.",
+    "energyFirst": "Primeiro planeje a energia na Sala de Controle."
+  },
+  "sys": {
+    "shield": "Escudo Magnético",
+    "life": "Suporte de Vida / Calor",
+    "greenhouse": "Estufa"
+  },
+  "report": {
+    "title": "Relatório do Sol {{n}}",
+    "realData": "DADOS REAIS DA NASA",
+    "gameRule": "REGRA DO JOGO",
+    "sample": "AMOSTRA - substituir por dados reais",
+    "dateNote": "O Sol {{n}} usa dados capturados na data terrestre {{date}}. Essa ligação é uma escolha da história: um dia na Terra e um Sol em Marte não têm a mesma duração.",
+    "continue": "Planejar energia",
+    "close": "Fechar",
+    "noReading": "Sem leitura neste Sol",
+    "noCme": "Sem CME hoje",
+    "noSep": "Sem tempestade de partículas",
+    "noFlare": "Nenhuma erupção registrada",
+    "flare": "Erupção solar",
+    "flareClass": "Classe {{c}}",
+    "cme": "Ejeção de massa coronal (CME)",
+    "cmeSpeed": "{{v}} km/s",
+    "sep": "Partículas energéticas (SEP)",
+    "sepYes": "Tempestade de partículas detectada!",
+    "marsImpact": "Previsão para Marte",
+    "impactYes": "Deve chegar a Marte",
+    "impactGlancing": "Raspão em Marte",
+    "impactNo": "Não deve chegar a Marte",
+    "noSim": "Sem previsão hoje",
+    "weather": "Clima em Marte",
+    "weatherWhere": "Medido pela sonda InSight em Elysium Planitia, não na Base ARES.",
+    "temp": "Temperatura do ar",
+    "tempValue": "{{v}} °C",
+    "wind": "Vento",
+    "windValue": "{{v}} m/s",
+    "pressure": "Pressão",
+    "pressureValue": "{{v}} Pa",
+    "energyNeeded": "Energia necessária hoje",
+    "kwh": "{{n}} kWh",
+    "fallback": "Sem leitura de temperatura: usamos um valor padrão do jogo.",
+    "sunActive": "O Sol está ativo, mas esta tempestade não deve atingir Marte."
+  },
+  "info": {
+    "api": "API",
+    "endpoint": "Endpoint",
+    "field": "Campo de origem",
+    "captured": "Capturado (UTC)",
+    "snapshot": "Snapshot",
+    "yes": "true",
+    "sample": "Dado de amostra",
+    "show": "De onde vem este número?"
+  },
+  "energy": {
+    "title": "Painel de Energia",
+    "pool": "Energia de hoje: {{n}} kWh",
+    "free": "Energia livre",
+    "need": "Precisa de cerca de {{n}}",
+    "start": "Iniciar Sol",
+    "save": "Salvar",
+    "hint": "Use toda a energia. A energia livre precisa ser 0 para começar.",
+    "budgetNote": "100 kWh é um orçamento do jogo, não uma medição real.",
+    "close": "Fechar"
+  },
+  "tasks": {
+    "title": "Tarefas do Sol {{n}}",
+    "progress": "Progresso da missão",
+    "none": "Todas as tarefas feitas!",
+    "time": "{{s}} s",
+    "success": "Muito bem!",
+    "fail": "Boa tentativa!",
+    "continue": "Continuar",
+    "badgeReal": "DADO REAL: {{src}}",
+    "badgeRule": "REGRA DO JOGO",
+    "check": "Conferir",
+    "sampleNote": "Dado de amostra",
+    "T02": {
+      "name": "Classificar a Erupção",
+      "goal": "Toque nas erupções da mais fraca para a mais forte.",
+      "fact": "Cada letra é 10 vezes mais forte que a anterior. Erupções X podem passar de X10!",
+      "today": "Hoje"
+    },
+    "T03": {
+      "name": "Chegada da CME",
+      "goal": "Arraste até a velocidade da CME de hoje para ver quando ela chegaria a Marte.",
+      "dist": "Marte fica a cerca de 1,524 UA do Sol: uns 228.000.000 km.",
+      "time": "Tempo de viagem: {{h}} horas (cerca de {{d}} dias)",
+      "note": "Simplificação: velocidade constante.",
+      "speed": "Velocidade: {{v}} km/s",
+      "target": "CME de hoje: {{v}} km/s"
+    },
+    "T04": {
+      "name": "Conferir a Previsão",
+      "goal": "A CME de hoje vai chegar a Marte?",
+      "yes": "Sim",
+      "no": "Não",
+      "yours": "Sua estimativa: cerca de {{d}} dias",
+      "enlilYes": "Previsão WSA+Enlil: chega a Marte ({{t}}).",
+      "enlilGlancing": "Ela só passa de raspão em Marte.",
+      "enlilNo": "Previsão WSA+Enlil: sem impacto em Marte.",
+      "noSim": "Não há previsão WSA+Enlil nos dados de hoje."
+    },
+    "T05": {
+      "name": "Ir ao Abrigo",
+      "goal": "Chegue ao abrigo do Escudo Magnético antes do tempo acabar!"
+    },
+    "T06": {
+      "name": "Leitura do Controle da Missão",
+      "goal": "Qual mensagem fala do evento principal de hoje?",
+      "event": "Evento principal de hoje: {{e}}"
+    },
+    "T07": {
+      "name": "Termostato",
+      "goal": "Lá fora está {{t}} °C. Ajuste o aquecedor para ficarmos quentinhos a {{tin}} °C aqui dentro.",
+      "heater": "Aquecedor: {{n}} kWh",
+      "rule": "Calor necessário = {{base}} + {{k}} × ({{tin}} − fora), arredondado para 5"
+    },
+    "T08": {
+      "name": "Rosa dos Ventos",
+      "goal": "Toque na direção de onde o vento veio mais vezes."
+    },
+    "T10": {
+      "name": "Álbum de Fotos",
+      "goal": "Escolha a legenda certa para esta imagem.",
+      "credit": "Crédito: {{c}}",
+      "sampleArt": "Desenho provisório: aqui entrará uma foto real da NASA."
+    },
+    "T14": {
+      "name": "Cuidar da Estufa",
+      "goal": "Regue todas as plantinhas com sede!"
+    },
+    "T15": {
+      "name": "Reciclar Água e Ar",
+      "goal": "Mande cada item para a máquina certa.",
+      "water": "Reciclador de água",
+      "air": "Sistema de ar",
+      "wash": "Água de lavar",
+      "vapor": "Vapor da respiração",
+      "co2": "CO₂ que expiramos",
+      "fog": "Vapor na janela"
+    },
+    "T11": {
+      "name": "Pergunta APOD",
+      "goal": "O que significa APOD?",
+      "right": "Imagem Astronômica do Dia",
+      "wrong": "Consumo de Energia da Base"
+    }
+  },
+  "event": {
+    "FLR": "Erupção solar",
+    "CME": "CME",
+    "SEP": "Partículas energéticas"
+  },
+  "photo": {
+    "rover": "Um rover andando sobre rochas vermelhas de Marte",
+    "sunset": "Um pôr do sol azul em Marte",
+    "dunes": "Dunas de areia onduladas em Marte",
+    "dustDevil": "Um redemoinho de poeira cruzando Marte",
+    "olympus": "Monte Olimpo, o maior vulcão de Marte"
+  },
+  "compass": {
+    "N": "N",
+    "NNE": "NNE",
+    "NE": "NE",
+    "ENE": "ENE",
+    "E": "L",
+    "ESE": "LSE",
+    "SE": "SE",
+    "SSE": "SSE",
+    "S": "S",
+    "SSW": "SSO",
+    "SW": "SO",
+    "WSW": "OSO",
+    "W": "O",
+    "WNW": "ONO",
+    "NW": "NO",
+    "NNW": "NNO"
+  },
+  "alarm": {
+    "title": "Alerta de clima espacial!",
+    "goShelter": "Vá para o abrigo do Escudo Magnético!",
+    "adjust": "Você também pode ajustar a energia na Sala de Controle."
+  },
+  "summary": {
+    "title": "Resumo do Sol {{n}}",
+    "given": "Dado",
+    "needed": "Necessário",
+    "ideal": "Na medida",
+    "deficit": "Faltou",
+    "surplus": "Sobrou (desperdício)",
+    "integrity": "Integridade",
+    "oxygen": "Oxigênio",
+    "next": "Próximo Sol",
+    "finish": "Concluir missão",
+    "sparks": "O escudo estava fraco: faíscas atingiram as cúpulas!",
+    "tasks": "Tarefas feitas: {{n}}"
+  },
+  "gameover": {
+    "title": "Missão pausada",
+    "body": "A base precisa de ajuda. Vamos treinar de novo!",
+    "retry": "Tentar de novo",
+    "home": "Tela inicial"
+  },
+  "cert": {
+    "title": "Certificado de Astronauta Júnior",
+    "body": "{{name}} manteve a Base ARES segura por 5 Sóis!",
+    "nickname": "Seu apelido",
+    "placeholder": "Nome de astronauta",
+    "show": "Ver meu certificado",
+    "again": "Jogar de novo",
+    "stats": "Integridade {{i}}% · Oxigênio {{o}}%",
+    "local": "Seu apelido fica só neste aparelho."
+  },
+  "narrator": {
+    "start": {
+      "calm": "O Sol {{sol}} parece tranquilo.",
+      "attention": "Sol {{sol}}: o Sol está agitado hoje!",
+      "alert": "Sol {{sol}}: grande notícia de clima espacial!"
+    },
+    "flare": "Uma erupção {{c}} foi registrada.",
+    "cme": "Uma CME está viajando a {{v}} km/s.",
+    "cmeNoImpact": "Uma CME saiu do Sol a {{v}} km/s, mas não deve chegar a Marte.",
+    "weather": "Lá fora está cerca de {{t}} °C.",
+    "alert": "Vamos correr para o abrigo do Escudo Magnético!",
+    "hint": "Dica: hoje o sistema {{system}} precisa de mais energia. Olhe o relatório!",
+    "summary": {
+      "good": "Ótimo planejamento, todos os sistemas ficaram felizes!",
+      "bad": "Alguns sistemas precisavam de mais energia: {{systems}}.",
+      "reveal": "O plano ideal era Escudo {{s}}, Suporte de Vida {{l}} e Estufa {{g}} kWh."
+    },
+    "answers": {
+      "what_is_a_flare": "Uma erupção solar é um clarão superforte no Sol. Os cientistas separam por letras: cada letra é 10 vezes mais forte que a anterior!",
+      "why_shelter": "Algumas tempestades espaciais mandam partículas minúsculas e rápidas. O abrigo tem paredes grossas que protegem os astronautas até passar.",
+      "why_cold_energy": "Quanto mais frio lá fora, mais rápido a base perde calor. Então os aquecedores precisam de mais energia para nos manter quentinhos!"
+    }
+  },
+  "ask": {
+    "title": "Pergunte à Bubble",
+    "what_is_a_flare": "O que é uma erupção solar?",
+    "why_shelter": "Por que preciso de um abrigo?",
+    "why_cold_energy": "Por que o frio gasta mais energia?",
+    "hint": "Me dá uma dica"
+  },
+  "areas": {
+    "control": "Sala de Controle",
+    "observatory": "Observatório",
+    "shield": "Escudo Magnético",
+    "lifeSupport": "Suporte de Vida",
+    "greenhouse": "Estufa",
+    "solar": "Parque Solar",
+    "airlock": "Eclusa"
+  },
+  "observatory": {
+    "viewImage": "Visualizar imagem",
+    "lensClose": "Sair do telescópio",
+    "title": "Observatório",
+    "apod": "DADO REAL: APOD",
+    "library": "NASA Image and Video Library",
+    "unavailable": "Sem imagem autêntica para esta data de amostra.",
+    "archiveNote": "Uma foto real do acervo NASA. Ela não corresponde à data de amostra deste Sol.",
+    "date": "Data terrestre: {{date}}",
+    "video": "Abrir vídeo",
+    "explanation": "Uma janela para o Universo, registrada por cientistas e fotógrafos.",
+    "loading": "Consultando imagens…",
+    "credit": "Crédito: {{credit}}",
+    "snapshot": "Snapshot",
+    "sample": "Amostra",
+    "view": "Ver imagens"
+  },
+  "refine": {
+    "bubbleToasts": "Balões de fala da Bubble",
+    "expandMap": "Ampliar mapa",
+    "rotateMap": "Girar mapa",
+    "northUp": "Norte para cima",
+    "cameraUp": "Câmera para cima",
+    "clearGuide": "Seguir próxima tarefa",
+    "corridor": "Corredor de ligação",
+    "dismissWalk": "Dispensar primeira caminhada",
+    "readMore": "Ler mais",
+    "readLess": "Ler menos",
+    "imageFailed": "Esta imagem não carregou. Vamos tentar outra janela para o espaço!",
+    "nasaMore": "A APOD compartilha imagens de astronomia. A biblioteca da NASA reúne imagens de missões espaciais. As datas das imagens são terrestres, não do relógio de Sol do jogo.",
+    "librarySource": "Biblioteca de Imagens da NASA",
+    "walk": {
+      "control": "Encontre o Painel de Energia coral junto à parede.",
+      "observatory": "A porta violeta leva aos observadores do céu.",
+      "shield": "A porta azul leva ao nosso escudo protetor.",
+      "lifeSupport": "A porta verde-água leva ao ar fresco e ao calor.",
+      "greenhouse": "A porta verde leva às nossas plantinhas.",
+      "solar": "Passe pelo Suporte de Vida e pela Eclusa até o parque solar amarelo."
+    }
+  },
+  "garden": {
+    "learning": "As plantas produzem comida para a tripulação. Elas também ajudam a manter o ar fresco.",
+    "sourcePending": "Fonte pendente",
+    "basket": "Cesta · {{n}}",
+    "harvest": "Colher uma maçã madura",
+    "learn": "Sobre nossas plantas",
+    "cosmetic": "Só por diversão — as maçãs não mudam a energia nem as recompensas da missão.",
+    "thirsty": "Plantinha com sede",
+    "happy": "Plantinha feliz"
+  },
+  "mini": {
+    "loading": "Preparando sua estação…",
+    "timer": "Segundos",
+    "mistakes": "Erros",
+    "stars": "Estrelas",
+    "retryTitle": "Mais uma tentativa?",
+    "retryBody": "Nada foi perdido. Sua estação está pronta para tentar de novo.",
+    "retry": "Tentar de novo",
+    "learned": "O que você aprendeu:",
+    "practice": "Treino com snapshot — não é uma leitura deste Sol.",
+    "practiceLearned": "Este treino usou um snapshot identificado, não uma observação deste Sol.",
+    "rulesNote": "Os alvos, o tempo e as estrelas são regras provisórias do jogo.",
+    "place": "Colocar próxima carta",
+    "placeCaption": "Colocar legenda",
+    "dial": "Bobina",
+    "pipe": "Cano",
+    "position": "Posição",
+    "dialValue": "Posição do controle {{n}}",
+    "rotateLeft": "Girar {{n}} para a esquerda",
+    "rotateRight": "Girar {{n}} para a direita",
+    "flow": "Liberar fluxo",
+    "oxygenTank": "Tanque de oxigênio",
+    "waterTank": "Tanque de água",
+    "wireStart": "Selecionar fio {{symbol}}",
+    "wireEnd": "Conectar fio {{symbol}}",
+    "speed": "Velocidade (km/s)",
+    "hours": "Tempo de viagem (horas)",
+    "constantSpeed": "Simplificação: velocidade constante na distância média Sol–Marte, não uma previsão real de chegada.",
+    "outside": "Temperatura externa (°C)",
+    "heating": "Aquecimento (kWh)",
+    "drop": "Gota de água",
+    "bed": "Regar canteiro {{n}}",
+    "lightTarget": "Alvo de luz do jogo",
+    "light": "Nível de luz",
+    "harvest": "Colha as maçãs maduras",
+    "apple": "Colher maçã {{n}}",
+    "patch": "Limpar área {{n}}",
+    "weatherInspired": "REGRA DO JOGO inspirada no clima de Marte",
+    "targetAngle": "Ângulo-alvo do jogo (graus)",
+    "angle": "Ângulo do painel",
+    "returnControl": "Volte ao Controle para selar o relatório.",
+    "sealTitle": "Selar o Relatório do Sol",
+    "sealGoal": "Ajuste os controles ao seu plano de energia confirmado.",
+    "confirmed": "Confirmado (kWh)",
+    "seal": "Selar relatório",
+    "taskNarration": "Você concluiu {{task}} com {{mistakes}} erros em {{seconds}} segundos.",
+    "cancel": "Cancelar",
+    "SortFlares": {
+      "name": "Ordenar Erupções",
+      "goal": "Ordene as classes e depois identifique a classe observada.",
+      "learned": "O snapshot registra uma erupção {{value}}.",
+      "reading": "Identifique a classe {{value}} do snapshot"
+    },
+    "PhotoDetective": {
+      "name": "Detetive de Fotos",
+      "goal": "Combine a legenda da fonte com a imagem.",
+      "learned": "A NASA identifica esta imagem do acervo como “{{value}}”.",
+      "decoyLab": "Um diagrama de fios do jogo",
+      "decoyMap": "Uma planta da Base ARES"
+    },
+    "AlignCoils": {
+      "name": "Alinhar Bobinas",
+      "goal": "Gire cada ponteiro até sua marca triangular.",
+      "learned": "Neste jogo, os ponteiros das bobinas correspondem aos alvos marcados."
+    },
+    "WireShield": {
+      "name": "Conectar o Escudo",
+      "goal": "Ligue as pontas com a mesma cor e símbolo.",
+      "learned": "Neste jogo, símbolos iguais identificam os fios conectados."
+    },
+    "CmeCountdown": {
+      "name": "Contagem da CME",
+      "goal": "Ajuste a velocidade registrada e escolha o tempo de viagem.",
+      "learned": "O snapshot registra uma CME a {{value}} km/s.",
+      "reading": "Velocidade da CME no snapshot (km/s)",
+      "arrival": "Escolha o tempo arredondado de viagem a velocidade constante (horas)."
+    },
+    "PipeFlow": {
+      "name": "Fluxo nos Canos",
+      "goal": "Gire a entrada de cada cano até o triângulo e libere o fluxo.",
+      "learned": "As rotas do jogo chegam aos tanques marcados de oxigênio e água."
+    },
+    "ThermostatDial": {
+      "name": "Ajustar Termostato",
+      "goal": "Leia a temperatura e ajuste o aquecimento pedido pelo jogo.",
+      "learned": "O snapshot da InSight registra uma média de {{value}} °C."
+    },
+    "SmartFarmCare": {
+      "name": "Cuidado Inteligente da Horta",
+      "goal": "Regue os canteiros, ajuste a luz e colha as maçãs maduras.",
+      "learned": "Esta sequência do jogo usa alvos de água, luz e maçãs maduras."
+    },
+    "CleanPanels": {
+      "name": "Limpar Painéis",
+      "goal": "Passe o dedo ou toque em cada área empoeirada.",
+      "learned": "Você removeu os alvos de poeira do jogo dos painéis."
+    },
+    "TiltSun": {
+      "name": "Inclinar para o Sol",
+      "goal": "Gire o painel até o ângulo destacado do jogo.",
+      "learned": "O ângulo destacado vem do Sol simulado do jogo."
+    }
+  }
+}

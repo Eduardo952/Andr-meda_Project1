@@ -1,0 +1,1 @@
+export { EnergyPanel as default } from "@/ui/EnergyPanel";

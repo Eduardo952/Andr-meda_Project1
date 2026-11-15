@@ -1,0 +1,26 @@
+# Base ARES
+- [x] Approve the five-region layout and implementation plan.
+- [x] Import inspected game source while retaining target framework versions.
+- [x] Measure baseline scene draw calls and triangles in Low/High.
+- [x] Replace extra rooms with the central hub, four region wings and Solar Park.
+- [x] Implement sealed walkable tunnels, interiors, doors, collisions and cutaway roofs.
+- [x] Relocate tasks, update minimap, region labels and guidance.
+- [x] Add Observatory APOD/Image Library display with server requests and snapshot fallback.
+- [x] Preserve narrator, energy rules, data layer, languages and camera controls.
+- [x] Verify gameplay, desktop/mobile rendering and before/after performance.
+- [ ] Verify live NASA/n8n services — blocked by sample campaign dates, absent authentic picture snapshots and missing NASA/n8n credentials.
+- [x] Approve the visual refinement plan with before/after comparisons and resolve open questions.
+- [x] Apply shared theme and redesign the command deck without changing gameplay formulas or data.
+- [x] Refine minimap, world labels, Observatory cards, and the single Bubble interface.
+- [x] Refine the astronaut and add optional first-walk guidance without changing collision or campaign rules.
+- [x] Verify desktop/mobile flows and record comparable Low/High draw calls and triangles before/after.
+- [x] Approve the greenhouse redesign plan.
+- [x] Build the larger vaulted greenhouse, animated growing systems and cosmetic apple harvesting without changing campaign rules.
+- [x] Verify greenhouse interactions, energy-driven visual states, cutaway roofs, phone layout and before/after rendering counts.
+- [x] Approve the per-sector tactile mini-game plan and provisional scoring rules.
+- [x] Implement deterministic Sol assignments, accessible lazy-loaded mini-games, checklist and report sealing.
+- [x] Extend narrator task facts, validation, localized learning lines and request samples.
+- [x] Test assignment, scoring, language-key parity, numeric provenance and a complete desktop Sol flow.
+- [x] Verify phone touch input and success overlay.
+- [ ] Complete every variant and a full Sol on a physical phone — device unavailable.
+- [x] Apply and verify uploaded telescope, Bubble dismissal and task-panel updates.

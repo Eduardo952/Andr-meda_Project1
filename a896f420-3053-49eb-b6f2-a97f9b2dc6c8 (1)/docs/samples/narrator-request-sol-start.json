@@ -1,0 +1,47 @@
+{
+  "_note": "Illustrative values, not real data.",
+  "lang": "en",
+  "sol": 4,
+  "facts": {
+    "flare": {
+      "class": "X",
+      "magnitude": 2.3,
+      "source": "DONKI/FLR"
+    },
+    "cme": {
+      "speed_kms": 1600,
+      "source": "DONKI/CMEAnalysis"
+    },
+    "mars_impact": {
+      "level": "direct",
+      "source": "DONKI/WSAEnlilSimulations"
+    },
+    "weather": {
+      "temp_avg_c": -66.5,
+      "source": "InSight/AT"
+    },
+    "severity": "alert"
+  },
+  "demand_kwh": {
+    "shield": 75,
+    "life": 25,
+    "greenhouse": 20
+  },
+  "player_kwh": {
+    "shield": 60,
+    "life": 20,
+    "greenhouse": 20
+  },
+  "result": null,
+  "formula_version": "1.0",
+  "phase": "alert",
+  "question_id": null,
+  "assigned_tasks": [
+    "SortFlares",
+    "WireShield",
+    "PipeFlow",
+    "SmartFarmCare",
+    "TiltSun"
+  ],
+  "task_results": []
+}

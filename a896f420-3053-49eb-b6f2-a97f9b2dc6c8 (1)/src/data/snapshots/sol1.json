@@ -1,0 +1,81 @@
+{
+  "_notice": "SAMPLE - replace with real data",
+  "sample": true,
+  "snapshot": true,
+  "sol": 1,
+  "earth_date": "SAMPLE-DATE-1",
+  "captured_at": "2026-11-14T00:00:00Z",
+  "donki": {
+    "FLR": [
+      {
+        "flrID": "SAMPLE-FLR-1",
+        "classType": "C2.1",
+        "peakTime": "SAMPLE"
+      }
+    ],
+    "CMEAnalysis": [],
+    "SEP": [],
+    "WSAEnlilSimulations": [],
+    "notifications": [
+      {
+        "messageType": "FLR",
+        "messageID": "SAMPLE-MSG-1-0",
+        "messageBody": "A C-class flare was observed (SAMPLE text)."
+      }
+    ]
+  },
+  "insight": {
+    "sol_key": "SAMPLE",
+    "recalculable": true,
+    "AT": {
+      "av": -61.2,
+      "mn": -95.1,
+      "mx": -17.4,
+      "ct": 177000
+    },
+    "HWS": {
+      "av": 4.9,
+      "mn": 0.2,
+      "mx": 17.1,
+      "ct": 88000
+    },
+    "PRE": {
+      "av": 722.0,
+      "mn": 702.0,
+      "mx": 741.0,
+      "ct": 177000
+    },
+    "WD": {
+      "10": {
+        "compass_point": "SW",
+        "compass_degrees": 225.0,
+        "ct": 4000
+      },
+      "12": {
+        "compass_point": "W",
+        "compass_degrees": 270.0,
+        "ct": 18000
+      },
+      "13": {
+        "compass_point": "WNW",
+        "compass_degrees": 292.5,
+        "ct": 30000
+      },
+      "14": {
+        "compass_point": "NW",
+        "compass_degrees": 315.0,
+        "ct": 9000
+      },
+      "most_common": {
+        "compass_point": "WNW",
+        "ct": 30000
+      }
+    }
+  },
+  "image_library": {
+    "nasa_id": "SAMPLE-IMG-1",
+    "illustration": "rover",
+    "credit": "SAMPLE - real NASA Image and Video Library credit goes here"
+  },
+  "apod": null
+}

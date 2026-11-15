@@ -1,0 +1,6 @@
+{
+  "name": "Ares.Runtime",
+  "rootNamespace": "Ares",
+  "references": ["Unity.InputSystem"],
+  "autoReferenced": true
+}

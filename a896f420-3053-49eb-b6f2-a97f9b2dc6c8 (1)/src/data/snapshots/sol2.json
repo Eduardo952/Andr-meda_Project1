@@ -1,0 +1,100 @@
+{
+  "_notice": "SAMPLE - replace with real data",
+  "sample": true,
+  "snapshot": true,
+  "sol": 2,
+  "earth_date": "SAMPLE-DATE-2",
+  "captured_at": "2026-11-14T00:00:00Z",
+  "donki": {
+    "FLR": [
+      {
+        "flrID": "SAMPLE-FLR-2",
+        "classType": "M5.4",
+        "peakTime": "SAMPLE"
+      }
+    ],
+    "CMEAnalysis": [
+      {
+        "associatedCMEID": "SAMPLE-CME-2",
+        "speed": 900,
+        "halfAngle": 30,
+        "isMostAccurate": true,
+        "time21_5": "SAMPLE"
+      }
+    ],
+    "SEP": [],
+    "WSAEnlilSimulations": [
+      {
+        "simulationID": "SAMPLE-ENLIL-2",
+        "impactList": [
+          {
+            "location": "Mars",
+            "arrivalTime": "SAMPLE +3 days",
+            "isGlancingBlow": true
+          }
+        ]
+      }
+    ],
+    "notifications": [
+      {
+        "messageType": "FLR",
+        "messageID": "SAMPLE-MSG-2-0",
+        "messageBody": "An M-class flare was observed (SAMPLE text)."
+      },
+      {
+        "messageType": "CME",
+        "messageID": "SAMPLE-MSG-2-1",
+        "messageBody": "A CME was detected leaving the Sun (SAMPLE text)."
+      }
+    ]
+  },
+  "insight": {
+    "sol_key": "SAMPLE",
+    "recalculable": true,
+    "AT": {
+      "av": -63.8,
+      "mn": -97.0,
+      "mx": -19.0,
+      "ct": 176000
+    },
+    "HWS": {
+      "av": 6.1,
+      "mn": 0.4,
+      "mx": 20.3,
+      "ct": 87000
+    },
+    "PRE": {
+      "av": 725.0,
+      "mn": 704.0,
+      "mx": 744.0,
+      "ct": 176000
+    },
+    "WD": {
+      "11": {
+        "compass_point": "WSW",
+        "compass_degrees": 247.5,
+        "ct": 12000
+      },
+      "12": {
+        "compass_point": "W",
+        "compass_degrees": 270.0,
+        "ct": 26000
+      },
+      "13": {
+        "compass_point": "WNW",
+        "compass_degrees": 292.5,
+        "ct": 20000
+      },
+      "most_common": {
+        "compass_point": "W",
+        "ct": 26000
+      }
+    }
+  },
+  "image_library": {
+    "nasa_id": "SAMPLE-IMG-2",
+    "illustration": "sunset",
+    "credit": "SAMPLE - real NASA Image and Video Library credit goes here"
+  },
+  "apod": null
+}

@@ -1,0 +1,82 @@
+{
+  "source": "code-archive",
+  "capabilities": [
+    {
+      "capability": "Game code, original procedural art, camera and i18n",
+      "source": "uploaded archive",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "43 tests passed; desktop/mobile scene, energy UI, bilingual roof/camera controls and connected movement verified."
+    },
+    {
+      "capability": "Gameplay and local preferences",
+      "source": "src/engine, src/game/store.ts",
+      "outcome": "preserve",
+      "status": "verified",
+      "next_action": "43 tests passed; desktop/mobile scene, energy UI, bilingual roof/camera controls and connected movement verified."
+    },
+    {
+      "capability": "Database schema and application records",
+      "source": "no database call sites or schema detected",
+      "outcome": "not_applicable",
+      "status": "inspected",
+      "next_action": "No database migration indicated; local scientific sample snapshots are bundled."
+    },
+    {
+      "capability": "Authentication identities and authorization",
+      "source": "no authentication or user ownership detected",
+      "outcome": "not_applicable",
+      "status": "inspected",
+      "next_action": "No account migration indicated."
+    },
+    {
+      "capability": "Uploaded storage bytes",
+      "source": "archive uses procedural visuals",
+      "outcome": "not_applicable",
+      "status": "inspected",
+      "next_action": "Keep original code-built art; reference image was not attached."
+    },
+    {
+      "capability": "n8n narrator provider and secrets",
+      "source": "src/lib/narrator.functions.ts",
+      "outcome": "preserve",
+      "status": "implemented_verification_pending",
+      "next_action": "Original proxy and local templates preserved; supply existing n8n webhook URL and matching header secret securely to verify live narration."
+    },
+    {
+      "capability": "NASA APOD and Image Library",
+      "source": "new brief; snapshots currently contain sample dates and sample image metadata, no apod field",
+      "outcome": "implement",
+      "status": "implemented_verification_pending",
+      "next_action": "Server date cache, fallbacks, wall and dialog implemented; authentic dates, APOD/image snapshots and NASA key needed for live verification. Sample fallback checked through UI."
+    },
+    {
+      "capability": "Public endpoints, callbacks, webhooks and schedules",
+      "source": "existing typed narrator function; no external inbound endpoints detected",
+      "outcome": "preserve",
+      "status": "inspected",
+      "next_action": "Keep internal narrator contract; verify there are no inbound cutover URLs during final import inspection."
+    },
+    {
+      "capability": "Original Context Skill v3.0 and composition reference",
+      "source": "brief mentions attachments not found in supplied files",
+      "outcome": "request",
+      "status": "pending",
+      "next_action": "Use supplied code as rule baseline; request missing document/image only for exact comparison."
+    },
+    {
+      "capability": "Cutover and end-to-end verification",
+      "source": "unpublished target project",
+      "outcome": "verify",
+      "status": "partially_verified",
+      "next_action": "Preview checks passed; publish after live-provider configuration. Low overview 147 calls exceeds aspirational 100-call target; triangles reduced substantially."
+    },
+    {
+      "capability": "Updated archive: Bubble dismissal, themed tasks and telescope image view",
+      "source": "mars-mission-trainer-updated.zip",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "Supplied updates applied; 74 tests and desktop/touch-emulated telescope, loaded archive image, Bubble dismissal and task-panel flows passed. Physical phone checks and existing APOD/n8n live configuration remain pending separately. P4\u2013P9 are not part of supplied changes."
+    }
+  ]
+}

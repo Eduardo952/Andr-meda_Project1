@@ -1,0 +1,475 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f44482de732e72458838adc60c8b881, type: 3}
+  m_Name: GameDefinition
+  m_EditorClassIdentifier: Ares.Runtime:Ares.Data:GameDefinition
+  layout:
+    rooms:
+    - id: control
+      shape: hub
+      color: '#ef7f69'
+      x: 0
+      z: 0
+      width: 28
+      depth: 28
+      height: 6.5
+      stationX: 8
+      stationZ: -8
+      ports:
+      - x: 0
+        z: -14
+      - x: 14
+        z: 0
+      - x: 0
+        z: 14
+      - x: -14
+        z: 0
+    - id: observatory
+      shape: barrel
+      color: '#a287da'
+      x: 0
+      z: -42
+      width: 24
+      depth: 18
+      height: 6
+      stationX: 0
+      stationZ: -46
+      ports:
+      - x: 0
+        z: -33
+    - id: shield
+      shape: barrel
+      color: '#62a9e5'
+      x: -44
+      z: 0
+      width: 26
+      depth: 18
+      height: 6
+      stationX: -48
+      stationZ: 0
+      ports:
+      - x: -31
+        z: 0
+    - id: greenhouse
+      shape: glass
+      color: '#83bf64'
+      x: 52
+      z: 0
+      width: 40
+      depth: 32
+      height: 12
+      stationX: 48
+      stationZ: 0
+      ports:
+      - x: 32
+        z: 0
+    - id: lifeSupport
+      shape: barrel
+      color: '#3dbfb3'
+      x: 0
+      z: 42
+      width: 26
+      depth: 18
+      height: 6
+      stationX: 0
+      stationZ: 45
+      ports:
+      - x: 0
+        z: 33
+      - x: 0
+        z: 51
+    - id: airlock
+      shape: box
+      color: '#ff9a3c'
+      x: 0
+      z: 57
+      width: 6
+      depth: 10
+      height: 4
+      stationX: 0
+      stationZ: 57
+      ports:
+      - x: 0
+        z: 52
+      - x: 0
+        z: 62
+    - id: solar
+      shape: park
+      color: '#f4ca54'
+      x: 0
+      z: 82
+      width: 48
+      depth: 26
+      height: 0
+      stationX: 0
+      stationZ: 76
+      ports: []
+    paths:
+    - a:
+        x: 0
+        z: -13
+      b:
+        x: 0
+        z: -34
+      width: 5
+    - a:
+        x: -13
+        z: 0
+      b:
+        x: -32
+        z: 0
+      width: 5
+    - a:
+        x: 13
+        z: 0
+      b:
+        x: 33
+        z: 0
+      width: 5
+    - a:
+        x: 0
+        z: 13
+      b:
+        x: 0
+        z: 34
+      width: 5
+    - a:
+        x: 0
+        z: 50
+      b:
+        x: 0
+        z: 53
+      width: 5
+    - a:
+        x: 0
+        z: 61
+      b:
+        x: 0
+        z: 83
+      width: 6
+    - a:
+        x: -23
+        z: 82
+      b:
+        x: 23
+        z: 82
+      width: 25
+    - a:
+        x: 0
+        z: -14
+      b:
+        x: 0
+        z: 0
+      width: 5
+    - a:
+        x: 14
+        z: 0
+      b:
+        x: 0
+        z: 0
+      width: 5
+    - a:
+        x: 0
+        z: 14
+      b:
+        x: 0
+        z: 0
+      width: 5
+    - a:
+        x: -14
+        z: 0
+      b:
+        x: 0
+        z: 0
+      width: 5
+    - a:
+        x: 0
+        z: 0
+      b:
+        x: 8
+        z: -8
+      width: 5
+    - a:
+        x: 0
+        z: -33
+      b:
+        x: 0
+        z: -42
+      width: 5
+    - a:
+        x: 0
+        z: -42
+      b:
+        x: 0
+        z: -46
+      width: 5
+    - a:
+        x: -31
+        z: 0
+      b:
+        x: -44
+        z: 0
+      width: 5
+    - a:
+        x: -44
+        z: 0
+      b:
+        x: -48
+        z: 0
+      width: 5
+    - a:
+        x: 32
+        z: 0
+      b:
+        x: 52
+        z: 0
+      width: 5
+    - a:
+        x: 52
+        z: 0
+      b:
+        x: 48
+        z: 0
+      width: 5
+    - a:
+        x: 0
+        z: 33
+      b:
+        x: 0
+        z: 42
+      width: 5
+    - a:
+        x: 0
+        z: 51
+      b:
+        x: 0
+        z: 42
+      width: 5
+    - a:
+        x: 0
+        z: 42
+      b:
+        x: 0
+        z: 45
+      width: 5
+    - a:
+        x: 0
+        z: 52
+      b:
+        x: 0
+        z: 57
+      width: 5
+    - a:
+        x: 0
+        z: 62
+      b:
+        x: 0
+        z: 57
+      width: 5
+    - a:
+        x: 0
+        z: 57
+      b:
+        x: 0
+        z: 57
+      width: 5
+    - a:
+        x: 0
+        z: 82
+      b:
+        x: 0
+        z: 76
+      width: 5
+    corridors:
+    - a:
+        x: 0
+        z: -13
+      b:
+        x: 0
+        z: -34
+      width: 5
+    - a:
+        x: -13
+        z: 0
+      b:
+        x: -32
+        z: 0
+      width: 5
+    - a:
+        x: 13
+        z: 0
+      b:
+        x: 33
+        z: 0
+      width: 5
+    - a:
+        x: 0
+        z: 13
+      b:
+        x: 0
+        z: 34
+      width: 5
+    - a:
+        x: 0
+        z: 50
+      b:
+        x: 0
+        z: 53
+      width: 5
+  campaign:
+    sols:
+    - sol: 1
+      date: SAMPLE-DATE-1
+      capturedAt: 2026-11-14T00:00:00Z
+      alarm: 
+      raw: '{"_notice":"SAMPLE - replace with real data","sample":true,"snapshot":true,"sol":1,"earth_date":"SAMPLE-DATE-1","captured_at":"2026-11-14T00:00:00Z","donki":{"FLR":[{"flrID":"SAMPLE-FLR-1","classType":"C2.1","peakTime":"SAMPLE"}],"CMEAnalysis":[],"SEP":[],"WSAEnlilSimulations":[],"notifications":[{"messageType":"FLR","messageID":"SAMPLE-MSG-1-0","messageBody":"A C-class flare was observed (SAMPLE text)."}]},"insight":{"sol_key":"SAMPLE","recalculable":true,"AT":{"av":-61.2,"mn":-95.1,"mx":-17.4,"ct":177000},"HWS":{"av":4.9,"mn":0.2,"mx":17.1,"ct":88000},"PRE":{"av":722,"mn":702,"mx":741,"ct":177000},"WD":{"10":{"compass_point":"SW","compass_degrees":225,"ct":4000},"12":{"compass_point":"W","compass_degrees":270,"ct":18000},"13":{"compass_point":"WNW","compass_degrees":292.5,"ct":30000},"14":{"compass_point":"NW","compass_degrees":315,"ct":9000},"most_common":{"compass_point":"WNW","ct":30000}}},"image_library":{"nasa_id":"SAMPLE-IMG-1","illustration":"rover","credit":"SAMPLE - real NASA Image and Video Library credit goes here"},"apod":null}'
+      sample: 1
+      thermalMissing: 0
+      demand:
+        shield: 15
+        life: 20
+        greenhouse: 20
+      tasks:
+      - id: SortFlares
+        room: observatory
+      - id: WireShield
+        room: shield
+      - id: PipeFlow
+        room: lifeSupport
+      - id: SmartFarmCare
+        room: greenhouse
+      - id: TiltSun
+        room: solar
+    - sol: 2
+      date: SAMPLE-DATE-2
+      capturedAt: 2026-11-14T00:00:00Z
+      alarm: cme
+      raw: '{"_notice":"SAMPLE - replace with real data","sample":true,"snapshot":true,"sol":2,"earth_date":"SAMPLE-DATE-2","captured_at":"2026-11-14T00:00:00Z","donki":{"FLR":[{"flrID":"SAMPLE-FLR-2","classType":"M5.4","peakTime":"SAMPLE"}],"CMEAnalysis":[{"associatedCMEID":"SAMPLE-CME-2","speed":900,"halfAngle":30,"isMostAccurate":true,"time21_5":"SAMPLE"}],"SEP":[],"WSAEnlilSimulations":[{"simulationID":"SAMPLE-ENLIL-2","impactList":[{"location":"Mars","arrivalTime":"SAMPLE +3 days","isGlancingBlow":true}]}],"notifications":[{"messageType":"FLR","messageID":"SAMPLE-MSG-2-0","messageBody":"An M-class flare was observed (SAMPLE text)."},{"messageType":"CME","messageID":"SAMPLE-MSG-2-1","messageBody":"A CME was detected leaving the Sun (SAMPLE text)."}]},"insight":{"sol_key":"SAMPLE","recalculable":true,"AT":{"av":-63.8,"mn":-97,"mx":-19,"ct":176000},"HWS":{"av":6.1,"mn":0.4,"mx":20.3,"ct":87000},"PRE":{"av":725,"mn":704,"mx":744,"ct":176000},"WD":{"11":{"compass_point":"WSW","compass_degrees":247.5,"ct":12000},"12":{"compass_point":"W","compass_degrees":270,"ct":26000},"13":{"compass_point":"WNW","compass_degrees":292.5,"ct":20000},"most_common":{"compass_point":"W","ct":26000}}},"image_library":{"nasa_id":"SAMPLE-IMG-2","illustration":"sunset","credit":"SAMPLE - real NASA Image and Video Library credit goes here"},"apod":null}'
+      sample: 1
+      thermalMissing: 0
+      demand:
+        shield: 55
+        life: 25
+        greenhouse: 20
+      tasks:
+      - id: PhotoDetective
+        room: observatory
+      - id: CmeCountdown
+        room: shield
+      - id: ThermostatDial
+        room: lifeSupport
+      - id: SmartFarmCare
+        room: greenhouse
+      - id: CleanPanels
+        room: solar
+    - sol: 3
+      date: SAMPLE-DATE-3
+      capturedAt: 2026-11-14T00:00:00Z
+      alarm: 
+      raw: '{"_notice":"SAMPLE - replace with real data","sample":true,"snapshot":true,"sol":3,"earth_date":"SAMPLE-DATE-3","captured_at":"2026-11-14T00:00:00Z","donki":{"FLR":[{"flrID":"SAMPLE-FLR-3","classType":"C8.0","peakTime":"SAMPLE"}],"CMEAnalysis":[{"associatedCMEID":"SAMPLE-CME-3","speed":null,"halfAngle":null,"isMostAccurate":true,"time21_5":"SAMPLE"}],"SEP":[],"WSAEnlilSimulations":[],"notifications":[{"messageType":"FLR","messageID":"SAMPLE-MSG-3-0","messageBody":"A C-class flare was observed (SAMPLE text)."}]},"insight":{"sol_key":"SAMPLE","recalculable":true,"AT":null,"HWS":null,"PRE":{"av":728,"mn":707,"mx":748,"ct":120000},"WD":null},"image_library":{"nasa_id":"SAMPLE-IMG-3","illustration":"dunes","credit":"SAMPLE - real NASA Image and Video Library credit goes here"},"apod":null}'
+      sample: 1
+      thermalMissing: 1
+      demand:
+        shield: 30
+        life: 25
+        greenhouse: 20
+      tasks:
+      - id: SortFlares
+        room: observatory
+      - id: AlignCoils
+        room: shield
+      - id: PipeFlow
+        room: lifeSupport
+      - id: SmartFarmCare
+        room: greenhouse
+      - id: TiltSun
+        room: solar
+    - sol: 4
+      date: SAMPLE-DATE-4
+      capturedAt: 2026-11-14T00:00:00Z
+      alarm: sep
+      raw: '{"_notice":"SAMPLE - replace with real data","sample":true,"snapshot":true,"sol":4,"earth_date":"SAMPLE-DATE-4","captured_at":"2026-11-14T00:00:00Z","donki":{"FLR":[{"flrID":"SAMPLE-FLR-4a","classType":"M1.2","peakTime":"SAMPLE"},{"flrID":"SAMPLE-FLR-4b","classType":"X2.3","peakTime":"SAMPLE"}],"CMEAnalysis":[{"associatedCMEID":"SAMPLE-CME-4","speed":1600,"halfAngle":45,"isMostAccurate":true,"time21_5":"SAMPLE"}],"SEP":[{"sepID":"SAMPLE-SEP-4","eventTime":"SAMPLE"}],"WSAEnlilSimulations":[{"simulationID":"SAMPLE-ENLIL-4","impactList":[{"location":"Mars","arrivalTime":"SAMPLE +2 days","isGlancingBlow":false}]}],"notifications":[{"messageType":"FLR","messageID":"SAMPLE-MSG-4-0","messageBody":"An X-class flare was observed (SAMPLE text)."},{"messageType":"CME","messageID":"SAMPLE-MSG-4-1","messageBody":"A fast CME was detected (SAMPLE text)."},{"messageType":"SEP","messageID":"SAMPLE-MSG-4-2","messageBody":"Energetic particles increased (SAMPLE text)."}]},"insight":{"sol_key":"SAMPLE","recalculable":true,"AT":{"av":-66.5,"mn":-99.3,"mx":-21.2,"ct":175000},"HWS":{"av":7.4,"mn":0.6,"mx":23,"ct":86000},"PRE":{"av":730,"mn":709,"mx":751,"ct":175000},"WD":{"8":{"compass_point":"S","compass_degrees":180,"ct":8000},"10":{"compass_point":"SW","compass_degrees":225,"ct":24000},"11":{"compass_point":"WSW","compass_degrees":247.5,"ct":19000},"most_common":{"compass_point":"SW","ct":24000}}},"image_library":{"nasa_id":"SAMPLE-IMG-4","illustration":"dustDevil","credit":"SAMPLE - real NASA Image and Video Library credit goes here"},"apod":null}'
+      sample: 1
+      thermalMissing: 0
+      demand:
+        shield: 75
+        life: 25
+        greenhouse: 20
+      tasks:
+      - id: PhotoDetective
+        room: observatory
+      - id: WireShield
+        room: shield
+      - id: ThermostatDial
+        room: lifeSupport
+      - id: SmartFarmCare
+        room: greenhouse
+      - id: CleanPanels
+        room: solar
+    - sol: 5
+      date: SAMPLE-DATE-5
+      capturedAt: 2026-11-14T00:00:00Z
+      alarm: 
+      raw: '{"_notice":"SAMPLE - replace with real data","sample":true,"snapshot":true,"sol":5,"earth_date":"SAMPLE-DATE-5","captured_at":"2026-11-14T00:00:00Z","donki":{"FLR":[{"flrID":"SAMPLE-FLR-5","classType":"B7.5","peakTime":"SAMPLE"}],"CMEAnalysis":[{"associatedCMEID":"SAMPLE-CME-5","speed":450,"halfAngle":20,"isMostAccurate":true,"time21_5":"SAMPLE"}],"SEP":[],"WSAEnlilSimulations":[{"simulationID":"SAMPLE-ENLIL-5","impactList":[]}],"notifications":[{"messageType":"CME","messageID":"SAMPLE-MSG-5-0","messageBody":"A slow CME was detected; no impact at Mars is expected (SAMPLE text)."}]},"insight":{"sol_key":"SAMPLE","recalculable":true,"AT":{"av":-58.9,"mn":-93,"mx":-14.8,"ct":178000},"HWS":{"av":3.8,"mn":0.1,"mx":14.2,"ct":89000},"PRE":{"av":733,"mn":712,"mx":754,"ct":178000},"WD":{"12":{"compass_point":"W","compass_degrees":270,"ct":15000},"13":{"compass_point":"WNW","compass_degrees":292.5,"ct":28000},"14":{"compass_point":"NW","compass_degrees":315,"ct":16000},"most_common":{"compass_point":"WNW","ct":28000}}},"image_library":{"nasa_id":"SAMPLE-IMG-5","illustration":"olympus","credit":"SAMPLE - real NASA Image and Video Library credit goes here"},"apod":null}'
+      sample: 1
+      thermalMissing: 0
+      demand:
+        shield: 30
+        life: 20
+        greenhouse: 20
+      tasks:
+      - id: SortFlares
+        room: observatory
+      - id: CmeCountdown
+        room: shield
+      - id: PipeFlow
+        room: lifeSupport
+      - id: SmartFarmCare
+        room: greenhouse
+      - id: TiltSun
+        room: solar
+  world:
+    walkSpeed: 5.2
+    walkAccel: 10
+    useRadius: 2.4
+    cameraDamping: 4
+    camera:
+      defaultYaw: 0
+      defaultPitchDegrees: 31
+      defaultDistance: 12.25
+      minPitchDegrees: 15
+      maxPitchDegrees: 70
+      minDistance: 7
+      maxDistance: 24
+      isometricYaw: 0.7853982
+      isometricPitchDegrees: 37
+      isometricDistance: 23
+      lookHeight: 1.2
+      rotationDamping: 10
+      zoomDamping: 8
+      radiansPerPixel: 0.005
+      wheelIntensity: 0.0015
+      minSensitivity: 0.25
+      maxSensitivity: 2
+      defaultSensitivity: 1
+      groundClearance: 0.8
+      domeClearance: 0.5
+    ambience:
+      interiorNear: 12
+      interiorFar: 18
+      shellOpacity: 0.09
+      fadeDamping: 7
+      jumpSeconds: 1.2
+      celebrationSeconds: 3.5
+      fallbackWindYaw: 0.7
+  portuguese: {fileID: 4900000, guid: 52b2d867844ca19468c8c98d6f1aefd1, type: 3}
+  english: {fileID: 4900000, guid: ab4ccb2766bf8bf4f9a533e65aa52732, type: 3}
