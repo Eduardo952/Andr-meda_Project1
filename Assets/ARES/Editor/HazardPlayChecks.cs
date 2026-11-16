@@ -28,7 +28,7 @@ namespace Ares.Editor
         static void Tick()
         {
             if(EditorApplication.isCompiling||EditorApplication.isUpdating)return;
-            if(!running && File.Exists(Request) && !EditorApplication.isPlayingOrWillChangePlaymode){File.Delete(Request);HazardAssets.Ensure();Directory.CreateDirectory(Captures);File.WriteAllText(Log,"RUNNING\nSynthetic presentation fixtures; no synthetic observations are saved in the NASA catalog.\n");running=true;stage=caseIndex=0;ui=null;began=next=EditorApplication.timeSinceStartup;background=Application.runInBackground;Application.runInBackground=true;language=PlayerPrefs.GetString("ARES.Language","pt-BR");EditorApplication.EnterPlaymode();return;}
+            if(!running && File.Exists(Request) && !EditorApplication.isPlayingOrWillChangePlaymode){File.Delete(Request);HazardAssets.Ensure();Directory.CreateDirectory(Captures);File.WriteAllText(Log,"RUNNING\nSynthetic presentation fixtures; no synthetic observations are saved in the NASA catalog.\n");running=true;stage=caseIndex=0;ui=null;began=next=EditorApplication.timeSinceStartup;background=Application.runInBackground;Application.runInBackground=true;language=Ares.UI.Localization.CurrentLanguage;EditorApplication.EnterPlaymode();return;}
             if(!running||!EditorApplication.isPlaying)return;
             try {
                 Require(EditorApplication.timeSinceStartup-began<240,"Play check timeout");

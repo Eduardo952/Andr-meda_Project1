@@ -23,7 +23,7 @@ namespace Ares.UI
         static bool initialized;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetCatalog(){initialized=false;english.Clear();portuguese.Clear();toEnglish.Clear();toPortuguese.Clear();}
-        public static string Language=>PlayerPrefs.GetString("ARES.Language","pt-BR");
+        public static string Language=>Ares.UI.Localization.CurrentLanguage;
         public static string Brand(string value)=>value?.Replace("CASA MARTE  /  BASE ARES","ARES BASE").Replace("CASA MARTE / ARES","ARES BASE").Replace("CASA MARTE","ARES BASE").Replace("Casa Marte","Ares Base").Replace("casamarte","Ares Base").Replace("Mission Mars","Ares Base");
         static void Initialize()
         {

@@ -17,7 +17,7 @@ namespace Ares.Editor
         static int stage;static double next,started;static bool background;
         static EnglishPresentationChecks(){EditorApplication.update+=Tick;}
         public static void Begin()
-        {previous=PlayerPrefs.GetString("ARES.Language","pt-BR");PlayerPrefs.SetString("ARES.Language","en");stage=0;ui=null;started=next=0;background=Application.runInBackground;Application.runInBackground=true;SessionState.SetBool(Pending,true);File.WriteAllText("Logs/ares-english.txt","RUNNING");File.WriteAllText("Logs/ares-english-text.txt","");EditorApplication.EnterPlaymode();}
+        {previous=Ares.UI.Localization.CurrentLanguage;PlayerPrefs.SetString("ARES.Language","en");stage=0;ui=null;started=next=0;background=Application.runInBackground;Application.runInBackground=true;SessionState.SetBool(Pending,true);File.WriteAllText("Logs/ares-english.txt","RUNNING");File.WriteAllText("Logs/ares-english-text.txt","");EditorApplication.EnterPlaymode();}
         static void Tick()
         {
             if(!SessionState.GetBool(Pending,false)||!EditorApplication.isPlaying||EditorApplication.isCompiling)return;

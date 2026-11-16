@@ -28,7 +28,7 @@ namespace Ares.Editor
         public static void Begin()
         {
             stage = 0; ui = null; began = next = 0;
-            language = PlayerPrefs.GetString("ARES.Language", "pt-BR"); PlayerPrefs.SetString("ARES.Language", "pt-BR");
+            language = Ares.UI.Localization.CurrentLanguage; PlayerPrefs.SetString("ARES.Language", "pt-BR");
             background = Application.runInBackground; Application.runInBackground = true;
             Directory.CreateDirectory("Logs"); File.WriteAllText(Log, "RUNNING");
             SessionState.SetBool(Pending, true); EditorApplication.EnterPlaymode();

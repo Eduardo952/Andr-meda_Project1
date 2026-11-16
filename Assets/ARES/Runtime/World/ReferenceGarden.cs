@@ -99,7 +99,7 @@ namespace Ares.World
             if(near)
             {
                 label.transform.rotation=camera.transform.rotation;
-                if(lastCount!=Harvest.Count){lastCount=Harvest.Count;bool en=PlayerPrefs.GetString("ARES.Language","pt-BR")=="en";label.text=en?$"Click ripe apples\nCollected {Harvest.Count}/24 · just for fun":$"Clique nas maçãs maduras\nColhidas {Harvest.Count}/24 · só por diversão";}
+                if(lastCount!=Harvest.Count){lastCount=Harvest.Count;bool en=Ares.UI.Localization.CurrentLanguage=="en";label.text=en?$"Click ripe apples\nCollected {Harvest.Count}/24 · just for fun":$"Clique nas maçãs maduras\nColhidas {Harvest.Count}/24 · só por diversão";}
                 if(Mouse.current!=null&&Mouse.current.leftButton.wasPressedThisFrame)TryHarvest(camera.ScreenPointToRay(Mouse.current.position.ReadValue()));
             }
         }

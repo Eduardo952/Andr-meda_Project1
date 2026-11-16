@@ -29,7 +29,7 @@ namespace Ares.UI
             card.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
             if (!show) return;
             string reading = Mathf.RoundToInt(DustStormWeather.ForCampaign(campaign).SpeedKmh) + " km/h";
-            if(campaign.NativeHazards)caption.text=PlayerPrefs.GetString("ARES.Language","pt-BR")=="en"?"SIMULATED WIND · no measured reading":"VENTO SIMULADO · sem medição real";
+            if(campaign.NativeHazards)caption.text=Ares.UI.Localization.CurrentLanguage=="en"?"SIMULATED WIND · no measured reading":"VENTO SIMULADO · sem medição real";
             if (speed.text != reading) speed.text = reading;
         }
     }

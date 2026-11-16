@@ -29,7 +29,7 @@ namespace Ares.World
         [Serializable] sealed class ViewingHistory { public string[] previous=Array.Empty<string>(),seen=Array.Empty<string>(); }
         ViewingHistory history;
         readonly string[] selectedUrls=new string[5];
-        string T(string key)=>new Ares.UI.Localization(PlayerPrefs.GetString("ARES.Language","pt-BR")).T(key);
+        string T(string key)=>new Ares.UI.Localization(Ares.UI.Localization.CurrentLanguage).T(key);
         void Awake()
         {
             collectionJson = Resources.Load<TextAsset>("ARES/Observatory/collection").text.TrimStart('\uFEFF');
@@ -105,8 +105,8 @@ namespace Ares.World
                     downloaded[day]?.Dispose();downloaded[day]=photo;photo=null;records[day]=null;
                     selectedUrls[day]=data.photo.url;
                     var p=data.photo;var entry=Collection.entries[day];entry.date="";entry.title=ApodRecord.PlainText(p.title);entry.summary=ApodRecord.PlainText(p.description);entry.credit=ApodRecord.PlainText(p.credit);entry.sourceUrl="https://images.nasa.gov/details/"+Uri.EscapeDataString(p.id??"");entry.imageUrl=p.url;entry.licenseUrl=null;
-                    entry.question=PlayerPrefs.GetString("ARES.Language","pt-BR")=="en"?"What details can you observe in this image?":"Que detalhes você consegue observar nesta imagem?";
-                    status[day]=new Ares.UI.Localization(PlayerPrefs.GetString("ARES.Language","pt-BR")).T("hazard.photoFallback");
+                    entry.question=Ares.UI.Localization.CurrentLanguage=="en"?"What details can you observe in this image?":"Que detalhes você consegue observar nesta imagem?";
+                    status[day]=new Ares.UI.Localization(Ares.UI.Localization.CurrentLanguage).T("hazard.photoFallback");
                 } else status[day] = T("observatory.failed");
                 if (photo != null && !photo.IsPlaceholder) {
                     photos[day]?.Dispose(); photos[day] = photo; photo = null; photoInfo[day] = data.photo;

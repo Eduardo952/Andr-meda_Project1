@@ -38,7 +38,7 @@ namespace Ares.UI
             lens.BuildControls(controls);
             Button(controls, "Observar", () => ShowDetails(true), "telescope-observe").name = "observatory-observe";
             var sources = Box(content, "telescope-sources");
-            Button(sources, new Localization(PlayerPrefs.GetString("ARES.Language","pt-BR")).T("hazard.imageSource"), () => OpenSource(service.Collection.entries[selected].sourceUrl));
+            Button(sources, new Localization(Ares.UI.Localization.CurrentLanguage).T("hazard.imageSource"), () => OpenSource(service.Collection.entries[selected].sourceUrl));
             Button(sources, "Biblioteca NASA", () => OpenSource("https://images.nasa.gov/"));
             details = Box(root, "telescope-details"); details.name = "observatory-details";
             ShowDetails(false);
@@ -88,14 +88,14 @@ namespace Ares.UI
                 button.EnableInClassList("selected", i == selected);
                 button.SetEnabled(campaign.Discoveries.CanView(i, campaign.SolIndex));
             }
-            Text(scroll,new Localization(PlayerPrefs.GetString("ARES.Language","pt-BR")).T("hazard.imageArchive"));
+            Text(scroll,new Localization(Ares.UI.Localization.CurrentLanguage).T("hazard.imageArchive"));
             Text(scroll, service.Status(selected), "telescope-detail-credit").name = "observatory-status";
             if (!string.IsNullOrWhiteSpace(entry.licenseUrl))
                 Button(scroll, "Licença da imagem", () => OpenSource(entry.licenseUrl));
             if(integration!=null) {
-                var ask=Button(scroll,"Perguntar à IA sobre este Sol",()=>integration.Ask(campaign,UnityEngine.PlayerPrefs.GetString("ARES.Language","pt-BR")));
+                var ask=Button(scroll,"Perguntar à IA sobre este Sol",()=>integration.Ask(campaign,Ares.UI.Localization.CurrentLanguage));
                 ask.SetEnabled(!integration.Busy && selected==campaign.SolIndex);
-                string language=PlayerPrefs.GetString("ARES.Language","pt-BR");
+                string language=Ares.UI.Localization.CurrentLanguage;
                 var questions=Ares.Infrastructure.Nasa.NasaJson.Read<System.Collections.Generic.Dictionary<string,string[]>>(Resources.Load<TextAsset>("ARES/Narrator/questions").text);
                 var ids=new System.Collections.Generic.List<string>(questions.Keys);
                 var labels=new System.Collections.Generic.List<string>();

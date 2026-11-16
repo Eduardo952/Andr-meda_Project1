@@ -29,7 +29,7 @@ namespace Ares.Editor
         {
             stage = 0; ui = null; began = next = 0;
             background = Application.runInBackground; Application.runInBackground = true;
-            language = PlayerPrefs.GetString("ARES.Language", "pt-BR"); PlayerPrefs.SetString("ARES.Language", "pt-BR");
+            language = Ares.UI.Localization.CurrentLanguage; PlayerPrefs.SetString("ARES.Language", "pt-BR");
             Directory.CreateDirectory("Logs"); File.WriteAllText(Log, "RUNNING");
             SessionState.SetBool(Pending, true); EditorApplication.isPaused = false; EditorApplication.EnterPlaymode();
         }

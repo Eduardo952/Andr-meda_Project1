@@ -7,6 +7,8 @@ namespace Ares.UI
     // Exported verbatim from the reference locales by Tools/AresImport/export-ui.py.
     public sealed class Localization
     {
+        public const string DefaultLanguage = "en";
+        public static string CurrentLanguage => PlayerPrefs.GetString("ARES.Language", DefaultLanguage);
         [Serializable] sealed class Entry { public string key, value; }
         [Serializable] sealed class Catalog { public Entry[] entries; }
         readonly Dictionary<string, string> entries = new Dictionary<string, string>();

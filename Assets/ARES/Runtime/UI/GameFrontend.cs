@@ -85,7 +85,7 @@ namespace Ares.UI
             Observatory = GetComponent<ObservatoryInteraction>();
             if (Observatory == null) Observatory = gameObject.AddComponent<ObservatoryInteraction>();
             stations = new StationInteraction(definition.layout, definition.world.useRadius);
-            locale = new Localization(PlayerPrefs.GetString("ARES.Language", "pt-BR"));
+            locale = new Localization(Ares.UI.Localization.CurrentLanguage);
             document = gameObject.AddComponent<UIDocument>(); panel = ScriptableObject.CreateInstance<PanelSettings>();
             panel.themeStyleSheet = Resources.Load<ThemeStyleSheet>("ARES/UI/RuntimeTheme");
             panel.scaleMode = PanelScaleMode.ScaleWithScreenSize; panel.referenceResolution = new Vector2Int(1920,1080); panel.match = .5f; document.panelSettings = panel;
@@ -333,7 +333,7 @@ namespace Ares.UI
         void Languages()
         {
             var view = Dialog(locale.T("title.language"));
-            foreach (var lang in new[] { "pt-BR", "en" }) Button(view, locale.T("lang." + lang), () => { locale.Set(lang); PlayerPrefs.SetString("ARES.Language", lang); if (title) ShowTitle(); else { BuildHud(); Settings(); } });
+            foreach (var lang in new[] { "en", "pt-BR" }) Button(view, locale.T("lang." + lang), () => { locale.Set(lang); PlayerPrefs.SetString("ARES.Language", lang); PlayerPrefs.Save(); if (title) ShowTitle(); else { BuildHud(); Settings(); } });
             Button(view, locale.T("settings.close"), CloseOverlay, "ghost");
         }
         void Help()

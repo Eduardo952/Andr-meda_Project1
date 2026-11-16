@@ -34,7 +34,7 @@ namespace Ares.UI
             pageTitle = Text(header, "", "computer-page-title");
             var navigation = Box(header, "computer-navigation");
             Button(navigation, "Voltar  [Esc]", () => { if (canInteract()) close(); }, "ghost").name = "computer-close";
-            var locale=new Localization(UnityEngine.PlayerPrefs.GetString("ARES.Language","pt-BR"));
+            var locale=new Localization(Ares.UI.Localization.CurrentLanguage);
             seal=Button(navigation,locale.T("hud.endSol"),()=>{if(canInteract() && campaign.Seal("control",campaign.Allocation))close();},"ghost");seal.name="computer-seal-sol";
             repair=Button(navigation,locale.T("hazard.repair"),()=>{if(canInteract())campaign.RepairGrid();},"ghost");repair.name="computer-repair-grid";
             var viewport = Box(shell, "computer-viewport"); viewport.name = "computer-viewport";
