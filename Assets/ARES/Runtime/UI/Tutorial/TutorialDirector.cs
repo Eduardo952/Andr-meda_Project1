@@ -13,7 +13,7 @@ namespace Ares.UI
         readonly GameFrontend frontend;
         readonly VisualElement normalHud;
         readonly TutorialView view;
-        public TutorialFlow Flow { get; } = new TutorialFlow();
+        public TutorialFlow Flow { get; }
         public bool Active => Flow.Active;
         public bool BlocksWorld => Active && Flow.Dialogue;
         public bool AllowsComputer => Flow.Stage == TutorialStage.FindComputer || Flow.Stage == TutorialStage.AllocateEnergy;
@@ -39,8 +39,9 @@ namespace Ares.UI
                 }
             }
         }
-        public TutorialDirector(VisualElement parent, VisualElement normalHud, ReferenceExplorer explorer, GameFrontend frontend)
+        public TutorialDirector(VisualElement parent, VisualElement normalHud, ReferenceExplorer explorer, GameFrontend frontend, TutorialFlow flow = null)
         {
+            Flow=flow ?? new TutorialFlow();
             this.explorer = explorer; this.frontend = frontend; this.normalHud = normalHud;
             view = new TutorialView(parent, explorer, this);
             Flow.Changed += Changed;

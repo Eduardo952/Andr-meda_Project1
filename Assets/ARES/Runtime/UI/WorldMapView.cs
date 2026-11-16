@@ -29,7 +29,7 @@ namespace Ares.UI
             capture = new MapCapture(explorer);
             screen = Box(parent, "world-map"); screen.name = "world-map";
             var header = Box(screen, "map-header");
-            var icon = new Image { image = Resources.Load<Texture2D>("ARES/UI/HudIcons/map-v1"), pickingMode = PickingMode.Ignore };
+            var icon = new ChallengeIcon("map", MissionVisualStyle.Hex("#282139"), 36);
             icon.AddToClassList("map-header-icon"); header.Add(icon);
             var heading = Box(header, "map-heading");
             Text(heading, "ARES BASE", "map-eyebrow");

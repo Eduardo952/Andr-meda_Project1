@@ -27,7 +27,7 @@ namespace Ares.World.Computer
             documentObject=new GameObject("Computer / offscreen document");
             document=documentObject.AddComponent<UIDocument>();document.panelSettings=panel;
             var root=document.rootVisualElement;root.AddToClassList("ares-root");root.pickingMode=PickingMode.Ignore;
-            foreach(string sheet in new[]{"Game","Oxygen","MissionTheme"})root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/"+sheet));
+            foreach(string sheet in new[]{"Game","Oxygen","MissionTheme","Refinement","ReferenceUX"})root.styleSheets.Add(Resources.Load<StyleSheet>("ARES/UI/"+sheet));
             root.AddToClassList("computer-physical-screen");PresentationLocalizer.Attach(root);
             documentObject.AddComponent<PresentationLocalizationLoop>().Bind(root);
             surface=new GameObject("Computer / live screen surface");surface.transform.SetParent(parent,false);

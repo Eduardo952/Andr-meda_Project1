@@ -35,6 +35,14 @@ namespace Ares.Editor
             Directory.CreateDirectory("Logs"); File.WriteAllText("Logs/ares-tutorial.txt", "RUNNING");
             SessionState.SetBool(Pending, true); EditorApplication.isPaused = false; EditorApplication.EnterPlaymode();
         }
+        static void StartAtCenter()
+        {
+            ui.StartMission();
+            // Wake ordering is tested in RefinementChecks; this fixture exercises tutorial content.
+            for(int i=0;i<100;i++)explorer.Rest.Tick(.05f,false);
+            var motion=(PlayerMotion)typeof(ReferenceExplorer).GetField("player",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(explorer);
+            motion.X=0;motion.Z=3;
+        }
         static void Tick()
         {
             if (!SessionState.GetBool(Pending, false) || !EditorApplication.isPlaying || EditorApplication.isCompiling) return;
@@ -53,12 +61,12 @@ namespace Ares.Editor
                     explorer = UnityEngine.Object.FindAnyObjectByType<ReferenceExplorer>();
                     if (explorer?.Rover == null) return;
                     ui = explorer.GetComponent<GameFrontend>(); ui.Apod.OfflineOnly = true; explorer.reducedMotion = false;
-                    ui.StartMission(); root = ui.GetComponent<UIDocument>().rootVisualElement; elapsed = 0;
+                    StartAtCenter(); root = ui.GetComponent<UIDocument>().rootVisualElement; elapsed = 0;
                 }
                 Require(ui.Campaign.SolElapsedSeconds == 0 || !ui.TutorialActive, "Tutorial spent mission time");
                 if (stage == 0 && elapsed > 1.3f)
                 {
-                    Require(ui.TutorialStage == TutorialStage.Offer && ui.BlocksWorld, "Spawn offer did not own input");
+                    Require(ui.TutorialStage == TutorialStage.Offer && ui.BlocksWorld, "Center offer did not own input");
                     CheckDialogue(); Capture("offer"); Next();
                 }
                 else if (stage == 1 && elapsed > .2f)
@@ -73,7 +81,7 @@ namespace Ares.Editor
                 else if (stage == 2 && elapsed > .3f)
                 {
                     Require(!ui.BlocksWorld && root.Q("mission-hud-root").enabledInHierarchy, "Decline did not restore normal play");
-                    ui.StartMission(); Next();
+                    StartAtCenter(); Next();
                 }
                 else if (stage == 3 && elapsed > .3f) { Press("tutorial-accept"); Next(); }
                 else if (stage == 4 && elapsed > 1)

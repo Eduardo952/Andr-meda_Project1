@@ -43,14 +43,14 @@ namespace Ares.World
             var explorer=GetComponent<ReferenceExplorer>();
             foreach(var room in explorer.definition.layout.rooms)
             {
-                if(room.id=="solar"||room.shape=="park"||room.id=="control")continue;
+                if(room.id=="control")continue;
                 var color=MissionVisualStyle.Sector(room.id);
                 var dark=Surface("Sector trim / "+room.id,MissionVisualStyle.Ink);
                 var accent=Surface("Sector identity / "+room.id,color);
                 var light=Surface("Sector guide light / "+room.id,Color.Lerp(color,Color.white,.55f),.25f);
                 var shell=new RoverMesh();var stripes=new RoverMesh();var glow=new RoverMesh();
                 // Door-sized frames are placed at imported ports; their six-metre opening stays clear.
-                if(room.ports!=null)foreach(var port in room.ports)
+                foreach(var port in room.id=="solar" ? new[]{new Ares.Data.PointData{x=room.stationX,z=room.stationZ}} : room.ports ?? System.Array.Empty<Ares.Data.PointData>())
                 {
                     var center=new Vector3(port.x,.03f,-port.z);
                     var toward=(room.Center-center).normalized;
@@ -64,6 +64,24 @@ namespace Ares.World
                         glow.Box(P(side*2.85f,.09f,1.1f),new Vector3(.16f,.08f,2.8f),turn,.025f);
                     }
                     shell.Box(P(0,4.45f,0),new Vector3(7.2f,.6f,.65f),turn,.18f);
+                    // Equipment silhouettes above each gateway stay identifiable even without text.
+                    var icon=new RoverMesh();
+                    if(room.id=="observatory") {
+                        icon.Tube(P(-1,5.4f,0),P(1,6.1f,0),.35f);
+                        icon.Tube(P(0,5.55f,0),P(0,4.8f,0),.10f);
+                        icon.Tube(P(0,5.1f,0),P(-.65f,4.8f,0),.07f);icon.Tube(P(0,5.1f,0),P(.65f,4.8f,0),.07f);
+                    } else if(room.id=="greenhouse") {
+                        icon.Tube(P(0,4.8f,0),P(0,6.3f,0),.09f);
+                        icon.Box(P(-.4f,5.65f,0),new Vector3(.85f,.3f,.25f),turn*Quaternion.Euler(0,0,-30),.12f);
+                        icon.Box(P(.4f,6f,0),new Vector3(.85f,.3f,.25f),turn*Quaternion.Euler(0,0,30),.12f);
+                    } else if(room.id=="shield") {
+                        icon.Tube(P(-.7f,6.2f,0),P(.7f,6.2f,0),.14f);
+                        icon.Tube(P(-.7f,6.2f,0),P(-.6f,5.4f,0),.14f);icon.Tube(P(.7f,6.2f,0),P(.6f,5.4f,0),.14f);
+                        icon.Tube(P(-.6f,5.4f,0),P(0,4.9f,0),.14f);icon.Tube(P(.6f,5.4f,0),P(0,4.9f,0),.14f);
+                    } else if(room.id=="lifeSupport") {
+                        icon.Box(P(0,5.65f,0),new Vector3(.4f,1.6f,.3f),turn,.12f);icon.Box(P(0,5.65f,0),new Vector3(1.4f,.4f,.3f),turn,.12f);
+                    } else {icon.Box(P(0,5.6f,0),new Vector3(1.6f,1f,.2f),turn,.12f);}
+                    Add(icon,accent,room.id+" / portal equipment emblem");
                     stripes.Box(P(0,4.43f,-.36f),new Vector3(3.3f,.28f,.09f),turn,.04f);
                 }
                 // A small inlaid equipment apron communicates interaction without occupying the walkway.

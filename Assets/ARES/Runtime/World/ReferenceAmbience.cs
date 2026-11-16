@@ -15,7 +15,7 @@ namespace Ares.World
         readonly Transform[] crew=new Transform[3],panels=new Transform[32],prints=new Transform[20];
         readonly float[] born=new float[20];
         readonly List<Mesh> meshes=new List<Mesh>();readonly List<Material> materials=new List<Material>();
-        ReferenceExplorer explorer;GameFrontend frontend;Transform radar,cleaner,brush;ParticleSystem steam;Light alarm;
+        ReferenceExplorer explorer;GameFrontend frontend;Transform radar,cleaner,brush;Light alarm;
         float time;int footprint;Vector3 lastStep;
         public int CrewCount {get;private set;}
         public int TrackingPanels {get;private set;}
@@ -47,14 +47,6 @@ namespace Ares.World
             var printMesh=new RoverMesh();printMesh.Box(Vector3.zero,new Vector3(.16f,.008f,.3f),Quaternion.identity,0);
             var footprintMesh=printMesh.Bake("Footprint");var printMaterial=Material("#72483e",true,.22f);
             for(int i=0;i<prints.Length;i++){prints[i]=Render("Footprint "+i,transform,footprintMesh,printMaterial);born[i]=-100;prints[i].gameObject.SetActive(false);}
-            steam=new GameObject("Life support vent steam").AddComponent<ParticleSystem>();steam.transform.SetParent(transform,false);steam.transform.position=layout.RoomPoint("lifeSupport",10,5,0);
-            steam.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
-            var main=steam.main;main.maxParticles=64;main.startLifetime=4;main.startSpeed=.7f;main.startSize=new ParticleSystem.MinMaxCurve(.2f,.55f);main.startColor=new Color(1,.97f,.93f,.13f);main.simulationSpace=ParticleSystemSimulationSpace.World;
-            var emission=steam.emission;emission.rateOverTime=12;
-            var shape=steam.shape;shape.shapeType=ParticleSystemShapeType.Circle;shape.radius=.25f;shape.rotation=new Vector3(-90,0,0);
-            var fade=new Gradient();fade.SetKeys(new[]{new GradientColorKey(Color.white,0),new GradientColorKey(Color.white,1)},new[]{new GradientAlphaKey(0,0),new GradientAlphaKey(.13f,.3f),new GradientAlphaKey(0,1)});
-            var over=steam.colorOverLifetime;over.enabled=true;over.color=fade;
-            var steamMaterial=new Material(Resources.Load<Shader>("ARES/Effects/WindDust"));materials.Add(steamMaterial);steam.GetComponent<ParticleSystemRenderer>().sharedMaterial=steamMaterial;
             alarm=new GameObject("Reference emergency light").AddComponent<Light>();alarm.transform.SetParent(transform,false);alarm.type=LightType.Point;alarm.range=30;alarm.color=new Color32(230,81,73,255);
         }
         Transform Render(string label,Transform parent,Mesh mesh,Material material)
@@ -86,14 +78,14 @@ namespace Ares.World
             }
             for(int i=0;i<crew.Length;i++)if(crew[i]!=null)
             {
-                crew[i].gameObject.SetActive(Vector3.Distance(explorer.PlayerPosition,crewPositions[i])<22);
+                // The sleeping room now contains beds and its terminal only; other crew stay in place.
+                crew[i].gameObject.SetActive(i!=1 && Vector3.Distance(explorer.PlayerPosition,crewPositions[i])<22);
                 crew[i].SetPositionAndRotation(crewPositions[i]+Vector3.up*Mathf.Sin(time*2+i+1)*.025f,Quaternion.Euler(0,180,0));
             }
             float a=2*Mathf.PI*((frontend.Campaign?.SolFraction??.35f)-.25f);
             float pitch=-.5f*(.35f/new Vector3(-Mathf.Cos(a),Mathf.Sin(a),.35f).magnitude);
             foreach(var panel in panels)if(panel!=null)panel.rotation=solarRotation*ReferenceSpace.Euler(pitch,0,0)*Quaternion.Inverse(solarRotation);
             radar.localRotation=Quaternion.Euler(0,explorer.reducedMotion?0:-time*.65f*Mathf.Rad2Deg,0);
-            if(animate&&!steam.isPlaying)steam.Play();else if(!animate&&steam.isPlaying)steam.Pause();
             bool emergency=!string.IsNullOrEmpty(frontend.Campaign?.Alarm);
             alarm.transform.position=explorer.ControlledPosition+Vector3.up*6;
             alarm.intensity=emergency?(explorer.reducedMotion?3:3+Mathf.Sin(time*2)*.5f):0;

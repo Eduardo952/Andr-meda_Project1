@@ -16,7 +16,8 @@ namespace Ares.UI
             information = Box(panel.Body, "mini-hint"); Text(information, l.T("energy.budgetNote")); information.style.display = DisplayStyle.None;
             Text(panel.Body, l.T("energy.hint"), "mini-context mini-instruction");
             parent = new ChallengeGrid(); parent.AddToClassList("energy-board"); panel.Body.Add(parent);
-            Text(parent, l.T("energy.pool", "n", campaign.EnergyPool), "badge");
+            var pool=Text(parent, l.T("energy.pool", "n", campaign.EnergyPool), "badge");
+            var battery=Text(parent,"","small");
             if (campaign.EnergyPool < rules.energyPool) Text(parent, l.T("energy.dustNote", "loss", rules.energyPool - campaign.EnergyPool), "warning");
             var sliders = new SliderInt[3]; var valueLabels = new Label[3]; var meters=new VisualElement[3];var notices=new Label[3];
             string[] systems = { "shield", "life", "greenhouse" };
@@ -37,7 +38,9 @@ namespace Ares.UI
             parent.Add(free); free.AddToClassList("badge"); Text(parent, l.T("energy.budgetNote"), "small");
             var row = panel.Footer; Button(row, l.T("energy.close"), close, "ghost");
             start.name = "energy-confirm";
-            start.text = l.T(campaign.Phase == Phase.Plan ? "energy.start" : "energy.save"); start.clicked += () => { if (campaign.Phase == Phase.Tasks || campaign.StartSol()) close(); }; row.Add(start); update();
+            Action refresh=()=>{demands[0]=campaign.Current.demand.shield;demands[1]=campaign.Current.demand.life;demands[2]=campaign.Current.demand.greenhouse;update();pool.text=l.T("energy.pool","n",campaign.EnergyPool);foreach(var slider in sliders)slider.highValue=campaign.EnergyPool;if(campaign.NativeHazards){battery.text=campaign.NativeDataReady?l.T("hazard.battery","n",campaign.Solar.ReserveKwh.ToString("0"),"max",campaign.Solar.CapacityKwh):l.T("hazard.loading");start.SetEnabled(campaign.NativeDataReady && campaign.Allocation.Total==campaign.EnergyPool);}};
+            campaign.Changed+=refresh;parent.RegisterCallback<DetachFromPanelEvent>(_=>campaign.Changed-=refresh);
+            start.text = l.T(campaign.Phase == Phase.Plan ? "energy.start" : "energy.save"); start.clicked += () => { if (campaign.Phase == Phase.Tasks || campaign.StartSol()) close(); }; row.Add(start); refresh();
         }
     }
 }

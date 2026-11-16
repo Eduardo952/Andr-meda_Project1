@@ -43,6 +43,8 @@ namespace Ares.World.Rover
             var effect=new GameObject("Six wheel contact dust"); effect.transform.SetParent(transform,false);
             Dust=effect.AddComponent<RoverDust>(); Dust.Initialize();
             CameraRig=new RoverCamera(settings,definition.layout);
+            var trail=new GameObject("NOMAD / surveyed route");trail.transform.SetParent(transform.parent,false);
+            trail.AddComponent<RoverRoute>().Build(spawn,settings.spawnYaw,CanOccupy,ground);
         }
         public void SetDriving(bool driving)
         {

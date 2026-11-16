@@ -49,7 +49,7 @@ namespace Ares.World
         {
             var settings = explorer.windSettings;
             if (!settings.enabled || (frontend != null && frontend.BlocksWorld)) { Clear(); return; }
-            var weather = new Ares.Domain.DustStormWeather(frontend?.Campaign?.Demands);
+            var weather = Ares.Domain.DustStormWeather.ForCampaign(frontend?.Campaign);
             StormStrength = Mathf.MoveTowards(StormStrength, weather.Strength, Time.deltaTime * .7f);
             Vector3 center = explorer.ControlledPosition;
             if (positioned && Vector3.Distance(previous,center)>settings.radius) Clear();
@@ -58,6 +58,8 @@ namespace Ares.World
             float gust = .7f + Mathf.PerlinNoise(gustTime*.09f, .37f)*.65f;
             bool storm = StormStrength > .02f;
             Vector3 direction = settings.direction.sqrMagnitude>.001f ? settings.direction.normalized : Vector3.right;
+            float tierScale=DustStormEffect.Sample(frontend?.Campaign,out float heading);
+            if(tierScale>0)direction=Quaternion.Euler(0,heading,0)*Vector3.forward;
             direction = Quaternion.Euler(0, Mathf.Sin(gustTime*.17f)*12, 0)*direction;
             float speed = Mathf.Lerp(settings.speed * gust, Mathf.Max(settings.speed, weather.SpeedMetersPerSecond), StormStrength) * (explorer.reducedMotion ? .45f : 1);
             float radius = Mathf.Lerp(settings.radius, Mathf.Max(32, settings.radius), StormStrength);
@@ -75,7 +77,7 @@ namespace Ares.World
                 buffer[i]=p;
             }
             particles.SetParticles(buffer,count);
-            budget += dt * Mathf.Lerp(settings.particlesPerSecond * gust, 260, StormStrength) * (explorer.reducedMotion ? .4f : 1);
+            budget += dt * Mathf.Lerp(settings.particlesPerSecond * gust, 260*Mathf.Max(1,tierScale), StormStrength) * (explorer.reducedMotion ? .4f : 1);
             int emit = Mathf.Min(18, Mathf.FloorToInt(budget)); budget = Mathf.Min(18, budget - emit);
             for (int i=0;i<emit;i++)
             {

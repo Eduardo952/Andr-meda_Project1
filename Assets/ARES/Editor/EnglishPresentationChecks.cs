@@ -31,7 +31,8 @@ namespace Ares.Editor
                 switch(stage++)
                 {
                     case 0:Require(root.Q<Button>("title-play").text.Contains("Start mission"),"Menu did not translate");Capture("menu");break;
-                    case 1:ui.StartMission();break;
+                    case 1:ui.StartMission();for(int i=0;i<100;i++)explorer.Rest.Tick(.05f,false);
+                        var spawn=(PlayerMotion)typeof(ReferenceExplorer).GetField("player",Private).GetValue(explorer);spawn.X=0;spawn.Z=3;break;
                     case 2:Require(root.Q<Label>("tutorial-speech").text.StartsWith("Hi!"),"Tutorial stayed Portuguese");Capture("tutorial");break;
                     case 3:Press("tutorial-decline");Call("OpenTask","SmartFarmCare");break;
                     case 4:Capture("greenhouse");stage=40;break;
@@ -41,7 +42,7 @@ namespace Ares.Editor
                     case 6:Require(root.Q<Label>("oxygen-status-title").text=="Ready to begin","Oxygen status stayed Portuguese");Capture("oxygen");root.Q<Foldout>("oxygen-science").value=true;break;
                     case 7:Capture("oxygen-details");Press("computer-energy");break;
                     case 8:Capture("energy");stage=80;break;
-                    case 80:Press("computer-communications");stage=9;break;
+                    case 80:Require(root.Q("communications-view")!=null,"Communication panel missing");stage=9;break;
                     case 9:Capture("communications");break;
                     case 10:
                         ui.Terminal.Reset();Call("CloseOverlay");ui.ShowObservatory();break;

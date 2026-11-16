@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -112,7 +112,7 @@ namespace Ares.Editor
                 }
                 if (stage == 0 && elapsed > .4f) { Require(ui.Terminal.TryInteract(), "Computer access"); Next(); }
                 else if (stage == 1 && elapsed > .5f) { Press("computer-energy"); Next(); }
-                else if (stage == 2 && elapsed > .3f) { Press("computer-communications"); ui.Campaign.Communications.Tick(12); Next(); }
+                else if (stage == 2 && elapsed > .3f) { Require(root.Q("communications-view") != null, "Independent communication panel missing"); ui.Campaign.Communications.Tick(12); Next(); }
                 else if (stage == 3 && elapsed > .4f)
                 {
                     var comms = root.Q("communications-view"); Require(comms != null && comms.worldBound.xMin >= -1 && comms.worldBound.xMax <= root.worldBound.xMax + 1, "Communication page layout");

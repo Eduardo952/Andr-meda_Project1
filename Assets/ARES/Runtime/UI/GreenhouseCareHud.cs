@@ -1,4 +1,4 @@
-﻿using Ares.World;
+using Ares.World;
 using Ares.Domain;
 using UnityEngine.UIElements;
 using static Ares.UI.UiElements;
@@ -15,7 +15,7 @@ namespace Ares.UI
         public GreenhouseCareHud(VisualElement root, GreenhouseCare care)
         {
             this.care = care; card = Box(root, "panel greenhouse-care-hud"); card.name = "greenhouse-care-hud";
-            card.Add(new CartoonText("ARES BASE", 29));
+            Text(card, "ARES BASE", "heading");
             water = Text(card, "", "small");
             can = new ProgressBar { lowValue = 0, highValue = GreenhouseWatering.CapacityMl }; card.Add(can);
             climate = Text(card, "", "small");

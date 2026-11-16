@@ -45,7 +45,7 @@ namespace Ares.World
         {
             if (isometric) return;
             float gain = config.radiansPerPixel * Mathf.Clamp(sensitivity, config.minSensitivity, config.maxSensitivity);
-            TargetYaw -= dx * gain;
+            TargetYaw = WrapYaw(TargetYaw - dx * gain);
             TargetPitch = Mathf.Clamp(TargetPitch + dy * gain * (invert ? -1 : 1), config.minPitchDegrees * Mathf.Deg2Rad, config.maxPitchDegrees * Mathf.Deg2Rad);
         }
         public void Zoom(float factor) { TargetDistance = Mathf.Clamp(TargetDistance * factor, config.minDistance, config.maxDistance); }
@@ -54,10 +54,13 @@ namespace Ares.World
             dt = Mathf.Min(dt, .05f);
             float rotation = 1 - Mathf.Exp(-config.rotationDamping * dt);
             if (isometric) { TargetYaw = config.isometricYaw; TargetPitch = config.isometricPitchDegrees * Mathf.Deg2Rad; }
+            // Keep a full natural orbit without accumulating huge angles over long sessions.
+            TargetYaw = WrapYaw(TargetYaw);
             float delta = Mathf.Atan2(Mathf.Sin(TargetYaw - Yaw), Mathf.Cos(TargetYaw - Yaw));
-            Yaw += delta * rotation; Pitch += (TargetPitch - Pitch) * rotation;
+            Yaw = WrapYaw(Yaw + delta * rotation); Pitch += (TargetPitch - Pitch) * rotation;
             Distance += (TargetDistance - Distance) * (1 - Mathf.Exp(-config.zoomDamping * dt));
         }
+        static float WrapYaw(float yaw) => Mathf.Repeat(yaw + Mathf.PI, 2 * Mathf.PI) - Mathf.PI;
         public static Vector2 RelativeInput(float x, float y, float yaw) => new Vector2(x * Mathf.Cos(yaw) + y * Mathf.Sin(yaw), -x * Mathf.Sin(yaw) + y * Mathf.Cos(yaw));
         public float SafeHeight(float x, float y, float z, bool occupied)
         {

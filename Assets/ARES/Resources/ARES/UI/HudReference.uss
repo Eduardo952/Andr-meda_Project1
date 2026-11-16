@@ -1,0 +1,71 @@
+/* HUD controls. Dimensions/palette follow Anexo/UX.png.
+   No panel, map, task, tutorial or document-wide selectors. */
+.hud.hud-reference { top: 14px; left: 14px; right: 14px; align-items: flex-start; flex-wrap: nowrap; }
+.hud-reference .hud-resource-strip {
+    flex-direction: row; align-items: center; flex-shrink: 0;
+    width: 828px; height: 84px; padding: 10px 14px;
+    background-color: #f1e9dc; border-radius: 32px;
+    border-width: 3px; border-color: #fff9ee;
+    border-bottom-width: 7px; border-bottom-color: #99766a;
+}
+.hud-reference .hud-resource-cell { flex-direction: row; align-items: center; width: 170px; flex-shrink: 0; margin-right: 14px; }
+.hud-reference .hud-resource-cell.energy { margin-right: 0; }
+.hud-reference .hud-resource-icon { width: 40px; height: 40px; border-radius: 20px; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 10px; }
+.hud-reference .integrity .hud-resource-icon { background-color: #50c35b; }
+.hud-reference .oxygen .hud-resource-icon { background-color: #38bce7; }
+.hud-reference .dose .hud-resource-icon { background-color: #fb7c54; }
+.hud-reference .energy .hud-resource-icon { background-color: #ffca18; }
+.hud-reference .hud-resource-readout { width: 120px; justify-content: center; }
+.hud-reference .hud-resource-label { color: #282139; font-size: 14px; -unity-font: resource("ARES/UI/Fonts/Nunito"); -unity-font-style: bold; margin: 0 0 2px 0; padding: 0; white-space: nowrap; }
+.hud-reference .hud-resource-bar { height: 16px; min-height: 16px; margin: 0; padding: 0; border-width: 0; }
+.hud-reference .hud-resource-bar .unity-progress-bar__container { height: 16px; padding: 0; margin: 0; }
+.hud-reference .hud-resource-bar .unity-progress-bar__background { background-color: #cfc4bf; border-radius: 8px; border-width: 0; padding: 0; margin: 0; overflow: hidden; }
+.hud-reference .hud-resource-bar .unity-progress-bar__progress { border-radius: 8px; border-width: 0; border-bottom-width: 3px; padding: 0; margin: 0; }
+.hud-reference .hud-resource-bar .unity-progress-bar__title-container { display: none; }
+.hud-reference .integrity .unity-progress-bar__progress { background-color: #50bf5d; border-bottom-color: #46a653; }
+.hud-reference .oxygen .unity-progress-bar__progress { background-color: #38bce7; border-bottom-color: #329ec2; }
+.hud-reference .dose .unity-progress-bar__progress { background-color: #fb7c54; border-bottom-color: #d76948; }
+.hud-reference .energy .unity-progress-bar__progress { background-color: #ffca18; border-bottom-color: #dfad16; }
+.hud-reference .hud-tools { flex-direction: row; flex-wrap: nowrap; align-items: flex-start; flex-shrink: 0; padding: 0; margin: 0; background-color: transparent; }
+.ares-root .hud-reference Button.hud-nav {
+    width: 58px; min-width: 58px; height: 58px; min-height: 58px; flex-shrink: 0;
+    margin: 0 0 0 10px; padding: 0; border-radius: 21px;
+    background-color: #ffca18; color: #282139;
+    border-width: 0; border-bottom-width: 3px; border-bottom-color: #dfaa24;
+    align-items: center; justify-content: center;
+    transition-property: background-color, translate; transition-duration: .12s;
+    scale: 1 1;
+}
+.ares-root .hud-reference Button.hud-nav.hud-nav-neutral { background-color: #f7f2e8; border-bottom-width: 6px; border-bottom-color: #86564a; }
+.ares-root .hud-reference Button.hud-nav:hover { background-color: #ffdb59; translate: 0 -1px; }
+.ares-root .hud-reference Button.hud-nav.hud-nav-neutral:hover { background-color: #fffaf2; }
+.ares-root .hud-reference Button.hud-nav:active { translate: 0 3px; scale: 1 1; }
+.ares-root .hud-reference Button.hud-nav:focus { border-width: 2px; border-color: #766184; border-bottom-width: 4px; }
+.ares-root .hud-reference Button.hud-nav:disabled { opacity: .45; translate: 0 0; }
+.ares-root .hud-reference Button.hud-resource-info { height: 54px; min-height: 54px; margin-left: 12px; }
+.ares-root.reduced-motion .hud-reference Button.hud-nav { transition-duration: 0s; }
+/* Keep the same two-group hierarchy on smaller logical viewports. */
+.hud-reference.hud-tight .hud-resource-strip { width: 668px; padding-left: 10px; padding-right: 10px; }
+.hud-reference.hud-tight .hud-resource-cell { width: 136px; margin-right: 9px; }
+.hud-reference.hud-tight .hud-resource-cell.energy { margin-right: 0; }
+.hud-reference.hud-tight .hud-resource-readout { width: 86px; }
+.hud-reference.hud-tight .hud-resource-label { font-size: 12px; }
+.ares-root .hud-reference.hud-tight Button.hud-nav { width: 48px; min-width: 48px; height: 54px; min-height: 54px; margin-left: 6px; border-radius: 18px; }
+.hud-reference.hud-narrow { flex-wrap: wrap; }
+.hud-reference.hud-narrow .hud-tools { margin-top: 8px; margin-left: auto; }
+/* Compact rover shortcut; preserve the existing rounded, raised button language. */
+.ares-root Button.hud-rover {
+    position: absolute; left: 18px; bottom: 18px; width: 214px; height: 58px; min-height: 58px;
+    margin: 0; padding: 6px 12px; flex-direction: row; align-items: center; justify-content: center;
+    background-color: #63d3c4; color: #282139; border-width: 0; border-bottom-width: 4px;
+    border-bottom-color: #398e89; border-radius: 19px;
+}
+.ares-root Button.hud-rover:hover { background-color: #80dfd2; }
+.ares-root Button.hud-rover:active, .ares-root Button.hud-rover.hud-rover-active { background-color: #50bbae; }
+.ares-root Button.hud-rover:focus { border-top-width: 2px; border-top-color: #766184; }
+.ares-root .hud-rover .hud-rover-label { margin: 0 0 0 10px; padding: 0; color: #282139; font-size: 13px; -unity-text-align: middle-left; }
+.ares-root .hud-cursor-hint {
+    position: absolute; top: 57%; left: 25%; right: 25%; margin: 0; padding: 0;
+    color: rgba(255,255,255,.72); font-size: 14px; -unity-text-align: middle-center;
+    text-shadow: 0 1px 3px rgba(0,0,0,.65);
+}

@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using Ares.Domain;
 using UnityEngine.UIElements;
 using static Ares.UI.UiElements;
 
 namespace Ares.UI
 {
-    /// <summary>Three persistent pages slide inside a clipped viewport; simulation state stays in Campaign.</summary>
+    /// <summary>Two control pages and an independent communications display slide inside a clipped viewport; simulation state stays in Campaign.</summary>
     internal sealed class ComputerPanel
     {
         readonly Campaign campaign;
@@ -14,6 +14,8 @@ namespace Ares.UI
         readonly VisualElement track, energyBody;
         readonly ScrollView oxygenPage, energyPage, communicationsPage;
         readonly Button previous, next;
+        readonly Button seal;
+        readonly Button repair;
         readonly Label pageTitle;
         readonly OxygenView oxygen;
         readonly bool energyOnly;
@@ -32,12 +34,21 @@ namespace Ares.UI
             pageTitle = Text(header, "", "computer-page-title");
             var navigation = Box(header, "computer-navigation");
             Button(navigation, "Voltar  [Esc]", () => { if (canInteract()) close(); }, "ghost").name = "computer-close";
+            var locale=new Localization(UnityEngine.PlayerPrefs.GetString("ARES.Language","pt-BR"));
+            seal=Button(navigation,locale.T("hud.endSol"),()=>{if(canInteract() && campaign.Seal("control",campaign.Allocation))close();},"ghost");seal.name="computer-seal-sol";
+            repair=Button(navigation,locale.T("hazard.repair"),()=>{if(canInteract())campaign.RepairGrid();},"ghost");repair.name="computer-repair-grid";
             var viewport = Box(shell, "computer-viewport"); viewport.name = "computer-viewport";
             track = Box(viewport, "computer-track"); track.name = "computer-track";
-            oxygenPage = Page(track); energyPage = Page(track); communicationsPage = Page(track);
+            oxygenPage = Page(track); energyPage = Page(track);
+            var radio = Box(Root, "communications-tv");
+            radio.style.display = energyOnly || communications == null ? DisplayStyle.None : DisplayStyle.Flex;
+            Text(radio,"COMUNICAÇÃO / TERRA","computer-brand");
+            communicationsPage = new ScrollView(); radio.Add(communicationsPage);
+            track.style.width = new UnityEngine.UIElements.Length(200, LengthUnit.Percent);
+            oxygenPage.style.width = energyPage.style.width = new UnityEngine.UIElements.Length(50, LengthUnit.Percent);
             oxygen = new OxygenView(Box(oxygenPage.contentContainer), campaign, () => canInteract() && !sliding && page == 0);
             energyBody = Box(energyPage.contentContainer, "computer-energy-body");
-            communications?.Invoke(Box(communicationsPage.contentContainer), () => canInteract() && !sliding && page == 2);
+            communications?.Invoke(Box(communicationsPage.contentContainer), () => canInteract() && !energyOnly);
             previous = Button(viewport, "‹", () => { if (canInteract() && !sliding) ShowPage(page - 1); }, "computer-arrow computer-arrow-left");
             previous.name = "computer-oxygen"; previous.tooltip = "Voltar ao oxigênio";
             next = Button(viewport, "›", () => { if (canInteract() && !sliding) ShowPage(page + 1); }, "computer-arrow computer-arrow-right");
@@ -50,23 +61,23 @@ namespace Ares.UI
         void ShowPage(int target)
         {
             if (energyOnly && target != 1) { if (target == 0) close(); return; }
-            if (target < 0 || target > 2 || target == page || sliding || (target == 1 && energy == null)) return;
+            if (target < 0 || target > 1 || target == page || sliding || (target == 1 && energy == null)) return;
             if (target == 1) { energyBody.Clear(); energy(energyBody, energyOnly ? close : ShowOxygen); }
             page = target;
             bool instant = reducedMotion != null && reducedMotion();
             Root.EnableInClassList("computer-reduced-motion", instant);
             sliding = !instant; ApplyPage();
-            track.style.translate = new Translate(new Length(-page * (100f / 3), LengthUnit.Percent), 0, 0);
+            track.style.translate = new Translate(new Length(-page * (100f / 2), LengthUnit.Percent), 0, 0);
             if (sliding) Root.schedule.Execute(() => { sliding = false; Refresh(); }).StartingIn(420);
         }
         void ApplyPage()
         {
-            pageTitle.text = page == 0 ? "01 / 03   OXIGÊNIO" : page == 1 ? "02 / 03   ENERGIA" : "03 / 03   COMUNICAÇÃO";
+            pageTitle.text = page == 0 ? "01 / 02   OXIGÊNIO" : "02 / 02   ENERGIA";
             previous.style.display = page > 0 ? DisplayStyle.Flex : DisplayStyle.None;
-            previous.tooltip = page == 2 ? "Voltar à energia" : "Voltar ao oxigênio";
-            next.name = page == 0 ? "computer-energy" : "computer-communications";
-            next.tooltip = page == 0 ? "Ir para energia" : "Ir para a central de comunicação";
-            next.style.display = page < 2 && energy != null ? DisplayStyle.Flex : DisplayStyle.None;
+            previous.tooltip = "Voltar ao oxigênio";
+            next.name = "computer-energy";
+            next.tooltip = "Ir para energia";
+            next.style.display = page < 1 && energy != null ? DisplayStyle.Flex : DisplayStyle.None;
             if (energyOnly)
             {
                 pageTitle.text = "TUTORIAL / DIVIDIR ENERGIA";
@@ -80,8 +91,11 @@ namespace Ares.UI
             oxygen.Refresh();
             oxygenPage.SetEnabled(canInteract() && !sliding && page == 0);
             energyPage.SetEnabled(canInteract() && !sliding && page == 1);
-            communicationsPage.SetEnabled(canInteract() && !sliding && page == 2);
+            communicationsPage.SetEnabled(canInteract() && !energyOnly);
             previous.SetEnabled(!sliding); next.SetEnabled(!sliding);
+            seal.style.display=campaign.NativeHazards && !energyOnly && campaign.Phase==Phase.Tasks?DisplayStyle.Flex:DisplayStyle.None;
+            seal.SetEnabled(canInteract() && campaign.AllTasksDone && campaign.SolRemainingSeconds<=0 && !campaign.RadioBlackout);
+            repair.style.display=campaign.NativeHazards && !energyOnly && campaign.Grid?.OfflineSystem!=null?DisplayStyle.Flex:DisplayStyle.None;repair.SetEnabled(canInteract());
         }
     }
 }

@@ -1,0 +1,7 @@
+.hazard-status { position: absolute; bottom: 86px; left: 26px; width: 490px; padding: 13px; border-radius: 18px; background-color: rgba(20, 35, 48, .94); color: rgb(240, 246, 250); border-width: 2px; border-color: rgb(88, 156, 170); }
+.hazard-status Label { white-space: normal; margin-bottom: 4px; color: rgb(235, 243, 248); font-size: 16px; }
+.hazard-status .heading { font-size: 20px; }
+.hazard-actions { flex-direction: row; }
+.hazard-actions Button { flex-grow: 1; min-height: 34px; margin-right: 5px; }
+.hazard-warning { border-color: rgb(245, 187, 72); }
+.hazard-collapse { background-color: rgb(28, 36, 46); border-color: rgb(224, 141, 104); }

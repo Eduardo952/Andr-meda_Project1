@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ffe8f6c9554544ba060bbca439b430, type: 3}
+  m_Name: ScenarioProfile
+  m_EditorClassIdentifier: Ares.Runtime::Ares.Infrastructure.Hazards.ScenarioProfile
+  slots:
+    slots:
+    - name: Orientation
+      acceptable:
+      - calm
+      - mild-atmosphere
+    - name: Radiation A
+      acceptable:
+      - flare-m
+      - radiation
+    - name: Atmosphere / breather
+      acceptable:
+      - breather
+      - calm
+    - name: Radiation B
+      acceptable:
+      - impact
+      - radiation
+    - name: Climax
+      acceptable:
+      - climax-atmosphere
+      - climax
+      - atmosphere
+  provisionalBalance:
+    solarFloor: 0.8
+    coldCaution: -65
+    coldWarning: -80
+    coldEmergency: -95
+    greenhouseDustMedium: 5
+    greenhouseDustHigh: 10
+    warningGrace: 15
+    shelterDeadline: 60
+    eventDuration: 90
+    commMediumSeconds: 45
+    commHighSeconds: 75
+    batteryCapacity: 30
+    batteryStart: 10
+    surgeMedium: 4
+    surgeHigh: 8
+    cmeShockMax: 10
+    blackoutOxygenCap: 12
+    blackoutIntegrityCap: 8
+    outdoorDoseCap: 20
+    coldIntegrityCap: 6
+    cautionDose: 50
+    warningDose: 75
+    cautionOxygen: 40
+    warningOxygen: 25
+    warningSpeed: 0.75
+    treatedSpeed: 0.85
+    treatedDose: 60
+    treatedOxygen: 60
+    treatedIntegrity: 45
+    medKits: 2
+    oxygenCanisters: 2
+    maxMedicalEvacuations: 3
+    medKitDose: 25
+    canisterOxygen: 25
+    restSeconds: 60
+    restDose: 25
+    restOxygen: 20
+    restEnergy: 5
+    rescueSeconds: 75
+    collapseAnimationSeconds: 4
+    rescueAnimationSeconds: 5
+    pulseHz: 1
+    dustDepositMedium: 0.35
+    dustDepositHigh: 0.55
+    lowCmeSpeed: 500
+    highCmeSpeed: 1000
+    radiationDosePerMinute: 8
+    coldLedgerSeconds: 300
+    candidatesPerSlot: 10
+    maxRepicksPerSlot: 20
+    catalogShortlistPerYear: 6
+    catalogRequestConcurrency: 3
+    minEventSeconds: 60
+    latestEventSeconds: 450
+    tierDurationJitter: 0.15

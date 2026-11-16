@@ -66,6 +66,10 @@ namespace Ares.UI
             var context = Box(body, "mini-context");
             Text(context, locale.T("mini." + attempt.Id + ".goal"), "mini-instruction");
             if (Practice) Text(body, locale.T("report.noReading") + " · " + locale.T("mini.practice"), "mini-practice");
+            string formula = attempt.Id == "CmeCountdown" ? "t (h) = 228 000 000 km ÷ v (km/s) ÷ 3 600" :
+                attempt.Id == "ThermostatDial" ? "E = arredondar para 5 [10 + 0,15 × máx(0, 20 − T)] kWh" :
+                attempt.Id == "PowerBalance" ? "Saldo = energia disponível − (escudo + suporte + estufa)" : null;
+            if(formula!=null) Text(body,formula,"formula-strip");
             ChallengeReadings.Build(body, attempt, locale);
             // Show the actual equipment first. The clock and input start only after Begin.
             var board = new ChallengeGrid(); body.Add(board);

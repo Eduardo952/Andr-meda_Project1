@@ -37,7 +37,7 @@ namespace Ares.Tasks
             if (id == "PhotoDetective" && Readings.ArchivedPhoto != null) Sample = false;
             Priority = campaign.Oxygen < Rules.initialOxygen ? "air" : Demand.life >= Demand.greenhouse ? "heat" : "water";
             var consequences = new Consequences(Rules); var facts = campaign.Current.facts;
-            Dust = consequences.PanelDustAfterStorm(campaign.PanelDust, consequences.StormForSol(campaign.SolIndex, facts.hasWindSpeed ? (float?)facts.windSpeed : null));
+            Dust = consequences.PanelDustAfterStorm(campaign.PanelDust, campaign.NativeHazards?new DustStorm():consequences.StormForSol(campaign.SolIndex, facts.hasWindSpeed ? (float?)facts.windSpeed : null));
             Passes = Dust.Select(consequences.CleaningPasses).ToArray();
             if (Id == "CmeCountdown") Values[0] = 400;
         }

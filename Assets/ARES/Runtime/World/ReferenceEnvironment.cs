@@ -47,7 +47,7 @@ namespace Ares.World
             float t = Mathf.Clamp01((direction.y + .12f) / .4f);
             Daylight = t*t*(3-2*t);
             bool emergency=!string.IsNullOrEmpty(frontend?.Campaign?.Alarm);
-            var weather = new Ares.Domain.DustStormWeather(frontend?.Campaign?.Demands);
+            var weather = Ares.Domain.DustStormWeather.ForCampaign(frontend?.Campaign);
             stormStrength = Mathf.MoveTowards(stormStrength, weather.Strength, Time.deltaTime * .7f);
             if(emergency)Daylight*=.78f;
             sky.SetVector("_SunDirection", direction); sky.SetFloat("_Day", Daylight);

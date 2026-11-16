@@ -20,10 +20,24 @@ namespace Ares.Domain
         public float RemainingSeconds { get; private set; }
         public bool ShieldRegulated { get; private set; }
         public bool ImpactedToday { get; private set; }
-        public bool ShieldTaskAvailable => Day == 2 || Day == 5;
+        public bool ShieldTaskAvailable => native ? nativeRadiation : Day == 2 || Day == 5;
         public bool Warning => Stage == DemandStage.Warning;
         public bool DustInAir => Event == DemandEvent.DustStorm && (Warning || Stage == DemandStage.Impact);
         public bool SolarActivity => Event == DemandEvent.SolarFlare && (Warning || Stage == DemandStage.Impact);
+        bool native,nativeRadiation;
+        public void SyncNative(Ares.Domain.Hazards.HazardPlan plan,float elapsed)
+        {
+            native=true;Event=DemandEvent.None;Stage=DemandStage.Resolved;RemainingSeconds=0;
+            nativeRadiation=plan?.Has(Ares.Domain.Hazards.HazardKind.Radiation)==true;
+            if(plan==null)return;
+            foreach(var e in plan.events) {
+                if(!e.damaging || e.kind==Ares.Domain.Hazards.HazardKind.Cold || elapsed>e.startsAt+e.duration)continue;
+                if(elapsed<e.startsAt-60)continue;
+                Event=e.kind==Ares.Domain.Hazards.HazardKind.Dust?DemandEvent.DustStorm:DemandEvent.SolarFlare;
+                Stage=elapsed<e.startsAt?DemandStage.Warning:DemandStage.Impact;
+                RemainingSeconds=elapsed<e.startsAt?e.startsAt-elapsed:e.startsAt+e.duration-elapsed;return;
+            }
+        }
 
         public ConflictingDemands(int days, int? seed = null)
         {
@@ -49,6 +63,7 @@ namespace Ares.Domain
         }
         internal void Arm(int mandatoryCompleted)
         {
+            if(native)return;
             if (mandatoryCompleted < 2 || Stage != DemandStage.Dormant || Day < 1 || Day > schedule.Length) return;
             Event = schedule[Day - 1];
             Stage = Event == DemandEvent.None ? DemandStage.Resolved : DemandStage.Warning;

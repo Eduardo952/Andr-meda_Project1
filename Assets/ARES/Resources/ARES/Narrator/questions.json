@@ -1,0 +1,50 @@
+{
+  "what_is_a_flare": [
+    "What is a solar flare?",
+    "O que é uma erupção solar?"
+  ],
+  "what_is_a_cme": [
+    "What is a CME?",
+    "O que é uma CME?"
+  ],
+  "why_shelter": [
+    "Why do we go to the Radiation Shelter?",
+    "Por que vamos ao Abrigo de Radiação?"
+  ],
+  "how_shield_works": [
+    "How does the base protect itself from radiation?",
+    "Como a base se protege da radiação?"
+  ],
+  "why_cold_energy": [
+    "Why does cold weather need more energy?",
+    "Por que o frio gasta mais energia?"
+  ],
+  "kw_vs_kwh": [
+    "What is the difference between kW and kWh?",
+    "Qual a diferença entre kW e kWh?"
+  ],
+  "why_battery": [
+    "Why do we need a battery?",
+    "Por que precisamos de bateria?"
+  ],
+  "why_dust_panels": [
+    "Why does dust hurt the solar panels?",
+    "Por que a poeira atrapalha os painéis solares?"
+  ],
+  "why_greenhouse_water": [
+    "How do I know if the plants need water?",
+    "Como sei se as plantas precisam de água?"
+  ],
+  "why_light_plants": [
+    "Why do plants need the right amount of light?",
+    "Por que as plantas precisam da luz certa?"
+  ],
+  "what_is_apod": [
+    "What is the picture in the Observatory?",
+    "O que é a imagem do Observatório?"
+  ],
+  "why_real_data": [
+    "Is this data real? Why do the dates differ?",
+    "Esses dados são reais? Por que as datas são diferentes?"
+  ]
+}

@@ -26,6 +26,8 @@ namespace Ares.UI
             var child = Resources.Load<TextAsset>("ARES/UI/" + language + ".child");
             if (child != null)
                 foreach (var entry in JsonUtility.FromJson<Catalog>(child.text).entries) entries[entry.key] = entry.value;
+            var hazards=Resources.Load<TextAsset>("ARES/UI/"+language+".hazards");
+            if(hazards!=null)foreach(var entry in JsonUtility.FromJson<Catalog>(hazards.text).entries)entries[entry.key]=entry.value;
         }
         public string T(string key, params object[] replacements)
         {

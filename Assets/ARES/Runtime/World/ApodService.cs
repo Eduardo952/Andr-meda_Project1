@@ -1,119 +1,128 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Ares.Data;
+using Ares.Infrastructure;
+using Ares.Infrastructure.Nasa;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace Ares.World
 {
-    /// <summary>Bounded APOD requests with a verified, attributed offline collection. No game rules.</summary>
+    /// <summary>Native mission/Sol imagery is independent of climate snapshots; local images retain their credits offline.</summary>
     public sealed class ApodService : MonoBehaviour
     {
-        readonly Texture2D[] downloaded = new Texture2D[5];
-        readonly bool[] attempted = new bool[5];
-        readonly bool[] loading = new bool[5];
+        readonly ImageLease[] downloaded = new ImageLease[5], photos = new ImageLease[5];
+        readonly SolPhoto[] photoInfo = new SolPhoto[5];
+        readonly bool[] attempted = new bool[5], loading = new bool[5];
         readonly string[] status = new string[5];
         readonly ApodRecord[] records = new ApodRecord[5];
+        CancellationTokenSource mission = new CancellationTokenSource();
+        int epoch;
         public event Action Changed;
         public ObservatoryCollection Collection { get; private set; }
         public bool OfflineOnly { get; set; }
         public int RequestCount { get; private set; }
         string collectionJson;
-
+        public const string HistoryKey="ARES.Observatory.ImageHistory.v1";
+        [Serializable] sealed class ViewingHistory { public string[] previous=Array.Empty<string>(),seen=Array.Empty<string>(); }
+        ViewingHistory history;
+        readonly string[] selectedUrls=new string[5];
+        string T(string key)=>new Ares.UI.Localization(PlayerPrefs.GetString("ARES.Language","pt-BR")).T(key);
         void Awake()
         {
-            var text = Resources.Load<TextAsset>("ARES/Observatory/collection");
-            collectionJson = text.text.TrimStart('\uFEFF');
+            collectionJson = Resources.Load<TextAsset>("ARES/Observatory/collection").text.TrimStart('\uFEFF');
             Collection = JsonUtility.FromJson<ObservatoryCollection>(collectionJson);
-            if (Collection.entries == null || Collection.entries.Length != 5)
-                throw new InvalidOperationException("The observatory requires five curated APOD entries.");
+            if (Collection.entries == null || Collection.entries.Length != 5) throw new InvalidOperationException("The observatory requires five curated APOD entries.");
+            try{history=JsonUtility.FromJson<ViewingHistory>(PlayerPrefs.GetString(HistoryKey,"{}"));}catch(ArgumentException){}
+            history=history??new ViewingHistory();history.previous=history.previous??Array.Empty<string>();history.seen=history.seen??Array.Empty<string>();
         }
-
         public void BeginMission(int? seed = null)
         {
-            StopAllCoroutines();
-            for (int i = 0; i < downloaded.Length; i++)
-            { if (downloaded[i] != null) Destroy(downloaded[i]); downloaded[i] = null; attempted[i] = loading[i] = false; status[i] = null; records[i] = null; }
+            epoch++; mission.Cancel(); mission.Dispose(); mission = new CancellationTokenSource();
+            for (int i = 0; i < 5; i++) {
+                downloaded[i]?.Dispose(); photos[i]?.Dispose(); downloaded[i] = photos[i] = null;
+                attempted[i] = loading[i] = false; status[i] = null; records[i] = null; photoInfo[i] = null;
+                selectedUrls[i]=null;
+            }
             var source = JsonUtility.FromJson<ObservatoryCollection>(collectionJson);
-            var order = Ares.Domain.DiscoveryDeck.Shuffle(source.entries.Length, seed ?? Guid.NewGuid().GetHashCode());
+            int Index(string resource)=>Array.FindIndex(source.entries,e=>e.resource==resource);
+            var order = seed.HasValue?Ares.Domain.DiscoveryDeck.Shuffle(5,seed.Value):Ares.Domain.DiscoveryDeck.FreshOrder(5,Guid.NewGuid().GetHashCode(),history.previous.Select(Index).ToArray(),history.seen.Select(Index).Where(i=>i>=0).ToArray());
             Collection = JsonUtility.FromJson<ObservatoryCollection>(collectionJson);
-            for (int i = 0; i < order.Length; i++) Collection.entries[i] = source.entries[order[i]];
+            for (int i = 0; i < 5; i++) Collection.entries[i] = source.entries[order[i]];
+            if(!seed.HasValue){history.previous=Collection.entries.Select(e=>e.resource).ToArray();SaveHistory();}
             RequestCount = 0; Changed?.Invoke();
         }
-
-        public Texture2D Image(int day) => downloaded[day] != null ? downloaded[day]
-            : Resources.Load<Texture2D>(Collection.entries[day].resource);
-        public string Status(int day) => status[day] ?? "Imagem real do arquivo APOD · cópia local";
+        void SaveHistory(){PlayerPrefs.SetString(HistoryKey,JsonUtility.ToJson(history));PlayerPrefs.Save();}
+        public void RememberViewed(int day)
+        {
+            if(day<0||day>=5)return;string key=selectedUrls[day]??Collection.entries[day].resource;
+            if(history.seen.LastOrDefault()==key)return;
+            var seen=new List<string>(history.seen);seen.Remove(key);seen.Add(key);history.seen=seen.Skip(Math.Max(0,seen.Count-32)).ToArray();SaveHistory();
+        }
+        public void EndMission(){epoch++;mission.Cancel();for(int i=0;i<5;i++)loading[i]=false;}
+        public Texture2D Image(int day) => downloaded[day]?.Texture ?? Resources.Load<Texture2D>(Collection.entries[day].resource);
+        public Texture2D ExtraPhoto(int day) => photos[day]?.Texture;
+        public SolPhoto ExtraPhotoInfo(int day) => photoInfo[day];
+        public string Status(int day) => status[day] ?? T("observatory.local");
         public bool Loading(int day) => loading[day];
         public ApodRecord Record(int day) => records[day];
-
         public void Load(int day, bool retry = false)
         {
             if (day < 0 || day >= 5 || loading[day] || (attempted[day] && !retry)) return;
             attempted[day] = true;
-            if (OfflineOnly) { status[day] = "Modo offline · imagem real do arquivo APOD"; Changed?.Invoke(); return; }
-            StartCoroutine(Fetch(day));
+            if (OfflineOnly) { status[day] = T("observatory.offline"); Changed?.Invoke(); return; }
+            _ = Fetch(day, epoch, mission.Token,retry);
         }
-
-        IEnumerator Fetch(int day)
+        async Task Fetch(int day, int version, CancellationToken cancellation,bool retry)
         {
-            loading[day] = true;
-            status[day] = "Consultando a NASA… Você já pode explorar a cópia local.";
-            Changed?.Invoke();
-            string key = Environment.GetEnvironmentVariable("NASA_API_KEY");
-            if (string.IsNullOrWhiteSpace(key)) key = "DEMO_KEY";
-            string endpoint = Collection.endpoint;
-            if (!Uri.TryCreate(endpoint, UriKind.Absolute, out var address) || address.Scheme != "https")
-            { Finish(day, "Conexão indisponível · imagem real do arquivo APOD"); yield break; }
-            // The current WordPress route takes YYMMDD in its path. Its date query can
-            // silently return a recent feed instead, so exact-date validation stays mandatory.
-            string query = address.Host == "science.nasa.gov" && endpoint.TrimEnd('/').EndsWith("apod-basic", StringComparison.Ordinal)
-                ? endpoint.TrimEnd('/') + "/" + Collection.entries[day].date.Substring(2).Replace("-", "")
-                : endpoint + (endpoint.Contains("?") ? "&" : "?") + "date=" + Collection.entries[day].date;
-            // A configured proxy owns its credentials. Never send the NASA key to another host.
-            if (address.Host == "api.nasa.gov") query += "&api_key=" + UnityWebRequest.EscapeURL(key);
-            ApodRecord record = null;
-            using (var request = UnityWebRequest.Get(query))
-            {
-                RequestCount++;
-                request.timeout = 12;
-                yield return request.SendWebRequest();
-                if (request.result == UnityWebRequest.Result.Success)
-                {
-                    try { record = ApodResponse.Parse(request.downloadHandler.text, Collection.entries[day].date); }
-                    catch (ArgumentException) { }
+            loading[day] = true; status[day] = T("observatory.loading"); Changed?.Invoke();
+            ImageLease image = null, photo = null;
+            try {
+                var integration = GetComponent<MissionIntegration>();
+                string id = integration.MissionId; RequestCount++;
+                var excluded=history.seen.Where(s=>s.StartsWith("https://",StringComparison.Ordinal)).Concat(selectedUrls.Where(s=>s!=null)).TakeLast(16).ToArray();
+                var data = await integration.GetImageryAsync(day + 1, cancellation,excluded,retry);
+                if (version != epoch || cancellation.IsCancellationRequested) return;
+                var apodTask=data.apod==null?Task.FromResult<ImageLease>(null):integration.Images.LoadAsync(id,day+1,data.apod.url,cancellation);
+                var photoTask=data.photo==null?Task.FromResult<ImageLease>(null):integration.Images.LoadAsync(id,day+1,data.photo.url,cancellation);
+                // Observe and release both tasks even when a mission is cancelled during either download.
+                try{await Task.WhenAll(apodTask,photoTask);}finally{if(apodTask.Status==TaskStatus.RanToCompletion)image=apodTask.Result;if(photoTask.Status==TaskStatus.RanToCompletion)photo=photoTask.Result;}
+                if (version != epoch || cancellation.IsCancellationRequested) return;
+                // Update metadata and texture together. Never relabel the local fallback as a different NASA image.
+                if (image != null && !image.IsPlaceholder) {
+                    downloaded[day]?.Dispose(); downloaded[day] = image; image = null;
+                    selectedUrls[day]=data.apod.url;
+                    var a = data.apod;
+                    records[day] = new ApodRecord { date = a.date, title = a.title, explanation = a.explanation, media_type = a.media_type, url = a.url, copyright = a.copyright };
+                    var entry = Collection.entries[day]; entry.date = a.date; entry.title = ApodRecord.PlainText(a.title);
+                    entry.summary = ApodRecord.PlainText(a.explanation); entry.credit = ApodRecord.PlainText(a.copyright ?? "NASA / APOD");
+                    entry.sourceUrl = a.url; entry.imageUrl = a.url; entry.licenseUrl = null;
+                    entry.question = "Que detalhes você consegue observar nesta imagem?";
+                    status[day] = T("observatory.apod")+" · "+a.date;
+                } else if(photo!=null && !photo.IsPlaceholder) {
+                    downloaded[day]?.Dispose();downloaded[day]=photo;photo=null;records[day]=null;
+                    selectedUrls[day]=data.photo.url;
+                    var p=data.photo;var entry=Collection.entries[day];entry.date="";entry.title=ApodRecord.PlainText(p.title);entry.summary=ApodRecord.PlainText(p.description);entry.credit=ApodRecord.PlainText(p.credit);entry.sourceUrl="https://images.nasa.gov/details/"+Uri.EscapeDataString(p.id??"");entry.imageUrl=p.url;entry.licenseUrl=null;
+                    entry.question=PlayerPrefs.GetString("ARES.Language","pt-BR")=="en"?"What details can you observe in this image?":"Que detalhes você consegue observar nesta imagem?";
+                    status[day]=new Ares.UI.Localization(PlayerPrefs.GetString("ARES.Language","pt-BR")).T("hazard.photoFallback");
+                } else status[day] = T("observatory.failed");
+                if (photo != null && !photo.IsPlaceholder) {
+                    photos[day]?.Dispose(); photos[day] = photo; photo = null; photoInfo[day] = data.photo;
                 }
+            } catch (OperationCanceledException) { }
+            catch { if (version == epoch) status[day] = T("observatory.failed"); }
+            finally {
+                image?.Dispose(); photo?.Dispose();
+                if (version == epoch) { loading[day] = false; Changed?.Invoke(); }
             }
-            if (record == null || !record.ValidFor(Collection.entries[day].date))
-            { Finish(day, "A NASA não enviou uma foto válida. Mostrando o arquivo verificado."); yield break; }
-
-            using (var request = UnityWebRequestTexture.GetTexture(record.ImageUrl, true))
-            {
-                request.timeout = 15;
-                yield return request.SendWebRequest();
-                if (request.result != UnityWebRequest.Result.Success)
-                { Finish(day, "Não foi possível baixar a foto. A cópia local continua disponível."); yield break; }
-                var texture = DownloadHandlerTexture.GetContent(request);
-                if (texture.width < 128 || texture.height < 128 || texture.width > 8192 || texture.height > 8192)
-                { Destroy(texture); Finish(day, "Imagem inválida · mostrando o arquivo verificado."); yield break; }
-                if (downloaded[day] != null) Destroy(downloaded[day]);
-                downloaded[day] = texture;
-                records[day] = record;
-            }
-            Finish(day, "Foto do arquivo NASA recebida");
         }
-
-        void Finish(int day, string message)
-        {
-            loading[day] = false;
-            status[day] = message;
-            Changed?.Invoke();
-        }
-
         void OnDestroy()
         {
-            StopAllCoroutines();
-            foreach (var texture in downloaded) if (texture != null) Destroy(texture);
+            epoch++; mission.Cancel(); mission.Dispose();
+            foreach (var lease in downloaded) lease?.Dispose();
+            foreach (var lease in photos) lease?.Dispose();
         }
     }
 }

@@ -181,7 +181,7 @@ namespace Ares.Editor
             Require(collision.Position.z<2 && collision.Speed==0,"Tunnelling or wheels spinning into obstruction");
             var nav=new RoverNavigation(explorer.definition.layout,explorer.roverSettings);
             foreach(var room in explorer.definition.layout.rooms)Require(!nav.CanOccupy(room.Center),"Building/solar exclusion");
-            Require(!nav.CanOccupy(new Vector3(0,0,24)),"Covered corridor exclusion");
+            foreach(var corridor in explorer.definition.layout.corridors) Require(!nav.CanOccupy(new Vector3((corridor.a.x+corridor.b.x)/2,0,-(corridor.a.z+corridor.b.z)/2)),"Covered corridor exclusion");
             Require(!nav.CanOccupy(new Vector3(150,0,0)),"World boundary");
         }
         static void Capture(string path,bool hero)

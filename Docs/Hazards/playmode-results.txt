@@ -1,0 +1,25 @@
+RUNNING
+Synthetic presentation fixtures; no synthetic observations are saved in the NASA catalog.
+calm: editor frame average=35,11 ms; whole-frame managed GC average=68312 bytes; particles=0 + dust 124. GPU time not measured.
+Flare-1: editor frame average=31,77 ms; whole-frame managed GC average=55069 bytes; particles=41 + dust 155. GPU time not measured.
+Flare-2: editor frame average=33,61 ms; whole-frame managed GC average=54797 bytes; particles=81 + dust 141. GPU time not measured.
+Flare-3: editor frame average=32,28 ms; whole-frame managed GC average=54244 bytes; particles=235 + dust 157. GPU time not measured.
+Cme-1: editor frame average=32,29 ms; whole-frame managed GC average=54254 bytes; particles=55 + dust 174. GPU time not measured.
+Cme-2: editor frame average=31,57 ms; whole-frame managed GC average=52764 bytes; particles=80 + dust 168. GPU time not measured.
+Cme-3: editor frame average=31,96 ms; whole-frame managed GC average=53583 bytes; particles=121 + dust 143. GPU time not measured.
+Radiation-1: editor frame average=31,69 ms; whole-frame managed GC average=53441 bytes; particles=47 + dust 166. GPU time not measured.
+Radiation-2: editor frame average=31,78 ms; whole-frame managed GC average=53144 bytes; particles=81 + dust 167. GPU time not measured.
+Radiation-3: editor frame average=31,95 ms; whole-frame managed GC average=53044 bytes; particles=235 + dust 163. GPU time not measured.
+Dust-1: editor frame average=31,75 ms; whole-frame managed GC average=52698 bytes; particles=14 + dust 163. GPU time not measured.
+Dust-2: editor frame average=32,30 ms; whole-frame managed GC average=53714 bytes; particles=0 + dust 430. GPU time not measured.
+Dust-3: editor frame average=31,68 ms; whole-frame managed GC average=53061 bytes; particles=0 + dust 482. GPU time not measured.
+Cold-1: editor frame average=32,55 ms; whole-frame managed GC average=56605 bytes; particles=40 + dust 405. GPU time not measured.
+Cold-2: editor frame average=34,63 ms; whole-frame managed GC average=53401 bytes; particles=40 + dust 176. GPU time not measured.
+Cold-3: editor frame average=32,62 ms; whole-frame managed GC average=54476 bytes; particles=49 + dust 191. GPU time not measured.
+LowOxygen-1: editor frame average=30,63 ms; whole-frame managed GC average=52251 bytes; particles=73 + dust 188. GPU time not measured.
+LowOxygen-2: editor frame average=31,42 ms; whole-frame managed GC average=51257 bytes; particles=73 + dust 186. GPU time not measured.
+LowOxygen-3: editor frame average=31,25 ms; whole-frame managed GC average=50799 bytes; particles=73 + dust 161. GPU time not measured.
+Power-1: editor frame average=31,47 ms; whole-frame managed GC average=50994 bytes; particles=73 + dust 174. GPU time not measured.
+Power-2: editor frame average=31,77 ms; whole-frame managed GC average=51162 bytes; particles=73 + dust 180. GPU time not measured.
+Power-3: editor frame average=32,14 ms; whole-frame managed GC average=51371 bytes; particles=73 + dust 216. GPU time not measured.
+PASS: 21 tier captures, bounded pools, visible-warning grace, collapse, medical recovery, dormitory relocation, locales, mixer, snapshots, explicit sealing and communication report.

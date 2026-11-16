@@ -6,9 +6,11 @@ namespace Ares.World
     public sealed class WorldNavigation
     {
         readonly LayoutData layout;
-        public WorldNavigation(LayoutData layout) { this.layout = layout; }
+        readonly Dormitory dorm;
+        public WorldNavigation(LayoutData layout) { this.layout = layout; dorm = new Dormitory(layout); }
         public bool Walkable(Vector3 position)
         {
+            if (dorm.Blocked(position)) return false;
             float x = position.x, z = -position.z;
             foreach (var r in layout.rooms)
                 if (r.shape != "park" && Inside(x, z, r, .35f) && !Inside(x, z, r, -.6f) && !Door(x, z, r)) return false;

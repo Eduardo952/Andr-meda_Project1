@@ -1,0 +1,37 @@
+{
+  "reference_utc": "2026-11-15",
+  "unit_assertions": 228,
+  "unity_playmode_images": "passed",
+  "full_runtime_editor_compile": "passed",
+  "live_missions": [
+    "mission-ABC12345",
+    "test_mission_001"
+  ],
+  "live_sols": 10,
+  "same_identity_disk_repeat": true,
+  "appendix_js_live_parity": "10/10",
+  "groq": "valid",
+  "http_status_counts": {
+    "api.nasa.gov/DONKI/FLR 404": 2,
+    "images-api.nasa.gov/search 200": 10,
+    "api.maas2.apollorion.com/504 200": 1,
+    "api.nasa.gov/DONKI/WSAEnlilSimulations 200": 10,
+    "api.nasa.gov/DONKI/CMEAnalysis 200": 10,
+    "api.maas2.apollorion.com/505 200": 1,
+    "api.maas2.apollorion.com/506 200": 1,
+    "api.maas2.apollorion.com/507 200": 1,
+    "api.maas2.apollorion.com/508 200": 1,
+    "api.maas2.apollorion.com/539 200": 1,
+    "api.maas2.apollorion.com/540 200": 1,
+    "api.maas2.apollorion.com/541 200": 1,
+    "api.maas2.apollorion.com/542 200": 1,
+    "api.maas2.apollorion.com/543 200": 1,
+    "api.groq.com/openai/v1/chat/completions 200": 1
+  },
+  "apod_timeout_sols": 10,
+  "credentials_in_report": false,
+  "final_player_on_other_computer": "not tested",
+  "main_editor_package_resolution": "passed",
+  "secret_scan_source_and_config_files": 3404,
+  "secret_scan": "passed"
+}

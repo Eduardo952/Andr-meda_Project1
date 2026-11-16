@@ -27,11 +27,16 @@ namespace Ares.Domain
         readonly bool[] buried = new bool[PanelCount];
         public int BuriedPanels { get; private set; }
         public float ReserveKwh { get; private set; }
-        public float CapacityKwh => settings.reserveCapacityKwh;
+        bool gridMode;float gridCapacity;
+        public float CapacityKwh => gridMode?gridCapacity:settings.reserveCapacityKwh;
+        public void ConfigureGrid(float capacity,float start){gridMode=true;gridCapacity=capacity;ReserveKwh=Math.Max(0,Math.Min(capacity,start));}
+        public void StoreEnergy(float amount){if(Nonnegative(amount))ReserveKwh=Math.Min(CapacityKwh,ReserveKwh+amount);}
+        public float AverageDust {get {float total=0;for(int i=0;i<PanelCount;i++)total+=dust[i];return total/PanelCount*100;}}
+        public void Deposit(float amount){if(!Nonnegative(amount))return;for(int i=0;i<PanelCount;i++){dust[i]=Math.Min(1,dust[i]+amount);ages[i]=settings.dustDelaySeconds+((i*13)%PanelCount)*settings.dustStaggerSeconds+dust[i]*settings.dustBuildSeconds;}}
         public float CycleSeconds => settings.energyCycleSeconds;
-        public float CriticalReserveKwh => settings.criticalReserveKwh;
+        public float CriticalReserveKwh => gridMode?gridCapacity*.2f:settings.criticalReserveKwh;
         public float CleaningSeconds => settings.cleaningSeconds;
-        public bool IsCritical => ReserveKwh < settings.criticalReserveKwh;
+        public bool IsCritical => ReserveKwh < CriticalReserveKwh;
         public int CleanedPanels { get; private set; }
         public float GeneratedKwh { get { float sum = 0; for (int i = 0; i < PanelCount; i++) sum += Generation(i); return sum; } }
         public int DirtyPanels { get { int count = 0; for (int i = 0; i < PanelCount; i++) if (NeedsCleaning(i)) count++; return count; } }
@@ -71,6 +76,7 @@ namespace Ares.Domain
         public void Tick(float seconds)
         {
             if (!Positive(seconds)) return;
+            if(gridMode)return; // Native grid budgets the Sol; deposition occurs only from a verified dust event.
             // Small simulation steps also make accelerated checks match ordinary frame updates.
             while (seconds > 0)
             {

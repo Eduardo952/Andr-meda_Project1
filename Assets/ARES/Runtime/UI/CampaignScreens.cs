@@ -9,43 +9,61 @@ namespace Ares.UI
     {
         public static void Report(VisualElement root, Campaign c, Localization l, Action close)
         {
-            root.AddToClassList("report");
-            Text(root, l.T("report.title", "n", c.Current.sol), "title");
+            root.AddToClassList("report"); root.AddToClassList("technical-report");
+            string Copy(string pt, string en) => l.Language == "en" ? en : pt;
+            var header = Box(root, "technical-report-header");
+            Text(header, Copy("BASE ARES / RELATÓRIO TÉCNICO", "ARES BASE / TECHNICAL REPORT"), "technical-report-eyebrow");
+            Text(header, l.T("report.title", "n", c.Current.sol), "title");
+            Text(header, Copy("Data de referência: ", "Reference date: ") + c.Current.date, "technical-report-muted");
             var f = c.Current.facts;
             var readings = new Ares.Data.SnapshotReadings(c.Current);
-            Text(root, "Prepare a casa para mais um dia em Marte.", "heading");
-            Text(root, "Cada equipamento precisa de uma parte da energia.", "small");
-            var demand = Box(root, "row");
+            var nativeFacts = c.NativeResponse?.facts;
+            var budget = Box(root, "technical-report-budget");
+            Text(budget, Copy("ENERGIA DISPONÍVEL", "AVAILABLE ENERGY"), "technical-report-eyebrow");
+            Text(budget, c.EnergyPool + " kWh", "technical-report-value");
+            Text(budget, Copy("Demanda total: ", "Total demand: ") + c.Current.demand.Total + " kWh", "technical-report-budget-total");
+            Text(root, Copy("Necessidade por sistema", "Demand by system"), "technical-report-section");
+            var demand = Box(root, "technical-report-demands");
             Demand(demand, l.T("sys.shield"), c.Current.demand.shield, "shield");
             Demand(demand, l.T("sys.life"), c.Current.demand.life, "oxygen");
             Demand(demand, l.T("sys.greenhouse"), c.Current.demand.greenhouse, "sprout");
             if (c.Current.thermalMissing) Text(root, l.T("report.fallback"), "warning");
-            var science = new Foldout { text = "Céu e clima · ver registros", value = false }; root.Add(science);
-            Text(science, c.Current.sample ? "Valores de treino para esta história, não medições da NASA." : l.T("report.realData"), "badge");
-            var row = Box(science, "row report-grid");
-            Reading(row, l.T("report.flare"), string.IsNullOrEmpty(f.flareClass) ? l.T("report.noFlare") : f.flareClass);
-            Reading(row, l.T("report.cme"), f.hasCmeSpeed ? f.cmeSpeed + " km/s" : l.T("report.noCme"));
-            Reading(row, l.T("report.sep"), l.T(readings.SepDetected?"report.sepYes":"report.noSep"));
-            Reading(row, l.T("report.marsImpact"), l.T(!readings.ImpactKnown?"report.noSim":!readings.MarsImpact?"report.impactNo":readings.Glancing?"report.impactGlancing":"report.impactYes"));
-            Reading(row, l.T("report.temp"), f.hasAirTempMean ? f.airTempMean + " °C" : l.T("report.noReading"));
-            Reading(row, l.T("report.wind"), (f.hasWindSpeed ? f.windSpeed + " m/s" : l.T("report.noReading")) + (readings.WindDirection==null?"":" · "+l.T("compass."+readings.WindDirection)));
-            Reading(row, l.T("report.pressure"), readings.Pressure.HasValue?readings.Pressure.Value+" Pa":l.T("report.noReading"));
+            Text(root, c.Current.sample ? Copy("SIMULAÇÃO · valores de treino", "SIMULATION · training values")
+                : Copy("ARQUIVO CIENTÍFICO · observações históricas", "SCIENTIFIC ARCHIVE · historical observations"), "technical-report-source");
+            var columns = Box(root, "technical-report-columns");
+            var solar = Box(columns, "technical-report-group");
+            Text(solar, Copy("Atividade solar", "Solar activity"), "technical-report-section");
+            ReportReading(solar, l.T("report.flare"), string.IsNullOrEmpty(f.flareClass) ? l.T("report.noFlare") : f.flareClass);
+            ReportReading(solar, l.T("report.cme"), f.hasCmeSpeed ? f.cmeSpeed + " km/s" : l.T("report.noCme"));
+            string impact = c.Current.native ? nativeFacts?.mars_impact?.level : null;
+            ReportReading(solar, l.T("report.marsImpact"), c.Current.native
+                ? l.T(impact == null ? "report.noSim" : impact == "direct" ? "report.impactYes" : impact == "glancing_blow" ? "report.impactGlancing" : "report.impactNo")
+                : l.T(!readings.ImpactKnown ? "report.noSim" : !readings.MarsImpact ? "report.impactNo" : readings.Glancing ? "report.impactGlancing" : "report.impactYes"));
+            var weather = Box(columns, "technical-report-group");
+            Text(weather, Copy("Condições em Marte", "Mars conditions"), "technical-report-section");
+            ReportReading(weather, l.T("report.temp"), f.hasAirTempMean ? f.airTempMean + " °C" : l.T("report.noReading"));
+            ReportReading(weather, l.T("report.wind"), (f.hasWindSpeed ? f.windSpeed + " m/s" : l.T("report.noReading")) + (c.Current.native || readings.WindDirection == null ? "" : " · " + l.T("compass." + readings.WindDirection)));
+            double? pressure = c.Current.native ? nativeFacts?.weather?.pressure_pa : readings.Pressure;
+            ReportReading(weather, l.T("report.pressure"), pressure.HasValue ? pressure.Value.ToString("0.#") + " Pa" : l.T("report.noReading"));
+            var science = new Foldout { text = Copy("Fontes e notas técnicas", "Sources and technical notes"), value = false }; root.Add(science);
+            science.AddToClassList("technical-report-notes");
+            ReportReading(science, l.T("report.sep"), c.Current.native ? l.T("report.noReading") : l.T(readings.SepDetected ? "report.sepYes" : "report.noSep"));
             if (!c.Current.sample)
-            { Text(science, l.T("report.weatherWhere"), "small"); Text(science, l.T("report.dateNote", "n", c.Current.sol, "date", c.Current.date), "small"); }
-            Text(science, "A divisão de energia é uma regra do jogo. Os desafios solares usam outros registros reais, identificados na fonte.", "small");
-            Button(root, l.T(c.Phase == Phase.Report ? "report.continue" : "report.close"), close);
+            { Text(science, c.Current.native ? "NASA/DONKI · Curiosity/REMS (MAAS2)" : l.T("report.weatherWhere"), "small"); Text(science, l.T("report.dateNote", "n", c.Current.sol, "date", c.Current.date), "small"); }
+            Text(science, Copy("A distribuição de energia e seus efeitos são regras do jogo. Leituras ausentes não são substituídas por medições inventadas.", "Energy allocation and its effects are game rules. Missing readings are not replaced with invented measurements."), "small");
+            var footer = Box(root, "technical-report-footer");
+            Text(footer, c.Phase == Phase.Report || c.Phase == Phase.Plan
+                ? Copy("Confirme a distribuição de energia no terminal para liberar as missões.", "Confirm energy allocation at the terminal to unlock tasks.")
+                : Copy("Consulte o terminal para acompanhar a distribuição de energia.", "Use the terminal to review energy allocation."), "technical-report-muted");
+            Button(footer, l.T(c.Phase == Phase.Report ? "report.continue" : "report.close"), close).name = "technical-report-close";
         }
         static void Demand(VisualElement parent, string title, int amount, string icon)
         {
-            var card = Box(parent, "card");
-            if (icon == "sprout") card.Add(new ChallengeIcon(icon, ChallengePalette.Green, 52));
-            else
-            {
-                var picture = new Image { image = UnityEngine.Resources.Load<UnityEngine.Texture2D>("ARES/UI/HudIcons/" + (icon == "shield" ? "integrity" : icon) + "-v1"), scaleMode = UnityEngine.ScaleMode.ScaleToFit };
-                picture.style.width = 64; picture.style.height = 64; card.Add(picture);
-            }
-            Text(card, title, "heading"); Text(card, amount + " kWh", "title");
+            var card = Box(parent, "technical-report-demand technical-report-" + icon);
+            Text(card, title, "technical-report-muted"); Text(card, amount + " kWh", "technical-report-value");
         }
+        static void ReportReading(VisualElement root, string title, string value)
+        { var row = Box(root, "technical-report-reading"); Text(row, title, "technical-report-label"); Text(row, value, "technical-report-reading-value"); }
         static void Reading(VisualElement root, string title, string value) { var card = Box(root, "card"); Text(card, title, "small"); Text(card, value, "heading"); }
         public static void Summary(VisualElement root, Campaign c, Localization l, Action next)
         {

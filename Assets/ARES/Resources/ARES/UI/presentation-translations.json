@@ -1,5 +1,17 @@
 {
   "entries": [
+    {
+      "source": "Mouse: câmera",
+      "translation": "Mouse: look"
+    },
+    {
+      "source": "Alt: cursor",
+      "translation": "Alt: cursor"
+    },
+    {
+      "source": "Segure Alt: cursor / HUD",
+      "translation": "Hold Alt: cursor / HUD"
+    },
     { "source": "CONSOLE DE COMANDOS", "translation": "COMMAND CONSOLE" },
     { "source": "Fechar console", "translation": "Close console" },
     { "source": "Executar comando", "translation": "Run command" },

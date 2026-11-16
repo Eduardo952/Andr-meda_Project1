@@ -40,6 +40,14 @@ namespace Ares.Editor
             {
                 string token=File.GetLastWriteTimeUtc(Request).Ticks.ToString();
                 if(SessionState.GetString(Pending+".refresh","")!=token){SessionState.SetString(Pending+".refresh",token);AssetDatabase.Refresh();return;}
+                if(File.ReadAllText(Request).Trim()=="dormitory")
+                {File.Delete(Request);DormitoryChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="camera-controls")
+                {File.Delete(Request);CameraControlChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="reference-ux")
+                {File.Delete(Request);ReferenceUxChecks.Begin();return;}
+                if(File.ReadAllText(Request).Trim()=="refinement")
+                {File.Delete(Request);RefinementChecks.Begin();return;}
                 if(File.ReadAllText(Request).Trim()=="oxygen-ui")
                 {File.Delete(Request);OxygenPresentationChecks.Begin();return;}
                 if(File.ReadAllText(Request).Trim()=="wind-preview")

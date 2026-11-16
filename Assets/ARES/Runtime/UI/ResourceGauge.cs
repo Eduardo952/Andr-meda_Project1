@@ -11,8 +11,7 @@ namespace Ares.UI
         {
             var cell = Box(parent, "resource resource-gauge");
             cell.name = "gauge-" + kind;
-            var icon = new Image { image = Resources.Load<Texture2D>("ARES/UI/HudIcons/" + kind + "-v1"),
-                scaleMode = ScaleMode.ScaleToFit, pickingMode = PickingMode.Ignore };
+            var icon = new ChallengeIcon(kind=="integrity"?"shield":kind=="dose"?"sun":kind,Color.white,32);
             icon.AddToClassList("resource-icon"); cell.Add(icon);
             var content = Box(cell, "resource-content");
             Text(content, title, "small");

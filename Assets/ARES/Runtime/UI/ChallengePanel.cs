@@ -13,10 +13,10 @@ namespace Ares.UI
         public ChallengePanel(VisualElement root, Localization locale, string title, string sector, string source,
             bool sample, Action information, Action close)
         {
-            root.AddToClassList("mini-overlay"); root.AddToClassList("region-" + sector);
+            root.AddToClassList("mini-overlay"); root.AddToClassList("ux-surface"); root.AddToClassList("region-" + sector);
             var header = Box(root, "row mini-header");
             header.style.backgroundColor = Color.Lerp(MissionVisualStyle.Sector(sector), MissionVisualStyle.Cream, .55f);
-            var emblem = Box(header, "mini-activity-emblem"); emblem.Add(MissionVisualStyle.Icon(sector));
+            var emblem = Box(header, "mini-activity-emblem"); emblem.Add(MissionVisualStyle.Icon(sector, 36));
             var titles = Box(header, "mini-header-title");
             Text(titles, locale.T("rooms." + sector), "mini-sector"); Text(titles, title, "title");
             var badges = Box(titles, "row mini-badges");

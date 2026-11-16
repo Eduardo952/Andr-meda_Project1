@@ -20,7 +20,6 @@ namespace Ares.UI
             this.plant = plant;
             Text(parent, "Escolha o ritmo", "ox-section");
             var choices = Box(parent, "ox-choices");
-            var skin = Resources.Load<Texture2D>("ARES/UI/Oxygen/button-cream-v1");
             string[] names = { "Poupar", "Equilibrar", "Reforçar" };
             string[] hints = { "Gasta menos energia", "Ritmo do dia a dia", "Produz mais oxigênio" };
             string[] explanations = { "Produz menos oxigênio e pode usar a reserva.", "Equilibra produção e gasto de energia.", "Produz mais, mas gasta mais água e energia." };
@@ -29,7 +28,6 @@ namespace Ares.UI
                 var mode = (OxygenMode)i;
                 modes[i] = Button(choices, "", () => { if (!canInteract()) return; plant.SetMode(mode); refresh(); }, "ox-mode");
                 modes[i].name = "oxygen-mode-" + i; modes[i].tooltip = explanations[i];
-                if (skin != null) modes[i].style.backgroundImage = new StyleBackground(skin);
                 Text(modes[i], names[i], "ox-mode-title"); Text(modes[i], hints[i], "ox-mode-hint");
                 states[i] = Text(modes[i], "", "ox-mode-state");
             }

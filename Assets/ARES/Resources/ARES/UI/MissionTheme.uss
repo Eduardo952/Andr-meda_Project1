@@ -62,6 +62,31 @@
 .ares-root .computer-energy-body .mini-header .title { font-size: 30px; margin: 4px 0; }
 .ares-root .computer-energy-body .mini-context { margin: 4px; padding: 8px; }
 .ares-root .mission-report-dialog { max-width: 1440px; padding: 20px; }
+/* Technical report: typography and measured values, without decorative images. */
+.ares-root .technical-report { padding: 4px 8px; }
+.ares-root .technical-report-header { border-bottom-width: 1px; border-bottom-color: #d7cdbd; margin-bottom: 16px; padding-bottom: 12px; }
+.ares-root .technical-report-header .title { font-size: 30px; margin: 2px 0 4px; }
+.ares-root .technical-report-eyebrow { font-size: 12px; letter-spacing: 1px; color: #526d75; margin: 0; -unity-font-style: bold; }
+.ares-root .technical-report-muted { color: #665f6b; font-size: 14px; margin: 0; }
+.ares-root .technical-report-section { font-size: 18px; color: #282139; -unity-font-style: bold; margin: 0 0 10px; }
+.ares-root .technical-report-budget { flex-direction: row; flex-wrap: wrap; align-items: center; background-color: #e5eee8; border-radius: 16px; padding: 12px 16px; margin-bottom: 16px; }
+.ares-root .technical-report-budget .technical-report-value { margin-left: 16px; }
+.ares-root .technical-report-budget-total { margin: 0 0 0 auto; padding-left: 20px; color: #47645c; font-size: 15px; }
+.ares-root .technical-report-value { font-size: 30px; -unity-font-style: bold; color: #282139; margin: 4px 0 0; }
+.ares-root .technical-report-demands { flex-direction: row; flex-wrap: wrap; margin: 0 -5px 16px; }
+.ares-root .technical-report-demand { flex-grow: 1; flex-basis: 200px; padding: 13px 16px; margin: 0 5px 8px; border-radius: 16px; background-color: #f4eee3; border-left-width: 4px; border-left-color: #9883bc; }
+.ares-root .technical-report-oxygen { border-left-color: #38bce7; }
+.ares-root .technical-report-sprout { border-left-color: #69a875; }
+.ares-root .technical-report-source { font-size: 12px; color: #6c6373; letter-spacing: .5px; margin-bottom: 12px; }
+.ares-root .technical-report-columns { flex-direction: row; flex-wrap: wrap; margin: 0 -5px; }
+.ares-root .technical-report-group { flex-grow: 1; flex-basis: 340px; background-color: #faf6ee; border-width: 1px; border-color: #dfd6c9; border-radius: 16px; margin: 0 5px 12px; padding: 16px; }
+.ares-root .technical-report-reading { flex-direction: row; align-items: center; justify-content: space-between; padding: 10px 0; border-top-width: 1px; border-top-color: #e8dfd2; }
+.ares-root .technical-report-label { flex-basis: 45%; flex-shrink: 1; font-size: 14px; color: #665f6b; margin: 0; padding-right: 12px; }
+.ares-root .technical-report-reading-value { flex-basis: 55%; flex-shrink: 1; font-size: 16px; -unity-font-style: bold; color: #282139; -unity-text-align: middle-right; margin: 0; }
+.ares-root .technical-report-notes { margin: 4px 0 12px; }
+.ares-root .technical-report-footer { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; border-top-width: 1px; border-top-color: #d7cdbd; padding-top: 12px; }
+.ares-root .technical-report-footer .technical-report-muted { flex-basis: 55%; flex-grow: 1; padding-right: 18px; }
+.ares-root .technical-report-footer Button { margin: 0; }
 .mission-report .title { font-size: 32px; }
 .mission-report-mentor { padding: 14px; margin-left: 16px; }
 .mission-report-mentor Image { height: 160px; }

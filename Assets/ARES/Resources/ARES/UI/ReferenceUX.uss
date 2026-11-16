@@ -1,0 +1,160 @@
+/* Anexo/UX.png: ivory shells, plum ink, sunny actions, warm shallow depth.
+   Scoped deliberately: the top HUD resource strip, tool row and task sidebar
+   never inherit this theme. Task dialogs do. */
+.ares-root .ux-surface {
+    --ux-paper: #f2ece0;
+    --ux-ink: #282139;
+    --ux-line: #fffaf0;
+    --ux-shadow: #927568;
+    --ux-yellow: #ffca18;
+    color: var(--ux-ink);
+    -unity-font: resource("ARES/UI/Fonts/Nunito");
+}
+.ares-root .ux-surface Button, .ares-root Button.ux-action {
+    min-height: 48px; padding: 10px 20px; margin: 4px;
+    border-radius: 20px; border-width: 2px; border-color: #ffe079;
+    border-bottom-width: 5px; border-bottom-color: #bb8d43;
+    background-color: #ffca18; color: #282139;
+    -unity-font: resource("ARES/UI/Fonts/Nunito"); -unity-font-style: bold;
+    font-size: 18px; white-space: normal;
+    transition-property: translate, background-color; transition-duration: .12s;
+    scale: 1 1;
+}
+.ares-root .ux-surface Button.ghost, .ares-root .ux-surface Button.alt {
+    background-color: #f7f2e8; border-color: #fffaf0; border-bottom-color: #a18a7e;
+}
+.ares-root .ux-surface Button:hover, .ares-root Button.ux-action:hover { background-color: #ffdc58; translate: 0 -1px; }
+.ares-root .ux-surface Button:active, .ares-root Button.ux-action:active { translate: 0 2px; scale: 1 1; }
+.ares-root .ux-surface Button:focus, .ares-root Button.ux-action:focus { border-color: #77628d; border-bottom-width: 5px; }
+.ares-root .ux-surface Button:disabled, .ares-root Button.ux-action:disabled { opacity: .48; translate: 0 0; }
+.ares-root .reduced-motion .ux-surface Button, .ares-root.reduced-motion .ux-surface Button { transition-duration: 0s; }
+.ares-root .ux-surface .title, .ares-root .ux-surface .heading,
+.ares-root .ux-surface .mini-instruction, .ares-root .ux-surface .ox-title,
+.ares-root .ux-surface .map-title {
+    -unity-font: resource("ARES/UI/Fonts/Nunito"); -unity-font-style: bold; color: #282139;
+}
+.ares-root .ux-surface .title { font-size: 30px; }
+.ares-root .ux-surface .heading { font-size: 23px; }
+.ares-root .ux-surface .small { color: #6e6370; }
+.ares-root .dialog.ux-surface, .ares-root .mini-overlay.ux-surface,
+.ares-root .ux-surface .computer-shell, .ares-root .mission-report-popup.ux-surface,
+.ares-root .mission-menu-content.ux-surface,
+.ares-root .command-console-panel.ux-surface {
+    background-color: #f2ece0; border-width: 2px; border-color: #fffaf0;
+    border-bottom-width: 7px; border-bottom-color: #927568; border-radius: 28px;
+    color: #282139;
+}
+.ares-root .overlay, .ares-root .challenge-backdrop { background-color: rgba(47,35,38,.38); }
+.ares-root .ux-surface .mini-header {
+    padding: 16px 24px; border-bottom-width: 1px; border-bottom-color: #d8cdc1;
+    border-top-left-radius: 26px; border-top-right-radius: 26px;
+}
+.ares-root .ux-surface .mini-header .title { font-size: 28px; margin: 4px 0; }
+.ares-root .ux-surface .mini-activity-emblem {
+    width: 60px; height: 60px; margin-right: 16px; border-radius: 30px;
+    background-color: #f7f2e8; border-width: 1px; border-color: #fffaf0;
+    border-bottom-width: 3px; border-bottom-color: #bba99a; rotate: 0deg;
+}
+.ares-root .ux-surface .mini-sector { background-color: #f7f2e8; font-size: 12px; letter-spacing: .5px; padding: 4px 10px; }
+.ares-root .ux-surface .mini-header-actions Button { width: 48px; height: 48px; padding: 0; }
+.ares-root .ux-surface .mini-play, .ares-root .ux-surface .mini-data-card,
+.ares-root .ux-surface .card, .ares-root .ux-surface .shield-control,
+.ares-root .ux-surface .mini-energy-row, .ares-root .ux-surface .mission-comparison,
+.ares-root .ux-surface .greenhouse-daily-shelf, .ares-root .ux-surface .greenhouse-light-card {
+    background-color: #faf6ee; border-width: 1px; border-color: #d8cdc1;
+    border-bottom-width: 3px; border-bottom-color: #c7b6a7; border-radius: 18px; padding: 16px;
+}
+.ares-root .ux-surface .region-shield .mini-play { background-color: #e3eef3; }
+.ares-root .ux-surface .mini-footer, .ares-root .ux-surface .mission-report-footer {
+    background-color: #eae1d5; border-top-width: 1px; border-top-color: #d8cdc1;
+    padding: 12px 20px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px;
+}
+.ares-root .ux-surface .formula-strip { background-color: #e8e0f0; color: #282139; border-radius: 16px; padding: 16px; font-size: 23px; margin: 12px 20px; }
+.ares-root .ux-surface .badge, .ares-root .ux-surface .ox-chip { background-color: #e6dfd4; color: #282139; border-radius: 20px; padding: 8px 14px; }
+.ares-root .ux-surface .mini-result { border-width: 1px; border-radius: 20px; padding: 20px; }
+.ares-root .ux-surface .result-success { background-color: #e0eed9; border-color: #91bb87; }
+.ares-root .ux-surface .result-retry { background-color: #fce5cd; border-color: #d6a27c; }
+.ares-root .ux-surface .unity-text-field__input, .ares-root .ux-surface .unity-integer-field__input, .ares-root .ux-surface .unity-float-field__input { background-color: #fffcf6; color: #282139; border-width: 1px; border-color: #c5b8ad; border-radius: 12px; padding: 8px 12px; }
+.ares-root .ux-surface .unity-toggle { min-height: 40px; margin: 4px 0; align-items: center; }
+.ares-root .ux-surface .unity-toggle__checkmark { width: 24px; height: 24px; border-radius: 8px; border-width: 2px; border-color: #c5b8ad; background-color: #fffcf6; }
+.ares-root .ux-surface .unity-toggle:checked .unity-toggle__checkmark { background-color: #ffca18; border-color: #b28a2b; }
+.ares-root.reduced-motion Button.ux-action { transition-duration: 0s; }
+.ares-root .ux-surface .unity-base-slider__tracker,
+.ares-root .ux-surface .unity-progress-bar__background,
+.ares-root .ux-surface .mission-comparison-track,
+.ares-root .ux-surface .ox-flow-track { background-color: #cfc4bf; border-radius: 9px; }
+.ares-root .ux-surface .unity-base-slider__tracker { height: 12px; }
+.ares-root .ux-surface .unity-base-slider__dragger { background-color: #ffca18; border-width: 2px; border-color: #fffaf0; border-radius: 14px; width: 26px; height: 26px; }
+.ares-root .ux-surface .unity-progress-bar__progress { background-color: #51bc61; border-radius: 9px; }
+.ares-root .ux-surface .mission-comparison-fill, .ares-root .ux-surface .ox-production { background-color: #36b5df; border-radius: 9px; }
+.ares-root .ux-surface .ox-consumption { background-color: #f48159; }
+.ares-root .ux-surface .computer-header { background-color: #eae1d5; border-bottom-width: 1px; border-bottom-color: #d8cdc1; padding: 12px 20px; }
+.ares-root .ux-surface .computer-brand, .ares-root .ux-surface .computer-page-title { color: #282139; }
+.ares-root .ux-surface Button.computer-arrow { width: 44px; min-height: 64px; padding: 0; font-size: 32px; }
+.ares-root .ux-surface .computer-energy-body.mini-overlay { border-width: 0; border-radius: 0; background-color: #f2ece0; }
+.ares-root .ux-surface .ox-storage, .ares-root .ux-surface .ox-status, .ares-root .ux-surface .ox-experiments,
+.ares-root .ux-surface .mission-report-mentor { background-color: #e8eddf; border-width: 1px; border-color: #cfdbc3; border-radius: 20px; }
+.ares-root .ux-surface Button.ox-mode { min-height: 104px; height: 104px; padding: 10px; background-color: #f7f2e8; border-color: #fffaf0; border-bottom-color: #a18a7e; }
+.ares-root .ux-surface Button.ox-mode.selected { background-color: #ffda52; border-color: #e2b42a; }
+.ares-root .ux-surface .ox-mode-title, .ares-root .ux-surface .ox-mode-hint, .ares-root .ux-surface .ox-mode-state { color: #282139; }
+/* Compact secondary display keeps its established dark identity. */
+.ares-root .ux-surface .communications-tv { border-radius: 24px; background-color: #302b3c; border-color: #736875; border-width: 2px; border-bottom-width: 6px; border-bottom-color: #51414a; padding: 14px; }
+.ares-root .ux-surface .communications-tv .computer-brand, .ares-root .ux-surface .communications-tv .title,
+.ares-root .ux-surface .communications-tv .heading { color: #f7f2e8; }
+.ares-root .ux-surface .communications-tv Button { min-height: 40px; font-size: 14px; padding: 8px 10px; border-radius: 15px; }
+.ares-root .ux-surface .communications-tv .comms-message, .ares-root .ux-surface .communications-tv .comms-connection,
+.ares-root .ux-surface .communications-tv .comms-report-card { background-color: #464052; border-color: #786e80; border-radius: 16px; border-width: 1px; }
+.ares-root .mission-menu-content.ux-surface { padding: 28px; }
+.ares-root .ux-surface .mission-menu-title { color: #282139; -unity-font: resource("ARES/UI/Fonts/Nunito"); font-size: 80px; }
+.ares-root .ux-surface .mission-menu-title-accent { color: #a85d35; font-size: 88px; margin-top: -16px; }
+.ares-root .ux-surface .mission-menu-kicker { color: #a85d35; letter-spacing: 2px; }
+.ares-root .ux-surface .mission-menu-description { color: #514756; font-size: 23px; }
+.ares-root .ux-surface Button.mission-launch { min-height: 62px; font-size: 23px; }
+.ares-root .ux-surface .mission-menu-links Button { font-size: 16px; }
+.ares-root .world-map.ux-surface { background-color: #f2ece0; padding: 18px; }
+.ares-root .ux-surface .map-header { background-color: #f7f2e8; border-width: 2px; border-color: #fffaf0; border-bottom-width: 5px; border-bottom-color: #a18a7e; border-radius: 24px; padding: 12px 20px; }
+.ares-root .ux-surface .map-title, .ares-root .ux-surface .map-eyebrow { color: #282139; }
+.ares-root .ux-surface .map-viewport { border-width: 2px; border-color: #fffaf0; border-radius: 22px; margin: 12px 0; }
+.ares-root .ux-surface .map-place, .ares-root .ux-surface .map-north, .ares-root .ux-surface .map-location-state { background-color: #f7f2e8; color: #282139; border-width: 1px; border-color: #fffaf0; border-bottom-width: 3px; border-bottom-color: #b6a497; border-radius: 14px; }
+.ares-root .ux-surface .map-place-observatory { background-color: #e5d6ef; }
+.ares-root .ux-surface .map-place-greenhouse { background-color: #dbe7bd; }
+.ares-root .ux-surface .map-place-lifeSupport { background-color: #d4eee4; }
+.ares-root .ux-surface .map-place-shield { background-color: #d5eaf5; }
+.ares-root .ux-surface .map-place-solar { background-color: #ffe3a3; }
+.ares-root .ux-surface .map-controls { background-color: #eae1d5; border-width: 0; border-radius: 22px; padding: 6px; }
+.ares-root .ux-surface .map-controls Button { min-height: 44px; }
+.ares-root .ux-surface .map-legend { background-color: #d4eee4; color: #282139; }
+.ares-root .ux-pill, .ares-root .walk-panel.ux-surface, .ares-root .speech-panel.ux-surface,
+.ares-root .solar-maintenance.ux-surface, .ares-root .greenhouse-care-hud.ux-surface {
+    background-color: #f2ece0; color: #282139; border-width: 2px; border-color: #fffaf0;
+    border-bottom-width: 6px; border-bottom-color: #927568; border-radius: 26px; padding: 12px 20px;
+}
+.ares-root .direction.ux-pill { left: 37%; right: 37%; top: 120px; font-size: 17px; }
+.ares-root .walk-panel.ux-surface { top: 190px; bottom: auto; left: 32%; right: 32%; padding: 10px 16px; }
+.ares-root .walk-panel.ux-surface Button { min-width: 36px; min-height: 36px; padding: 0; border-radius: 18px; }
+.ares-root .hud-stars.ux-pill { padding: 8px 16px; }
+.ares-root #hud-map { background-color: #ffca18; border-color: #ffe079; border-bottom-color: #d9a21c; color: #282139; }
+.ares-root #hud-map:hover, .ares-root #hud-map:focus, .ares-root #hud-map:active { background-color: #edbb14; }
+.ares-root #hud-map Label { color: #282139; }
+.ares-root .ux-surface .mini-equipment-preview:disabled { opacity: 1; }
+.ares-root .ux-surface.region-shield .mini-play { background-color: #e3eef3; }
+.ares-root .ux-surface.region-greenhouse .mini-play { background-color: #e5edd5; }
+.ares-root .ux-surface.region-observatory .mini-play { background-color: #ebe2f1; }
+.ares-root .ux-surface.region-lifeSupport .mini-play { background-color: #dfede6; }
+.ares-root .ux-surface .comms-report-card, .ares-root .ux-surface .comms-connection,
+.ares-root .ux-surface .comms-message { border-width: 1px; border-color: #c9c1b6; border-radius: 18px; }
+.ares-root .ux-surface .comms-report-card { background-color: #faf6ee; }
+.ares-root .telescope-view.ux-surface .telescope-details { background-color: #f2ece0; color: #282139; border-width: 2px; border-color: #fffaf0; border-bottom-width: 7px; border-bottom-color: #927568; border-radius: 28px; padding: 20px; }
+.ares-root .telescope-view.ux-surface .telescope-details Label { color: #282139; }
+.ares-root .telescope-view.ux-surface Button.telescope-exit { width: 48px; height: 48px; padding: 0; }
+.ares-root .ux-surface .map-header-icon { width: 40px; height: 40px; }
+.ares-root.ux-short .ux-surface .computer-energy-body .mini-header { padding: 8px 16px; }
+.ares-root.ux-short .ux-surface .computer-energy-body .mini-header .title { font-size: 25px; }
+.ares-root.ux-short .ux-surface .computer-energy-body .mini-play { padding: 10px; margin: 4px 12px 8px; }
+.ares-root.ux-short .ux-surface .computer-energy-body .mini-energy-row { padding: 8px 12px; }
+.ares-root.ux-short .ux-surface .computer-energy-body .mini-footer { padding: 6px 12px; }
+.ares-root.ux-short .ux-surface .energy-card-emblem { width: 42px; height: 42px; }
+.ares-root.ux-short .ux-surface .computer-energy-body .mini-context { padding: 4px; margin: 0; }
+.ares-root.ux-short .ux-surface .computer-energy-body .energy-board { padding: 8px; }
+.ares-root.ux-short .ux-surface .mission-menu-title { font-size: 68px; }
+.ares-root.ux-short .ux-surface .mission-menu-title-accent { font-size: 72px; }

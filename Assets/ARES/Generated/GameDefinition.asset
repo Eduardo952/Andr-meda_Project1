@@ -600,10 +600,10 @@ MonoBehaviour:
     camera:
       defaultYaw: 0
       defaultPitchDegrees: 31
-      defaultDistance: 12.25
+      defaultDistance: 10.5
       minPitchDegrees: 15
       maxPitchDegrees: 70
-      minDistance: 7
+      minDistance: 5.5
       maxDistance: 24
       isometricYaw: 0.7853982
       isometricPitchDegrees: 37

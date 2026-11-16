@@ -1,0 +1,3 @@
+RUNNING
+Peak: particles=448, wind=92 km/h, visibility=48
+PASS: dense bounded storm, shaders, visibility recovery, outdoor km/h, room/corridor exclusion, reduced motion and English instrument.

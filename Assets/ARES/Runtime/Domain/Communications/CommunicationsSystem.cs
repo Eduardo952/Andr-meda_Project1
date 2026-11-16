@@ -38,7 +38,9 @@ namespace Ares.Domain.Communications
         public IReadOnlyList<RadioMessage> Messages { get; }
         public IReadOnlyList<MissionReport> Reports { get; }
         public int Day { get; private set; }
-        public bool Connected { get; private set; } = true;
+        bool antennaConnected=true;
+        public bool TransientBlackout {get;set;}
+        public bool Connected { get=>antennaConnected && !TransientBlackout; private set=>antennaConnected=value; }
         public int RepairStep { get; private set; }
         public bool Repairing => repairRemaining > 0;
         public float RepairProgress => Repairing ? 1 - repairRemaining / CommunicationsRules.RepairStepSeconds : 0;

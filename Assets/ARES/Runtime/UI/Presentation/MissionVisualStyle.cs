@@ -23,10 +23,8 @@ namespace Ares.UI
         }
         public static VisualElement Icon(string sector, int size = 72)
         {
-            string name = sector == "shield" ? "integrity" : sector == "lifeSupport" ? "oxygen" : sector == "observatory" ? "dose" : "energy";
-            if (sector == "greenhouse") return new ChallengeIcon("sprout", Sector(sector), size);
-            var image = new Image { image = Resources.Load<Texture2D>("ARES/UI/HudIcons/" + name + "-v1"), scaleMode = ScaleMode.ScaleToFit, pickingMode = PickingMode.Ignore };
-            image.style.width = size; image.style.height = size; return image;
+            string icon=sector=="greenhouse"?"sprout":sector=="observatory"?"telescope":sector=="lifeSupport"?"oxygen":sector=="shield"?"shield":"sun";
+            return new ChallengeIcon(icon,Hex("#282139"),size);
         }
         public static bool Reduced => PlayerPrefs.GetInt("ARES.ReducedMotion", 0) == 1;
         public static void Open(VisualElement element)

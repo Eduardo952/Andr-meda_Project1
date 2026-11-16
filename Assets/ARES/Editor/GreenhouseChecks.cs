@@ -20,7 +20,7 @@ namespace Ares.Editor
         static GameFrontend ui;
         static ReferenceExplorer explorer;
         static VisualElement root;
-        static int stage, frame;
+        static int stage, frame, gardenRendererCount;
         static float elapsed;
         static double started;
         static bool background;
@@ -102,6 +102,10 @@ namespace Ares.Editor
                     var actor = found?.GetComponent<ReferenceExplorer>();
                     if (actor == null || typeof(ReferenceExplorer).GetField("player", Private).GetValue(actor) == null) return;
                     ui = found; explorer = actor; ModelChecks(explorer.definition);
+                    gardenRendererCount=0;
+                    foreach(var renderer in ui.GetComponentsInChildren<MeshRenderer>(true))
+                        if(renderer.TryGetComponent<ReferenceWorldPart>(out var part) && part.role.StartsWith("foliage"))gardenRendererCount++;
+                    Require(gardenRendererCount>0,"Imported garden is missing");
                     ui.StartMission(false); ui.Campaign.CloseReport(); Call("CloseOverlay");
                     ui.Campaign.SetAllocation(new Allocation { shield = ui.Campaign.EnergyPool }); ui.Campaign.StartSol();
                     root = ui.GetComponent<UIDocument>().rootVisualElement;
@@ -128,8 +132,8 @@ namespace Ares.Editor
                     water.Tick(0, false, 3); Require(water.CanMl == 0 && ui.Campaign.Greenhouse.TodayDeliveredMl == 510, "World dose amount");
                     int gardenMeshes = 0;
                     foreach (var renderer in ui.GetComponentsInChildren<MeshRenderer>())
-                        if (renderer.name.StartsWith("greenhouse_interior_") && renderer.enabled) gardenMeshes++;
-                    Require(gardenMeshes == 842, "Reference garden must remain visible during manual care");
+                        if (renderer.enabled && renderer.TryGetComponent<ReferenceWorldPart>(out var part) && part.role.StartsWith("foliage")) gardenMeshes++;
+                    Require(gardenMeshes == gardenRendererCount, "Reference garden visibility changed: "+gardenMeshes+" / "+gardenRendererCount);
                     var orbit = (OrbitCamera)typeof(ReferenceExplorer).GetField("rig", Private).GetValue(explorer);
                     SetPlayer(new Vector3(51, 0, -1)); orbit.Yaw = orbit.TargetYaw = .35f; orbit.Pitch = orbit.TargetPitch = .75f; orbit.Distance = orbit.TargetDistance = 16;
                     Next();

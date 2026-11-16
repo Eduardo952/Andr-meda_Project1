@@ -43,3 +43,8 @@ Desktop.ini
 /Tools/AresImport/generated/
 /Tools/AresPreview/dist/
 **/.env
+
+/Assets/StreamingAssets/secrets.local.json
+
+/Assets/StreamingAssets/secrets.local.json.meta
+/Tools/NasaMigration/obj/

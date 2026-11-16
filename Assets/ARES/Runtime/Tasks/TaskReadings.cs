@@ -51,8 +51,9 @@ namespace Ares.Tasks
             var archive = ScienceArchive.Load();
             ArchivedFlare = archive?.ForDay("flare", sol.sol);
             ArchivedCme = archive?.ForDay("cme", sol.sol);
-            if (ArchivedFlare != null) { Flare = ArchivedFlare.label; FlarePractice = false; }
-            if (ArchivedCme != null) { Speed = ArchivedCme.value; CmePractice = false; }
+            if (!sol.native && ArchivedFlare != null) { Flare = ArchivedFlare.label; FlarePractice = false; }
+            if (!sol.native && ArchivedCme != null) { Speed = ArchivedCme.value; CmePractice = false; }
+            if(sol.native){ArchivedFlare=null;ArchivedCme=null;}
             var photoCatalog = Resources.Load<TextAsset>("ARES/Observatory/collection");
             if (photoCatalog != null)
             {

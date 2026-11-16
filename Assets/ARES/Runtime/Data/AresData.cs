@@ -37,7 +37,7 @@ namespace Ares.Data
     [Serializable] public sealed class CampaignData { public SolData[] sols; }
     [Serializable] public sealed class SolData
     {
-        public int sol; public string date, capturedAt, alarm, raw; public bool sample, thermalMissing;
+        public int sol; public string date, capturedAt, alarm, raw; public bool sample, thermalMissing, native;
         public Allocation demand; public Assignment[] tasks;
         public ConsequenceFacts facts = new ConsequenceFacts();
     }

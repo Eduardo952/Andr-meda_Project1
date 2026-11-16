@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><TargetFramework>net8.0</TargetFramework><OutputType>Exe</OutputType><StartupObject>HazardsTool</StartupObject><EnableDefaultCompileItems>false</EnableDefaultCompileItems><OutputPath>../../Temp/HazardsTool/</OutputPath></PropertyGroup>
+ <ItemGroup>
+  <Compile Include="HazardsTool.cs" /><Compile Include="../NasaMigration/LiveSmoke.cs" /><Compile Include="../../Assets/ARES/Editor/NasaMigrationTests.cs" />
+  <Compile Include="TelescopeTests.cs" />
+  <Compile Include="../../Assets/ARES/Editor/HazardChecks.cs" />
+  <Reference Include="Ares.Runtime.verify"><HintPath>../../Temp/Ares.Runtime.verify.dll</HintPath></Reference>
+  <Reference Include="Newtonsoft.Json"><HintPath>../../Packages/com.unity.nuget.newtonsoft-json/Runtime/Newtonsoft.Json.dll</HintPath></Reference>
+ </ItemGroup>
+</Project>

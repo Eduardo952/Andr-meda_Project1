@@ -17,6 +17,7 @@ namespace Ares.World
         void LateUpdate()
         {
             if(shield==null)return;
+            if(properties==null)properties=new MaterialPropertyBlock();
             bool alarm=frontend.Campaign?.Demands.SolarActivity == true;
             Strength=Mathf.MoveTowards(Strength,alarm?1:0,Time.deltaTime/(alarm?2.5f:4));
             if(!explorer.reducedMotion)phase+=Time.deltaTime;

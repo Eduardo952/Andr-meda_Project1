@@ -24,6 +24,13 @@ namespace Ares.World
         public Vector3 ControlledForward => IsDrivingRover ? Rover.transform.forward
             : new Vector3(Mathf.Sin(player?.Heading ?? Mathf.PI), 0, -Mathf.Cos(player?.Heading ?? Mathf.PI));
         public Ares.Domain.SolarMaintenanceSettings solarSettings = new Ares.Domain.SolarMaintenanceSettings();
+        public BedSequence Rest { get; } = new BedSequence();
+        public Dormitory Dorm { get; private set; }
+        public bool BedBusy => Rest.Busy;
+        public bool NearBed => Dorm != null && Dorm.Near(PlayerPosition) >= 0;
+        public void RecoverAtBed(){if(player==null||Dorm==null)return;Rover?.SetDriving(false);player.X=Dorm.Stand(0).x;player.Z=-Dorm.Stand(0).z;player.Speed=player.VelocityX=player.VelocityZ=0;Rest.Start();cameraInput.Clear();}
+        public void BeginWakeSequence() { ResetMissionSpawn(); player.X=Dorm.Stand(0).x; player.Z=-Dorm.Stand(0).z; Rest.Start(); cameraPosition=rig.Position(player.X,player.Z,true); }
+        public bool UseBed() { if(Rest.Stage==RestStage.Resting){Rest.Wake();return true;} if(Rest.Busy)return true; int bed=Dorm.Near(PlayerPosition); if(bed<0)return false; player.X=Dorm.Stand(bed).x;player.Z=-Dorm.Stand(bed).z;Rest.Rest(bed);return true; }
         SprintDust sprintDust;
         WorldNavigation navigation;
         PlayerMotion player;
@@ -32,6 +39,37 @@ namespace Ares.World
         AstronautAnimator astronaut;
         BubbleAnimator bubble;
         readonly CameraInput cameraInput = new CameraInput();
+        readonly GameplayCursor cursor = new GameplayCursor();
+        readonly PointerResumeGuard resumePointer = new PointerResumeGuard();
+        public bool SuppressWorldPointer => resumePointer.SuppressPointer || !Application.isFocused;
+        public bool MouseLookActive => cursor.MouseLookActive;
+        public bool CursorInteraction { get; private set; }
+        int pointerInputFrame = -1;
+        public void ToggleCursorInteraction()
+        {
+            CursorInteraction = !CursorInteraction;
+            resumePointer.Clear(); cameraInput.Clear(); Rover?.CameraRig?.ClearInput();
+            cursor.Update(!CursorInteraction && !(frontend?.RequiresCursor ?? false) && !Rest.Busy && !overview && !isometric,
+                Application.isFocused, Mouse.current != null);
+        }
+        public void PreparePointerInput()
+        {
+            if (pointerInputFrame == Time.frameCount) return;
+            pointerInputFrame = Time.frameCount;
+            // Escape/editor focus can release the native lock before Unity's focus callback.
+            if (cursor.MouseLookActive && Cursor.lockState != CursorLockMode.Locked)
+            { CursorInteraction = true; resumePointer.Arm(); cursor.Release(); }
+            if (Keyboard.current?.rKey.wasPressedThisFrame == true && !Rest.Busy &&
+                (frontend == null || frontend.CanToggleCursor)) ToggleCursorInteraction();
+            var mouse = Mouse.current;
+            resumePointer.Step(mouse != null && (mouse.leftButton.isPressed || mouse.rightButton.isPressed || mouse.middleButton.isPressed), Time.frameCount);
+        }
+        public bool ConsumeUiPointer(bool pressed = false)
+        {
+            PreparePointerInput();
+            if (pressed) resumePointer.Step(true, Time.frameCount);
+            return SuppressWorldPointer || cursor.MouseLookActive;
+        }
         float walkPhase, elapsed, ambienceTime;
         Camera view;
         bool overview, roofs = true, isometric;
@@ -46,7 +84,7 @@ namespace Ares.World
         public void RecenterCamera() { overview = false; if (IsDrivingRover) Rover.CameraRig.Recenter(Rover.transform); else rig?.Recenter(isometric); }
         public void ToggleRover()
         {
-            if (Rover == null || (frontend != null && (frontend.BlocksWorld || frontend.TutorialActive))) return;
+            if (Rest.Busy || Rover == null || (frontend != null && (frontend.BlocksWorld || frontend.TutorialActive))) return;
             Rover.SetDriving(!Rover.IsDriving); cameraInput.Clear(); overview = false;
             player.VelocityX = player.VelocityZ = player.Speed = 0; IsRunning = false;
             cameraPosition = view.transform.position;
@@ -57,6 +95,8 @@ namespace Ares.World
             if (navigation == null) return;
             Rover?.SetDriving(false);
             player = new PlayerMotion(navigation);
+            Rest.Cancel();
+            CursorInteraction = false; resumePointer.Clear();
             cameraInput.Clear(); overview = false; IsRunning = false;
             rig.Recenter(isometric);
             cameraPosition = rig.Position(player.X, player.Z, true);
@@ -65,6 +105,8 @@ namespace Ares.World
         void Initialize()
         {
             navigation = new WorldNavigation(definition.layout);
+            Dorm = new Dormitory(definition.layout);
+            if(GetComponent<DormitoryArt>()==null) gameObject.AddComponent<DormitoryArt>();
             player = new PlayerMotion(navigation);
             rig = new OrbitCamera(definition.world.camera, definition.layout);
             cutaway = new RoomCutaway(transform, definition.layout);
@@ -92,13 +134,19 @@ namespace Ares.World
         {
             // Unity can reload scripts during Play without calling Start again.
             if (player == null || rig == null || view == null) Initialize();
+            PreparePointerInput();
             var keys = Keyboard.current;
-            bool inputBlocked = frontend != null && frontend.BlocksWorld;
+            bool modalBlocked = frontend != null && frontend.BlocksWorld;
+            if(!modalBlocked) {
+                Rest.Tick(Mathf.Min(Time.deltaTime,.05f),reducedMotion);
+                if(Rest.Stage==RestStage.Resting && keys!=null && keys.eKey.wasPressedThisFrame) Rest.Wake();
+            }
+            bool inputBlocked = modalBlocked || Rest.Busy || !Application.isFocused || frontend?.Campaign?.Condition?.Stage==Ares.Domain.Hazards.CrewCondition.Incapacitated;
             if (inputBlocked) keys = null;
             if (keys != null && keys.yKey.wasPressedThisFrame) ToggleRover();
             if (!IsDrivingRover && keys != null && keys.tabKey.wasPressedThisFrame) overview = !overview;
             if (keys != null && keys.cKey.wasPressedThisFrame) ToggleCamera();
-            if (keys != null && (keys.rKey.wasPressedThisFrame || keys.homeKey.wasPressedThisFrame)) RecenterCamera();
+            if (keys != null && keys.homeKey.wasPressedThisFrame) RecenterCamera();
             if (keys != null && keys.hKey.wasPressedThisFrame) ToggleRoofs();
             float dt = Mathf.Min(Time.deltaTime, .05f);
             elapsed += Time.deltaTime;
@@ -107,15 +155,20 @@ namespace Ares.World
             float ix = keys == null ? 0 : (keys.dKey.isPressed || keys.rightArrowKey.isPressed ? 1 : 0) - (keys.aKey.isPressed || keys.leftArrowKey.isPressed ? 1 : 0);
             float iz = keys == null ? 0 : (keys.sKey.isPressed || keys.downArrowKey.isPressed ? 1 : 0) - (keys.wKey.isPressed || keys.upArrowKey.isPressed ? 1 : 0);
             var mouse = Mouse.current;
-            bool blocked = frontend != null && frontend.BlocksPointer;
+            bool pointerMode = CursorInteraction || overview || (frontend != null && frontend.RequiresCursor);
+            bool cursorRequired = inputBlocked || pointerMode || isometric || resumePointer.AwaitingClick;
+            cursor.Update(!cursorRequired, Application.isFocused, mouse != null);
+            // Touch keeps its original gestures. Isometric mode keeps wheel zoom with a visible cursor.
+            bool blocked = (frontend != null && frontend.BlocksPointer) ||
+                (mouse != null && (CursorInteraction || overview || resumePointer.SuppressPointer || !Application.isFocused));
             if (inputBlocked || IsDrivingRover) cameraInput.Clear();
-            else cameraInput.Read(rig, view, isometric, cameraSensitivity, invertCamera, blocked, frontend != null && ((frontend.Solar != null && frontend.Solar.CapturesPointer) || (frontend.GreenhouseCare != null && frontend.GreenhouseCare.CapturesPointer) || (frontend.Observatory != null && frontend.Observatory.PointerOnTelescope)));
+            else cameraInput.Read(rig, view, isometric, cameraSensitivity, invertCamera, blocked, frontend != null && ((frontend.Solar != null && frontend.Solar.CapturesPointer) || (frontend.GreenhouseCare != null && frontend.GreenhouseCare.CapturesPointer) || (frontend.Observatory != null && frontend.Observatory.PointerOnTelescope)), cursor.MouseLookActive);
             rig.Step(dt, isometric);
             float yaw = Mathf.Atan2(view.transform.position.x - player.X, -view.transform.position.z - player.Z);
             Vector2 input = OrbitCamera.RelativeInput(ix, iz, yaw);
             bool sprintRequested = keys != null && (keys.leftShiftKey.isPressed || keys.rightShiftKey.isPressed) && input.sqrMagnitude > .01f;
             if (inputBlocked || IsDrivingRover) { player.VelocityX = 0; player.VelocityZ = 0; player.Speed = 0; }
-            else player.Step(input.x, input.y, dt, sprint.Speed(definition.world.walkSpeed, sprintRequested), definition.world.walkAccel);
+            else player.Step(input.x, input.y, dt, sprint.Speed(definition.world.walkSpeed, sprintRequested)*(frontend?.Campaign?.Condition?.SpeedFactor??1), definition.world.walkAccel);
             IsRunning = sprintRequested && player.Speed > definition.world.walkSpeed * 1.05f;
             sprintDust.Tick(player.UnityPosition, player.Heading, IsRunning, reducedMotion);
             Rover.Tick(-iz, ix, dt, inputBlocked, reducedMotion);
@@ -140,6 +193,7 @@ namespace Ares.World
                 astronaut.transform.position = player.UnityPosition;
                 astronaut.transform.rotation = ReferenceSpace.Euler(0, player.Heading, 0);
                 astronaut.Apply(CharacterAnimation.Astronaut(player.Speed, walkPhase, elapsed, ambienceTime, 0, 0, reducedMotion, definition.world.ambience.jumpSeconds));
+                Rest.Apply(astronaut,Dorm);
             }
             if (bubble != null)
             {
@@ -147,12 +201,12 @@ namespace Ares.World
                 bubble.Apply(ambienceTime, "happy", false, false);
             }
         }
-        void OnApplicationFocus(bool focused) { if (!focused) { cameraInput.Clear(); Rover?.Motion?.Stop(); Rover?.CameraRig?.ClearInput(); } }
-        void OnDisable() { cameraInput.Clear(); IsRunning = false; if (Rover != null && Rover.Motion != null) Rover.SetDriving(false); }
+        void OnApplicationFocus(bool focused) { cameraInput.Clear(); Rover?.CameraRig?.ClearInput(); if (!focused) { CursorInteraction = true; resumePointer.Arm(); cursor.Release(); Rover?.Motion?.Stop(); } }
+        void OnDisable() { cursor.Release(); cameraInput.Clear(); IsRunning = false; if (Rover != null && Rover.Motion != null) Rover.SetDriving(false); }
         void OnGUI()
         {
             if (frontend != null) return;
-            GUI.Box(new Rect(12, 12, 650, 70), "Base ARES — inspeção da migração\nWASD: mover • Arraste o cenário: girar • Roda: zoom • R: centralizar\nC: isométrica • H: tetos • TAB: visão geral • Campanha/interface em migração.");
+            GUI.Box(new Rect(12, 12, 650, 70), "Base ARES — inspeção da migração\nWASD: mover • Mouse: câmera • Roda: zoom • R: cursor • Home: centralizar\nC: isométrica • H: tetos • TAB: visão geral • Campanha/interface em migração.");
         }
     }
 }

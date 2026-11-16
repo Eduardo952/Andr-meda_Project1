@@ -1,0 +1,35 @@
+.hud-tool { background-color: #253647; border-radius: 12px; border-width: 1px; border-color: #516176; border-bottom-width: 3px; }
+.hud-tool:hover { background-color: #405a70; }
+.panel { border-radius: 16px; border-bottom-width: 3px; }
+.mini-overlay { max-width: 1100px; max-height: 88%; border-radius: 20px; }
+.challenge-backdrop { background-color: rgba(10, 18, 30, 0.42); }
+.formula-strip { background-color: #e4eef3; color: #233847; font-size: 24px; -unity-font-style: bold; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+.computer-session { flex-direction: row; }
+.computer-shell { flex-grow: 1; flex-shrink: 1; min-width: 0; }
+.communications-tv { width: 300px; flex-shrink: 0; margin: 16px 12px; padding: 14px; background-color: #131f2c; border-color: #43556a; border-width: 3px; border-bottom-width: 8px; border-radius: 22px; }
+.communications-tv Label { color: #ecf3fa; white-space: normal; }
+.communications-tv .title { font-size: 21px; }
+.communications-tv .comms-view { padding: 0; min-width: 0; }
+.communications-tv .comms-connection, .communications-tv .comms-message, .communications-tv .comms-content { background-color: #253448; }
+.communications-tv .row { flex-wrap: wrap; }
+.communications-tv Button { font-size: 13px; padding: 7px; border-radius: 9px; }
+.communications-tv .comms-small { font-size: 12px; }
+.communications-tv .unity-scroll-view { flex-grow: 1; }
+.ares-root .communications-tv .comms-message.incoming, .ares-root .communications-tv .comms-message.outgoing, .ares-root .communications-tv .comms-report-card { background-color: #2c4055; margin-left: 0; margin-right: 0; min-width: 0; width: 100%; padding: 10px; }
+.ares-root .communications-tv .comms-view .title, .ares-root .communications-tv .comms-message-title { color: #ffffff; }
+.map-launcher { border-radius: 14px; background-color: #263a4c; }
+.integration-status { white-space: normal; font-size: 14px; margin-top: 8px; }
+
+.ares-root .computer-shell { width: auto; min-width: 0; flex-grow: 1; flex-shrink: 1; height: 94%; border-radius: 22px; border-width: 2px; border-bottom-width: 5px; }
+.ares-root .communications-tv { height: 90%; }
+.ares-root .mini-overlay { max-width: 1100px; border-radius: 20px; border-width: 2px; border-bottom-width: 5px; }
+.ares-root .computer-energy-body.mini-overlay { max-width: none; border-width: 0; }
+
+.map-viewport { border-radius: 22px; overflow: hidden; margin: 8px 16px; border-width: 1px; border-color: #617487; }
+
+.ares-root Button.hud-tool { background-color: #253647; border-color: #516176; border-width: 1px; border-bottom-width: 3px; border-radius: 12px; }
+.ares-root Button.hud-tool:hover { background-color: #405a70; }
+.resource-icon { background-color: #365665; border-radius: 9px; padding: 3px; }
+#gauge-integrity .resource-icon { background-color: #347955; }
+#gauge-dose .resource-icon { background-color: #786298; }
+#gauge-energy .resource-icon { background-color: #99732a; }

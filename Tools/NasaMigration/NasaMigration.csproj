@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <OutputPath>../../Temp/NasaMigrationBin/</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Assets/ARES/Runtime/Infrastructure/Nasa/*.cs"
+             Exclude="../../Assets/ARES/Runtime/Infrastructure/Nasa/ImageLoader.cs;../../Assets/ARES/Runtime/Infrastructure/Nasa/UnityHttpTransport.cs;../../Assets/ARES/Runtime/Infrastructure/Nasa/NasaAsyncRunner.cs" />
+    <Compile Include="../../Assets/ARES/Editor/NasaMigrationTests.cs" />
+    <Compile Include="LiveSmoke.cs" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>../../Packages/com.unity.nuget.newtonsoft-json/Runtime/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -154,6 +154,19 @@ namespace Ares.UI
                 Circle(p,P(.5f,.5f),w*.28f,Color.clear,color,2); Circle(p,P(.5f,.5f),w*.1f,Color.clear,color,2);
                 for(int i=0;i<8;i++) {float a=i*Mathf.PI/4;var v=new Vector2(Mathf.Sin(a),Mathf.Cos(a));Line(p,color,3,P(.5f,.5f)+v*w*.28f,P(.5f,.5f)+v*w*.4f);}
             }
+            else if(kind=="telescope") {
+                Line(p,color,7,P(.18f,.48f),P(.77f,.22f));Line(p,color,3,P(.5f,.42f),P(.5f,.7f),P(.25f,.9f));Line(p,color,3,P(.5f,.7f),P(.75f,.9f));
+            }
+            else if(kind=="shield") {
+                Polygon(p,Color.clear,color,3,P(.16f,.18f),P(.84f,.18f),P(.78f,.65f),P(.5f,.9f),P(.22f,.65f));
+            }
+            else if(kind=="oxygen") {
+                Line(p,color,5,P(.5f,.12f),P(.5f,.88f));Line(p,color,5,P(.12f,.5f),P(.88f,.5f));
+            }
+            else if(kind=="map") {
+                Polygon(p,Color.clear,color,2,P(.1f,.2f),P(.36f,.1f),P(.64f,.25f),P(.9f,.1f),P(.9f,.8f),P(.64f,.9f),P(.36f,.75f),P(.1f,.9f));
+                Line(p,color,2,P(.36f,.1f),P(.36f,.75f));Line(p,color,2,P(.64f,.25f),P(.64f,.9f));
+            }
             else if (kind == "sun")
             {
                 Circle(p, P(.5f,.5f), w * .2f, Color.clear, color, 3);
