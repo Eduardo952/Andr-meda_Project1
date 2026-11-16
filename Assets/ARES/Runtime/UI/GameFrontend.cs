@@ -407,8 +407,6 @@ namespace Ares.UI
         }
         internal void BuildComputerEnergy(VisualElement parent, Action close)
         { if (Terminal.Focused && Terminal.Near) EnergyView.Build(parent, campaign, definition.rules, locale, close); }
-        internal void BuildComputerCommunications(VisualElement parent, Func<bool> canInteract)
-        { new CommunicationsView(parent, campaign, canInteract, null, () => communicationsArchive?.Error); }
         internal void SealFromComputer() { ShowSeal(); }
         public void ShowObservatory()
         {

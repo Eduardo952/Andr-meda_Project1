@@ -5,14 +5,14 @@ using static Ares.UI.UiElements;
 
 namespace Ares.UI
 {
-    /// <summary>Two control pages and an independent communications display slide inside a clipped viewport; simulation state stays in Campaign.</summary>
+    /// <summary>Oxygen and energy control pages share a clipped viewport; simulation state stays in Campaign.</summary>
     internal sealed class ComputerPanel
     {
         readonly Campaign campaign;
         readonly Func<bool> canInteract, reducedMotion;
         readonly Action<VisualElement, Action> energy;
         readonly VisualElement track, energyBody;
-        readonly ScrollView oxygenPage, energyPage, communicationsPage;
+        readonly ScrollView oxygenPage, energyPage;
         readonly Button previous, next;
         readonly Button seal;
         readonly Button repair;
@@ -24,7 +24,7 @@ namespace Ares.UI
         bool sliding;
         public VisualElement Root { get; }
         public ComputerPanel(VisualElement parent, Campaign campaign, Func<bool> canInteract, Action close,
-            Action<VisualElement, Action> energy, Func<bool> reducedMotion = null, Action<VisualElement, Func<bool>> communications = null, bool energyOnly = false)
+            Action<VisualElement, Action> energy, Func<bool> reducedMotion = null, bool energyOnly = false)
         {
             this.campaign = campaign; this.canInteract = canInteract; this.energy = energy; this.reducedMotion = reducedMotion;
             this.energyOnly = energyOnly; this.close = close;
@@ -40,15 +40,10 @@ namespace Ares.UI
             var viewport = Box(shell, "computer-viewport"); viewport.name = "computer-viewport";
             track = Box(viewport, "computer-track"); track.name = "computer-track";
             oxygenPage = Page(track); energyPage = Page(track);
-            var radio = Box(Root, "communications-tv");
-            radio.style.display = energyOnly || communications == null ? DisplayStyle.None : DisplayStyle.Flex;
-            Text(radio,"COMUNICAÇÃO / TERRA","computer-brand");
-            communicationsPage = new ScrollView(); radio.Add(communicationsPage);
             track.style.width = new UnityEngine.UIElements.Length(200, LengthUnit.Percent);
             oxygenPage.style.width = energyPage.style.width = new UnityEngine.UIElements.Length(50, LengthUnit.Percent);
             oxygen = new OxygenView(Box(oxygenPage.contentContainer), campaign, () => canInteract() && !sliding && page == 0);
             energyBody = Box(energyPage.contentContainer, "computer-energy-body");
-            communications?.Invoke(Box(communicationsPage.contentContainer), () => canInteract() && !energyOnly);
             previous = Button(viewport, "‹", () => { if (canInteract() && !sliding) ShowPage(page - 1); }, "computer-arrow computer-arrow-left");
             previous.name = "computer-oxygen"; previous.tooltip = "Voltar ao oxigênio";
             next = Button(viewport, "›", () => { if (canInteract() && !sliding) ShowPage(page + 1); }, "computer-arrow computer-arrow-right");
@@ -91,7 +86,6 @@ namespace Ares.UI
             oxygen.Refresh();
             oxygenPage.SetEnabled(canInteract() && !sliding && page == 0);
             energyPage.SetEnabled(canInteract() && !sliding && page == 1);
-            communicationsPage.SetEnabled(canInteract() && !energyOnly);
             previous.SetEnabled(!sliding); next.SetEnabled(!sliding);
             seal.style.display=campaign.NativeHazards && !energyOnly && campaign.Phase==Phase.Tasks?DisplayStyle.Flex:DisplayStyle.None;
             seal.SetEnabled(canInteract() && campaign.AllTasksDone && campaign.SolRemainingSeconds<=0 && !campaign.RadioBlackout);

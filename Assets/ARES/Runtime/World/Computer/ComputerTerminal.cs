@@ -43,7 +43,7 @@ namespace Ares.World.Computer
             if(!Near || frontend.BlocksWorld || OwnsCamera || Camera.main==null)return false;
             if (frontend.TutorialActive && !frontend.Tutorial.AllowsComputer) return false;
             CameraRig.Begin(Camera.main);
-            foreground=new ComputerPanel(root,campaign,()=>Focused && (!frontend.TutorialActive || frontend.Tutorial.AllowsEnergy),Close,frontend.BuildComputerEnergy,()=>explorer.reducedMotion,frontend.BuildComputerCommunications,frontend.TutorialActive);
+            foreground=new ComputerPanel(root,campaign,()=>Focused && (!frontend.TutorialActive || frontend.Tutorial.AllowsEnergy),Close,frontend.BuildComputerEnergy,()=>explorer.reducedMotion,frontend.TutorialActive);
             foreground.Root.style.opacity=0;return true;
         }
         public void Close() {CameraRig?.Close();}
